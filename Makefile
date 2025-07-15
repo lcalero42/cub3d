@@ -7,7 +7,6 @@ WINDOW_WIDTH = 640		# width of window
 WINDOW_HEIGHT = 480		# height of window
 
 # --------------------------------- gameplay --------------------------------- #
-FOV = 60				# field of view in degrees
 MOVE_SPEED = 0.1		# player movement speed
 ROT_SPEED = 0.05		# player rotation speed
 
@@ -18,8 +17,8 @@ TEXTURE_SIZE = 64		# texture resolution (64x64)
 
 NAME = cub3d
 MODE ?= release
-CONFIG = -D WINDOW_WIDTH=$(WINDOW_WIDTH) -D WINDOW_HEIGHT=$(WINDOW_HEIGHT) -D FOV=$(FOV) -D MOVE_SPEED=$(MOVE_SPEED) -D ROT_SPEED=$(ROT_SPEED) -D TEXTURE_SIZE=$(TEXTURE_SIZE)
-DEBUG_CONFIG = -D WINDOW_WIDTH=$(WINDOW_WIDTH) -D WINDOW_HEIGHT=$(WINDOW_HEIGHT) -D FOV=$(FOV) -D MOVE_SPEED=0.05 -D ROT_SPEED=0.02 -D TEXTURE_SIZE=32
+CONFIG = -D WINDOW_WIDTH=$(WINDOW_WIDTH) -D WINDOW_HEIGHT=$(WINDOW_HEIGHT) -D MOVE_SPEED=$(MOVE_SPEED) -D ROT_SPEED=$(ROT_SPEED) -D TEXTURE_SIZE=$(TEXTURE_SIZE)
+DEBUG_CONFIG = -D WINDOW_WIDTH=$(WINDOW_WIDTH) -D WINDOW_HEIGHT=$(WINDOW_HEIGHT) -D MOVE_SPEED=0.05 -D ROT_SPEED=0.02 -D TEXTURE_SIZE=32
 OPTI = -O3 -flto -march=native -mtune=native -funroll-loops
 OBJ_DIR = obj-$(MODE)
 INCLUDES = -Iincludes -Ilibft -Iminilibx-linux
