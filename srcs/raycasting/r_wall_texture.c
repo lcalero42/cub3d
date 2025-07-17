@@ -6,17 +6,20 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 17:10:47 by lcalero           #+#    #+#             */
-/*   Updated: 2025/07/17 18:08:11 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/07/17 22:10:39 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static void	load_wall_texture(t_data *data, char *path);
+static void	load_wall_texture(t_data *data, char *path, t_wall_render *wall);
 
 void	init_walls(t_data *data)
 {
-	load_wall_texture(data, "sprites/wall.xpm");
+	load_wall_texture(data, "sprites/wall.xpm", &data->north_wall);
+	load_wall_texture(data, "sprites/wall_2.xpm", &data->south_wall);
+	load_wall_texture(data, "sprites/wall_3.xpm", &data->west_wall);
+	load_wall_texture(data, "sprites/wall_4.xpm", &data->east_wall);
 	data->render_img = mlx_new_image(data->mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
 	if (!data->render_img)
 	{
@@ -29,19 +32,20 @@ void	init_walls(t_data *data)
 			&data->render_endian);
 }
 
-int	get_wall_texture_pixel(t_data *data, int x, int y, int side)
+int	get_wall_texture_pixel(t_data *data, int x, int y, int ray_index)
 {
-	char	*dst;
-	int		color;
+	t_texture_info	texture;
+	t_wall_side		side;
+	char			*dst;
 
 	if (x < 0 || x >= 64 || y < 0 || y >= 64)
 		return (0x808080);
-	dst = data->wall_texture_addr + (y * data->wall_texture_line_len
-			+ x * (data->wall_texture_bpp / 8));
-	color = *(unsigned int *)dst;
-	if (side == 1)
-		color = ((color >> 1) & 0x7F7F7F);
-	return (color);
+	side = get_wall_side(data, ray_index);
+	texture = get_texture_info_by_side(data, side);
+	if (!texture.addr)
+		return (0x808080);
+	dst = texture.addr + (y * texture.line_len + x * (texture.bpp / 8));
+	return (*(unsigned int *)dst);
 }
 
 void	put_pixel_to_image(t_data *data, int x, int y, int color)
@@ -83,20 +87,20 @@ void	clear_screen(t_data *data)
 	}
 }
 
-static void	load_wall_texture(t_data *data, char *path)
+static void	load_wall_texture(t_data *data, char *path, t_wall_render *wall)
 {
 	int	width;
 	int	height;
 
-	data->wall_texture_img = mlx_xpm_file_to_image(data->mlx, path,
+	wall->wall_texture_img = mlx_xpm_file_to_image(data->mlx, path,
 			&width, &height);
-	if (!data->wall_texture_img)
+	if (!wall->wall_texture_img)
 	{
 		printf("Error: Cannot load wall texture\n");
 		exit(1);
 	}
-	data->wall_texture_addr = mlx_get_data_addr(data->wall_texture_img,
-			&data->wall_texture_bpp,
-			&data->wall_texture_line_len,
-			&data->wall_texture_endian);
+	wall->info.addr = mlx_get_data_addr(wall->wall_texture_img,
+			&wall->info.bpp,
+			&wall->info.line_len,
+			&wall->wall_texture_endian);
 }

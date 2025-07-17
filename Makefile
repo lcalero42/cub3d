@@ -39,6 +39,7 @@ SRCS =	main.c						\
 		r_raycast_init.c			\
 		r_wall_render.c				\
 		r_wall_texture.c			\
+		r_wall_side.c				\
 		p_determine_movement.c		\
 
 

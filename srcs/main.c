@@ -6,7 +6,7 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 11:53:44 by lcalero           #+#    #+#             */
-/*   Updated: 2025/07/17 19:20:21 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/07/17 21:37:51 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,13 @@
 
 int	key_hook(int keycode, t_data *data)
 {
-	if (keycode == 65307)
+	if (keycode == XK_Escape)
 	{
 		mlx_destroy_image(data->mlx, data->render_img);
-		mlx_destroy_image(data->mlx, data->wall_texture_img);
+		mlx_destroy_image(data->mlx, data->north_wall.wall_texture_img);
+		mlx_destroy_image(data->mlx, data->south_wall.wall_texture_img);
+		mlx_destroy_image(data->mlx, data->east_wall.wall_texture_img);
+		mlx_destroy_image(data->mlx, data->west_wall.wall_texture_img);
 		mlx_destroy_window(data->mlx, data->window);
 		mlx_loop_end(data->mlx);
 		mlx_destroy_display(data->mlx);
@@ -35,6 +38,7 @@ int	render_loop(t_data *data)
 	trace_ray(data, data->player.angle);
 	render_walls(data);
 	mlx_put_image_to_window(data->mlx, data->window, data->render_img, 0, 0);
+	usleep(100);
 	return (1);
 }
 
