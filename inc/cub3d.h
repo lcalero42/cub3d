@@ -6,7 +6,7 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 14:01:03 by lcalero           #+#    #+#             */
-/*   Updated: 2025/07/17 22:08:11 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/07/17 23:48:30 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,16 @@ typedef struct s_player
 	double			angle;
 }					t_player;
 
+typedef struct s_keys
+{
+	int a;
+	int d;
+	int up;
+	int down;
+	int left;
+	int right;
+}	t_keys;
+
 typedef struct s_sprite
 {
 	double			x;
@@ -135,6 +145,7 @@ typedef struct s_data
 	t_player		player;
 	t_grid			grid;
 	t_ray			rays[WINDOW_WIDTH];
+	t_keys			keys;
 }					t_data;
 
 // FUNCTIONS
@@ -145,7 +156,7 @@ void				clear_screen(t_data *data);
 void				put_pixel_to_image(t_data *data, int x, int y, int color);
 int					get_wall_texture_pixel(t_data *data, int x, int y,
 						int side);
-int					determine_movement(int keycode, t_data *data);
+int					update_player_movement(t_data *data);
 t_wall_side			get_wall_side(t_data *data, int ray_index);
 t_texture_info		get_texture_info_by_side(t_data *data, t_wall_side side);
 
