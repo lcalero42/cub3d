@@ -6,7 +6,7 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 11:53:44 by lcalero           #+#    #+#             */
-/*   Updated: 2025/07/17 18:33:34 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/07/17 19:20:21 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ int	key_hook(int keycode, t_data *data)
 {
 	if (keycode == 65307)
 	{
+		mlx_destroy_image(data->mlx, data->render_img);
+		mlx_destroy_image(data->mlx, data->wall_texture_img);
 		mlx_destroy_window(data->mlx, data->window);
 		mlx_loop_end(data->mlx);
 		mlx_destroy_display(data->mlx);

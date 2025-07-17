@@ -6,7 +6,7 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 14:01:03 by lcalero           #+#    #+#             */
-/*   Updated: 2025/07/17 18:01:26 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/07/17 19:08:28 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,14 @@
 
 # ifndef WINDOW_HEIGHT
 #  define WINDOW_HEIGHT 480
+# endif
+
+# ifndef MOVE_SPEED
+#  define MOVE_SPEED 0.1
+# endif
+
+# ifndef ROTATION_SPEED
+#  define ROTATION_SPEED 0.05
 # endif
 
 # define FOV 1.047198f

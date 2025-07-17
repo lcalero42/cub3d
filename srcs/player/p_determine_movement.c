@@ -6,7 +6,7 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 17:48:15 by lcalero           #+#    #+#             */
-/*   Updated: 2025/07/17 18:02:50 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/07/17 19:08:53 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,28 +15,28 @@
 int	determine_movement(int keycode, t_data *data)
 {
 	if (keycode == XK_d)
-		data->player.angle += 0.1;
+		data->player.angle += ROTATION_SPEED;
 	if (keycode == XK_a)
-		data->player.angle -= 0.1;
+		data->player.angle -= ROTATION_SPEED;
 	if (keycode == XK_Up)
 	{
-		data->player.position.y += 0.05 * data->player.dir.y;
-		data->player.position.x += 0.05 * data->player.dir.x;
+		data->player.position.y += MOVE_SPEED * data->player.dir.y;
+		data->player.position.x += MOVE_SPEED * data->player.dir.x;
 	}
 	if (keycode == XK_Down)
 	{
-		data->player.position.y -= 0.05 * data->player.dir.y;
-		data->player.position.x -= 0.05 * data->player.dir.x;
+		data->player.position.y -= MOVE_SPEED * data->player.dir.y;
+		data->player.position.x -= MOVE_SPEED * data->player.dir.x;
 	}
 	if (keycode == XK_Right)
 	{
-		data->player.position.x += 0.05 * -data->player.dir.y;
-		data->player.position.y += 0.05 * data->player.dir.x;
+		data->player.position.x += MOVE_SPEED * -data->player.dir.y;
+		data->player.position.y += MOVE_SPEED * data->player.dir.x;
 	}
 	if (keycode == XK_Left)
 	{
-		data->player.position.x += 0.05 * data->player.dir.y;
-		data->player.position.y += 0.05 * -data->player.dir.x;
+		data->player.position.x += MOVE_SPEED * data->player.dir.y;
+		data->player.position.y += MOVE_SPEED * -data->player.dir.x;
 	}
 	return (0);
 }
