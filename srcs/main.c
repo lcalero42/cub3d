@@ -3,15 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 11:53:44 by lcalero           #+#    #+#             */
-/*   Updated: 2025/07/08 20:06:34 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/07/16 02:54:46 by ekeisler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <stdlib.h>
 #include "cub3d.h"
 
 int	key_hook(int keycode, t_data *data)
@@ -33,18 +31,50 @@ int	render_loop(t_data *data)
 	return (1);
 }
 
+void	print_config_info_simple(t_config *config)
+{
+	printf("\n========== CONFIG PARSING INFO ==========\n");
+	
+	printf("Config lines parsed: %d\n", config->config_lines);
+	printf("Map dimensions: %dx%d\n", config->map.width, config->map.height);
+	printf("\nTextures:\n");
+	printf("  NO: %s\n", config->path.north ? config->path.north : "NOT SET");
+	printf("  SO: %s\n", config->path.south ? config->path.south : "NOT SET");
+	printf("  WE: %s\n", config->path.west ? config->path.west : "NOT SET");
+	printf("  EA: %s\n", config->path.east ? config->path.east : "NOT SET");
+	
+	printf("\nColors:\n");
+	if (config->floor.r != -1)
+		printf("  Floor: RGB(%d, %d, %d)\n", 
+			   config->floor.r, config->floor.g, config->floor.b);
+	else
+		printf("  Floor: NOT SET\n");
+	
+	if (config->ceiling.r != -1)
+		printf("  Ceiling: RGB(%d, %d, %d)\n", 
+			   config->ceiling.r, config->ceiling.g, config->ceiling.b);
+	else
+		printf("  Ceiling: NOT SET\n");
+	
+	printf("\nMap:\n");
+	if (config->map.grid)
+	{
+		for (int i = 0; i < config->map.height; i++)
+			printf("  [%2d] %s\n", i, config->map.grid[i]);
+	}
+	else
+	{
+		printf("  NO MAP LOADED\n");
+	}
+	printf("==========================================\n\n");
+}
+
 int	main(void)
 {
-	t_data	data;
-
-	ft_bzero(&data, sizeof(t_data));
-	data.mlx = mlx_init();
-	data.player.position.x = 2.5;
-	data.player.position.y = 2.5;
-	data.window = mlx_new_window(data.mlx, 640, 480, "cub3d");
-	mlx_key_hook(data.window, key_hook, &data);
-	mlx_loop_hook(data.mlx, render_loop, &data);
-	mlx_loop(data.mlx);
-	mlx_destroy_display(data.mlx);
+	t_config	config;
+	
+	init_config(&config);
+	parse_file("map/test_parsing.cub", &config);
+	// print_config_info_simple(&config);
 	return (0);
 }

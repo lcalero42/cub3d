@@ -1,0 +1,49 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   p_parse_file.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/07/15 23:32:10 by ekeisler          #+#    #+#             */
+/*   Updated: 2025/07/16 02:56:15 by ekeisler         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "cub3d.h"
+
+int	parse_file(char *filename, t_config *config)
+{
+	
+	int		fd;
+	char	*line;
+	char	*buf;
+	char	*tmp;
+	char	**all_lines;
+
+	fd = open(filename, O_RDONLY);
+	if (fd < 0)
+		printf("fd error\n");
+	buf = ft_strdup("");
+	line = get_next_line(fd);
+	while (line)
+	{
+		tmp = ft_strjoin(buf, line);
+		free(buf);
+		free(line);
+		if (!tmp)
+			return (close(fd), 1);
+		buf = tmp;
+		line = get_next_line(fd);
+	}
+	close(fd);
+	all_lines = ft_split(buf, '\n');
+	for (int i = 0; all_lines[i]; i++)
+	{
+		printf("%s\n", all_lines[i]);
+	}
+	parse_config_section(all_lines, config);
+	parse_map(all_lines, config);
+	free(buf);
+	return (0);
+}

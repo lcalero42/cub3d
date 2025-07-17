@@ -3,92 +3,104 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/27 20:20:00 by lcalero           #+#    #+#             */
-/*   Updated: 2025/01/22 19:08:44 by lcalero          ###   ########.fr       */
+/*   Created: 2024/12/09 12:32:34 by ekeisler          #+#    #+#             */
+/*   Updated: 2025/01/30 15:19:26 by ekeisler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include "../includes/so_long.h"
+#include "unistd.h"
 
-char	*ft_strjoin_free(char *s1, char *s2)
+static char	*ft_strdup_endl(const char *line)
 {
-	char	*res;
-	size_t	len_s1;
-	size_t	j;
+	size_t	len;
+	char	*str;
+	size_t	i;
 
-	j = 0;
-	len_s1 = ft_strlen(s1);
-	while (s2[j] != '\n' && s2[j])
-		j++;
-	if (s2[j] == '\n')
-		j++;
-	res = malloc((len_s1 + j + 1) * sizeof(char));
-	if (res == NULL)
-		return (free(s1), NULL);
-	ft_memcpy(res, s1, len_s1);
-	ft_memcpy(res + len_s1, s2, j);
-	res[len_s1 + j] = '\0';
-	free(s1);
-	return (res);
+	len = 0;
+	i = 0;
+	while (line[len] && line[len] != '\n')
+		len++;
+	if (line[len] == '\n')
+		len++;
+	str = malloc(sizeof(char) * (len + 1));
+	if (!str)
+		return (NULL);
+	while (i < len)
+	{
+		str[i] = line[i];
+		i++;
+	}
+	str[i] = '\0';
+	return (str);
 }
 
-void	ft_update(char *str)
+static char	*ft_strjoin_and_free(char *s1, char *s2)
+{
+	size_t	len1;
+	size_t	len2;
+	char	*line;
+
+	if (!s1 || !s2)
+		return (NULL);
+	len1 = ft_strlen(s1);
+	len2 = 0;
+	while (s2[len2] != '\0' && s2[len2] != '\n')
+		len2++;
+	if (s2[len2] == '\n')
+		len2++;
+	line = malloc(sizeof(char) * len1 + len2 + 1);
+	if (!line)
+		return (free(s1), NULL);
+	ft_memcpy(line, s1, len1);
+	ft_memcpy(line + len1, s2, len2);
+	line[len1 + len2] = '\0';
+	free(s1);
+	return (line);
+}
+
+static void	ft_update(char	*buf)
 {
 	int	i;
 	int	j;
 
 	i = 0;
 	j = 0;
-	while (str[i] && str[i] != '\n')
+	while (buf[i] && buf[i] != '\n')
 		i++;
-	if (str[i] == '\n')
+	if (buf[i] == '\n')
 		i++;
-	while (str[i])
-		str[j++] = str[i++];
-	str[j] = '\0';
+	while (buf[i])
+		buf[j++] = buf[i++];
+	buf[j] = '\0';
 }
 
 char	*get_next_line(int fd)
 {
-	static char		buffer[BUFFER_SIZE + 1] = {0};
-	char			*line;
+	static char		buf[100 + 1];
 	int				index;
+	char			*line;
 
-	if (fd < 0 || BUFFER_SIZE <= 0)
+	if (fd < 0 || 100 <= 0)
 		return (NULL);
 	index = 1;
-	line = ft_strdup(buffer);
+	line = ft_strdup_endl(buf);
 	if (!line)
 		return (NULL);
 	while (index > 0 && !ft_strchr(line, '\n'))
 	{
-		index = read(fd, buffer, BUFFER_SIZE);
+		index = read(fd, buf, 100);
 		if (index == -1)
-			return (ft_bzero(buffer, BUFFER_SIZE), free(line), NULL);
-		buffer[index] = '\0';
-		line = ft_strjoin_free(line, buffer);
+			return (ft_bzero(buf, 100), free(line), NULL);
+		buf[index] = '\0';
+		line = ft_strjoin_and_free(line, buf);
 		if (!line)
 			return (NULL);
 	}
 	if (index == 0 && !line[0])
 		return (free(line), NULL);
-	ft_update(buffer);
+	ft_update(buf);
 	return (line);
 }
-
-/*#include <stdio.h>
-#include <fcntl.h>
-int	main(void)
-{
-	int fd = open("test.txt", O_RDONLY);
-	char *line;
-	while ((line = get_next_line(fd)) != NULL)
-	{
-		//printf("%s", line);
-		free(line);
-	}
-	return (0);
-}*/

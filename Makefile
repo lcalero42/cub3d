@@ -31,10 +31,19 @@ ifeq ($(MODE), debug)
 	CFLAGS = -Wall -Wextra -MD -MP -Iinc $(INCLUDES) -g3 $(DEBUG_CONFIG)
 endif
 
-VPATH = srcs:srcs/raycasting
+VPATH = srcs:srcs/raycasting 		\
+		srcs:srcs/parsing	 		\
+		srcs:srcs/utils				\
 
 SRCS =	main.c						\
 		r_trace.c					\
+		p_init_config.c				\
+		p_parse_file.c				\
+		p_parse_config_lines.c		\
+		p_parse_map.c				\
+		u_is_config_line.c			\
+		u_is_empty_line.c			\
+		u_calculate_map_width.c
 
 OBJS = $(addprefix $(OBJ_DIR)/, $(SRCS:.c=.o))
 DEPS = $(OBJS:.o=.d)

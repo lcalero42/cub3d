@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 14:01:03 by lcalero           #+#    #+#             */
-/*   Updated: 2025/07/08 20:13:37 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/07/16 02:44:58 by ekeisler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,10 @@
 
 # include "../minilibx-linux/mlx.h"
 # include "libft.h"
-
+# include <unistd.h>
+# include <fcntl.h>
+# include <stdio.h>
+# include <stdlib.h>
 # ifndef WINDOW_WIDTH
  # define WINDOW_WIDTH 640
 # endif
@@ -57,6 +60,29 @@ typedef struct s_player
 	double		fov;
 } t_player;
 
+typedef struct s_color 
+{
+	int r;
+	int g;
+	int b;
+} t_color;
+
+typedef struct s_path
+{
+	char *north;
+	char *west;
+	char *south;
+	char *east;
+} t_path;
+
+typedef struct s_config {
+    t_path		path;
+    t_color     floor;
+    t_color     ceiling;
+	t_grid		map;
+    int         config_lines;
+} t_config;
+
 // typedef struct s_camera 
 // {
 // 	float x_position;
@@ -72,6 +98,16 @@ typedef struct s_data
 	t_ray		rays[WINDOW_WIDTH];
 } t_data;
 
+// parsing
+int		parse_file(char *filename, t_config *config);
+int		parse_config_section(char **all_lines, t_config *config);
+int		parse_map(char **all_lines, t_config *config);
+void 	init_config(t_config *config);
+// raycasting
 void	trace_ray(t_data *data, double angle);
 
+// utils
+int		u_is_empty_line(char *line);
+int		u_is_config_line(char *line);
+void	u_calculate_map_width(t_config *config);
 #endif

@@ -5,5 +5,7 @@
 !libft
 !srcs
 !raycasting
+!parsing
+!utils
 !*.c
 !*.h
