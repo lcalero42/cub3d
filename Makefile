@@ -3,8 +3,8 @@
 # ---------------------------------------------------------------------------- #
 
 # ---------------------------------- window ---------------------------------- #
-WINDOW_WIDTH = 640		# width of window
-WINDOW_HEIGHT = 480		# height of window
+WINDOW_WIDTH = 1920		# width of window
+WINDOW_HEIGHT = 1080		# height of window
 
 # --------------------------------- gameplay --------------------------------- #
 MOVE_SPEED = 0.1		# player movement speed
@@ -31,10 +31,16 @@ ifeq ($(MODE), debug)
 	CFLAGS = -Wall -Wextra -MD -MP -Iinc $(INCLUDES) -g3 $(DEBUG_CONFIG)
 endif
 
-VPATH = srcs:srcs/raycasting
+VPATH = srcs:srcs/raycasting \
+		srcs:srcs/player	 \
 
 SRCS =	main.c						\
-		r_trace.c					\
+		r_raycast_dda.c				\
+		r_raycast_init.c			\
+		r_wall_render.c				\
+		r_wall_texture.c			\
+		p_determine_movement.c		\
+
 
 OBJS = $(addprefix $(OBJ_DIR)/, $(SRCS:.c=.o))
 DEPS = $(OBJS:.o=.d)
