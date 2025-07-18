@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   p_parse_config_lines.c                             :+:      :+:    :+:   */
+/*   pr_parse_config_lines.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 23:58:38 by ekeisler          #+#    #+#             */
-/*   Updated: 2025/07/16 02:48:58 by ekeisler         ###   ########.fr       */
+/*   Updated: 2025/07/18 02:11:40 by ekeisler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static int  parse_config_line(char *line, t_config *config);
+static int  parse_config_line(char *line, t_data *data);
 
-int	parse_config_section(char **all_lines, t_config *config)
+int	parse_config_section(char **all_lines, t_data *data)
 {
 	int	i;
 	
@@ -28,9 +28,9 @@ int	parse_config_section(char **all_lines, t_config *config)
 		}
 		if (u_is_config_line(all_lines[i]))
 		{
-			if (!parse_config_line(all_lines[i], config))
+			if (!parse_config_line(all_lines[i], data))
 				return (0);
-			config->config_lines++;
+			data->config_lines++;
 		}
 		else
 			break;
@@ -39,13 +39,13 @@ int	parse_config_section(char **all_lines, t_config *config)
 	return (1);
 }
 
-static int parse_config_line(char *line, t_config *config)
+static int parse_config_line(char *line, t_data *data)
 {
     char *trimmed;
     char **tokens;
     int result = 0;
     
-    (void) config;
+    (void) data;
 	result = 0;
 	trimmed = ft_strtrim(line, " \t\n");
     if (!trimmed)

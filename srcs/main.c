@@ -6,7 +6,7 @@
 /*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 11:53:44 by lcalero           #+#    #+#             */
-/*   Updated: 2025/07/16 02:54:46 by ekeisler         ###   ########.fr       */
+/*   Updated: 2025/07/18 02:29:28 by ekeisler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,67 +14,117 @@
 
 int	key_hook(int keycode, t_data *data)
 {
-	if (keycode == 65307)
+	if (keycode == XK_Escape)
 	{
+		mlx_destroy_image(data->mlx, data->render_img);
+		mlx_destroy_image(data->mlx, data->north_wall.wall_texture_img);
+		mlx_destroy_image(data->mlx, data->south_wall.wall_texture_img);
+		mlx_destroy_image(data->mlx, data->east_wall.wall_texture_img);
+		mlx_destroy_image(data->mlx, data->west_wall.wall_texture_img);
 		mlx_destroy_window(data->mlx, data->window);
 		mlx_loop_end(data->mlx);
 		mlx_destroy_display(data->mlx);
 		free(data->mlx);
 		exit(0);
 	}
+	determine_movement(keycode, data);
 	return (0);
 }
 
 int	render_loop(t_data *data)
 {
-	trace_ray(data, 0);
+	trace_ray(data, data->player.angle);
+	render_walls(data);
+	mlx_put_image_to_window(data->mlx, data->window, data->render_img, 0, 0);
+	usleep(100);
 	return (1);
 }
 
-void	print_config_info_simple(t_config *config)
+static void	print_config_info_simple(t_data *data)
 {
-	printf("\n========== CONFIG PARSING INFO ==========\n");
-	
-	printf("Config lines parsed: %d\n", config->config_lines);
-	printf("Map dimensions: %dx%d\n", config->map.width, config->map.height);
-	printf("\nTextures:\n");
-	printf("  NO: %s\n", config->path.north ? config->path.north : "NOT SET");
-	printf("  SO: %s\n", config->path.south ? config->path.south : "NOT SET");
-	printf("  WE: %s\n", config->path.west ? config->path.west : "NOT SET");
-	printf("  EA: %s\n", config->path.east ? config->path.east : "NOT SET");
-	
-	printf("\nColors:\n");
-	if (config->floor.r != -1)
-		printf("  Floor: RGB(%d, %d, %d)\n", 
-			   config->floor.r, config->floor.g, config->floor.b);
-	else
-		printf("  Floor: NOT SET\n");
-	
-	if (config->ceiling.r != -1)
-		printf("  Ceiling: RGB(%d, %d, %d)\n", 
-			   config->ceiling.r, config->ceiling.g, config->ceiling.b);
-	else
-		printf("  Ceiling: NOT SET\n");
-	
-	printf("\nMap:\n");
-	if (config->map.grid)
-	{
-		for (int i = 0; i < config->map.height; i++)
-			printf("  [%2d] %s\n", i, config->map.grid[i]);
-	}
-	else
-	{
-		printf("  NO MAP LOADED\n");
-	}
-	printf("==========================================\n\n");
+	int i;
+    int j;
+    
+    if (!data || !data->grid.grid)
+    {
+        printf("Erreur: map non initialisée\n");
+        return;
+    }
+    printf("=== MAP ===\n");
+    printf("Dimensions: %dx%d\n", data->grid.width, data->grid.height);
+    printf("Position joueur: (%.2f, %.2f)\n", data->player.position.x, data->player.position.y);
+    printf("Direction joueur: (%.2f, %.2f)\n", data->player.dir.x, data->player.dir.y);
+    printf("Angle joueur: %.2f°\n", data->player.angle * 180.0 / M_PI);
+    printf("\n");
+    i = 0;
+    while (i < data->grid.height && data->grid.grid[i])
+    {
+        printf("Ligne %2d: [", i);
+        
+        j = 0;
+        while (j < data->grid.width && data->grid.grid[i][j])
+        {
+            printf("%c", data->grid.grid[i][j]);
+            j++;
+        }
+        while (j < data->grid.width)
+        {
+            printf(" ");
+            j++;
+        }
+        printf("] (longueur réelle: %zu)\n", strlen(data->grid.grid[i]));
+        i++;
+    }
+    printf("\n");
+    if (data->sprites && data->sprite_count > 0)
+    {
+        printf("=== SPRITES ===\n");
+        i = 0;
+        while (i < data->sprite_count)
+        {
+            printf("Sprite %d: pos(%.2f, %.2f), texture_id=%d, distance=%.2f\n",
+                   i, data->sprites[i].x, data->sprites[i].y, 
+                   data->sprites[i].texture_id, data->sprites[i].distance);
+            i++;
+        }
+        printf("\n");
+    }
 }
+
 
 int	main(void)
 {
-	t_config	config;
+	t_data	data;
 	
-	init_config(&config);
-	parse_file("map/test_parsing.cub", &config);
-	// print_config_info_simple(&config);
+	ft_bzero(&data, sizeof(t_data));
+	parse_file("map/maptest.cub", &data);
+	print_config_info_simple(data);
 	return (0);
 }
+
+// int	main(void)
+// {
+// 	t_data	data;
+	
+// 	static char *grid_map[] = {
+// 		"111111",
+// 		"100001", 
+// 		"102101",
+// 		"100001",
+// 		"111111",
+// 		NULL
+// 	};
+// 	ft_bzero(&data, sizeof(t_data));
+// 	data.grid.grid = grid_map;
+// 	data.mlx = mlx_init();
+// 	data.player.position.x = 2.5;
+// 	data.player.position.y = 2.5;
+// 	data.window = mlx_new_window(data.mlx,
+// 			WINDOW_WIDTH, WINDOW_HEIGHT, "cub3d");
+// 	init_walls(&data);
+// 	mlx_hook(data.window, 2, 1L << 0, key_hook, &data);
+// 	mlx_loop_hook(data.mlx, render_loop, &data);
+// 	mlx_loop(data.mlx);
+// 	mlx_destroy_display(data.mlx);
+// 	return (0);
+// }

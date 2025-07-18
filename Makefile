@@ -3,12 +3,12 @@
 # ---------------------------------------------------------------------------- #
 
 # ---------------------------------- window ---------------------------------- #
-WINDOW_WIDTH = 640		# width of window
-WINDOW_HEIGHT = 480		# height of window
+WINDOW_WIDTH = 1920		# width of window
+WINDOW_HEIGHT = 1080		# height of window
 
 # --------------------------------- gameplay --------------------------------- #
-MOVE_SPEED = 0.1		# player movement speed
-ROT_SPEED = 0.05		# player rotation speed
+MOVE_SPEED = 0.05		# player movement speed
+ROT_SPEED = 0.1		# player rotation speed
 
 # -------------------------------- performance ------------------------------- #		# check your cpu for best value
 TEXTURE_SIZE = 64		# texture resolution (64x64)
@@ -31,19 +31,21 @@ ifeq ($(MODE), debug)
 	CFLAGS = -Wall -Wextra -MD -MP -Iinc $(INCLUDES) -g3 $(DEBUG_CONFIG)
 endif
 
-VPATH = srcs:srcs/raycasting 		\
-		srcs:srcs/parsing	 		\
-		srcs:srcs/utils				\
+VPATH = srcs:srcs/raycasting \
+		srcs:srcs/player	 \
+		srcs:srcs/parsing	 \
 
 SRCS =	main.c						\
-		r_trace.c					\
-		p_init_config.c				\
-		p_parse_file.c				\
-		p_parse_config_lines.c		\
-		p_parse_map.c				\
-		u_is_config_line.c			\
-		u_is_empty_line.c			\
-		u_calculate_map_width.c
+		pr_parse_config_lines.c		\
+		pr_parse_file.c				\
+		pr_parse_map.c				\
+		r_raycast_dda.c				\
+		r_raycast_init.c			\
+		r_wall_render.c				\
+		r_wall_texture.c			\
+		r_wall_side.c				\
+		p_determine_movement.c		\
+
 
 OBJS = $(addprefix $(OBJ_DIR)/, $(SRCS:.c=.o))
 DEPS = $(OBJS:.o=.d)
