@@ -38,10 +38,6 @@ int	parse_file(char *filename, t_data *data)
 	}
 	close(fd);
 	all_lines = ft_split(buf, '\n');
-	for (int i = 0; all_lines[i]; i++)
-	{
-		printf("%s\n", all_lines[i]);
-	}
 	parse_config_section(all_lines, data);
 	parse_map(all_lines, data);
 	free(buf);

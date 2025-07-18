@@ -72,7 +72,7 @@ static void	print_config_info_simple(t_data *data)
             printf(" ");
             j++;
         }
-        printf("] (longueur réelle: %zu)\n", strlen(data->grid.grid[i]));
+        printf("] (longueur réelle: %zu)\n", ft_strlen(data->grid.grid[i]));
         i++;
     }
     printf("\n");
@@ -97,8 +97,8 @@ int	main(void)
 	t_data	data;
 	
 	ft_bzero(&data, sizeof(t_data));
-	parse_file("map/maptest.cub", &data);
-	print_config_info_simple(data);
+	parse_file("map/map.cub", &data);
+	print_config_info_simple(&data);
 	return (0);
 }
 

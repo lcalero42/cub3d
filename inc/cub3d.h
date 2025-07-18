@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: ekeisler <enzokeisler89@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 14:01:03 by lcalero           #+#    #+#             */
-/*   Updated: 2025/07/18 02:21:47 by ekeisler         ###   ########.fr       */
+/*   Updated: 2025/07/18 05:09:29 by ekeisler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,13 @@ typedef enum e_wall_side
 	EAST = 2,
 	WEST = 3
 }					t_wall_side;
+
+typedef struct s_color
+{
+	int	red;
+	int	green;
+	int blue;
+} t_color;
 
 typedef struct s_vector
 {
@@ -126,6 +133,8 @@ typedef struct s_data
 	t_wall_render	south_wall;
 	t_wall_render	east_wall;
 	t_wall_render	west_wall;
+	t_color			floor;
+	t_color			ceiling;
 	void			*render_img;
 	char			*render_addr;
 	int				render_bpp;
@@ -145,6 +154,8 @@ typedef struct s_data
 int					parse_file(char *filename, t_data *data);
 int					parse_map(char **all_lines, t_data *data);
 int					parse_config_section(char **all_lines, t_data *data);
+int 				parse_texture_path(char **texture_ptr, char *path);
+int					parse_color(char *color_str, t_color *color);
 
 // FUNCTIONS
 void				trace_ray(t_data *data, double angle);
