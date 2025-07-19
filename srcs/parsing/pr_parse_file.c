@@ -6,7 +6,7 @@
 /*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 23:32:10 by ekeisler          #+#    #+#             */
-/*   Updated: 2025/07/18 02:18:38 by ekeisler         ###   ########.fr       */
+/*   Updated: 2025/07/19 11:07:53 by ekeisler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,11 @@ int	parse_file(char *filename, t_data *data)
 	char	*tmp;
 	char	**all_lines;
 
+	if (check_file_extension(filename))
+	{
+		printf("error: file ext\n");
+		return (1);
+	}
 	fd = open(filename, O_RDONLY);
 	if (fd < 0)
 		printf("fd error\n");
@@ -41,5 +46,7 @@ int	parse_file(char *filename, t_data *data)
 	parse_config_section(all_lines, data);
 	parse_map(all_lines, data);
 	free(buf);
+	if (0 == validate_config(data))
+		return (1);
 	return (0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ekeisler <enzokeisler89@gmail.com>         +#+  +:+       +#+        */
+/*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 14:01:03 by lcalero           #+#    #+#             */
-/*   Updated: 2025/07/18 05:09:29 by ekeisler         ###   ########.fr       */
+/*   Updated: 2025/07/19 11:02:11 by ekeisler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,6 +156,8 @@ int					parse_map(char **all_lines, t_data *data);
 int					parse_config_section(char **all_lines, t_data *data);
 int 				parse_texture_path(char **texture_ptr, char *path);
 int					parse_color(char *color_str, t_color *color);
+int					check_file_extension(char *filename);
+int					validate_config(t_data *data);
 
 // FUNCTIONS
 void				trace_ray(t_data *data, double angle);
@@ -179,4 +181,6 @@ void				init_ray_steps(t_data *data, int i);
 int		u_is_empty_line(char *line);
 int		u_is_config_line(char *line);
 void	u_calculate_map_width(t_data *data);
+void	u_ft_free(char **res);
+
 #endif

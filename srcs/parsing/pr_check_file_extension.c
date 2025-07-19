@@ -1,26 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pr_parse_texture.c                                 :+:      :+:    :+:   */
+/*   pr_check_file_extension.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/18 04:54:05 by ekeisler          #+#    #+#             */
-/*   Updated: 2025/07/19 09:41:19 by ekeisler         ###   ########.fr       */
+/*   Created: 2025/07/19 10:00:20 by ekeisler          #+#    #+#             */
+/*   Updated: 2025/07/19 10:09:34 by ekeisler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int parse_texture_path(char **texture_ptr, char *path) 
+int	check_file_extension(char *filename)
 {
-        if (*texture_ptr != NULL)
-    {
-        printf("Error: Duplicate texture definition\n");
+	int len;
+
+    if (!filename)
+        return (0);    
+    len = ft_strlen(filename);
+    if (len < 4)
+	{
         return (0);
-    }
-    *texture_ptr = ft_strdup(path);
-    if (!*texture_ptr)
-        return (0);
-    return (1);
+	}
+	if (ft_strncmp(filename + len - 4, ".cub", 4))
+	{
+		return (1);
+	}
+	return (0);
 }

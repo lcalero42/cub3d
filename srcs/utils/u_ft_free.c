@@ -1,26 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pr_parse_texture.c                                 :+:      :+:    :+:   */
+/*   u_ft_free.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/18 04:54:05 by ekeisler          #+#    #+#             */
-/*   Updated: 2025/07/19 09:41:19 by ekeisler         ###   ########.fr       */
+/*   Created: 2025/07/19 10:54:06 by ekeisler          #+#    #+#             */
+/*   Updated: 2025/07/19 10:55:39 by ekeisler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int parse_texture_path(char **texture_ptr, char *path) 
+void	u_ft_free(char **res)
 {
-        if (*texture_ptr != NULL)
-    {
-        printf("Error: Duplicate texture definition\n");
-        return (0);
-    }
-    *texture_ptr = ft_strdup(path);
-    if (!*texture_ptr)
-        return (0);
-    return (1);
+	int	i;
+
+	i = 0;
+	while (res[i])
+	{
+		if (res[i])
+			free(res[i]);
+		i++;
+	}
+	free(res);
 }

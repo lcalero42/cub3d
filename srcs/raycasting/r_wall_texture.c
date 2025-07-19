@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   r_wall_texture.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 17:10:47 by lcalero           #+#    #+#             */
-/*   Updated: 2025/07/17 22:10:39 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/07/19 09:49:26 by ekeisler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@ static void	load_wall_texture(t_data *data, char *path, t_wall_render *wall);
 
 void	init_walls(t_data *data)
 {
-	load_wall_texture(data, "sprites/wall.xpm", &data->north_wall);
-	load_wall_texture(data, "sprites/wall_2.xpm", &data->south_wall);
-	load_wall_texture(data, "sprites/wall_3.xpm", &data->west_wall);
-	load_wall_texture(data, "sprites/wall_4.xpm", &data->east_wall);
+	load_wall_texture(data, data->north_wall.info.addr, &data->north_wall);
+	load_wall_texture(data, data->south_wall.info.addr, &data->south_wall);
+	load_wall_texture(data, data->west_wall.info.addr, &data->west_wall);
+	load_wall_texture(data, data->east_wall.info.addr, &data->east_wall);
 	data->render_img = mlx_new_image(data->mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
 	if (!data->render_img)
 	{
