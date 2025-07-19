@@ -6,7 +6,7 @@
 /*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 23:32:10 by ekeisler          #+#    #+#             */
-/*   Updated: 2025/07/19 11:07:53 by ekeisler         ###   ########.fr       */
+/*   Updated: 2025/07/19 12:45:55 by ekeisler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 int	parse_file(char *filename, t_data *data)
 {
-	
 	int		fd;
 	char	*line;
 	char	*buf;
@@ -46,6 +45,8 @@ int	parse_file(char *filename, t_data *data)
 	parse_config_section(all_lines, data);
 	parse_map(all_lines, data);
 	free(buf);
+	free(line);
+	u_ft_free(all_lines);
 	if (0 == validate_config(data))
 		return (1);
 	return (0);

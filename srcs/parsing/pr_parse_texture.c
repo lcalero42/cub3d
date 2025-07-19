@@ -6,21 +6,21 @@
 /*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/18 04:54:05 by ekeisler          #+#    #+#             */
-/*   Updated: 2025/07/19 09:41:19 by ekeisler         ###   ########.fr       */
+/*   Updated: 2025/07/19 12:45:38 by ekeisler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int parse_texture_path(char **texture_ptr, char *path) 
+int	parse_texture_path(char **texture_ptr, char *path)
 {
-        if (*texture_ptr != NULL)
-    {
-        printf("Error: Duplicate texture definition\n");
-        return (0);
-    }
-    *texture_ptr = ft_strdup(path);
-    if (!*texture_ptr)
-        return (0);
-    return (1);
+	if (*texture_ptr != NULL)
+	{
+		printf("Error: Duplicate texture definition\n");
+		return (0);
+	}
+	*texture_ptr = ft_strdup(path);
+	if (!*texture_ptr)
+		return (0);
+	return (1);
 }
