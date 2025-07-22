@@ -6,42 +6,70 @@
 /*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 23:59:55 by ekeisler          #+#    #+#             */
-/*   Updated: 2025/07/19 12:49:40 by ekeisler         ###   ########.fr       */
+/*   Updated: 2025/07/22 12:19:28 by ekeisler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
+static int	find_map_start(char **all_lines);
+static int	count_map_lines(char **all_lines, int map_start);
+static int	allocate_grid(t_data *data, int map_line_count);
+static int	fill_grid(char **all_lines, t_data *data, int map_start, int count);
+
 int	parse_map(char **all_lines, t_data *data)
 {
-	int	i;
 	int	map_start;
 	int	map_line_count;
-	int	map_idx;
+
+	map_start = find_map_start(all_lines);
+	if (map_start == -1)
+	{
+		printf("error: no map found\n");
+		return (0);
+	}
+	map_line_count = count_map_lines(all_lines, map_start);
+	if (!allocate_grid(data, map_line_count))
+		return (0);
+	if (!fill_grid(all_lines, data, map_start, map_line_count))
+		return (0);
+	data->grid.height = map_line_count;
+	u_calculate_map_width(data);
+	return (1);
+}
+
+static int	find_map_start(char **all_lines)
+{
+	int	i;
 
 	i = 0;
-	map_start = 0;
-	map_line_count = 0;
 	while (all_lines[i])
 	{
-		if (u_is_empty_line(all_lines[i]) || u_is_config_line(all_lines[i]))
-		{
-			i++;
-			continue ;
-		}
-		else
-		{
-			map_start = i;
-			break ;
-		}
+		if (!u_is_empty_line(all_lines[i]) && !u_is_config_line(all_lines[i]))
+			return (i);
+		i++;
 	}
+	return (-1);
+}
+
+static int	count_map_lines(char **all_lines, int map_start)
+{
+	int	i;
+	int	count;
+
 	i = map_start;
+	count = 0;
 	while (all_lines[i])
 	{
 		if (!u_is_config_line(all_lines[i]) && !u_is_empty_line(all_lines[i]))
-			map_line_count++;
+			count++;
 		i++;
 	}
+	return (count);
+}
+
+static int	allocate_grid(t_data *data, int map_line_count)
+{
 	if (map_line_count == 0)
 	{
 		printf("error: no map found\n");
@@ -50,9 +78,17 @@ int	parse_map(char **all_lines, t_data *data)
 	data->grid.grid = malloc(sizeof(char *) * (map_line_count + 1));
 	if (!data->grid.grid)
 		return (0);
+	return (1);
+}
+
+static int	fill_grid(char **all_lines, t_data *data, int map_start, int count)
+{
+	int	i;
+	int	map_idx;
+
 	i = map_start;
 	map_idx = 0;
-	while (all_lines[i] && map_idx < map_line_count)
+	while (all_lines[i] && map_idx < count)
 	{
 		if (!u_is_empty_line(all_lines[i]))
 		{
@@ -64,7 +100,5 @@ int	parse_map(char **all_lines, t_data *data)
 		i++;
 	}
 	data->grid.grid[map_idx] = NULL;
-	data->grid.height = map_line_count;
-	u_calculate_map_width(data);
 	return (1);
 }
