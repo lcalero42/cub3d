@@ -1,41 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strjoin.c                                       :+:      :+:    :+:   */
+/*   pr_parse_texture.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/12 12:04:57 by lcalero           #+#    #+#             */
-/*   Updated: 2025/07/19 11:25:49 by ekeisler         ###   ########.fr       */
+/*   Created: 2025/07/18 04:54:05 by ekeisler          #+#    #+#             */
+/*   Updated: 2025/07/19 12:45:38 by ekeisler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "cub3d.h"
 
-char	*ft_strjoin(char const *s1, char const *s2)
+int	parse_texture_path(char **texture_ptr, char *path)
 {
-	char		*res;
-	size_t		i;
-	size_t		j;
-
-	i = 0;
-	j = 0;
-	res = malloc((ft_strlen(s1) + ft_strlen(s2) + 1) * sizeof(char));
-	if (res == NULL)
-		return (NULL);
-	while (s1[i])
+	if (*texture_ptr != NULL)
 	{
-		res[j] = s1[i];
-		i++;
-		j++;
+		printf("Error: Duplicate texture definition\n");
+		return (0);
 	}
-	i = 0;
-	while (s2[i])
-	{
-		res[j] = s2[i];
-		i++;
-		j++;
-	}
-	res[j] = '\0';
-	return (res);
+	*texture_ptr = ft_strdup(path);
+	if (!*texture_ptr)
+		return (0);
+	return (1);
 }

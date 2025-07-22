@@ -6,12 +6,10 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 11:53:44 by lcalero           #+#    #+#             */
-/*   Updated: 2025/07/17 23:57:19 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/07/22 13:37:02 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <stdlib.h>
 #include "cub3d.h"
 
 int	key_release_hook(int keycode, t_data *data)
@@ -71,20 +69,20 @@ int	render_loop(t_data *data)
 	return (1);
 }
 
-int	main(void)
+int	main(int argc, char **argv)
 {
 	t_data	data;
-	
-	static char *grid_map[] = {
-		"111111",
-		"100001", 
-		"102101",
-		"100001",
-		"111111",
-		NULL
-	};
+
+	if (argc != 2)
+	{
+		printf("error : missing map path\n");
+		return (1);
+	}
 	ft_bzero(&data, sizeof(t_data));
-	data.grid.grid = grid_map;
+	if (1 == parse_file(argv[1], &data))
+	{
+		return (1);
+	}
 	data.mlx = mlx_init();
 	data.player.position.x = 2.5;
 	data.player.position.y = 2.5;

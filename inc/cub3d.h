@@ -6,7 +6,7 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 14:01:03 by lcalero           #+#    #+#             */
-/*   Updated: 2025/07/17 23:48:30 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/07/22 13:37:32 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,10 @@
 # include <X11/keysym.h>
 # include <math.h>
 # include <stdio.h>
-
+# include <unistd.h>
+# include <fcntl.h>
+# include <stdio.h>
+# include <stdlib.h>
 # ifndef WINDOW_WIDTH
 #  define WINDOW_WIDTH 640
 # endif
@@ -45,6 +48,13 @@ typedef enum e_wall_side
 	EAST = 2,
 	WEST = 3
 }					t_wall_side;
+
+typedef struct s_color
+{
+	int	red;
+	int	green;
+	int blue;
+} t_color;
 
 typedef struct s_vector
 {
@@ -133,6 +143,8 @@ typedef struct s_data
 	t_wall_render	south_wall;
 	t_wall_render	east_wall;
 	t_wall_render	west_wall;
+	t_color			floor;
+	t_color			ceiling;
 	void			*render_img;
 	char			*render_addr;
 	int				render_bpp;
@@ -140,6 +152,7 @@ typedef struct s_data
 	int				render_endian;
 	t_sprite		*sprites;
 	int				sprite_count;
+	int				config_lines;
 	void			*mlx;
 	void			*window;
 	t_player		player;
@@ -147,6 +160,15 @@ typedef struct s_data
 	t_ray			rays[WINDOW_WIDTH];
 	t_keys			keys;
 }					t_data;
+
+// PARSING
+int					parse_file(char *filename, t_data *data);
+int					parse_map(char **all_lines, t_data *data);
+int					parse_config_section(char **all_lines, t_data *data);
+int 				parse_texture_path(char **texture_ptr, char *path);
+int					parse_color(char *color_str, t_color *color);
+int					check_file_extension(char *filename);
+int					validate_config(t_data *data);
 
 // FUNCTIONS
 void				trace_ray(t_data *data, double angle);
@@ -165,5 +187,11 @@ void				init_player_direction(t_data *data, double angle);
 void				init_ray_direction(t_data *data, int i);
 void				init_ray_distances(t_data *data, int i);
 void				init_ray_steps(t_data *data, int i);
+
+// utils
+int		u_is_empty_line(char *line);
+int		u_is_config_line(char *line);
+void	u_calculate_map_width(t_data *data);
+void	u_ft_free(char **res);
 
 #endif
