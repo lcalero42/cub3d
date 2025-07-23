@@ -55,6 +55,7 @@ SRCS =	main.c						\
 		u_is_config_line.c			\
 		u_is_empty_line.c			\
 		u_ft_free.c					\
+		u_rgb_to_hex.c				\
 
 OBJS = $(addprefix $(OBJ_DIR)/, $(SRCS:.c=.o))
 DEPS = $(OBJS:.o=.d)

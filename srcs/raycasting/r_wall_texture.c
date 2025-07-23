@@ -6,7 +6,7 @@
 /*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 17:10:47 by lcalero           #+#    #+#             */
-/*   Updated: 2025/07/23 09:50:20 by ekeisler         ###   ########.fr       */
+/*   Updated: 2025/07/23 13:03:38 by ekeisler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void	clear_screen(t_data *data)
 		x = 0;
 		while (x < WINDOW_WIDTH)
 		{
-			put_pixel_to_image(data, x, y, 0x87CEEB);
+			put_pixel_to_image(data, x, y, u_rgb_to_hex(data->ceiling.r, data->ceiling.g, data->ceiling.b));
 			x++;
 		}
 		y++;
@@ -80,7 +80,7 @@ void	clear_screen(t_data *data)
 		x = 0;
 		while (x < WINDOW_WIDTH)
 		{
-			put_pixel_to_image(data, x, y, 0x8B4513);
+			put_pixel_to_image(data, x, y, u_rgb_to_hex(data->floor.r, data->floor.g, data->floor.b));
 			x++;
 		}
 		y++;
