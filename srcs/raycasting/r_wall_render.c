@@ -6,7 +6,7 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 17:13:46 by lcalero           #+#    #+#             */
-/*   Updated: 2025/07/17 21:57:13 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/07/23 18:27:06 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,15 +22,15 @@ static void		draw_wall_column(t_data *data, int x,
 void	render_walls(t_data *data)
 {
 	int		x;
-	double	perp_wall_dist;
 	int		draw_start;
 	int		draw_end;
+	double	perp_wall_dist;
 
-	clear_screen(data);
 	x = 0;
 	while (x < WINDOW_WIDTH)
 	{
-		perp_wall_dist = calculate_perp_wall_dist(data, x);
+		data->rays[x].perp_wall_dist = calculate_perp_wall_dist(data, x);
+		perp_wall_dist = data->rays[x].perp_wall_dist;
 		calculate_wall_bounds(perp_wall_dist, &draw_start, &draw_end);
 		draw_wall_column(data, x, draw_start, draw_end);
 		x++;
