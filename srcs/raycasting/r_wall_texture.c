@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   r_wall_texture.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 17:10:47 by lcalero           #+#    #+#             */
-/*   Updated: 2025/07/19 09:49:26 by ekeisler         ###   ########.fr       */
+/*   Updated: 2025/07/23 11:39:22 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ int	get_wall_texture_pixel(t_data *data, int x, int y, int ray_index)
 
 	if (x < 0 || x >= 64 || y < 0 || y >= 64)
 		return (0x808080);
+	if (!data->rays[ray_index].must_render)
+		return (0x87CEEB);
 	side = get_wall_side(data, ray_index);
 	texture = get_texture_info_by_side(data, side);
 	if (!texture.addr)

@@ -6,7 +6,7 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 14:01:03 by lcalero           #+#    #+#             */
-/*   Updated: 2025/07/22 13:37:32 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/07/23 11:40:19 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,10 @@
 
 # ifndef ROTATION_SPEED
 #  define ROTATION_SPEED 0.05
+# endif
+
+# ifndef RENDER_DISTANCE
+#  define RENDER_DISTANCE 1000
 # endif
 
 # define FOV 1.047198f
@@ -71,6 +75,7 @@ typedef struct s_ray
 	t_vector		step;
 	int				hit;
 	int				side;
+	int				must_render;
 }					t_ray;
 
 typedef struct s_grid
@@ -193,5 +198,6 @@ int		u_is_empty_line(char *line);
 int		u_is_config_line(char *line);
 void	u_calculate_map_width(t_data *data);
 void	u_ft_free(char **res);
+void	close_window(t_data *data);
 
 #endif

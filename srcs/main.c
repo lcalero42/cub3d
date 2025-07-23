@@ -6,7 +6,7 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 11:53:44 by lcalero           #+#    #+#             */
-/*   Updated: 2025/07/22 13:37:02 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/07/23 13:11:06 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,18 +32,7 @@ int	key_release_hook(int keycode, t_data *data)
 int	key_press_hook(int keycode, t_data *data)
 {
 	if (keycode == XK_Escape)
-	{
-		mlx_destroy_image(data->mlx, data->render_img);
-		mlx_destroy_image(data->mlx, data->north_wall.wall_texture_img);
-		mlx_destroy_image(data->mlx, data->south_wall.wall_texture_img);
-		mlx_destroy_image(data->mlx, data->east_wall.wall_texture_img);
-		mlx_destroy_image(data->mlx, data->west_wall.wall_texture_img);
-		mlx_destroy_window(data->mlx, data->window);
-		mlx_loop_end(data->mlx);
-		mlx_destroy_display(data->mlx);
-		free(data->mlx);
-		exit(0);
-	}
+		close_window(data);
 	if (keycode == XK_d)
 		data->keys.d = 1;
 	if (keycode == XK_a)
@@ -61,10 +50,15 @@ int	key_press_hook(int keycode, t_data *data)
 
 int	render_loop(t_data *data)
 {
+	// printf("1\n");
 	update_player_movement(data);
+	// printf("2\n");
 	trace_ray(data, data->player.angle);
+	// printf("3\n");
 	render_walls(data);
+	// printf("4\n");
 	mlx_put_image_to_window(data->mlx, data->window, data->render_img, 0, 0);
+	// printf("x : %d, y : %d\n", (int)data->player.position.x, (int)data->player.position.y);
 	usleep(5000);
 	return (1);
 }
@@ -79,13 +73,13 @@ int	main(int argc, char **argv)
 		return (1);
 	}
 	ft_bzero(&data, sizeof(t_data));
-	if (1 == parse_file(argv[1], &data))
-	{
+	if (parse_file(argv[1], &data))
 		return (1);
-	}
+	for (int i = 0; data.grid.grid[i]; i++)
+		printf("%s\n", data.grid.grid[i]);
 	data.mlx = mlx_init();
-	data.player.position.x = 2.5;
-	data.player.position.y = 2.5;
+	data.player.position.x = 7.5;
+	data.player.position.y = 7.5;
 	data.window = mlx_new_window(data.mlx,
 			WINDOW_WIDTH, WINDOW_HEIGHT, "cub3d");
 	init_walls(&data);

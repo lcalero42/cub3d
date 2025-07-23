@@ -6,7 +6,7 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 17:11:51 by lcalero           #+#    #+#             */
-/*   Updated: 2025/07/17 18:09:31 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/07/23 11:27:15 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	init_ray_direction(t_data *data, int i)
 	double	camera_x;
 
 	ft_bzero(&data->rays[i], sizeof(t_ray));
+	data->rays[i].must_render = 1;
 	camera_x = 2.0 * i / (double)WINDOW_WIDTH - 1.0;
 	data->rays[i].ray_dir.x = data->player.dir.x
 		+ data->player.camera_segment.x * camera_x;

@@ -3,22 +3,22 @@
 # ---------------------------------------------------------------------------- #
 
 # ---------------------------------- window ---------------------------------- #
-WINDOW_WIDTH = 1920		# width of window
-WINDOW_HEIGHT = 1080		# height of window
+WINDOW_WIDTH = 640		# width of window
+WINDOW_HEIGHT = 480		# height of window
 
 # --------------------------------- gameplay --------------------------------- #
 MOVE_SPEED = 0.02		# player movement speed
 ROT_SPEED = 0.1		# player rotation speed
 
-# -------------------------------- performance ------------------------------- #		# check your cpu for best value
-TEXTURE_SIZE = 64		# texture resolution (64x64)
+# -------------------------------- performance ------------------------------- #
+RENDER_DISTANCE = 1000		# the maximum distance where the walls will be rendered 
 
 # ------------------------------------- - ------------------------------------ #
 
 NAME = cub3d
 MODE ?= release
-CONFIG = -D WINDOW_WIDTH=$(WINDOW_WIDTH) -D WINDOW_HEIGHT=$(WINDOW_HEIGHT) -D MOVE_SPEED=$(MOVE_SPEED) -D ROT_SPEED=$(ROT_SPEED) -D TEXTURE_SIZE=$(TEXTURE_SIZE)
-DEBUG_CONFIG = -D WINDOW_WIDTH=$(WINDOW_WIDTH) -D WINDOW_HEIGHT=$(WINDOW_HEIGHT) -D MOVE_SPEED=0.05 -D ROT_SPEED=0.02 -D TEXTURE_SIZE=32
+CONFIG = -D WINDOW_WIDTH=$(WINDOW_WIDTH) -D WINDOW_HEIGHT=$(WINDOW_HEIGHT) -D MOVE_SPEED=$(MOVE_SPEED) -D ROT_SPEED=$(ROT_SPEED) -D RENDER_DISTANCE=$(RENDER_DISTANCE)
+DEBUG_CONFIG = -D WINDOW_WIDTH=$(WINDOW_WIDTH) -D WINDOW_HEIGHT=$(WINDOW_HEIGHT) -D MOVE_SPEED=0.05 -D ROT_SPEED=0.02 -D RENDER_DISTANCE=10
 OPTI = -O3 -flto -march=native -mtune=native -funroll-loops
 OBJ_DIR = obj-$(MODE)
 INCLUDES = -Iincludes -Ilibft -Iminilibx-linux
@@ -54,6 +54,7 @@ SRCS =	main.c						\
 		u_is_config_line.c			\
 		u_is_empty_line.c			\
 		u_ft_free.c					\
+		u_close_window.c			\
 
 OBJS = $(addprefix $(OBJ_DIR)/, $(SRCS:.c=.o))
 DEPS = $(OBJS:.o=.d)
