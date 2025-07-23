@@ -6,7 +6,7 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 17:10:47 by lcalero           #+#    #+#             */
-/*   Updated: 2025/07/23 11:39:22 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/07/23 13:40:10 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@ static void	load_wall_texture(t_data *data, char *path, t_wall_render *wall);
 
 void	init_walls(t_data *data)
 {
-	load_wall_texture(data, data->north_wall.info.addr, &data->north_wall);
-	load_wall_texture(data, data->south_wall.info.addr, &data->south_wall);
-	load_wall_texture(data, data->west_wall.info.addr, &data->west_wall);
-	load_wall_texture(data, data->east_wall.info.addr, &data->east_wall);
+	load_wall_texture(data, data->north_wall.texture_path, &data->north_wall);
+	load_wall_texture(data, data->south_wall.texture_path, &data->south_wall);
+	load_wall_texture(data, data->west_wall.texture_path, &data->west_wall);
+	load_wall_texture(data, data->east_wall.texture_path, &data->east_wall);
 	data->render_img = mlx_new_image(data->mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
 	if (!data->render_img)
 	{
@@ -72,7 +72,7 @@ void	clear_screen(t_data *data)
 		x = 0;
 		while (x < WINDOW_WIDTH)
 		{
-			put_pixel_to_image(data, x, y, 0x87CEEB);
+			put_pixel_to_image(data, x, y, u_rgb_to_hex(data->ceiling.r, data->ceiling.g, data->ceiling.b));
 			x++;
 		}
 		y++;
@@ -82,7 +82,7 @@ void	clear_screen(t_data *data)
 		x = 0;
 		while (x < WINDOW_WIDTH)
 		{
-			put_pixel_to_image(data, x, y, 0x8B4513);
+			put_pixel_to_image(data, x, y, u_rgb_to_hex(data->floor.r, data->floor.g, data->floor.b));
 			x++;
 		}
 		y++;

@@ -6,7 +6,7 @@
 /*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 23:58:38 by ekeisler          #+#    #+#             */
-/*   Updated: 2025/07/22 12:16:57 by ekeisler         ###   ########.fr       */
+/*   Updated: 2025/07/23 09:55:46 by ekeisler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,6 @@ static int	parse_config_line(char *line, t_data *data)
 	if (!tokens || !tokens[0])
 	{
 		free(trimmed);
-		if (tokens)
-			u_ft_free(tokens);
 		return (0);
 	}
 	result = process_config_tokens(tokens, data);
@@ -81,13 +79,13 @@ static int	process_config_tokens(char **tokens, t_data *data)
 static int	parse_wall_texture(char *key, char *value, t_data *data)
 {
 	if (ft_strncmp(key, "NO", 2) == 0)
-		return (parse_texture_path(&data->north_wall.info.addr, value));
+		return (parse_texture_path(&data->north_wall.texture_path, value));
 	else if (ft_strncmp(key, "SO", 2) == 0)
-		return (parse_texture_path(&data->south_wall.info.addr, value));
+		return (parse_texture_path(&data->south_wall.texture_path, value));
 	else if (ft_strncmp(key, "WE", 2) == 0)
-		return (parse_texture_path(&data->west_wall.info.addr, value));
+		return (parse_texture_path(&data->west_wall.texture_path, value));
 	else if (ft_strncmp(key, "EA", 2) == 0)
-		return (parse_texture_path(&data->east_wall.info.addr, value));
+		return (parse_texture_path(&data->east_wall.texture_path, value));
 	return (0);
 }
 

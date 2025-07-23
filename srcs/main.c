@@ -6,7 +6,7 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 11:53:44 by lcalero           #+#    #+#             */
-/*   Updated: 2025/07/23 13:11:06 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/07/23 13:39:59 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,8 +78,7 @@ int	main(int argc, char **argv)
 	for (int i = 0; data.grid.grid[i]; i++)
 		printf("%s\n", data.grid.grid[i]);
 	data.mlx = mlx_init();
-	data.player.position.x = 7.5;
-	data.player.position.y = 7.5;
+	find_player_pos(&data);
 	data.window = mlx_new_window(data.mlx,
 			WINDOW_WIDTH, WINDOW_HEIGHT, "cub3d");
 	init_walls(&data);

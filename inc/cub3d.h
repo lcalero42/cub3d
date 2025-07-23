@@ -6,7 +6,7 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 14:01:03 by lcalero           #+#    #+#             */
-/*   Updated: 2025/07/23 11:40:19 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/07/23 13:40:52 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,9 +55,9 @@ typedef enum e_wall_side
 
 typedef struct s_color
 {
-	int	red;
-	int	green;
-	int blue;
+	int	r;
+	int	g;
+	int b;
 } t_color;
 
 typedef struct s_vector
@@ -138,6 +138,7 @@ typedef struct s_texture_info
 typedef struct s_wall_render
 {
 	void			*wall_texture_img;
+	char			*texture_path;
 	t_texture_info	info;
 	int				wall_texture_endian;
 }					t_wall_render;
@@ -174,6 +175,7 @@ int 				parse_texture_path(char **texture_ptr, char *path);
 int					parse_color(char *color_str, t_color *color);
 int					check_file_extension(char *filename);
 int					validate_config(t_data *data);
+int					find_player_pos(t_data *data);
 
 // FUNCTIONS
 void				trace_ray(t_data *data, double angle);
@@ -194,6 +196,7 @@ void				init_ray_distances(t_data *data, int i);
 void				init_ray_steps(t_data *data, int i);
 
 // utils
+int		u_rgb_to_hex(int r, int g, int b);
 int		u_is_empty_line(char *line);
 int		u_is_config_line(char *line);
 void	u_calculate_map_width(t_data *data);

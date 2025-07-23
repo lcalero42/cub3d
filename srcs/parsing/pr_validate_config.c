@@ -6,7 +6,7 @@
 /*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/19 10:58:01 by ekeisler          #+#    #+#             */
-/*   Updated: 2025/07/19 12:44:46 by ekeisler         ###   ########.fr       */
+/*   Updated: 2025/07/23 09:49:42 by ekeisler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ int	validate_config(t_data *data)
 			required_elements, data->config_lines);
 		return (0);
 	}
-	if (!data->north_wall.info.addr || !data->south_wall.info.addr
-		|| !data->west_wall.info.addr || !data->east_wall.info.addr)
+	if (!data->north_wall.texture_path || !data->south_wall.texture_path
+		|| !data->west_wall.texture_path || !data->east_wall.texture_path)
 	{
 		printf("Error: Missing texture configuration\n");
 		return (0);

@@ -1,26 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pr_parse_texture.c                                 :+:      :+:    :+:   */
+/*   u_rgb_to_hex.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/18 04:54:05 by ekeisler          #+#    #+#             */
-/*   Updated: 2025/07/22 16:15:34 by ekeisler         ###   ########.fr       */
+/*   Created: 2025/07/23 12:51:30 by ekeisler          #+#    #+#             */
+/*   Updated: 2025/07/23 12:52:35 by ekeisler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
-
-int	parse_texture_path(char **texture_ptr, char *path)
+int	u_rgb_to_hex(int r, int g, int b)
 {
-	if (*texture_ptr != NULL)
-	{
-		printf("Error: Duplicate texture definition\n");
-		return (0);
-	}
-	*texture_ptr = ft_strdup(path);
-	if (!*texture_ptr)
-		return (0);
-	return (1);
+	return (((r & 0xFF) << 16) | ((g & 0xFF) << 8) | (b & 0xFF));
 }

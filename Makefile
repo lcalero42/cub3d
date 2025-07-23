@@ -44,6 +44,7 @@ SRCS =	main.c						\
 		pr_parse_color.c			\
 		pr_check_file_extension.c	\
 		pr_validate_config.c		\
+		pr_find_player_pos.c		\
 		r_raycast_dda.c				\
 		r_raycast_init.c			\
 		r_wall_render.c				\
@@ -55,6 +56,7 @@ SRCS =	main.c						\
 		u_is_empty_line.c			\
 		u_ft_free.c					\
 		u_close_window.c			\
+		u_rgb_to_hex.c				\
 
 OBJS = $(addprefix $(OBJ_DIR)/, $(SRCS:.c=.o))
 DEPS = $(OBJS:.o=.d)
