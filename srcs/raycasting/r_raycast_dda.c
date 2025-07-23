@@ -6,7 +6,7 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 17:13:02 by lcalero           #+#    #+#             */
-/*   Updated: 2025/07/23 13:32:44 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/07/23 14:52:56 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,29 +68,23 @@ static void	perform_dda_step(t_data *data, int i)
 
 static void	perform_dda(t_data *data, int i)
 {
-	int steps = 0;
+	int	steps;
+	int	map_x;
+	int	map_y;
+
+	steps = 0;
 	while (data->rays[i].hit == 0)
 	{
 		perform_dda_step(data, i);
-		
-		int map_x = (int)data->rays[i].map_pos.x;
-		int map_y = (int)data->rays[i].map_pos.y;
-
+		map_x = (int)data->rays[i].map_pos.x;
+		map_y = (int)data->rays[i].map_pos.y;
 		if (map_x < 0 || map_y < 0)
-		{
-			printf("Ray %d hit boundary at x=%d, y=%d (grid: %dx%d)\n", 
-				   i, map_x, map_y, data->grid.width, data->grid.height);
-			printf("Player mut not get out of bounds\n");
 			close_window(data);
-		}
-		
 		if (data->grid.grid[map_y][map_x] == '1')
 			data->rays[i].hit = 1;
-			
 		steps++;
 		if (steps > RENDER_DISTANCE)
 		{
-			printf("Ray %d: Too many steps, breaking\n", i);
 			data->rays[i].hit = 1;
 			data->rays[i].must_render = 0;
 			break ;

@@ -6,7 +6,7 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 14:01:03 by lcalero           #+#    #+#             */
-/*   Updated: 2025/07/23 13:40:52 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/07/23 15:02:12 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,11 @@
 # include "libft.h"
 # include <X11/X.h>
 # include <X11/keysym.h>
+# include <fcntl.h>
 # include <math.h>
 # include <stdio.h>
-# include <unistd.h>
-# include <fcntl.h>
-# include <stdio.h>
 # include <stdlib.h>
+# include <unistd.h>
 # ifndef WINDOW_WIDTH
 #  define WINDOW_WIDTH 640
 # endif
@@ -55,10 +54,10 @@ typedef enum e_wall_side
 
 typedef struct s_color
 {
-	int	r;
-	int	g;
-	int b;
-} t_color;
+	int				r;
+	int				g;
+	int				b;
+}					t_color;
 
 typedef struct s_vector
 {
@@ -96,13 +95,13 @@ typedef struct s_player
 
 typedef struct s_keys
 {
-	int a;
-	int d;
-	int up;
-	int down;
-	int left;
-	int right;
-}	t_keys;
+	int				a;
+	int				d;
+	int				up;
+	int				down;
+	int				left;
+	int				right;
+}					t_keys;
 
 typedef struct s_sprite
 {
@@ -130,10 +129,10 @@ typedef struct s_sprite_calc
 
 typedef struct s_texture_info
 {
-	char	*addr;
-	int		bpp;
-	int		line_len;
-}	t_texture_info;
+	char			*addr;
+	int				bpp;
+	int				line_len;
+}					t_texture_info;
 
 typedef struct s_wall_render
 {
@@ -171,7 +170,7 @@ typedef struct s_data
 int					parse_file(char *filename, t_data *data);
 int					parse_map(char **all_lines, t_data *data);
 int					parse_config_section(char **all_lines, t_data *data);
-int 				parse_texture_path(char **texture_ptr, char *path);
+int					parse_texture_path(char **texture_ptr, char *path);
 int					parse_color(char *color_str, t_color *color);
 int					check_file_extension(char *filename);
 int					validate_config(t_data *data);
@@ -196,11 +195,11 @@ void				init_ray_distances(t_data *data, int i);
 void				init_ray_steps(t_data *data, int i);
 
 // utils
-int		u_rgb_to_hex(int r, int g, int b);
-int		u_is_empty_line(char *line);
-int		u_is_config_line(char *line);
-void	u_calculate_map_width(t_data *data);
-void	u_ft_free(char **res);
-void	close_window(t_data *data);
+int					u_rgb_to_hex(int r, int g, int b);
+int					u_is_empty_line(char *line);
+int					u_is_config_line(char *line);
+void				u_calculate_map_width(t_data *data);
+void				u_ft_free(char **res);
+int					close_window(t_data *data);
 
 #endif

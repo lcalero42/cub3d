@@ -6,13 +6,13 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/22 15:12:24 by lcalero           #+#    #+#             */
-/*   Updated: 2025/07/23 10:59:09 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/07/23 15:02:02 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	close_window(t_data *data)
+int	close_window(t_data *data)
 {
 	mlx_destroy_image(data->mlx, data->render_img);
 	mlx_destroy_image(data->mlx, data->north_wall.wall_texture_img);
@@ -25,4 +25,5 @@ void	close_window(t_data *data)
 	free(data->mlx);
 	u_ft_free(data->grid.grid);
 	exit(0);
+	return (1);
 }

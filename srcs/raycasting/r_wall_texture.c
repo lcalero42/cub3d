@@ -6,7 +6,7 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 17:10:47 by lcalero           #+#    #+#             */
-/*   Updated: 2025/07/23 13:40:10 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/07/23 14:54:38 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,26 +66,22 @@ void	clear_screen(t_data *data)
 	int	x;
 	int	y;
 
-	y = 0;
-	while (y < WINDOW_HEIGHT / 2)
+	y = -1;
+	while (y++ < WINDOW_HEIGHT / 2)
 	{
-		x = 0;
-		while (x < WINDOW_WIDTH)
-		{
-			put_pixel_to_image(data, x, y, u_rgb_to_hex(data->ceiling.r, data->ceiling.g, data->ceiling.b));
-			x++;
-		}
-		y++;
+		x = -1;
+		while (x++ < WINDOW_WIDTH)
+			put_pixel_to_image(data, x, y,
+				u_rgb_to_hex(data->ceiling.r,
+					data->ceiling.g, data->ceiling.b));
 	}
-	while (y < WINDOW_HEIGHT)
+	while (y++ < WINDOW_HEIGHT)
 	{
-		x = 0;
-		while (x < WINDOW_WIDTH)
-		{
-			put_pixel_to_image(data, x, y, u_rgb_to_hex(data->floor.r, data->floor.g, data->floor.b));
-			x++;
-		}
-		y++;
+		x = -1;
+		while (x++ < WINDOW_WIDTH)
+			put_pixel_to_image(data, x, y,
+				u_rgb_to_hex(data->floor.r,
+					data->floor.g, data->floor.b));
 	}
 }
 

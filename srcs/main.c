@@ -6,7 +6,7 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 11:53:44 by lcalero           #+#    #+#             */
-/*   Updated: 2025/07/23 13:39:59 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/07/23 15:02:24 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,15 +50,10 @@ int	key_press_hook(int keycode, t_data *data)
 
 int	render_loop(t_data *data)
 {
-	// printf("1\n");
 	update_player_movement(data);
-	// printf("2\n");
 	trace_ray(data, data->player.angle);
-	// printf("3\n");
 	render_walls(data);
-	// printf("4\n");
 	mlx_put_image_to_window(data->mlx, data->window, data->render_img, 0, 0);
-	// printf("x : %d, y : %d\n", (int)data->player.position.x, (int)data->player.position.y);
 	usleep(5000);
 	return (1);
 }
@@ -75,8 +70,6 @@ int	main(int argc, char **argv)
 	ft_bzero(&data, sizeof(t_data));
 	if (parse_file(argv[1], &data))
 		return (1);
-	for (int i = 0; data.grid.grid[i]; i++)
-		printf("%s\n", data.grid.grid[i]);
 	data.mlx = mlx_init();
 	find_player_pos(&data);
 	data.window = mlx_new_window(data.mlx,
@@ -84,6 +77,7 @@ int	main(int argc, char **argv)
 	init_walls(&data);
 	mlx_hook(data.window, 2, 1L << 0, key_press_hook, &data);
 	mlx_hook(data.window, 3, 1L << 1, key_release_hook, &data);
+	mlx_hook(data.window, 17, 1L << 17, close_window, &data);
 	mlx_loop_hook(data.mlx, render_loop, &data);
 	mlx_loop(data.mlx);
 	mlx_destroy_display(data.mlx);
