@@ -6,7 +6,7 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/22 15:12:24 by lcalero           #+#    #+#             */
-/*   Updated: 2025/07/23 15:02:02 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/07/23 15:07:17 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,10 @@ int	close_window(t_data *data)
 	mlx_destroy_display(data->mlx);
 	free(data->mlx);
 	u_ft_free(data->grid.grid);
+	free(data->north_wall.texture_path);
+	free(data->south_wall.texture_path);
+	free(data->east_wall.texture_path);
+	free(data->west_wall.texture_path);
 	exit(0);
 	return (1);
 }
