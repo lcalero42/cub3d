@@ -44,6 +44,7 @@ SRCS =	main.c						\
 		pr_parse_color.c			\
 		pr_check_file_extension.c	\
 		pr_validate_config.c		\
+		pr_find_player_pos.c		\
 		r_raycast_dda.c				\
 		r_raycast_init.c			\
 		r_wall_render.c				\

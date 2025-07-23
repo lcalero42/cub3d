@@ -6,7 +6,7 @@
 /*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 14:01:03 by lcalero           #+#    #+#             */
-/*   Updated: 2025/07/22 10:30:44 by ekeisler         ###   ########.fr       */
+/*   Updated: 2025/07/23 09:48:17 by ekeisler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,6 +123,7 @@ typedef struct s_texture_info
 typedef struct s_wall_render
 {
 	void			*wall_texture_img;
+	char			*texture_path;
 	t_texture_info	info;
 	int				wall_texture_endian;
 }					t_wall_render;
@@ -158,6 +159,7 @@ int 				parse_texture_path(char **texture_ptr, char *path);
 int					parse_color(char *color_str, t_color *color);
 int					check_file_extension(char *filename);
 int					validate_config(t_data *data);
+int					find_player_pos(t_data *data);
 
 // FUNCTIONS
 void				trace_ray(t_data *data, double angle);

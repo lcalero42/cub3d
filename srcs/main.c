@@ -6,7 +6,7 @@
 /*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 11:53:44 by lcalero           #+#    #+#             */
-/*   Updated: 2025/07/19 12:54:48 by ekeisler         ###   ########.fr       */
+/*   Updated: 2025/07/23 09:53:05 by ekeisler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,11 @@ int	key_hook(int keycode, t_data *data)
 		mlx_destroy_window(data->mlx, data->window);
 		mlx_loop_end(data->mlx);
 		mlx_destroy_display(data->mlx);
+		free(data->north_wall.texture_path);
+		free(data->south_wall.texture_path);
+		free(data->west_wall.texture_path);
+		free(data->east_wall.texture_path);
+		u_ft_free(data->grid.grid);
 		free(data->mlx);
 		exit(0);
 	}
@@ -55,8 +60,7 @@ int	main(int argc, char **argv)
 		return (1);
 	}
 	data.mlx = mlx_init();
-	data.player.position.x = 2.5;
-	data.player.position.y = 2.5;
+	find_player_pos(&data);
 	data.window = mlx_new_window(data.mlx,
 			WINDOW_WIDTH, WINDOW_HEIGHT, "cub3d");
 	init_walls(&data);
