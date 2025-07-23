@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   u_rgb_to_hex.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/23 12:51:30 by ekeisler          #+#    #+#             */
-/*   Updated: 2025/07/23 12:52:35 by ekeisler         ###   ########.fr       */
+/*   Updated: 2025/07/23 18:22:55 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	u_rgb_to_hex(int r, int g, int b)
+int	u_rgb_to_hex(int r, int g, int b, int a)
 {
-	return (((r & 0xFF) << 16) | ((g & 0xFF) << 8) | (b & 0xFF));
+	return (((a & 0xFF) << 24) | ((r & 0xFF) << 16)
+		| ((g & 0xFF) << 8) | (b & 0xFF));
 }

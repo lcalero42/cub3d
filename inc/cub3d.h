@@ -6,7 +6,7 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 14:01:03 by lcalero           #+#    #+#             */
-/*   Updated: 2025/07/23 15:02:12 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/07/23 18:34:55 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,13 @@
 #  define RENDER_DISTANCE 1000
 # endif
 
+# define FOG_START_DISTANCE 0.1f
+# define FOG_END_DISTANCE 8.0f
+# define FOG_MAX_ALPHA 255
+# define FOG_COLOR_R 0
+# define FOG_COLOR_G 0
+# define FOG_COLOR_B 0
+
 # define FOV 1.047198f
 
 typedef enum e_wall_side
@@ -72,6 +79,7 @@ typedef struct s_ray
 	t_vector		side_dist;
 	t_vector		delta_dist;
 	t_vector		step;
+	double			perp_wall_dist;
 	int				hit;
 	int				side;
 	int				must_render;
@@ -195,7 +203,7 @@ void				init_ray_distances(t_data *data, int i);
 void				init_ray_steps(t_data *data, int i);
 
 // utils
-int					u_rgb_to_hex(int r, int g, int b);
+int					u_rgb_to_hex(int r, int g, int b, int a);
 int					u_is_empty_line(char *line);
 int					u_is_config_line(char *line);
 void				u_calculate_map_width(t_data *data);
