@@ -6,7 +6,7 @@
 /*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 23:59:55 by ekeisler          #+#    #+#             */
-/*   Updated: 2025/07/22 12:19:28 by ekeisler         ###   ########.fr       */
+/*   Updated: 2025/07/23 15:06:07 by ekeisler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	parse_map(char **all_lines, t_data *data)
 	map_start = find_map_start(all_lines);
 	if (map_start == -1)
 	{
-		printf("error: no map found\n");
+		u_print_error("No map found");
 		return (0);
 	}
 	map_line_count = count_map_lines(all_lines, map_start);
@@ -72,7 +72,7 @@ static int	allocate_grid(t_data *data, int map_line_count)
 {
 	if (map_line_count == 0)
 	{
-		printf("error: no map found\n");
+		u_print_error("No map found");
 		return (0);
 	}
 	data->grid.grid = malloc(sizeof(char *) * (map_line_count + 1));

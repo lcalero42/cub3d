@@ -6,7 +6,7 @@
 /*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/18 04:59:55 by ekeisler          #+#    #+#             */
-/*   Updated: 2025/07/23 12:59:36 by ekeisler         ###   ########.fr       */
+/*   Updated: 2025/07/23 15:07:09 by ekeisler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	parse_color(char *color_str, t_color *color)
 		|| color->g < 0 || color->g > 255
 		|| color->b < 0 || color->b > 255)
 	{
-		printf("Error: RGB values must be between 0 and 255\n");
+		u_print_error("RGB values must be between 0 and 255");
 		u_ft_free(rgb_parts);
 		return (0);
 	}

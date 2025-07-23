@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 11:53:44 by lcalero           #+#    #+#             */
-/*   Updated: 2025/07/23 13:39:59 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/07/23 17:41:28 by ekeisler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,15 +50,10 @@ int	key_press_hook(int keycode, t_data *data)
 
 int	render_loop(t_data *data)
 {
-	// printf("1\n");
 	update_player_movement(data);
-	// printf("2\n");
 	trace_ray(data, data->player.angle);
-	// printf("3\n");
 	render_walls(data);
-	// printf("4\n");
 	mlx_put_image_to_window(data->mlx, data->window, data->render_img, 0, 0);
-	// printf("x : %d, y : %d\n", (int)data->player.position.x, (int)data->player.position.y);
 	usleep(5000);
 	return (1);
 }
@@ -69,14 +64,12 @@ int	main(int argc, char **argv)
 
 	if (argc != 2)
 	{
-		printf("error : missing map path\n");
+		u_print_error("missing map path");
 		return (1);
 	}
 	ft_bzero(&data, sizeof(t_data));
 	if (parse_file(argv[1], &data))
 		return (1);
-	for (int i = 0; data.grid.grid[i]; i++)
-		printf("%s\n", data.grid.grid[i]);
 	data.mlx = mlx_init();
 	find_player_pos(&data);
 	data.window = mlx_new_window(data.mlx,

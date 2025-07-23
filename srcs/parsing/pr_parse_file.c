@@ -6,7 +6,7 @@
 /*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 23:32:10 by ekeisler          #+#    #+#             */
-/*   Updated: 2025/07/23 09:55:56 by ekeisler         ###   ########.fr       */
+/*   Updated: 2025/07/23 15:06:48 by ekeisler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,13 @@ static int	open_and_validate_file(char *filename)
 
 	if (check_file_extension(filename))
 	{
-		printf("error: file extension\n");
+		u_print_error("File extension (.cub needed)");
 		return (-1);
 	}
 	fd = open(filename, O_RDONLY);
 	if (fd < 0)
 	{
-		printf("fd error\n");
+		u_print_error("fd error");
 		return (-1);
 	}
 	return (fd);

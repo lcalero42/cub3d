@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 14:01:03 by lcalero           #+#    #+#             */
-/*   Updated: 2025/07/23 13:40:52 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/07/23 17:17:30 by ekeisler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -202,5 +202,6 @@ int		u_is_config_line(char *line);
 void	u_calculate_map_width(t_data *data);
 void	u_ft_free(char **res);
 void	close_window(t_data *data);
+void	u_print_error(char *msg);
 
 #endif

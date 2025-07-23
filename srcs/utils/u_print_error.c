@@ -1,26 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pr_parse_texture.c                                 :+:      :+:    :+:   */
+/*   u_print_error.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/18 04:54:05 by ekeisler          #+#    #+#             */
-/*   Updated: 2025/07/23 15:05:38 by ekeisler         ###   ########.fr       */
+/*   Created: 2025/07/23 14:59:38 by ekeisler          #+#    #+#             */
+/*   Updated: 2025/07/23 15:04:47 by ekeisler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	parse_texture_path(char **texture_ptr, char *path)
+void	u_print_error(char *msg)
 {
-	if (*texture_ptr != NULL)
-	{
-		u_print_error("Duplicate texture definition");
-		return (0);
-	}
-	*texture_ptr = ft_strdup(path);
-	if (!*texture_ptr)
-		return (0);
-	return (1);
+	ft_putstr_fd("Error\n", 2);
+	ft_putstr_fd(msg, 2);
+	ft_putstr_fd("\n", 2);
 }
