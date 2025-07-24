@@ -6,7 +6,7 @@
 /*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 14:01:03 by lcalero           #+#    #+#             */
-/*   Updated: 2025/07/24 15:29:50 by ekeisler         ###   ########.fr       */
+/*   Updated: 2025/07/24 17:38:07 by ekeisler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,11 @@
 # endif
 
 # ifndef MOVE_SPEED
-#  define MOVE_SPEED 0.1
+#  define MOVE_SPEED 0.1f
 # endif
 
 # ifndef ROTATION_SPEED
-#  define ROTATION_SPEED 0.05
+#  define ROTATION_SPEED 3.0f
 # endif
 
 # ifndef RENDER_DISTANCE
@@ -50,6 +50,16 @@
 # define FOG_COLOR_B 0
 
 # define FOV 1.047f
+
+# define RAY_HIT 1
+# define RAY_CONTINUE 0
+
+typedef struct s_dda_vars
+{
+    int     map_x;
+    int     map_y;
+    int     steps;
+}   t_dda_vars;
 
 typedef enum e_wall_side
 {
@@ -105,8 +115,8 @@ typedef struct s_keys
 {
 	int				a;
 	int				d;
-	int				up;
-	int				down;
+	int				w;
+	int				s;
 	int				left;
 	int				right;
 }					t_keys;
@@ -150,6 +160,14 @@ typedef struct s_wall_render
 	int				wall_texture_endian;
 }					t_wall_render;
 
+typedef struct s_time
+{
+	int				frame_count;
+	double			delta_time;
+	double			target_fps;
+	double			last_frame_time;
+}					t_time;
+
 typedef struct s_data
 {
 	t_wall_render	north_wall;
@@ -172,6 +190,8 @@ typedef struct s_data
 	t_grid			grid;
 	t_ray			rays[WINDOW_WIDTH];
 	t_keys			keys;
+	t_time			time;
+	int				render_fog;
 }					t_data;
 
 // PARSING
@@ -196,7 +216,7 @@ void				clear_screen(t_data *data);
 void				put_pixel_to_image(t_data *data, int x, int y, int color);
 int					get_wall_texture_pixel(t_data *data, int x, int y,
 						int side);
-int					update_player_movement(t_data *data);
+void				update_player_movement(t_data *data, t_player *player, t_time *time);
 t_wall_side			get_wall_side(t_data *data, int ray_index);
 t_texture_info		get_texture_info_by_side(t_data *data, t_wall_side side);
 
@@ -218,5 +238,7 @@ int					u_is_empty_line(char *line);
 int					u_is_config_line(char *line);
 void				u_calculate_map_width(t_data *data);
 void				u_ft_free(char **res);
+void				update_time(t_time *time);
+void				init_time(t_time *time);
 
 #endif

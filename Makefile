@@ -3,12 +3,12 @@
 # ---------------------------------------------------------------------------- #
 
 # ---------------------------------- window ---------------------------------- #
-WINDOW_WIDTH = 640		# width of window
-WINDOW_HEIGHT = 480		# height of window
+WINDOW_WIDTH = 1920		# width of window
+WINDOW_HEIGHT = 1080		# height of window
 
 # --------------------------------- gameplay --------------------------------- #
-MOVE_SPEED = 0.02		# player movement speed
-ROT_SPEED = 0.1		# player rotation speed
+MOVE_SPEED = 10.0f		# player movement speed
+ROT_SPEED = 3.0f	# player rotation speed
 
 # -------------------------------- performance ------------------------------- #
 RENDER_DISTANCE = 1000		# the maximum distance where the walls will be rendered 
@@ -54,6 +54,7 @@ SRCS =	main.c						\
 		r_wall_texture.c			\
 		r_wall_side.c				\
 		p_determine_movement.c		\
+		p_delta_time.c				\
 		u_calculate_map_width.c		\
 		u_is_config_line.c			\
 		u_is_empty_line.c			\
