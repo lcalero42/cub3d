@@ -6,6 +6,7 @@
 !srcs
 !raycasting
 !player
+!checker
 !parsing
 !utils
 !*.c

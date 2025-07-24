@@ -6,7 +6,7 @@
 /*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 14:01:03 by lcalero           #+#    #+#             */
-/*   Updated: 2025/07/23 18:38:33 by ekeisler         ###   ########.fr       */
+/*   Updated: 2025/07/24 15:29:50 by ekeisler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@
 # define FOG_COLOR_G 0
 # define FOG_COLOR_B 0
 
-# define FOV 1.047198f
+# define FOV 1.047f
 
 typedef enum e_wall_side
 {
@@ -184,6 +184,10 @@ int					check_file_extension(char *filename);
 int					validate_config(t_data *data);
 int					find_player_pos(t_data *data);
 
+// CHECKER
+int 				check_map(t_data *data);
+int					is_map_surrounded(char **map, int height, int width);
+
 // FUNCTIONS
 void				trace_ray(t_data *data, double angle);
 void				render_walls(t_data *data);
@@ -207,7 +211,7 @@ int					u_is_empty_line(char *line);
 int					u_is_config_line(char *line);
 void				u_calculate_map_width(t_data *data);
 void				u_ft_free(char **res);
-void				close_window(t_data *data);
+int					close_window(t_data *data);
 void				u_print_error(char *msg);
 int					u_rgb_to_hex(int r, int g, int b, int a);
 int					u_is_empty_line(char *line);

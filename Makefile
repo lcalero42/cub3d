@@ -34,6 +34,7 @@ endif
 VPATH = srcs:srcs/raycasting \
 		srcs:srcs/player	 \
 		srcs:srcs/parsing	 \
+		srcs:srcs/checker	 \
 		srcs:srcs/utils		 \
 
 SRCS =	main.c						\
@@ -45,6 +46,8 @@ SRCS =	main.c						\
 		pr_check_file_extension.c	\
 		pr_validate_config.c		\
 		pr_find_player_pos.c		\
+		c_check_map.c				\
+		c_check_sourrounded_bw.c	\
 		r_raycast_dda.c				\
 		r_raycast_init.c			\
 		r_wall_render.c				\
