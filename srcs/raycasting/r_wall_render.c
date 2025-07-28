@@ -6,7 +6,7 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 17:13:46 by lcalero           #+#    #+#             */
-/*   Updated: 2025/07/28 17:59:38 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/07/28 19:55:20 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,19 +89,20 @@ static void	draw_wall_column(t_data *data, int x, int draw_start, int draw_end)
 	double	step;
 	double	tex_pos;
 	int		y;
+	int		line_height;
 
-	perp_wall_dist = data->rays[x].perp_wall_dist;
+	perp_wall_dist = calculate_perp_wall_dist(data, x);
 	tex_x = calculate_texture_x(data, x, perp_wall_dist);
-	step = 1.0 * 64 / (draw_end - draw_start);
-	tex_pos = (draw_start - WINDOW_HEIGHT / 2
-			+ (draw_end - draw_start) / 2) * step;
+	line_height = (int)(WINDOW_HEIGHT / perp_wall_dist);
+	step = 1.0 * 64 / line_height;
+	tex_pos = (draw_start - WINDOW_HEIGHT / 2 + line_height / 2) * step;
 	y = draw_start;
 	while (y < draw_end)
 	{
-		tex_pos += step;
 		put_pixel_to_image(data, x, y,
 			get_wall_texture_pixel(data, tex_x,
 				(int)tex_pos & (64 - 1), x));
+		tex_pos += step;
 		y++;
 	}
 }

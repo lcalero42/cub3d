@@ -6,7 +6,7 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 14:01:03 by lcalero           #+#    #+#             */
-/*   Updated: 2025/07/28 18:06:01 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/07/28 19:53:37 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,14 +44,14 @@
 # endif
 
 # define FOG_START_DISTANCE 0.1f
-# define FOG_END_DISTANCE 4.0f
+# define FOG_END_DISTANCE 8.0f
 # define FOG_MAX_ALPHA 255
 # define FOG_COLOR_R 0
 # define FOG_COLOR_G 0
 # define FOG_COLOR_B 0
 
-# define FOV 1.047198f
-# define CAMERA_PLANE_LENGTH 0.649
+# define FOV 60.0f
+# define CAMERA_PLANE_LENGTH 0.57735f
 
 # define RAY_HIT 1
 # define RAY_CONTINUE 0
