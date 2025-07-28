@@ -6,7 +6,7 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 17:13:46 by lcalero           #+#    #+#             */
-/*   Updated: 2025/07/23 18:27:06 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/07/28 17:59:38 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,9 @@ static double	calculate_perp_wall_dist(t_data *data, int x)
 	double	perp_wall_dist;
 
 	if (data->rays[x].side == 0)
-		perp_wall_dist = (data->rays[x].map_pos.x - data->player.position.x
-				+ (1 - data->rays[x].step.x) / 2) / data->rays[x].ray_dir.x;
+		perp_wall_dist = data->rays[x].side_dist.x - data->rays[x].delta_dist.x;
 	else
-		perp_wall_dist = (data->rays[x].map_pos.y - data->player.position.y
-				+ (1 - data->rays[x].step.y) / 2) / data->rays[x].ray_dir.y;
+		perp_wall_dist = data->rays[x].side_dist.y - data->rays[x].delta_dist.y;
 	return (perp_wall_dist);
 }
 
@@ -92,7 +90,7 @@ static void	draw_wall_column(t_data *data, int x, int draw_start, int draw_end)
 	double	tex_pos;
 	int		y;
 
-	perp_wall_dist = calculate_perp_wall_dist(data, x);
+	perp_wall_dist = data->rays[x].perp_wall_dist;
 	tex_x = calculate_texture_x(data, x, perp_wall_dist);
 	step = 1.0 * 64 / (draw_end - draw_start);
 	tex_pos = (draw_start - WINDOW_HEIGHT / 2

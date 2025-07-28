@@ -6,7 +6,7 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 14:01:03 by lcalero           #+#    #+#             */
-/*   Updated: 2025/07/28 14:32:03 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/07/28 18:06:01 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
+
 # ifndef WINDOW_WIDTH
 #  define WINDOW_WIDTH 640
 # endif
@@ -31,7 +32,7 @@
 # endif
 
 # ifndef MOVE_SPEED
-#  define MOVE_SPEED 0.1f
+#  define MOVE_SPEED 3.0f
 # endif
 
 # ifndef ROTATION_SPEED
@@ -43,13 +44,14 @@
 # endif
 
 # define FOG_START_DISTANCE 0.1f
-# define FOG_END_DISTANCE 8.0f
+# define FOG_END_DISTANCE 4.0f
 # define FOG_MAX_ALPHA 255
 # define FOG_COLOR_R 0
 # define FOG_COLOR_G 0
 # define FOG_COLOR_B 0
 
 # define FOV 1.047198f
+# define CAMERA_PLANE_LENGTH 0.649
 
 # define RAY_HIT 1
 # define RAY_CONTINUE 0
@@ -243,7 +245,7 @@ void				u_calculate_map_width(t_data *data);
 void				u_ft_free(char **res);
 int					close_window(t_data *data);
 long long			get_current_time(void);
-void				calculate_fps(void);
+void				calculate_fps(t_data *data);
 void				extract_base_colors(int base_color, int *r, int *g, int *b);
 void				extract_fog_colors(int fog_color, int *r, int *g, int *b);
 int					calculate_fog_alpha(double distance);
