@@ -6,7 +6,7 @@
 /*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/22 14:45:42 by ekeisler          #+#    #+#             */
-/*   Updated: 2025/07/24 14:25:05 by ekeisler         ###   ########.fr       */
+/*   Updated: 2025/07/28 16:38:36 by ekeisler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,13 @@ int	find_player_pos(t_data *data)
 		i++;
 	}
 	if (found == 0 || found > 1)
+	{
+		if (found == 0)
+			u_print_error("No player position found in the map");
+		else
+			u_print_error("More than one player position found in the map");
 		return (1);
+	}
 	return (0);
 }
 

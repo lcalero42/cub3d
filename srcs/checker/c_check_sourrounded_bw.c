@@ -6,7 +6,7 @@
 /*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 14:47:10 by ekeisler          #+#    #+#             */
-/*   Updated: 2025/07/24 15:58:23 by ekeisler         ###   ########.fr       */
+/*   Updated: 2025/07/28 16:26:38 by ekeisler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,10 @@ int	is_map_surrounded(char **map, int height, int width)
 			if (is_walkable_space(map[i][j]))
 			{
 				if (has_open_neighbor(map, i, j, height, width))
+				{
+					u_print_error("Map not surrounded by walls");
 					return (0);
+				}
 			}
 			j++;
 		}

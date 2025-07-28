@@ -6,7 +6,7 @@
 /*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 23:32:10 by ekeisler          #+#    #+#             */
-/*   Updated: 2025/07/24 14:32:23 by ekeisler         ###   ########.fr       */
+/*   Updated: 2025/07/28 16:36:40 by ekeisler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ int	parse_file(char *filename, t_data *data)
 {
 	int		fd;
 	char	*buf;
-	int		result;
 
 	fd = open_and_validate_file(filename);
 	if (fd < 0)
@@ -29,9 +28,14 @@ int	parse_file(char *filename, t_data *data)
 	close(fd);
 	if (!buf)
 		return (1);
-	result = process_file_content(buf, data);
+	if (process_file_content(buf, data))
+		return (1);
 	free(buf);
-	return (result);
+	if (check_map(data))
+		return (1);
+	if (find_player_pos(data))
+		return (1);
+	return (0);
 }
 
 static int	open_and_validate_file(char *filename)

@@ -6,7 +6,7 @@
 /*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 11:53:44 by lcalero           #+#    #+#             */
-/*   Updated: 2025/07/28 15:51:15 by ekeisler         ###   ########.fr       */
+/*   Updated: 2025/07/28 16:51:24 by ekeisler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,8 +78,9 @@ int	main(int argc, char **argv)
 	data.render_fog = 1;
 	if (parse_file(argv[1], &data))
 		return (1);
+	printf("r : %d, g : %d, b: %d\n", data.floor.base_r, data.floor.base_g, data.floor.base_b);
+	printf("r : %d, g : %d, b: %d\n", data.ceiling.base_r, data.ceiling.base_g, data.ceiling.base_b);
 	data.mlx = mlx_init();
-	find_player_pos(&data);
 	data.window = mlx_new_window(data.mlx, WINDOW_WIDTH,
 			WINDOW_HEIGHT, "cub3d");
 	init_walls(&data);

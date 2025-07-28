@@ -6,7 +6,7 @@
 /*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/18 04:59:55 by ekeisler          #+#    #+#             */
-/*   Updated: 2025/07/28 15:50:24 by ekeisler         ###   ########.fr       */
+/*   Updated: 2025/07/28 17:07:51 by ekeisler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,11 @@
 int	parse_color(char *color_str, t_color *color)
 {
 	char	**rgb_parts;
-
-	rgb_parts = ft_split(color_str, ',');
-	if (!rgb_parts || !rgb_parts[0] || !rgb_parts[1] || !rgb_parts[2])
+	char	*trimmed;
+	
+	trimmed = ft_strtrim(color_str, "FC");
+	rgb_parts = ft_split(trimmed, ',');
+	if (!rgb_parts || !rgb_parts[0] || !rgb_parts[1] || !rgb_parts[2] || rgb_parts[3])
 	{
 		u_ft_free(rgb_parts);
 		return (0);
@@ -34,5 +36,6 @@ int	parse_color(char *color_str, t_color *color)
 		return (0);
 	}
 	u_ft_free(rgb_parts);
+	free(trimmed);
 	return (1);
 }

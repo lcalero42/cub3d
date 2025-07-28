@@ -6,16 +6,16 @@
 /*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 23:58:38 by ekeisler          #+#    #+#             */
-/*   Updated: 2025/07/23 17:07:10 by ekeisler         ###   ########.fr       */
+/*   Updated: 2025/07/28 16:48:36 by ekeisler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
 static int	parse_config_line(char *line, t_data *data);
-static int	process_config_tokens(char **tokens, t_data *data);
+static int	process_config_tokens(char **tokens, char *full_line, t_data *data);
 static int	parse_wall_texture(char *key, char *value, t_data *data);
-static int	parse_color_config(char *key, char *value, t_data *data);
+static int	parse_color_config(char *key, char *full_line, t_data *data);
 
 int	parse_config_section(char **all_lines, t_data *data)
 {
@@ -48,7 +48,7 @@ static int	parse_config_line(char *line, t_data *data)
 	char	**tokens;
 	int		result;
 
-	trimmed = ft_strtrim(line, " \t\n");
+	trimmed = ft_strtrim(line, " \t\n ");
 	if (!trimmed)
 		return (0);
 	tokens = ft_split(trimmed, ' ');
@@ -57,22 +57,24 @@ static int	parse_config_line(char *line, t_data *data)
 		free(trimmed);
 		return (0);
 	}
-	result = process_config_tokens(tokens, data);
+	result = process_config_tokens(tokens, trimmed, data);
 	free(trimmed);
 	u_ft_free(tokens);
 	return (result);
 }
 
-static int	process_config_tokens(char **tokens, t_data *data)
+
+
+static int	process_config_tokens(char **tokens, char *full_line, t_data *data)
 {
-	int	result;
+	int		result;
 
 	result = 0;
 	if (!tokens[1])
 		return (0);
 	result = parse_wall_texture(tokens[0], tokens[1], data);
 	if (result == 0)
-		result = parse_color_config(tokens[0], tokens[1], data);
+		result = parse_color_config(tokens[0], full_line, data);
 	return (result);
 }
 
@@ -89,11 +91,11 @@ static int	parse_wall_texture(char *key, char *value, t_data *data)
 	return (0);
 }
 
-static int	parse_color_config(char *key, char *value, t_data *data)
+static int	parse_color_config(char *key, char *full_line, t_data *data)
 {
 	if (ft_strncmp(key, "F", 1) == 0)
-		return (parse_color(value, &data->floor));
+		return (parse_color(full_line, &data->floor));
 	else if (ft_strncmp(key, "C", 1) == 0)
-		return (parse_color(value, &data->ceiling));
+		return (parse_color(full_line, &data->ceiling));
 	return (0);
 }
