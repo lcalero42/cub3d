@@ -1,4 +1,5 @@
 *
+!sprites
 !minilibx-linux
 !Makefile
 !inc
@@ -11,3 +12,4 @@
 !utils
 !*.c
 !*.h
+!*.xpm

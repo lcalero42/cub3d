@@ -7,7 +7,7 @@ WINDOW_WIDTH = 1920		# width of window
 WINDOW_HEIGHT = 1080		# height of window
 
 # --------------------------------- gameplay --------------------------------- #
-MOVE_SPEED = 10.0f		# player movement speed
+MOVE_SPEED = 5.0f		# player movement speed
 ROT_SPEED = 3.0f	# player rotation speed
 
 # -------------------------------- performance ------------------------------- #
@@ -18,7 +18,7 @@ RENDER_DISTANCE = 1000		# the maximum distance where the walls will be rendered
 NAME = cub3d
 MODE ?= release
 CONFIG = -D WINDOW_WIDTH=$(WINDOW_WIDTH) -D WINDOW_HEIGHT=$(WINDOW_HEIGHT) -D MOVE_SPEED=$(MOVE_SPEED) -D ROT_SPEED=$(ROT_SPEED) -D RENDER_DISTANCE=$(RENDER_DISTANCE)
-DEBUG_CONFIG = -D WINDOW_WIDTH=$(WINDOW_WIDTH) -D WINDOW_HEIGHT=$(WINDOW_HEIGHT) -D MOVE_SPEED=0.05 -D ROT_SPEED=0.02 -D RENDER_DISTANCE=10
+DEBUG_CONFIG = -D WINDOW_WIDTH=$(WINDOW_WIDTH) -D WINDOW_HEIGHT=$(WINDOW_HEIGHT) -D MOVE_SPEED=3.0f -D ROT_SPEED=2.0f -D RENDER_DISTANCE=10
 OPTI = -O3 -flto -march=native -mtune=native -funroll-loops
 OBJ_DIR = obj-$(MODE)
 INCLUDES = -Iincludes -Ilibft -Iminilibx-linux
@@ -28,7 +28,7 @@ CFLAGS = -Wall -Werror -Wextra -MD -MP -Iinc $(INCLUDES) $(CONFIG) $(OPTI)
 MLXFLAGS = -lX11 -lXext -lm
 
 ifeq ($(MODE), debug)
-	CFLAGS = -Wall -Wextra -MD -MP -Iinc $(INCLUDES) -g3 $(DEBUG_CONFIG)
+	CFLAGS = -Wall -Wextra -MD -MP -Iinc $(INCLUDES) -g3 $(DEBUG_CONFIG) $(OPTI)
 endif
 
 VPATH = srcs:srcs/raycasting \
@@ -53,6 +53,7 @@ SRCS =	main.c						\
 		r_wall_render.c				\
 		r_wall_texture.c			\
 		r_wall_side.c				\
+		r_render_fog.c				\
 		p_determine_movement.c		\
 		p_delta_time.c				\
 		u_calculate_map_width.c		\
@@ -62,6 +63,8 @@ SRCS =	main.c						\
 		u_close_window.c			\
 		u_rgb_to_hex.c				\
 		u_print_error.c				\
+		u_fog_rendering.c			\
+		u_rendering.c				\
 
 OBJS = $(addprefix $(OBJ_DIR)/, $(SRCS:.c=.o))
 DEPS = $(OBJS:.o=.d)
