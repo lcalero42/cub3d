@@ -6,7 +6,7 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 17:10:47 by lcalero           #+#    #+#             */
-/*   Updated: 2025/07/24 13:15:06 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/07/28 14:22:27 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,9 @@ int	get_wall_texture_pixel(t_data *data, int x, int y, int ray_index)
 
 	if (x < 0 || x >= 64 || y < 0 || y >= 64)
 		return (0x808080);
-	// if (!data->rays[ray_index].must_render)
-	// 	return (0x87CEEB);
+	if (!data->rays[ray_index].must_render)
+		return (u_rgb_to_hex(data->ceiling.base_r,
+				data->ceiling.base_g, data->ceiling.base_b, 255));
 	side = get_wall_side(data, ray_index);
 	texture = get_texture_info_by_side(data, side);
 	if (!texture.addr)
@@ -72,16 +73,16 @@ void	clear_screen(t_data *data)
 		x = -1;
 		while (x++ < WINDOW_WIDTH)
 			put_pixel_to_image(data, x, y,
-				u_rgb_to_hex(data->ceiling.r,
-					data->ceiling.g, data->ceiling.b, 0));
+				u_rgb_to_hex(data->ceiling.base_r,
+					data->ceiling.base_g, data->ceiling.base_b, 0));
 	}
 	while (y++ < WINDOW_HEIGHT)
 	{
 		x = -1;
 		while (x++ < WINDOW_WIDTH)
 			put_pixel_to_image(data, x, y,
-				u_rgb_to_hex(data->floor.r,
-					data->floor.g, data->floor.b, 0));
+				u_rgb_to_hex(data->floor.base_r,
+					data->floor.base_g, data->floor.base_b, 0));
 	}
 }
 
