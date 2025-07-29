@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pr_parse_color.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/18 04:59:55 by ekeisler          #+#    #+#             */
-/*   Updated: 2025/07/28 17:07:51 by ekeisler         ###   ########.fr       */
+/*   Updated: 2025/07/29 14:36:37 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,11 @@ int	parse_color(char *color_str, t_color *color)
 {
 	char	**rgb_parts;
 	char	*trimmed;
-	
+
 	trimmed = ft_strtrim(color_str, "FC");
 	rgb_parts = ft_split(trimmed, ',');
-	if (!rgb_parts || !rgb_parts[0] || !rgb_parts[1] || !rgb_parts[2] || rgb_parts[3])
+	if (!rgb_parts || !rgb_parts[0]
+		|| !rgb_parts[1] || !rgb_parts[2] || rgb_parts[3])
 	{
 		u_ft_free(rgb_parts);
 		return (0);

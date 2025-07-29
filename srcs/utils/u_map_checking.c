@@ -1,29 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   u_is_empty_line.c                                  :+:      :+:    :+:   */
+/*   u_map_checking.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/16 00:12:26 by ekeisler          #+#    #+#             */
-/*   Updated: 2025/07/29 14:21:11 by lcalero          ###   ########.fr       */
+/*   Created: 2025/07/29 15:14:06 by lcalero           #+#    #+#             */
+/*   Updated: 2025/07/29 15:14:24 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
+#include "cub3d.h"
 
-int	u_is_empty_line(char *line)
+int	is_out_of_bounds(int x, int y, int height, int width)
 {
-	int	i;
+	return (x < 0 || x >= height || y < 0 || y >= width);
+}
 
-	i = 0;
-	if (!line)
-		return (1);
-	while (line[i])
-	{
-		if (line[i] != ' ' && line[i] != '\t' && line[i] != '\n')
-			return (0);
-		i++;
-	}
-	return (1);
+int	is_valid_map_char(char c)
+{
+	return (c == '1' || c == '0' || c == 'N'
+		|| c == 'S' || c == 'E' || c == 'W');
 }

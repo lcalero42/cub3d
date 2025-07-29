@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pr_parse_config_lines.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 23:58:38 by ekeisler          #+#    #+#             */
-/*   Updated: 2025/07/28 16:48:36 by ekeisler         ###   ########.fr       */
+/*   Updated: 2025/07/29 14:37:06 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,6 @@ static int	parse_config_line(char *line, t_data *data)
 	u_ft_free(tokens);
 	return (result);
 }
-
-
 
 static int	process_config_tokens(char **tokens, char *full_line, t_data *data)
 {

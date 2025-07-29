@@ -65,6 +65,7 @@ SRCS =	main.c						\
 		u_print_error.c				\
 		u_fog_rendering.c			\
 		u_rendering.c				\
+		u_map_checking.c			\
 
 OBJS = $(addprefix $(OBJ_DIR)/, $(SRCS:.c=.o))
 DEPS = $(OBJS:.o=.d)

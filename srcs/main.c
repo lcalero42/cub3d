@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 11:53:44 by lcalero           #+#    #+#             */
-/*   Updated: 2025/07/29 12:34:23 by ekeisler         ###   ########.fr       */
+/*   Updated: 2025/07/29 14:07:50 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ int	key_press_hook(int keycode, t_data *data)
 
 int	render_loop(t_data *data)
 {
+	data->game_started = 1;
 	update_player_movement(data);
 	trace_ray(data, data->player.angle);
 	clear_screen(data);
@@ -77,7 +78,10 @@ int	main(int argc, char **argv)
 	ft_bzero(&data, sizeof(t_data));
 	data.render_fog = 1;
 	if (parse_file(argv[1], &data))
+	{
+		close_window(&data);
 		return (1);
+	}
 	data.mlx = mlx_init();
 	data.window = mlx_new_window(data.mlx, WINDOW_WIDTH,
 			WINDOW_HEIGHT, "cub3d");

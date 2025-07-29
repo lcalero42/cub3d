@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   u_ft_free.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/19 10:54:06 by ekeisler          #+#    #+#             */
-/*   Updated: 2025/07/19 12:51:18 by ekeisler         ###   ########.fr       */
+/*   Updated: 2025/07/29 14:11:35 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,5 +23,6 @@ void	u_ft_free(char **res)
 			free(res[i]);
 		i++;
 	}
-	free(res);
+	if (res)
+		free(res);
 }

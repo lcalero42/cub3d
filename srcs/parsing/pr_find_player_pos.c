@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pr_find_player_pos.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/22 14:45:42 by ekeisler          #+#    #+#             */
-/*   Updated: 2025/07/28 16:38:36 by ekeisler         ###   ########.fr       */
+/*   Updated: 2025/07/29 13:53:04 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 static int	set_player_angle(int i, int j, t_data *data);
 static int	player_is_found(int i, int j, t_data *data);
+static int	check_player_num(int found);
 
 int	find_player_pos(t_data *data)
 {
@@ -39,6 +40,13 @@ int	find_player_pos(t_data *data)
 		}
 		i++;
 	}
+	if (check_player_num(found))
+		return (1);
+	return (0);
+}
+
+static int	check_player_num(int found)
+{
 	if (found == 0 || found > 1)
 	{
 		if (found == 0)

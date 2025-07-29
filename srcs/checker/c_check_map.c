@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   c_check_map.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 14:16:06 by ekeisler          #+#    #+#             */
-/*   Updated: 2025/07/24 15:31:43 by ekeisler         ###   ########.fr       */
+/*   Updated: 2025/07/29 14:55:44 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,25 +14,24 @@
 
 static int	is_mfw(int i, int j, t_data *data);
 
-int check_map(t_data *data)
+int	check_map(t_data *data)
 {
 	int	i;
 	int	j;
 
 	i = 0;
-	j = 0;
 	while (data->grid.grid[i])
 	{
 		j = 0;
 		while (data->grid.grid[i][j])
 		{
-			if (0 == is_mfw(i, j, data))
+			if (!is_mfw(i, j, data))
 				return (1);
 			j++;
 		}
 		i++;
 	}
-	if (!is_map_surrounded(data->grid.grid, data->grid.height, data->grid.width))
+	if (!is_map_surrounded(data))
 		return (1);
 	return (0);
 }
@@ -56,7 +55,8 @@ static int	is_mfw(int i, int j, t_data *data)
 	else
 	{
 		u_print_error("Map not filled well");
-		printf("found : '%c'\nx : %d\ny : %d\n", data->grid.grid[i][j], i + 1, j + 1);
+		printf("found : '%c'\nx : %d\ny : %d\n",
+			data->grid.grid[i][j], i + 1, j + 1);
 	}
-	return (0);	
+	return (0);
 }

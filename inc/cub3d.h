@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 14:01:03 by lcalero           #+#    #+#             */
-/*   Updated: 2025/07/29 12:34:42 by ekeisler         ###   ########.fr       */
+/*   Updated: 2025/07/29 15:15:04 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,12 @@
 # define RAY_HIT 1
 # define RAY_CONTINUE 0
 
+typedef struct s_pos
+{
+	int	x;
+	int	y;
+}	t_pos;
+
 typedef struct s_dda_vars
 {
 	int				map_x;
@@ -73,28 +79,28 @@ typedef enum e_wall_side
 
 typedef struct s_color
 {
-	int	base_r;
-	int	base_g;
-	int	base_b;
-	int	fog_r;
-	int	fog_g;
-	int	fog_b;
-}	t_color;
+	int				base_r;
+	int				base_g;
+	int				base_b;
+	int				fog_r;
+	int				fog_g;
+	int				fog_b;
+}					t_color;
 
 typedef struct s_fog_params
 {
-	int	x;
-	int	wall_start;
-	int	wall_end;
-	int	fog_alpha;
-	int	fog_color;
-}	t_fog_params;
+	int				x;
+	int				wall_start;
+	int				wall_end;
+	int				fog_alpha;
+	int				fog_color;
+}					t_fog_params;
 
 typedef struct s_wall_bounds
 {
-	int	wall_start;
-	int	wall_end;
-}	t_wall_bounds;
+	int				wall_start;
+	int				wall_end;
+}					t_wall_bounds;
 
 typedef struct s_vector
 {
@@ -129,6 +135,7 @@ typedef struct s_player
 	t_vector		dir;
 	double			fov;
 	double			angle;
+	int				is_moving;
 }					t_player;
 
 typedef struct s_keys
@@ -182,6 +189,7 @@ typedef struct s_wall_render
 
 typedef struct s_data
 {
+	int				game_started;
 	t_wall_render	north_wall;
 	t_wall_render	south_wall;
 	t_wall_render	east_wall;
@@ -219,8 +227,8 @@ int					validate_config(t_data *data);
 int					find_player_pos(t_data *data);
 
 // CHECKER
-int 				check_map(t_data *data);
-int					is_map_surrounded(char **map, int height, int width);
+int					check_map(t_data *data);
+int					is_map_surrounded(t_data *data);
 
 // FUNCTIONS
 // RAYCASTING/RENDERING FUNCTIONS
@@ -261,5 +269,7 @@ void				extract_fog_colors(int fog_color, int *r, int *g, int *b);
 int					calculate_fog_alpha(double distance);
 int					get_pixel_from_image(t_data *data, int x, int y);
 int					blend_colors(t_color *colors, double alpha);
+int					is_out_of_bounds(int x, int y, int height, int width);
+int					is_valid_map_char(char c);
 
 #endif

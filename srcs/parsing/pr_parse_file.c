@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pr_parse_file.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 23:32:10 by ekeisler          #+#    #+#             */
-/*   Updated: 2025/07/28 16:36:40 by ekeisler         ###   ########.fr       */
+/*   Updated: 2025/07/29 14:31:22 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,9 @@ static int	process_file_content(char *buf, t_data *data)
 	parse_map(all_lines, data);
 	u_ft_free(all_lines);
 	if (0 == validate_config(data))
+	{
+		free(buf);
 		return (1);
+	}
 	return (0);
 }

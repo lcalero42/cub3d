@@ -3,35 +3,33 @@
 /*                                                        :::      ::::::::   */
 /*   c_check_sourrounded_bw.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 14:47:10 by ekeisler          #+#    #+#             */
-/*   Updated: 2025/07/28 16:26:38 by ekeisler         ###   ########.fr       */
+/*   Updated: 2025/07/29 15:15:28 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
 static int	is_walkable_space(char c);
-static int	has_open_neighbor(char **map, int x, int y, int height, int width);
-static int	check_neighbor(char **map, int nx, int ny, int height, int width);
-static int	is_out_of_bounds(int x, int y, int height, int width);
-static int	is_valid_map_char(char c);
+static int	has_open_neighbor(t_data *data, int x, int y);
+static int	check_neighbor(t_data *data, int nx, int ny);
 
-int	is_map_surrounded(char **map, int height, int width)
+int	is_map_surrounded(t_data *data)
 {
 	int	i;
 	int	j;
 
 	i = 0;
-	while (i < height)
+	while (data->grid.grid[i])
 	{
 		j = 0;
-		while (j < width)
+		while (data->grid.grid[i][j])
 		{
-			if (is_walkable_space(map[i][j]))
+			if (is_walkable_space(data->grid.grid[i][j]))
 			{
-				if (has_open_neighbor(map, i, j, height, width))
+				if (has_open_neighbor(data, i, j))
 				{
 					u_print_error("Map not surrounded by walls");
 					return (0);
@@ -49,7 +47,7 @@ static int	is_walkable_space(char c)
 	return (c == '0' || c == 'N' || c == 'S' || c == 'E' || c == 'W');
 }
 
-static int	has_open_neighbor(char **map, int x, int y, int height, int width)
+static int	has_open_neighbor(t_data *data, int x, int y)
 {
 	int	dx[4];
 	int	dy[4];
@@ -70,30 +68,20 @@ static int	has_open_neighbor(char **map, int x, int y, int height, int width)
 	{
 		nx = x + dx[i];
 		ny = y + dy[i];
-		if (check_neighbor(map, nx, ny, height, width))
+		if (check_neighbor(data, nx, ny))
 			return (1);
 		i++;
 	}
 	return (0);
 }
 
-static int	check_neighbor(char **map, int nx, int ny, int height, int width)
+static int	check_neighbor(t_data *data, int nx, int ny)
 {
-	if (is_out_of_bounds(nx, ny, height, width))
+	if (is_out_of_bounds(nx, ny, data->grid.height, data->grid.width))
 		return (1);
-	if (map[nx][ny] == ' ' || map[nx][ny] == '\0')
+	if (data->grid.grid[nx][ny] == ' ' || data->grid.grid[nx][ny] == '\0')
 		return (1);
-	if (!is_valid_map_char(map[nx][ny]))
+	if (!is_valid_map_char(data->grid.grid[nx][ny]))
 		return (1);
 	return (0);
-}
-
-static int	is_out_of_bounds(int x, int y, int height, int width)
-{
-	return (x < 0 || x >= height || y < 0 || y >= width);
-}
-
-static int	is_valid_map_char(char c)
-{
-	return (c == '1' || c == '0' || c == 'N' || c == 'S' || c == 'E' || c == 'W');
 }
