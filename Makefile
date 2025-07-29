@@ -7,7 +7,7 @@ WINDOW_WIDTH = 1920		# width of window
 WINDOW_HEIGHT = 1080		# height of window
 
 # --------------------------------- gameplay --------------------------------- #
-MOVE_SPEED = 5.0f		# player movement speed
+MOVE_SPEED = 2.0f		# player movement speed
 ROT_SPEED = 3.0f	# player rotation speed
 
 # -------------------------------- performance ------------------------------- #

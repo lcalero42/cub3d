@@ -6,7 +6,7 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 14:33:02 by lcalero           #+#    #+#             */
-/*   Updated: 2025/07/28 14:16:06 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/07/28 16:16:06 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,13 @@ long long	get_current_time(void)
 	return (tv.tv_sec * 1000 + tv.tv_usec / 1000);
 }
 
-void	calculate_fps(void)
+void	calculate_fps(t_data *data)
 {
-	int					fps;
 	static int			frame_count = 0;
 	static long long	current_time = 0;
 	static long long	last_sec_time = 0;
+	char				*fps;
 
-	fps = 0;
 	frame_count++;
 	if (current_time == 0)
 	{
@@ -39,9 +38,14 @@ void	calculate_fps(void)
 		current_time = get_current_time();
 	if (current_time - last_sec_time >= 1000)
 	{
-		fps = frame_count;
+		data->fps = frame_count;
 		frame_count = 0;
 		last_sec_time = current_time;
-		printf("fps: %d\n", fps);
 	}
+	if (data->fps == 0)
+		return ;
+	fps = ft_itoa(data->fps);
+	mlx_string_put(data->mlx, data->window,
+		WINDOW_WIDTH * 0.95, WINDOW_HEIGHT * 0.05, 0xFFFFFF, fps);
+	free(fps);
 }

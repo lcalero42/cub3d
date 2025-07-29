@@ -6,7 +6,7 @@
 /*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 11:53:44 by lcalero           #+#    #+#             */
-/*   Updated: 2025/07/29 12:33:25 by ekeisler         ###   ########.fr       */
+/*   Updated: 2025/07/29 12:34:23 by ekeisler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ int	key_press_hook(int keycode, t_data *data)
 
 int	render_loop(t_data *data)
 {
-	calculate_fps();
 	update_player_movement(data);
 	trace_ray(data, data->player.angle);
 	clear_screen(data);
@@ -62,6 +61,7 @@ int	render_loop(t_data *data)
 	if (data->render_fog)
 		apply_fog_overlay(data);
 	mlx_put_image_to_window(data->mlx, data->window, data->render_img, 0, 0);
+	calculate_fps(data);
 	return (1);
 }
 

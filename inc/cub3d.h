@@ -6,7 +6,7 @@
 /*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 14:01:03 by lcalero           #+#    #+#             */
-/*   Updated: 2025/07/28 15:51:29 by ekeisler         ###   ########.fr       */
+/*   Updated: 2025/07/29 12:34:42 by ekeisler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
+
 # ifndef WINDOW_WIDTH
 #  define WINDOW_WIDTH 640
 # endif
@@ -31,7 +32,7 @@
 # endif
 
 # ifndef MOVE_SPEED
-#  define MOVE_SPEED 0.1f
+#  define MOVE_SPEED 3.0f
 # endif
 
 # ifndef ROTATION_SPEED
@@ -49,7 +50,8 @@
 # define FOG_COLOR_G 0
 # define FOG_COLOR_B 0
 
-# define FOV 1.047f
+# define FOV 60.0f
+# define CAMERA_PLANE_LENGTH 0.57735f
 
 # define RAY_HIT 1
 # define RAY_CONTINUE 0
@@ -253,7 +255,7 @@ int					u_is_config_line(char *line);
 void				u_calculate_map_width(t_data *data);
 void				u_ft_free(char **res);
 long long			get_current_time(void);
-void				calculate_fps(void);
+void				calculate_fps(t_data *data);
 void				extract_base_colors(int base_color, int *r, int *g, int *b);
 void				extract_fog_colors(int fog_color, int *r, int *g, int *b);
 int					calculate_fog_alpha(double distance);

@@ -6,7 +6,7 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 17:11:51 by lcalero           #+#    #+#             */
-/*   Updated: 2025/07/23 11:27:15 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/07/28 19:55:50 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ void	init_player_direction(t_data *data, double angle)
 {
 	data->player.dir.x = cos(angle);
 	data->player.dir.y = sin(angle);
-	data->player.camera_segment.x = -sin(angle) * FOV;
-	data->player.camera_segment.y = cos(angle) * FOV;
+	data->player.camera_segment.x = -sin(angle) * CAMERA_PLANE_LENGTH;
+	data->player.camera_segment.y = cos(angle) * CAMERA_PLANE_LENGTH;
 }
 
 void	init_ray_direction(t_data *data, int i)
