@@ -6,7 +6,7 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 11:53:44 by lcalero           #+#    #+#             */
-/*   Updated: 2025/07/29 14:07:50 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/07/29 15:29:50 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,9 @@
 
 int	key_release_hook(int keycode, t_data *data)
 {
+	if (keycode == XK_d || keycode == XK_d
+		|| keycode == XK_d || keycode == XK_d)
+		data->player.is_moving = 0;
 	if (keycode == XK_d)
 		data->keys.d = 0;
 	if (keycode == XK_a)
@@ -31,6 +34,9 @@ int	key_release_hook(int keycode, t_data *data)
 
 int	key_press_hook(int keycode, t_data *data)
 {
+	if (keycode == XK_d || keycode == XK_d
+		|| keycode == XK_d || keycode == XK_d)
+		data->player.is_moving = 1;
 	if (keycode == XK_Escape)
 		close_window(data);
 	if (keycode == XK_f && data->render_fog)
