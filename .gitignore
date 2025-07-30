@@ -12,6 +12,11 @@
 !rendering
 !utils
 !mouse_move
+!mandatory
+!bonus
+!lib
+!map
+!textures
 !*.c
 !*.h
 !*.xpm

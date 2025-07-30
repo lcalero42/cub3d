@@ -12,8 +12,6 @@ ROT_SPEED = 3.0f	       # player rotation speed
 CROSSHAIR_SIZE = 1        # size of the crosshair
 CROSSHAIR_THICKNESS = 4   # thickness of the crosshair
 CROSSHAIR_COLOR = 0x00FF00 # color of the crosshair in hexa
-MOVE_SPEED = 2.0f		# player movement speed
-ROT_SPEED = 3.0f	# player rotation speed
 SENSITIVITY = 2	# player mouse sensitivity
 
 # -------------------------------- performance ------------------------------- #
@@ -24,32 +22,42 @@ RENDER_DISTANCE = 1000		# the maximum distance where the walls will be rendered
 NAME = cub3d
 MODE ?= release
 CONFIG = -D WINDOW_WIDTH=$(WINDOW_WIDTH) -D WINDOW_HEIGHT=$(WINDOW_HEIGHT) -D MOVE_SPEED=$(MOVE_SPEED) -D ROT_SPEED=$(ROT_SPEED) -D RENDER_DISTANCE=$(RENDER_DISTANCE) \
-		 -D CROSSHAIR_SIZE=$(CROSSHAIR_SIZE) -D CROSSHAIR_THICKNESS=$(CROSSHAIR_THICKNESS) -D CROSSHAIR_COLOR=$(CROSSHAIR_COLOR)
+		 -D CROSSHAIR_SIZE=$(CROSSHAIR_SIZE) -D CROSSHAIR_THICKNESS=$(CROSSHAIR_THICKNESS) -D CROSSHAIR_COLOR=$(CROSSHAIR_COLOR) -D SENSITIVITY=$(SENSITIVITY)
 DEBUG_CONFIG = -D WINDOW_WIDTH=$(WINDOW_WIDTH) -D WINDOW_HEIGHT=$(WINDOW_HEIGHT) -D MOVE_SPEED=3.0f -D ROT_SPEED=2.0f -D RENDER_DISTANCE=10 \
-			   -D CROSSHAIR_SIZE=$(CROSSHAIR_SIZE) -D CROSSHAIR_THICKNESS=$(CROSSHAIR_THICKNESS) -D CROSSHAIR_COLOR=$(CROSSHAIR_COLOR)
-CONFIG = -D WINDOW_WIDTH=$(WINDOW_WIDTH) -D WINDOW_HEIGHT=$(WINDOW_HEIGHT) -D MOVE_SPEED=$(MOVE_SPEED) -D ROT_SPEED=$(ROT_SPEED) -D RENDER_DISTANCE=$(RENDER_DISTANCE) -D SENSITIVITY=$(SENSITIVITY)
-DEBUG_CONFIG = -D WINDOW_WIDTH=$(WINDOW_WIDTH) -D WINDOW_HEIGHT=$(WINDOW_HEIGHT) -D MOVE_SPEED=3.0f -D ROT_SPEED=2.0f -D RENDER_DISTANCE=10 -D SENSITIVITY=$(SENSITIVITY)
+			   -D CROSSHAIR_SIZE=$(CROSSHAIR_SIZE) -D CROSSHAIR_THICKNESS=$(CROSSHAIR_THICKNESS) -D CROSSHAIR_COLOR=$(CROSSHAIR_COLOR) -D SENSITIVITY=$(SENSITIVITY)
 OPTI = -O3 -flto -march=native -mtune=native -funroll-loops
-OBJ_DIR = obj-$(MODE)
-INCLUDES = -Iincludes -Ilibft -Iminilibx-linux
-LIBS = libft/libft.a minilibx-linux/libmlx_Linux.a
+
+# Directory structure
+ifeq ($(MODE), bonus)
+	SRC_DIR = bonus
+	OBJ_DIR = obj-bonus
+	INC_DIR = bonus/inc
+else
+	SRC_DIR = mandatory
+	OBJ_DIR = obj-release
+	INC_DIR = mandatory/inc
+endif
+
+INCLUDES = -I$(INC_DIR) -Ilib/libft -Ilib/minilibx-linux
+LIBS = lib/libft/libft.a lib/minilibx-linux/libmlx_Linux.a
 CC = cc
-CFLAGS = -Wall -Werror -Wextra -MD -MP -Iinc $(INCLUDES) $(CONFIG) $(OPTI)
+CFLAGS = -Wall -Werror -Wextra -MD -MP $(INCLUDES) $(CONFIG) $(OPTI)
 MLXFLAGS = -lX11 -lXext -lm
 
 ifeq ($(MODE), debug)
-	CFLAGS = -Wall -Wextra -MD -MP -Iinc $(INCLUDES) -g3 $(DEBUG_CONFIG) $(OPTI)
+	CFLAGS = -Wall -Wextra -MD -MP $(INCLUDES) -g3 $(DEBUG_CONFIG) $(OPTI)
 endif
 
-VPATH = srcs:srcs/raycasting \
-		srcs:srcs/player	 \
-		srcs:srcs/parsing	 \
-		srcs:srcs/checker	 \
-		srcs:srcs/utils		 \
-		srcs:srcs/rendering		 \
-		srcs:srcs/mouse_move \
+VPATH = $(SRC_DIR)/srcs:$(SRC_DIR)/srcs/raycasting \
+        $(SRC_DIR)/srcs:$(SRC_DIR)/srcs/player     \
+        $(SRC_DIR)/srcs:$(SRC_DIR)/srcs/parsing    \
+        $(SRC_DIR)/srcs:$(SRC_DIR)/srcs/checker    \
+        $(SRC_DIR)/srcs:$(SRC_DIR)/srcs/utils      \
+        $(SRC_DIR)/srcs:$(SRC_DIR)/srcs/rendering  \
+        $(SRC_DIR)/srcs:$(SRC_DIR)/srcs/mouse_move \
 
-SRCS =	main.c						\
+# Mandatory source files
+SRCS_MANDATORY = main.c						\
 		pr_parse_config_lines.c		\
 		pr_parse_file.c				\
 		pr_parse_map.c				\
@@ -63,7 +71,6 @@ SRCS =	main.c						\
 		re_wall_render.c			\
 		re_wall_texture.c			\
 		re_render_fog.c				\
-		re_render_crosshair.c		\
 		r_wall_side.c				\
 		r_raycast_dda.c				\
 		r_raycast_init.c			\
@@ -80,8 +87,48 @@ SRCS =	main.c						\
 		u_rendering.c				\
 		u_map_checking.c			\
 		u_init.c					\
-		m_init_mouse_move.c			\
-		m_mouse_move.c				\
+
+# Bonus source files (with _bonus suffix)
+SRCS_BONUS = main_bonus.c					\
+		pr_parse_config_lines_bonus.c	\
+		pr_parse_file_bonus.c			\
+		pr_parse_map_bonus.c			\
+		pr_parse_texture_bonus.c		\
+		pr_parse_color_bonus.c			\
+		pr_check_file_extension_bonus.c	\
+		pr_validate_config_bonus.c		\
+		pr_find_player_pos_bonus.c		\
+		c_check_map_bonus.c				\
+		c_check_sourrounded_bw_bonus.c	\
+		re_wall_render_bonus.c			\
+		re_wall_texture_bonus.c			\
+		re_render_fog_bonus.c			\
+		re_render_crosshair_bonus.c		\
+		r_wall_side_bonus.c				\
+		r_raycast_dda_bonus.c			\
+		r_raycast_init_bonus.c			\
+		p_determine_movement_bonus.c	\
+		p_delta_time_bonus.c			\
+		u_calculate_map_width_bonus.c	\
+		u_is_config_line_bonus.c		\
+		u_is_empty_line_bonus.c			\
+		u_ft_free_bonus.c				\
+		u_close_window_bonus.c			\
+		u_rgb_to_hex_bonus.c			\
+		u_print_error_bonus.c			\
+		u_fog_rendering_bonus.c			\
+		u_rendering_bonus.c				\
+		u_map_checking_bonus.c			\
+		u_init_bonus.c					\
+		m_init_mouse_move_bonus.c		\
+		m_mouse_move_bonus.c			\
+
+# Select source files based on mode
+ifeq ($(MODE), bonus)
+	SRCS = $(SRCS_BONUS)
+else
+	SRCS = $(SRCS_MANDATORY)
+endif
 
 OBJS = $(addprefix $(OBJ_DIR)/, $(SRCS:.c=.o))
 DEPS = $(OBJS:.o=.d)
@@ -102,33 +149,40 @@ all:
 
 $(OBJ_DIR):
 	mkdir -p $(OBJ_DIR)
+	mkdir -p $(OBJ_DIR)/checker
+	mkdir -p $(OBJ_DIR)/parsing
+	mkdir -p $(OBJ_DIR)/player
+	mkdir -p $(OBJ_DIR)/raycasting
+	mkdir -p $(OBJ_DIR)/rendering
+	mkdir -p $(OBJ_DIR)/utils
+	mkdir -p $(OBJ_DIR)/mouse_move
 
 libft:
-	$(MAKE) -C libft > /dev/null 2>&1
+	$(MAKE) -C lib/libft > /dev/null 2>&1
 
 mlx:
-	$(MAKE) -C minilibx-linux > /dev/null 2>&1
+	$(MAKE) -C lib/minilibx-linux > /dev/null 2>&1
 
 mlx-verbose:
-	$(MAKE) -C minilibx-linux
+	$(MAKE) -C lib/minilibx-linux
 
 $(BIN): $(OBJS)
 	$(CC) $(CFLAGS) $(OBJS) $(LIBS) -o $@ $(MLXFLAGS)
 
 $(OBJ_DIR)/%.o: %.c Makefile $(LIBS) | $(OBJ_DIR)
 	$(CC) $(CFLAGS) -c $< -o $@
-	printf "$(GRAY)compiling: $(BLUE)%-40s $(GRAY)[%d/%d]\n" "$<" "$$(ls $(OBJ_DIR) | grep -c '\.o')" "$(words $(SRCS))"
+	printf "$(GRAY)compiling: $(BLUE)%-40s $(GRAY)[%d/%d]\n" "$<" "$$(find $(OBJ_DIR) -name '*.o' | wc -l)" "$(words $(SRCS))"
 
 clean:
 	rm -rf obj-*
-	$(MAKE) -C libft clean
-	$(MAKE) -C minilibx-linux clean > /dev/null 2>&1
+	$(MAKE) -C lib/libft clean
+	$(MAKE) -C lib/minilibx-linux clean > /dev/null 2>&1
 
 fclean: clean
 	rm -f $(NAME)
-	$(MAKE) -C libft fclean
-	$(MAKE) -C minilibx-linux clean > /dev/null 2>&1
-	rm -f minilibx-linux/libmlx.a
+	$(MAKE) -C lib/libft fclean
+	$(MAKE) -C lib/minilibx-linux clean > /dev/null 2>&1
+	rm -f lib/minilibx-linux/libmlx.a
 
 re: fclean all
 
@@ -138,6 +192,9 @@ debug:
 release:
 	$(MAKE) MODE=release
 
+bonus:
+	$(MAKE) MODE=bonus
+
 see:
 	$(MAKE) libft-verbose
 	$(MAKE) mlx-verbose
@@ -145,9 +202,9 @@ see:
 	printf "$(RESET)"
 
 libft-verbose:
-	$(MAKE) -C libft
+	$(MAKE) -C lib/libft
 
-.PHONY: all libft libft-verbose mlx mlx-verbose clean fclean re debug release see
+.PHONY: all libft libft-verbose mlx mlx-verbose clean fclean re debug release bonus see
 
 -include $(DEPS)
 
