@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   u_init.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/30 14:21:07 by lcalero           #+#    #+#             */
-/*   Updated: 2025/07/30 15:49:03 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/07/30 18:16:33 by ekeisler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	init(t_data *data, char **argv)
 	data->window = mlx_new_window(data->mlx, WINDOW_WIDTH,
 			WINDOW_HEIGHT, "cub3d");
 	init_walls(data);
+	init_mouse_control(data);
 }
 
 void	load_texture(t_data *data, char *path, t_render *texture)

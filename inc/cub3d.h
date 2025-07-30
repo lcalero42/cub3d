@@ -6,7 +6,7 @@
 /*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 14:01:03 by lcalero           #+#    #+#             */
-/*   Updated: 2025/07/30 18:14:10 by ekeisler         ###   ########.fr       */
+/*   Updated: 2025/07/30 18:18:28 by ekeisler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@
 # endif
 
 # ifndef SENSITIVITY
-#	define SENSITIVITY 100
+#  define SENSITIVITY 100
 # endif
 
 # ifndef ROTATION_SPEED
