@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   u_close_window.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/22 15:12:24 by lcalero           #+#    #+#             */
-/*   Updated: 2025/07/29 14:41:37 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/07/30 15:08:43 by ekeisler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ static void	free_paths(t_data *data);
 
 int	close_window(t_data *data)
 {
+	if (data->mouse.enabled)
+		toggle_mouse_control(data);
 	destroy_images(data);
 	if (data->window)
 		mlx_destroy_window(data->mlx, data->window);

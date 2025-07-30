@@ -6,21 +6,44 @@
 /*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/30 14:19:07 by ekeisler          #+#    #+#             */
-/*   Updated: 2025/07/30 14:44:10 by ekeisler         ###   ########.fr       */
+/*   Updated: 2025/07/30 18:08:20 by ekeisler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void init_mouse_control(t_data *data)
+void	init_mouse_control(t_data *data)
 {
-    if (!data->mlx || !data->window)
-    {
-        printf("Error: MLX not initialized before mouse setup\n");
-        return;
-    }
-    data->mouse.first_move = 1;
-    data->mouse.last_x = 0;
-    data->mouse.enabled = 1;
-    data->mouse.sensitivity = SENSITIVITY;
+	int	center_x;
+	int	center_y;
+
+	data->mouse.enabled = 1;
+	data->mouse.first_move = 1;
+	data->mouse.sensitivity = SENSITIVITY;
+	center_x = WINDOW_WIDTH / 2;
+	center_y = WINDOW_HEIGHT / 2;
+	data->mouse.last_x = center_x;
+	mlx_mouse_hide(data->mlx, data->window);
+	mlx_mouse_move(data->mlx, data->window, center_x, center_y);
+}
+
+void	toggle_mouse_control(t_data *data)
+{
+	int	center_x;
+	int	center_y;
+
+	center_x = WINDOW_WIDTH / 2;
+	center_y = WINDOW_HEIGHT / 2;
+	if (data->mouse.enabled)
+	{
+		data->mouse.enabled = 0;
+		mlx_mouse_show(data->mlx, data->window);
+	}
+	else
+	{
+		data->mouse.enabled = 1;
+		data->mouse.first_move = 1;
+		mlx_mouse_hide(data->mlx, data->window);
+		mlx_mouse_move(data->mlx, data->window, center_x, center_y);
+	}
 }

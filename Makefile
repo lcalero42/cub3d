@@ -3,13 +3,13 @@
 # ---------------------------------------------------------------------------- #
 
 # ---------------------------------- window ---------------------------------- #
-WINDOW_WIDTH = 1920		# width of window
-WINDOW_HEIGHT = 1080		# height of window
+WINDOW_WIDTH = 640		# width of window
+WINDOW_HEIGHT = 480		# height of window
 
 # --------------------------------- gameplay --------------------------------- #
 MOVE_SPEED = 2.0f		# player movement speed
 ROT_SPEED = 3.0f	# player rotation speed
-SENSITIVITY = 100	# player mouse sensitivity
+SENSITIVITY = 2	# player mouse sensitivity
 
 # -------------------------------- performance ------------------------------- #
 RENDER_DISTANCE = 1000		# the maximum distance where the walls will be rendered 

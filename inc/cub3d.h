@@ -6,7 +6,7 @@
 /*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 14:01:03 by lcalero           #+#    #+#             */
-/*   Updated: 2025/07/30 14:41:46 by ekeisler         ###   ########.fr       */
+/*   Updated: 2025/07/30 16:05:51 by ekeisler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -263,7 +263,8 @@ void				init_ray_direction(t_data *data, int i);
 void				init_ray_distances(t_data *data, int i);
 void				init_ray_steps(t_data *data, int i);
 void				init_mouse_control(t_data *data);
-int					mouse_move(int x, t_data *data);
+int					mouse_move(int x, int y, void *param);
+void				toggle_mouse_control(t_data *data);
 
 // UTILS
 int					u_rgb_to_hex(int r, int g, int b, int a);
