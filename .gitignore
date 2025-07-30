@@ -11,6 +11,7 @@
 !parsing
 !rendering
 !utils
+!mouse_move
 !*.c
 !*.h
 !*.xpm

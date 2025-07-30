@@ -3,8 +3,8 @@
 # ---------------------------------------------------------------------------- #
 
 # ---------------------------------- window ---------------------------------- #
-WINDOW_WIDTH = 1920		# width of window
-WINDOW_HEIGHT = 1080		# height of window
+WINDOW_WIDTH = 640		# width of window
+WINDOW_HEIGHT = 480		# height of window
 
 # --------------------------------- gameplay --------------------------------- #
 MOVE_SPEED = 2.0f		   # player movement speed
@@ -12,6 +12,9 @@ ROT_SPEED = 3.0f	       # player rotation speed
 CROSSHAIR_SIZE = 1        # size of the crosshair
 CROSSHAIR_THICKNESS = 4   # thickness of the crosshair
 CROSSHAIR_COLOR = 0x00FF00 # color of the crosshair in hexa
+MOVE_SPEED = 2.0f		# player movement speed
+ROT_SPEED = 3.0f	# player rotation speed
+SENSITIVITY = 2	# player mouse sensitivity
 
 # -------------------------------- performance ------------------------------- #
 RENDER_DISTANCE = 1000		# the maximum distance where the walls will be rendered 
@@ -24,6 +27,8 @@ CONFIG = -D WINDOW_WIDTH=$(WINDOW_WIDTH) -D WINDOW_HEIGHT=$(WINDOW_HEIGHT) -D MO
 		 -D CROSSHAIR_SIZE=$(CROSSHAIR_SIZE) -D CROSSHAIR_THICKNESS=$(CROSSHAIR_THICKNESS) -D CROSSHAIR_COLOR=$(CROSSHAIR_COLOR)
 DEBUG_CONFIG = -D WINDOW_WIDTH=$(WINDOW_WIDTH) -D WINDOW_HEIGHT=$(WINDOW_HEIGHT) -D MOVE_SPEED=3.0f -D ROT_SPEED=2.0f -D RENDER_DISTANCE=10 \
 			   -D CROSSHAIR_SIZE=$(CROSSHAIR_SIZE) -D CROSSHAIR_THICKNESS=$(CROSSHAIR_THICKNESS) -D CROSSHAIR_COLOR=$(CROSSHAIR_COLOR)
+CONFIG = -D WINDOW_WIDTH=$(WINDOW_WIDTH) -D WINDOW_HEIGHT=$(WINDOW_HEIGHT) -D MOVE_SPEED=$(MOVE_SPEED) -D ROT_SPEED=$(ROT_SPEED) -D RENDER_DISTANCE=$(RENDER_DISTANCE) -D SENSITIVITY=$(SENSITIVITY)
+DEBUG_CONFIG = -D WINDOW_WIDTH=$(WINDOW_WIDTH) -D WINDOW_HEIGHT=$(WINDOW_HEIGHT) -D MOVE_SPEED=3.0f -D ROT_SPEED=2.0f -D RENDER_DISTANCE=10 -D SENSITIVITY=$(SENSITIVITY)
 OPTI = -O3 -flto -march=native -mtune=native -funroll-loops
 OBJ_DIR = obj-$(MODE)
 INCLUDES = -Iincludes -Ilibft -Iminilibx-linux
@@ -42,6 +47,7 @@ VPATH = srcs:srcs/raycasting \
 		srcs:srcs/checker	 \
 		srcs:srcs/utils		 \
 		srcs:srcs/rendering		 \
+		srcs:srcs/mouse_move \
 
 SRCS =	main.c						\
 		pr_parse_config_lines.c		\
@@ -74,6 +80,8 @@ SRCS =	main.c						\
 		u_rendering.c				\
 		u_map_checking.c			\
 		u_init.c					\
+		m_init_mouse_move.c			\
+		m_mouse_move.c				\
 
 OBJS = $(addprefix $(OBJ_DIR)/, $(SRCS:.c=.o))
 DEPS = $(OBJS:.o=.d)
