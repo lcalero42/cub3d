@@ -6,7 +6,7 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 14:01:03 by lcalero           #+#    #+#             */
-/*   Updated: 2025/07/29 15:15:04 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/07/30 15:47:47 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,16 @@
 
 # define RAY_HIT 1
 # define RAY_CONTINUE 0
+
+# ifndef CROSSHAIR_SIZE
+#  define CROSSHAIR_SIZE 10
+# endif
+# ifndef CROSSHAIR_THICKNESS
+#  define CROSSHAIR_THICKNESS 2
+# endif
+# ifndef CROSSHAIR_COLOR
+#  define CROSSHAIR_COLOR 0x00FF00
+# endif
 
 typedef struct s_pos
 {
@@ -179,27 +189,26 @@ typedef struct s_texture_info
 	int				line_len;
 }					t_texture_info;
 
-typedef struct s_wall_render
+typedef struct s_render
 {
-	void			*wall_texture_img;
+	void			*texture_img;
 	char			*texture_path;
 	t_texture_info	info;
-	int				wall_texture_endian;
-}					t_wall_render;
+	int				texture_endian;
+}					t_render;
 
 typedef struct s_data
 {
 	int				game_started;
-	t_wall_render	north_wall;
-	t_wall_render	south_wall;
-	t_wall_render	east_wall;
-	t_wall_render	west_wall;
+	t_render		north_wall;
+	t_render		south_wall;
+	t_render		east_wall;
+	t_render		west_wall;
+	t_render		crosshair;
 	t_color			floor;
 	t_color			ceiling;
 	void			*render_img;
-	char			*render_addr;
-	int				render_bpp;
-	int				render_line_len;
+	t_texture_info	render_info;
 	int				render_endian;
 	t_sprite		*sprites;
 	int				sprite_count;
@@ -243,6 +252,7 @@ void				update_player_movement(t_data *data);
 t_wall_side			get_wall_side(t_data *data, int ray_index);
 t_texture_info		get_texture_info_by_side(t_data *data, t_wall_side side);
 void				apply_fog_overlay(t_data *data);
+void				render_crosshair(t_data *data);
 
 // RAYCASTING INIT FUNCTIONS
 void				init_player_direction(t_data *data, double angle);
@@ -271,5 +281,7 @@ int					get_pixel_from_image(t_data *data, int x, int y);
 int					blend_colors(t_color *colors, double alpha);
 int					is_out_of_bounds(int x, int y, int height, int width);
 int					is_valid_map_char(char c);
+void				load_texture(t_data *data, char *path, t_render *texture);
+void				init(t_data *data, char **argv);
 
 #endif

@@ -6,29 +6,27 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 17:10:47 by lcalero           #+#    #+#             */
-/*   Updated: 2025/07/28 18:21:46 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/07/30 14:33:13 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static void	load_wall_texture(t_data *data, char *path, t_wall_render *wall);
-
 void	init_walls(t_data *data)
 {
-	load_wall_texture(data, data->north_wall.texture_path, &data->north_wall);
-	load_wall_texture(data, data->south_wall.texture_path, &data->south_wall);
-	load_wall_texture(data, data->west_wall.texture_path, &data->west_wall);
-	load_wall_texture(data, data->east_wall.texture_path, &data->east_wall);
+	load_texture(data, data->north_wall.texture_path, &data->north_wall);
+	load_texture(data, data->south_wall.texture_path, &data->south_wall);
+	load_texture(data, data->west_wall.texture_path, &data->west_wall);
+	load_texture(data, data->east_wall.texture_path, &data->east_wall);
 	data->render_img = mlx_new_image(data->mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
 	if (!data->render_img)
 	{
 		printf("Error: Cannot create render buffer\n");
 		exit(1);
 	}
-	data->render_addr = mlx_get_data_addr(data->render_img,
-			&data->render_bpp,
-			&data->render_line_len,
+	data->render_info.addr = mlx_get_data_addr(data->render_img,
+			&data->render_info.bpp,
+			&data->render_info.line_len,
 			&data->render_endian);
 }
 
@@ -57,8 +55,8 @@ void	put_pixel_to_image(t_data *data, int x, int y, int color)
 
 	if (x < 0 || x >= WINDOW_WIDTH || y < 0 || y >= WINDOW_HEIGHT)
 		return ;
-	dst = data->render_addr + (y * data->render_line_len
-			+ x * (data->render_bpp / 8));
+	dst = data->render_info.addr + (y * data->render_info.line_len
+			+ x * (data->render_info.bpp / 8));
 	*(unsigned int *)dst = color;
 }
 
@@ -84,22 +82,4 @@ void	clear_screen(t_data *data)
 				u_rgb_to_hex(data->floor.base_r,
 					data->floor.base_g, data->floor.base_b, 0));
 	}
-}
-
-static void	load_wall_texture(t_data *data, char *path, t_wall_render *wall)
-{
-	int	width;
-	int	height;
-
-	wall->wall_texture_img = mlx_xpm_file_to_image(data->mlx, path,
-			&width, &height);
-	if (!wall->wall_texture_img)
-	{
-		printf("Error: Cannot load wall texture\n");
-		exit(1);
-	}
-	wall->info.addr = mlx_get_data_addr(wall->wall_texture_img,
-			&wall->info.bpp,
-			&wall->info.line_len,
-			&wall->wall_texture_endian);
 }

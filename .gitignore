@@ -9,6 +9,7 @@
 !player
 !checker
 !parsing
+!rendering
 !utils
 !*.c
 !*.h

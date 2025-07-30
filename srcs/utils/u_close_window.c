@@ -6,7 +6,7 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/22 15:12:24 by lcalero           #+#    #+#             */
-/*   Updated: 2025/07/29 14:41:37 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/07/30 14:38:32 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,12 +49,14 @@ static void	destroy_images(t_data *data)
 {
 	if (data->render_img)
 		mlx_destroy_image(data->mlx, data->render_img);
-	if (data->north_wall.wall_texture_img)
-		mlx_destroy_image(data->mlx, data->north_wall.wall_texture_img);
-	if (data->south_wall.wall_texture_img)
-		mlx_destroy_image(data->mlx, data->south_wall.wall_texture_img);
-	if (data->east_wall.wall_texture_img)
-		mlx_destroy_image(data->mlx, data->east_wall.wall_texture_img);
-	if (data->west_wall.wall_texture_img)
-		mlx_destroy_image(data->mlx, data->west_wall.wall_texture_img);
+	if (data->north_wall.texture_img)
+		mlx_destroy_image(data->mlx, data->north_wall.texture_img);
+	if (data->south_wall.texture_img)
+		mlx_destroy_image(data->mlx, data->south_wall.texture_img);
+	if (data->east_wall.texture_img)
+		mlx_destroy_image(data->mlx, data->east_wall.texture_img);
+	if (data->west_wall.texture_img)
+		mlx_destroy_image(data->mlx, data->west_wall.texture_img);
+	if (data->crosshair.texture_img)
+		mlx_destroy_image(data->mlx, data->crosshair.texture_img);
 }

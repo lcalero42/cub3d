@@ -7,8 +7,11 @@ WINDOW_WIDTH = 1920		# width of window
 WINDOW_HEIGHT = 1080		# height of window
 
 # --------------------------------- gameplay --------------------------------- #
-MOVE_SPEED = 2.0f		# player movement speed
-ROT_SPEED = 3.0f	# player rotation speed
+MOVE_SPEED = 2.0f		   # player movement speed
+ROT_SPEED = 3.0f	       # player rotation speed
+CROSSHAIR_SIZE = 1        # size of the crosshair
+CROSSHAIR_THICKNESS = 4   # thickness of the crosshair
+CROSSHAIR_COLOR = 0x00FF00 # color of the crosshair in hexa
 
 # -------------------------------- performance ------------------------------- #
 RENDER_DISTANCE = 1000		# the maximum distance where the walls will be rendered 
@@ -17,8 +20,10 @@ RENDER_DISTANCE = 1000		# the maximum distance where the walls will be rendered
 
 NAME = cub3d
 MODE ?= release
-CONFIG = -D WINDOW_WIDTH=$(WINDOW_WIDTH) -D WINDOW_HEIGHT=$(WINDOW_HEIGHT) -D MOVE_SPEED=$(MOVE_SPEED) -D ROT_SPEED=$(ROT_SPEED) -D RENDER_DISTANCE=$(RENDER_DISTANCE)
-DEBUG_CONFIG = -D WINDOW_WIDTH=$(WINDOW_WIDTH) -D WINDOW_HEIGHT=$(WINDOW_HEIGHT) -D MOVE_SPEED=3.0f -D ROT_SPEED=2.0f -D RENDER_DISTANCE=10
+CONFIG = -D WINDOW_WIDTH=$(WINDOW_WIDTH) -D WINDOW_HEIGHT=$(WINDOW_HEIGHT) -D MOVE_SPEED=$(MOVE_SPEED) -D ROT_SPEED=$(ROT_SPEED) -D RENDER_DISTANCE=$(RENDER_DISTANCE) \
+		 -D CROSSHAIR_SIZE=$(CROSSHAIR_SIZE) -D CROSSHAIR_THICKNESS=$(CROSSHAIR_THICKNESS) -D CROSSHAIR_COLOR=$(CROSSHAIR_COLOR)
+DEBUG_CONFIG = -D WINDOW_WIDTH=$(WINDOW_WIDTH) -D WINDOW_HEIGHT=$(WINDOW_HEIGHT) -D MOVE_SPEED=3.0f -D ROT_SPEED=2.0f -D RENDER_DISTANCE=10 \
+			   -D CROSSHAIR_SIZE=$(CROSSHAIR_SIZE) -D CROSSHAIR_THICKNESS=$(CROSSHAIR_THICKNESS) -D CROSSHAIR_COLOR=$(CROSSHAIR_COLOR)
 OPTI = -O3 -flto -march=native -mtune=native -funroll-loops
 OBJ_DIR = obj-$(MODE)
 INCLUDES = -Iincludes -Ilibft -Iminilibx-linux
@@ -36,6 +41,7 @@ VPATH = srcs:srcs/raycasting \
 		srcs:srcs/parsing	 \
 		srcs:srcs/checker	 \
 		srcs:srcs/utils		 \
+		srcs:srcs/rendering		 \
 
 SRCS =	main.c						\
 		pr_parse_config_lines.c		\
@@ -48,12 +54,13 @@ SRCS =	main.c						\
 		pr_find_player_pos.c		\
 		c_check_map.c				\
 		c_check_sourrounded_bw.c	\
+		re_wall_render.c			\
+		re_wall_texture.c			\
+		re_render_fog.c				\
+		re_render_crosshair.c		\
+		r_wall_side.c				\
 		r_raycast_dda.c				\
 		r_raycast_init.c			\
-		r_wall_render.c				\
-		r_wall_texture.c			\
-		r_wall_side.c				\
-		r_render_fog.c				\
 		p_determine_movement.c		\
 		p_delta_time.c				\
 		u_calculate_map_width.c		\
@@ -66,6 +73,7 @@ SRCS =	main.c						\
 		u_fog_rendering.c			\
 		u_rendering.c				\
 		u_map_checking.c			\
+		u_init.c					\
 
 OBJS = $(addprefix $(OBJ_DIR)/, $(SRCS:.c=.o))
 DEPS = $(OBJS:.o=.d)

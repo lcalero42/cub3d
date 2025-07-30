@@ -6,7 +6,7 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/28 14:25:57 by lcalero           #+#    #+#             */
-/*   Updated: 2025/07/28 14:31:49 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/07/30 14:16:45 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ int	get_pixel_from_image(t_data *data, int x, int y)
 
 	if (x < 0 || x >= WINDOW_WIDTH || y < 0 || y >= WINDOW_HEIGHT)
 		return (0);
-	pixel_addr = data->render_addr + y * data->render_line_len
-		+ x * (data->render_bpp / 8);
+	pixel_addr = data->render_info.addr + y * data->render_info.line_len
+		+ x * (data->render_info.bpp / 8);
 	color = *(unsigned int *)pixel_addr;
 	return (color);
 }

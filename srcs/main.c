@@ -6,7 +6,7 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 11:53:44 by lcalero           #+#    #+#             */
-/*   Updated: 2025/07/29 15:29:50 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/07/30 15:49:12 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ int	render_loop(t_data *data)
 	render_walls(data);
 	if (data->render_fog)
 		apply_fog_overlay(data);
+	render_crosshair(data);
 	mlx_put_image_to_window(data->mlx, data->window, data->render_img, 0, 0);
 	calculate_fps(data);
 	return (1);
@@ -82,16 +83,7 @@ int	main(int argc, char **argv)
 		return (1);
 	}
 	ft_bzero(&data, sizeof(t_data));
-	data.render_fog = 1;
-	if (parse_file(argv[1], &data))
-	{
-		close_window(&data);
-		return (1);
-	}
-	data.mlx = mlx_init();
-	data.window = mlx_new_window(data.mlx, WINDOW_WIDTH,
-			WINDOW_HEIGHT, "cub3d");
-	init_walls(&data);
+	init(&data, argv);
 	mlx_hook(data.window, 2, 1L << 0, key_press_hook, &data);
 	mlx_hook(data.window, 3, 1L << 1, key_release_hook, &data);
 	mlx_hook(data.window, 17, 1L << 17, close_window, &data);
