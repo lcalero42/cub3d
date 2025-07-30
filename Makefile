@@ -9,6 +9,7 @@ WINDOW_HEIGHT = 1080		# height of window
 # --------------------------------- gameplay --------------------------------- #
 MOVE_SPEED = 2.0f		# player movement speed
 ROT_SPEED = 3.0f	# player rotation speed
+SENSITIVITY = 100	# player mouse sensitivity
 
 # -------------------------------- performance ------------------------------- #
 RENDER_DISTANCE = 1000		# the maximum distance where the walls will be rendered 
@@ -17,8 +18,8 @@ RENDER_DISTANCE = 1000		# the maximum distance where the walls will be rendered
 
 NAME = cub3d
 MODE ?= release
-CONFIG = -D WINDOW_WIDTH=$(WINDOW_WIDTH) -D WINDOW_HEIGHT=$(WINDOW_HEIGHT) -D MOVE_SPEED=$(MOVE_SPEED) -D ROT_SPEED=$(ROT_SPEED) -D RENDER_DISTANCE=$(RENDER_DISTANCE)
-DEBUG_CONFIG = -D WINDOW_WIDTH=$(WINDOW_WIDTH) -D WINDOW_HEIGHT=$(WINDOW_HEIGHT) -D MOVE_SPEED=3.0f -D ROT_SPEED=2.0f -D RENDER_DISTANCE=10
+CONFIG = -D WINDOW_WIDTH=$(WINDOW_WIDTH) -D WINDOW_HEIGHT=$(WINDOW_HEIGHT) -D MOVE_SPEED=$(MOVE_SPEED) -D ROT_SPEED=$(ROT_SPEED) -D RENDER_DISTANCE=$(RENDER_DISTANCE) -D SENSITIVITY=$(SENSITIVITY)
+DEBUG_CONFIG = -D WINDOW_WIDTH=$(WINDOW_WIDTH) -D WINDOW_HEIGHT=$(WINDOW_HEIGHT) -D MOVE_SPEED=3.0f -D ROT_SPEED=2.0f -D RENDER_DISTANCE=10 -D SENSITIVITY=$(SENSITIVITY)
 OPTI = -O3 -flto -march=native -mtune=native -funroll-loops
 OBJ_DIR = obj-$(MODE)
 INCLUDES = -Iincludes -Ilibft -Iminilibx-linux
@@ -36,6 +37,7 @@ VPATH = srcs:srcs/raycasting \
 		srcs:srcs/parsing	 \
 		srcs:srcs/checker	 \
 		srcs:srcs/utils		 \
+		srcs:srcs/mouse_move \
 
 SRCS =	main.c						\
 		pr_parse_config_lines.c		\
@@ -66,6 +68,8 @@ SRCS =	main.c						\
 		u_fog_rendering.c			\
 		u_rendering.c				\
 		u_map_checking.c			\
+		m_init_mouse_move.c			\
+		m_mouse_move.c				\
 
 OBJS = $(addprefix $(OBJ_DIR)/, $(SRCS:.c=.o))
 DEPS = $(OBJS:.o=.d)

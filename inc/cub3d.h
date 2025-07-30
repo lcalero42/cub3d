@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 14:01:03 by lcalero           #+#    #+#             */
-/*   Updated: 2025/07/29 15:15:04 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/07/30 14:41:46 by ekeisler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,10 @@
 
 # ifndef MOVE_SPEED
 #  define MOVE_SPEED 3.0f
+# endif
+
+# ifndef SENSITIVITY
+#	define SENSITIVITY 100
 # endif
 
 # ifndef ROTATION_SPEED
@@ -187,6 +191,14 @@ typedef struct s_wall_render
 	int				wall_texture_endian;
 }					t_wall_render;
 
+typedef struct s_mouse
+{
+	int				first_move;
+	int				last_x;
+	int				enabled;
+	int				sensitivity;
+}	t_mouse;
+
 typedef struct s_data
 {
 	int				game_started;
@@ -207,6 +219,7 @@ typedef struct s_data
 	void			*mlx;
 	void			*window;
 	t_player		player;
+	t_mouse			mouse;
 	t_grid			grid;
 	t_ray			rays[WINDOW_WIDTH];
 	t_keys			keys;
@@ -249,6 +262,8 @@ void				init_player_direction(t_data *data, double angle);
 void				init_ray_direction(t_data *data, int i);
 void				init_ray_distances(t_data *data, int i);
 void				init_ray_steps(t_data *data, int i);
+void				init_mouse_control(t_data *data);
+int					mouse_move(int x, t_data *data);
 
 // UTILS
 int					u_rgb_to_hex(int r, int g, int b, int a);
