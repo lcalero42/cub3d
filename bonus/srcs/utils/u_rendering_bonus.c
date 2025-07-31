@@ -1,18 +1,47 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   u_rendering.c                                      :+:      :+:    :+:   */
+/*   u_rendering_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/28 14:25:57 by lcalero           #+#    #+#             */
-/*   Updated: 2025/07/30 14:16:45 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/07/31 14:50:05 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
 static int	blend_component(int base, int fog, double alpha);
+
+void	draw_floor(t_data *data, int x, int y)
+{
+	float	t;
+	int		floor_r;
+	int		floor_g;
+	int		floor_b;
+
+	t = (float)(y - WINDOW_HEIGHT / 2) / (WINDOW_HEIGHT / 2);
+	if (t > 1.0f)
+		t = 1.0f;
+	if (t < 0.0f)
+		t = 0.0f;
+	if (data->render_fog)
+	{
+		floor_r = (int)(data->floor.base_r * t);
+		floor_g = (int)(data->floor.base_g * t);
+		floor_b = (int)(data->floor.base_b * t);
+	}
+	else
+	{
+		floor_r = data->floor.base_r;
+		floor_g = data->floor.base_g;
+		floor_b = data->floor.base_b;
+	}
+	while (x++ < WINDOW_WIDTH)
+		put_pixel_to_image(data, x, y,
+			u_rgb_to_hex(floor_r, floor_g, floor_b, 0));
+}
 
 int	get_pixel_from_image(t_data *data, int x, int y)
 {
