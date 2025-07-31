@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 14:01:03 by lcalero           #+#    #+#             */
-/*   Updated: 2025/07/30 18:18:28 by ekeisler         ###   ########.fr       */
+/*   Updated: 2025/07/31 13:57:37 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,9 +72,9 @@
 
 typedef struct s_pos
 {
-	int	x;
-	int	y;
-}	t_pos;
+	int				x;
+	int				y;
+}					t_pos;
 
 typedef struct s_dda_vars
 {
@@ -207,7 +207,7 @@ typedef struct s_mouse
 	int				last_x;
 	int				enabled;
 	int				sensitivity;
-}	t_mouse;
+}					t_mouse;
 
 typedef struct s_data
 {
@@ -299,5 +299,12 @@ int					is_out_of_bounds(int x, int y, int height, int width);
 int					is_valid_map_char(char c);
 void				load_texture(t_data *data, char *path, t_render *texture);
 void				init(t_data *data, char **argv);
+int					check_collisions(t_data *data, t_vector move);
+void				handle_forward_backward(t_data *data, t_vector *move,
+						double move_speed);
+void				handle_strafe(t_data *data, t_vector *move,
+						double move_speed);
+void				normalize_movement(t_data *data, t_vector *move,
+						double *magnitude, double move_speed);
 
 #endif

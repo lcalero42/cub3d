@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   p_determine_movement.c                             :+:      :+:    :+:   */
+/*   p_determine_movement_bonus.c                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 17:48:15 by lcalero           #+#    #+#             */
-/*   Updated: 2025/07/29 15:55:29 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/07/31 13:59:13 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,6 @@
 
 static void	determine_movement(t_data *data, double move_speed);
 static void	determine_rotation(t_data *data, double rotation_speed);
-static void	handle_forward_backward(t_data *data, t_vector *move,
-				double move_speed);
-static void	handle_strafe(t_data *data, t_vector *move, double move_speed);
 
 void	update_player_movement(t_data *data)
 {
@@ -39,36 +36,7 @@ void	update_player_movement(t_data *data)
 	determine_movement(data, move_speed);
 }
 
-static void	determine_movement(t_data *data, double move_speed)
-{
-	t_vector	move;
-	double		magnitude;
-
-	data->player.dir.x = cos(data->player.angle);
-	data->player.dir.y = sin(data->player.angle);
-	move.x = 0.0;
-	move.y = 0.0;
-	handle_forward_backward(data, &move, move_speed);
-	handle_strafe(data, &move, move_speed);
-	magnitude = sqrt(move.x * move.x + move.y * move.y);
-	if (magnitude > move_speed)
-	{
-		move.x = (move.x / magnitude) * move_speed;
-		move.y = (move.y / magnitude) * move_speed;
-	}
-	data->player.position.x += move.x;
-	data->player.position.y += move.y;
-}
-
-static void	determine_rotation(t_data *data, double rotation_speed)
-{
-	if (data->keys.left)
-		data->player.angle -= rotation_speed;
-	if (data->keys.right)
-		data->player.angle += rotation_speed;
-}
-
-static void	handle_forward_backward(t_data *data, t_vector *move,
+void	handle_forward_backward(t_data *data, t_vector *move,
 	double move_speed)
 {
 	if (data->keys.w)
@@ -83,7 +51,7 @@ static void	handle_forward_backward(t_data *data, t_vector *move,
 	}
 }
 
-static void	handle_strafe(t_data *data, t_vector *move, double move_speed)
+void	handle_strafe(t_data *data, t_vector *move, double move_speed)
 {
 	double	strafe_speed;
 
@@ -98,4 +66,40 @@ static void	handle_strafe(t_data *data, t_vector *move, double move_speed)
 		move->x += data->player.dir.y * strafe_speed;
 		move->y += (-data->player.dir.x) * strafe_speed;
 	}
+}
+
+static void	determine_movement(t_data *data, double move_speed)
+{
+	t_vector	move;
+	t_vector	x_move;
+	t_vector	y_move;
+	double		magnitude;
+
+	data->player.dir.x = cos(data->player.angle);
+	data->player.dir.y = sin(data->player.angle);
+	move.x = 0.0;
+	move.y = 0.0;
+	normalize_movement(data, &move, &magnitude, move_speed);
+	if (!check_collisions(data, move))
+	{
+		data->player.position.x += move.x;
+		data->player.position.y += move.y;
+		return ;
+	}
+	x_move.x = move.x;
+	x_move.y = 0;
+	if (!check_collisions(data, x_move))
+		data->player.position.x += move.x;
+	y_move.x = 0;
+	y_move.y = move.y;
+	if (!check_collisions(data, y_move))
+		data->player.position.y += move.y;
+}
+
+static void	determine_rotation(t_data *data, double rotation_speed)
+{
+	if (data->keys.left)
+		data->player.angle -= rotation_speed;
+	if (data->keys.right)
+		data->player.angle += rotation_speed;
 }

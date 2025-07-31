@@ -1,24 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   u_map_checking_bonus.c                             :+:      :+:    :+:   */
+/*   u_player_movement.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/29 15:14:06 by lcalero           #+#    #+#             */
-/*   Updated: 2025/07/31 12:56:35 by lcalero          ###   ########.fr       */
+/*   Created: 2025/07/31 13:52:58 by lcalero           #+#    #+#             */
+/*   Updated: 2025/07/31 14:00:17 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	is_out_of_bounds(int x, int y, int height, int width)
+void	normalize_movement(t_data *data, t_vector *move,
+			double *magnitude, double move_speed)
 {
-	return (x < 0 || x >= height || y < 0 || y >= width);
-}
-
-int	is_valid_map_char(char c)
-{
-	return (c == '1' || c == '0' || c == 'N'
-		|| c == 'S' || c == 'E' || c == 'W');
+	handle_forward_backward(data, move, move_speed);
+	handle_strafe(data, move, move_speed);
+	*magnitude = sqrt(move->x * move->x + move->y * move->y);
+	if (*magnitude > move_speed)
+	{
+		move->x = (move->x / *magnitude) * move_speed;
+		move->y = (move->y / *magnitude) * move_speed;
+	}
 }
