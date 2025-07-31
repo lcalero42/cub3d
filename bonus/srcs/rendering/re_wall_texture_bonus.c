@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   r_wall_texture.c                                   :+:      :+:    :+:   */
+/*   re_wall_texture_bonus.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 17:10:47 by lcalero           #+#    #+#             */
-/*   Updated: 2025/07/30 14:33:13 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/07/31 16:07:09 by ekeisler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,26 +60,37 @@ void	put_pixel_to_image(t_data *data, int x, int y, int color)
 	*(unsigned int *)dst = color;
 }
 
-void	clear_screen(t_data *data)
-{
-	int	x;
-	int	y;
+void clear_screen(t_data *data) {
+	int x;
+	int y;
+	double pitch_offset;
+	int horizon_line;
 
-	y = -1;
-	while (y++ < WINDOW_HEIGHT / 2)
-	{
-		x = -1;
-		while (x++ < WINDOW_WIDTH)
-			put_pixel_to_image(data, x, y,
-				u_rgb_to_hex(data->ceiling.base_r,
-					data->ceiling.base_g, data->ceiling.base_b, 0));
+	pitch_offset = data->player.pitch * (WINDOW_HEIGHT * 0.5);
+	horizon_line = WINDOW_HEIGHT / 2 + (int)pitch_offset;
+	if (horizon_line < 0) horizon_line = 0;
+	if (horizon_line >= WINDOW_HEIGHT) horizon_line = WINDOW_HEIGHT - 1;
+	y = 0;
+	while (y < horizon_line) {
+		x = 0;
+		while (x < WINDOW_WIDTH) {
+			put_pixel_to_image(
+			    data, x, y,
+			    u_rgb_to_hex(data->ceiling.base_r, data->ceiling.base_g,
+			                 data->ceiling.base_b, 0));
+			x++;
+		}
+		y++;
 	}
-	while (y++ < WINDOW_HEIGHT)
-	{
-		x = -1;
-		while (x++ < WINDOW_WIDTH)
-			put_pixel_to_image(data, x, y,
-				u_rgb_to_hex(data->floor.base_r,
-					data->floor.base_g, data->floor.base_b, 0));
+	while (y < WINDOW_HEIGHT) {
+		x = 0;
+		while (x < WINDOW_WIDTH) {
+			put_pixel_to_image(
+			    data, x, y,
+			    u_rgb_to_hex(data->floor.base_r, data->floor.base_g,
+			                 data->floor.base_b, 0));
+			x++;
+		}
+		y++;
 	}
 }

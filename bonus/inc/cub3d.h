@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 14:01:03 by lcalero           #+#    #+#             */
-/*   Updated: 2025/07/31 13:57:37 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/07/31 14:47:00 by ekeisler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,14 @@
 # ifndef SENSITIVITY
 #  define SENSITIVITY 100
 # endif
+
+# ifndef PITCH_MAX
+#  define PITCH_MAX 1.4f
+#endif
+
+# ifndef PITCH_MIN
+#define PITCH_MIN -1.4f
+#endif
 
 # ifndef ROTATION_SPEED
 #  define ROTATION_SPEED 3.0f
@@ -149,6 +157,7 @@ typedef struct s_player
 	t_vector		dir;
 	double			fov;
 	double			angle;
+	double			pitch;
 	int				is_moving;
 }					t_player;
 

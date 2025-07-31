@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   m_init_mouse_move.c                                :+:      :+:    :+:   */
+/*   m_init_mouse_move_bonus.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/30 14:19:07 by ekeisler          #+#    #+#             */
-/*   Updated: 2025/07/30 18:08:20 by ekeisler         ###   ########.fr       */
+/*   Updated: 2025/07/31 14:50:31 by ekeisler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void	init_mouse_control(t_data *data)
 	int	center_y;
 
 	data->mouse.enabled = 1;
+	data->player.pitch = 0.0;
 	data->mouse.first_move = 1;
 	data->mouse.sensitivity = SENSITIVITY;
 	center_x = WINDOW_WIDTH / 2;
