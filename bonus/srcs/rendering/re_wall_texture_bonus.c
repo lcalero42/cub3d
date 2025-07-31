@@ -6,7 +6,7 @@
 /*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 17:10:47 by lcalero           #+#    #+#             */
-/*   Updated: 2025/07/31 16:11:33 by ekeisler         ###   ########.fr       */
+/*   Updated: 2025/07/31 16:58:25 by ekeisler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,37 +60,36 @@ void	put_pixel_to_image(t_data *data, int x, int y, int color)
 	*(unsigned int *)dst = color;
 }
 
-void clear_screen(t_data *data) {
-	int x;
-	int y;
-	double pitch_offset;
-	int horizon_line;
+void	clear_screen(t_data *data)
+{
+	int		x;
+	int		y;
+	double	pitch_offset;
+	int		horizon_line;
 
 	pitch_offset = data->player.pitch * (WINDOW_HEIGHT * 0.5);
 	horizon_line = WINDOW_HEIGHT / 2 + (int)pitch_offset;
-	if (horizon_line < 0) horizon_line = 0;
-	if (horizon_line >= WINDOW_HEIGHT) horizon_line = WINDOW_HEIGHT - 1;
+	if (horizon_line < 0)
+		horizon_line = 0;
+	if (horizon_line >= WINDOW_HEIGHT)
+		horizon_line = WINDOW_HEIGHT - 1;
 	y = 0;
-	while (y < horizon_line) {
+	while (y < horizon_line)
+	{
 		x = 0;
-		while (x < WINDOW_WIDTH) {
+		while (x < WINDOW_WIDTH)
+		{
 			put_pixel_to_image(
-			    data, x, y,
-			    u_rgb_to_hex(data->ceiling.base_r, data->ceiling.base_g,
-			                 data->ceiling.base_b, 0));
+				data, x, y,
+				u_rgb_to_hex(data->ceiling.base_r, data->ceiling.base_g,
+					data->ceiling.base_b, 0));
 			x++;
 		}
 		y++;
 	}
-	while (y < WINDOW_HEIGHT) {
-		x = 0;
-		while (x < WINDOW_WIDTH) {
-			put_pixel_to_image(
-			    data, x, y,
-			    u_rgb_to_hex(data->floor.base_r, data->floor.base_g,
-			                 data->floor.base_b, 0));
-			x++;
-		}
+	while (y < WINDOW_HEIGHT)
+	{
+		draw_floor(data, 0, y);
 		y++;
 	}
 }

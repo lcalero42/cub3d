@@ -6,7 +6,7 @@
 /*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 14:01:03 by lcalero           #+#    #+#             */
-/*   Updated: 2025/07/31 16:11:13 by ekeisler         ###   ########.fr       */
+/*   Updated: 2025/07/31 16:40:51 by ekeisler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,12 +40,12 @@
 # endif
 
 # ifndef PITCH_MAX
-#  define PITCH_MAX 1.4f
-#endif
+#  define PITCH_MAX 3.0f
+# endif
 
 # ifndef PITCH_MIN
-#define PITCH_MIN -1.4f
-#endif
+#  define PITCH_MIN -3.0f
+# endif
 
 # ifndef ROTATION_SPEED
 #  define ROTATION_SPEED 3.0f
@@ -267,7 +267,7 @@ void				trace_ray(t_data *data, double angle);
 void				render_walls(t_data *data);
 void				init_walls(t_data *data);
 void				clear_screen(t_data *data);
-void				draw_floor(t_data *data, int x, int y);
+void				draw_floor(t_data *data, int start_x, int y);
 void				put_pixel_to_image(t_data *data, int x, int y, int color);
 int					get_wall_texture_pixel(t_data *data, int x, int y,
 						int side);
