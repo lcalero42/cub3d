@@ -6,7 +6,7 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 14:01:03 by lcalero           #+#    #+#             */
-/*   Updated: 2025/07/31 13:57:37 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/07/31 14:41:25 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -258,6 +258,7 @@ void				trace_ray(t_data *data, double angle);
 void				render_walls(t_data *data);
 void				init_walls(t_data *data);
 void				clear_screen(t_data *data);
+void				draw_floor(t_data *data, int x, int y);
 void				put_pixel_to_image(t_data *data, int x, int y, int color);
 int					get_wall_texture_pixel(t_data *data, int x, int y,
 						int side);

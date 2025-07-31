@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   r_wall_texture.c                                   :+:      :+:    :+:   */
+/*   re_wall_texture_bonus.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 17:10:47 by lcalero           #+#    #+#             */
-/*   Updated: 2025/07/30 14:33:13 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/07/31 14:50:25 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,9 +77,6 @@ void	clear_screen(t_data *data)
 	while (y++ < WINDOW_HEIGHT)
 	{
 		x = -1;
-		while (x++ < WINDOW_WIDTH)
-			put_pixel_to_image(data, x, y,
-				u_rgb_to_hex(data->floor.base_r,
-					data->floor.base_g, data->floor.base_b, 0));
+		draw_floor(data, x, y);
 	}
 }
