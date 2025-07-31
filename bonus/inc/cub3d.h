@@ -6,7 +6,7 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 14:01:03 by lcalero           #+#    #+#             */
-/*   Updated: 2025/07/31 14:41:25 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/07/31 17:23:30 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -201,6 +201,30 @@ typedef struct s_render
 	int				texture_endian;
 }					t_render;
 
+typedef struct s_sprite_bounds
+{
+	int	start_x;
+	int	end_x;
+	int	half_width;
+}	t_sprite_bounds;
+
+typedef struct s_sprite_params
+{
+	t_texture_info	*tex_info;
+	int				x;
+	int				tex_x;
+	int				sprite_top;
+	int				sprite_height;
+}	t_sprite_params;
+
+typedef struct s_enemy_render_data
+{
+	int	visible;
+	int	screen_x;
+	int	sprite_height;
+	int	sprite_top;
+}	t_enemy_render_data;
+
 typedef struct s_mouse
 {
 	int				first_move;
@@ -208,6 +232,12 @@ typedef struct s_mouse
 	int				enabled;
 	int				sensitivity;
 }					t_mouse;
+
+typedef struct s_enemy
+{
+	t_vector		position;
+	t_render		render;
+}					t_enemy;
 
 typedef struct s_data
 {
@@ -228,6 +258,7 @@ typedef struct s_data
 	void			*mlx;
 	void			*window;
 	t_player		player;
+	t_enemy			enemy;
 	t_mouse			mouse;
 	t_grid			grid;
 	t_ray			rays[WINDOW_WIDTH];
@@ -267,6 +298,7 @@ t_wall_side			get_wall_side(t_data *data, int ray_index);
 t_texture_info		get_texture_info_by_side(t_data *data, t_wall_side side);
 void				apply_fog_overlay(t_data *data);
 void				render_crosshair(t_data *data);
+void				render_enemy(t_data *data);
 
 // RAYCASTING INIT FUNCTIONS
 void				init_player_direction(t_data *data, double angle);

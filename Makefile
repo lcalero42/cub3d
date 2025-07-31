@@ -104,6 +104,7 @@ SRCS_BONUS = main_bonus.c					\
 		re_wall_texture_bonus.c			\
 		re_render_fog_bonus.c			\
 		re_render_crosshair_bonus.c		\
+		re_render_enemy.c				\
 		r_wall_side_bonus.c				\
 		r_raycast_dda_bonus.c			\
 		r_raycast_init_bonus.c			\

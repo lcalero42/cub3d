@@ -6,7 +6,7 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 11:53:44 by lcalero           #+#    #+#             */
-/*   Updated: 2025/07/31 12:54:00 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/07/31 17:27:12 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ int	render_loop(t_data *data)
 	render_walls(data);
 	if (data->render_fog)
 		apply_fog_overlay(data);
+	render_enemy(data);
 	render_crosshair(data);
 	mlx_put_image_to_window(data->mlx, data->window, data->render_img, 0, 0);
 	calculate_fps(data);
