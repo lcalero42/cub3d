@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 11:53:44 by lcalero           #+#    #+#             */
-/*   Updated: 2025/07/31 12:54:00 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/08/26 16:51:29 by ekeisler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ int	key_release_hook(int keycode, t_data *data)
 		data->keys.right = 0;
 	if (keycode == XK_Left)
 		data->keys.left = 0;
+	if (keycode == XK_Shift_L)
+		data->player.is_running = 0;
 	return (0);
 }
 
@@ -57,6 +59,8 @@ int	key_press_hook(int keycode, t_data *data)
 		data->keys.left = 1;
 	if (keycode == XK_m || keycode == XK_M)
 		toggle_mouse_control(data);
+	if (keycode == XK_Shift_L)
+		data->player.is_running = 1;
 	return (0);
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   p_determine_movement_bonus.c                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 17:48:15 by lcalero           #+#    #+#             */
-/*   Updated: 2025/07/31 13:59:13 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/08/26 16:46:33 by ekeisler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	update_player_movement(t_data *data)
 	}
 	delta_time = (current_time - data->last_time) / 1000.0;
 	data->last_time = current_time;
-	move_speed = MOVE_SPEED * delta_time;
+	move_speed = u_get_current_speed(data) * delta_time;
 	rotation_speed = ROTATION_SPEED * delta_time;
 	determine_rotation(data, rotation_speed);
 	determine_movement(data, move_speed);

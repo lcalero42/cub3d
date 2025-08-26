@@ -6,15 +6,13 @@
 /*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 14:01:03 by lcalero           #+#    #+#             */
-/*   Updated: 2025/07/31 16:40:51 by ekeisler         ###   ########.fr       */
+/*   Updated: 2025/08/26 13:55:15 by ekeisler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
 
-# include "../minilibx-linux/mlx.h"
-# include "libft.h"
 # include <X11/X.h>
 # include <X11/keysym.h>
 # include <fcntl.h>
@@ -22,6 +20,9 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
+
+# include "../minilibx-linux/mlx.h"
+# include "libft.h"
 
 # ifndef WINDOW_WIDTH
 #  define WINDOW_WIDTH 640
@@ -49,6 +50,10 @@
 
 # ifndef ROTATION_SPEED
 #  define ROTATION_SPEED 3.0f
+# endif
+
+# ifndef RUN_MULTIPLIER
+#  define RUN_MULTIPLIER 2.0f
 # endif
 
 # ifndef RENDER_DISTANCE
@@ -82,14 +87,14 @@ typedef struct s_pos
 {
 	int				x;
 	int				y;
-}					t_pos;
+}	t_pos;
 
 typedef struct s_dda_vars
 {
 	int				map_x;
 	int				map_y;
 	int				steps;
-}					t_dda_vars;
+}	t_dda_vars;
 
 typedef enum e_wall_side
 {
@@ -97,7 +102,7 @@ typedef enum e_wall_side
 	SOUTH = 1,
 	EAST = 2,
 	WEST = 3
-}					t_wall_side;
+}	t_wall_side;
 
 typedef struct s_color
 {
@@ -107,7 +112,7 @@ typedef struct s_color
 	int				fog_r;
 	int				fog_g;
 	int				fog_b;
-}					t_color;
+}	t_color;
 
 typedef struct s_fog_params
 {
@@ -116,19 +121,19 @@ typedef struct s_fog_params
 	int				wall_end;
 	int				fog_alpha;
 	int				fog_color;
-}					t_fog_params;
+}	t_fog_params;
 
 typedef struct s_wall_bounds
 {
 	int				wall_start;
 	int				wall_end;
-}					t_wall_bounds;
+}	t_wall_bounds;
 
 typedef struct s_vector
 {
 	double			x;
 	double			y;
-}					t_vector;
+}	t_vector;
 
 typedef struct s_ray
 {
@@ -141,14 +146,14 @@ typedef struct s_ray
 	int				hit;
 	int				side;
 	int				must_render;
-}					t_ray;
+}	t_ray;
 
 typedef struct s_grid
 {
 	char			**grid;
 	int				width;
 	int				height;
-}					t_grid;
+}	t_grid;
 
 typedef struct s_player
 {
@@ -159,7 +164,8 @@ typedef struct s_player
 	double			angle;
 	double			pitch;
 	int				is_moving;
-}					t_player;
+	int				is_running;
+}	t_player;
 
 typedef struct s_keys
 {
@@ -169,7 +175,8 @@ typedef struct s_keys
 	int				s;
 	int				left;
 	int				right;
-}					t_keys;
+	int				run;
+}	t_keys;
 
 typedef struct s_sprite
 {
@@ -177,7 +184,7 @@ typedef struct s_sprite
 	double			y;
 	int				texture_id;
 	double			distance;
-}					t_sprite;
+}	t_sprite;
 
 typedef struct s_sprite_calc
 {
@@ -193,14 +200,14 @@ typedef struct s_sprite_calc
 	int				draw_end_y;
 	int				draw_start_x;
 	int				draw_end_x;
-}					t_sprite_calc;
+}	t_sprite_calc;
 
 typedef struct s_texture_info
 {
 	char			*addr;
 	int				bpp;
 	int				line_len;
-}					t_texture_info;
+}	t_texture_info;
 
 typedef struct s_render
 {
@@ -208,7 +215,7 @@ typedef struct s_render
 	char			*texture_path;
 	t_texture_info	info;
 	int				texture_endian;
-}					t_render;
+}	t_render;
 
 typedef struct s_mouse
 {
@@ -216,7 +223,7 @@ typedef struct s_mouse
 	int				last_x;
 	int				enabled;
 	int				sensitivity;
-}					t_mouse;
+}	t_mouse;
 
 typedef struct s_data
 {
@@ -245,7 +252,7 @@ typedef struct s_data
 	int				frame_count;
 	double			fps;
 	long long		last_time;
-}					t_data;
+}	t_data;
 
 // PARSING
 int					parse_file(char *filename, t_data *data);
@@ -316,5 +323,6 @@ void				handle_strafe(t_data *data, t_vector *move,
 						double move_speed);
 void				normalize_movement(t_data *data, t_vector *move,
 						double *magnitude, double move_speed);
+double				u_get_current_speed(t_data *data);
 
 #endif

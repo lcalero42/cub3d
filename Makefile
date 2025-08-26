@@ -122,6 +122,7 @@ SRCS_BONUS = main_bonus.c				\
 		u_map_checking_bonus.c			\
 		u_init_bonus.c					\
 		u_player_movement.c				\
+		u_get_current_speed_bonus.c \
 		m_init_mouse_move_bonus.c		\
 		m_mouse_move_bonus.c			\
 
@@ -156,7 +157,7 @@ $(OBJ_DIR):
 	mkdir -p $(OBJ_DIR)/player
 	mkdir -p $(OBJ_DIR)/raycasting
 	mkdir -p $(OBJ_DIR)/rendering
-	mkdir -p $(OBJ_DIR)/utils
+	mkdir -p $(OBJ_DIR)/utils´p
 	mkdir -p $(OBJ_DIR)/mouse_move
 
 libft:
