@@ -6,7 +6,7 @@
 /*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/28 14:25:57 by lcalero           #+#    #+#             */
-/*   Updated: 2025/08/27 16:22:26 by ekeisler         ###   ########.fr       */
+/*   Updated: 2025/08/27 16:46:58 by ekeisler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@ void	draw_floor(t_data *data, int start_x, int y)
 	int		floor_r;
 	int		floor_g;
 	int		floor_b;
-	double	pitch_offset;
 	int		adjusted_horizon;
 	int		x;
 	int		floor_height;
+	double	pitch_offset;
 
 	pitch_offset = data->player.pitch * (WINDOW_HEIGHT * 0.5);
 	adjusted_horizon = WINDOW_HEIGHT / 2 + (int)pitch_offset;
