@@ -6,11 +6,11 @@
 /*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/26 13:33:10 by ekeisler          #+#    #+#             */
-/*   Updated: 2025/08/27 16:07:43 by ekeisler         ###   ########.fr       */
+/*   Updated: 2025/08/27 16:23:23 by ekeisler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3d_bonus.h"
 
 double	u_get_current_speed(t_data *data)
 {

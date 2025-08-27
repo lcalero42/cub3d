@@ -6,11 +6,11 @@
 /*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/30 14:14:46 by ekeisler          #+#    #+#             */
-/*   Updated: 2025/07/31 16:42:58 by ekeisler         ###   ########.fr       */
+/*   Updated: 2025/08/27 16:26:39 by ekeisler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3d_bonus.h"
 
 int	mouse_move(int x, int y, void *param)
 {

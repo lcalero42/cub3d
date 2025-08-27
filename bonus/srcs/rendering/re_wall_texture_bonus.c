@@ -6,11 +6,11 @@
 /*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 17:10:47 by lcalero           #+#    #+#             */
-/*   Updated: 2025/07/31 16:58:25 by ekeisler         ###   ########.fr       */
+/*   Updated: 2025/08/27 16:23:57 by ekeisler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3d_bonus.h"
 
 void	init_walls(t_data *data)
 {

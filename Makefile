@@ -158,7 +158,7 @@ $(OBJ_DIR):
 	mkdir -p $(OBJ_DIR)/player
 	mkdir -p $(OBJ_DIR)/raycasting
 	mkdir -p $(OBJ_DIR)/rendering
-	mkdir -p $(OBJ_DIR)/utils´p
+	mkdir -p $(OBJ_DIR)/utils
 	mkdir -p $(OBJ_DIR)/mouse_move
 
 libft:

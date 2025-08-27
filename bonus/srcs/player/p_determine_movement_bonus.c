@@ -6,11 +6,11 @@
 /*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 17:48:15 by lcalero           #+#    #+#             */
-/*   Updated: 2025/08/27 15:46:49 by ekeisler         ###   ########.fr       */
+/*   Updated: 2025/08/27 16:24:55 by ekeisler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3d_bonus.h"
 
 static void	determine_movement(t_data *data, double move_speed);
 static void	determine_rotation(t_data *data, double rotation_speed);

@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   u_calculate_map_width.c                            :+:      :+:    :+:   */
+/*   u_calculate_map_width_bonus.c                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 02:11:47 by ekeisler          #+#    #+#             */
-/*   Updated: 2025/07/29 14:21:58 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/08/27 16:23:50 by ekeisler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3d_bonus.h"
 
 void	u_calculate_map_width(t_data *data)
 {

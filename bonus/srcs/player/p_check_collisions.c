@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   p_check_collisions.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/31 12:34:22 by lcalero           #+#    #+#             */
-/*   Updated: 2025/07/31 13:49:10 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/08/27 16:25:06 by ekeisler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3d_bonus.h"
 
 static int	check_point(t_data *data, double x, double y);
 

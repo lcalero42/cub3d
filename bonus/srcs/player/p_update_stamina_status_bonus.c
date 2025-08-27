@@ -6,11 +6,11 @@
 /*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 12:56:28 by ekeisler          #+#    #+#             */
-/*   Updated: 2025/08/27 16:07:11 by ekeisler         ###   ########.fr       */
+/*   Updated: 2025/08/27 16:24:48 by ekeisler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3d_bonus.h"
 
 void	update_player_stamina_status(t_data *data, double delta_time)
 {

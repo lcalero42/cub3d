@@ -6,11 +6,11 @@
 /*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/30 14:19:07 by ekeisler          #+#    #+#             */
-/*   Updated: 2025/07/31 16:41:27 by ekeisler         ###   ########.fr       */
+/*   Updated: 2025/08/27 16:26:10 by ekeisler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3d_bonus.h"
 
 void	init_mouse_control(t_data *data)
 {

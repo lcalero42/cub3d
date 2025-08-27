@@ -6,11 +6,11 @@
 /*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/30 14:21:07 by lcalero           #+#    #+#             */
-/*   Updated: 2025/08/27 13:25:31 by ekeisler         ###   ########.fr       */
+/*   Updated: 2025/08/27 16:23:17 by ekeisler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3d_bonus.h"
 
 void	init(t_data *data, char **argv)
 {

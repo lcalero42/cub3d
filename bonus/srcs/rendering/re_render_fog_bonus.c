@@ -6,11 +6,11 @@
 /*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/28 14:09:27 by lcalero           #+#    #+#             */
-/*   Updated: 2025/07/31 16:56:58 by ekeisler         ###   ########.fr       */
+/*   Updated: 2025/08/27 16:24:14 by ekeisler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3d_bonus.h"
 
 int	blend_fog_with_pixel(int base_color, int fog_color, int fog_alpha)
 {

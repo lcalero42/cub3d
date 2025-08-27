@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pr_check_file_extension.c                          :+:      :+:    :+:   */
+/*   pr_check_file_extension_bonus.c                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/19 10:00:20 by ekeisler          #+#    #+#             */
-/*   Updated: 2025/07/19 12:53:38 by ekeisler         ###   ########.fr       */
+/*   Updated: 2025/08/27 16:25:58 by ekeisler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3d_bonus.h"
 
 int	check_file_extension(char *filename)
 {

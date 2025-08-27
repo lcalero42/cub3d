@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   u_close_window.c                                   :+:      :+:    :+:   */
+/*   u_close_window_bonus.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/22 15:12:24 by lcalero           #+#    #+#             */
-/*   Updated: 2025/07/30 18:15:41 by ekeisler         ###   ########.fr       */
+/*   Updated: 2025/08/27 16:23:46 by ekeisler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3d_bonus.h"
 
 static void	destroy_images(t_data *data);
 static void	free_paths(t_data *data);

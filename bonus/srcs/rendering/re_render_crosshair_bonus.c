@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   re_render_crosshair.c                              :+:      :+:    :+:   */
+/*   re_render_crosshair_bonus.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/30 14:42:52 by lcalero           #+#    #+#             */
-/*   Updated: 2025/07/30 15:44:20 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/08/27 16:24:19 by ekeisler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3d_bonus.h"
 
 void	render_crosshair(t_data *data)
 {

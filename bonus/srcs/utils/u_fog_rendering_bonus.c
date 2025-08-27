@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   u_fog_rendering_bonus.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/28 14:23:43 by lcalero           #+#    #+#             */
-/*   Updated: 2025/07/31 14:38:01 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/08/27 16:23:41 by ekeisler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3d_bonus.h"
 
 int	calculate_fog_alpha(double distance)
 {

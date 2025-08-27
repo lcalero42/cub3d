@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pr_parse_config_lines.c                            :+:      :+:    :+:   */
+/*   pr_parse_config_lines_bonus.c                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 23:58:38 by ekeisler          #+#    #+#             */
-/*   Updated: 2025/07/29 14:37:06 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/08/27 16:25:46 by ekeisler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3d_bonus.h"
 
 static int	parse_config_line(char *line, t_data *data);
 static int	process_config_tokens(char **tokens, char *full_line, t_data *data);

@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   r_wall_side.c                                      :+:      :+:    :+:   */
+/*   r_wall_side_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 21:51:20 by lcalero           #+#    #+#             */
-/*   Updated: 2025/07/17 22:11:07 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/08/27 16:24:27 by ekeisler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3d_bonus.h"
 
 static t_texture_info	get_north_texture_info(t_data *data)
 {

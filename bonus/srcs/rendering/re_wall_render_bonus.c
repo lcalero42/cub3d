@@ -6,11 +6,11 @@
 /*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 17:13:46 by lcalero           #+#    #+#             */
-/*   Updated: 2025/07/31 16:52:55 by ekeisler         ###   ########.fr       */
+/*   Updated: 2025/08/27 16:24:04 by ekeisler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3d_bonus.h"
 
 static double	calculate_perp_wall_dist(t_data *data, int x);
 static void		calculate_wall_bounds(t_data *data, double perp_wall_dist,

@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   r_raycast_dda_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 17:13:02 by lcalero           #+#    #+#             */
-/*   Updated: 2025/07/31 13:46:56 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/08/27 16:24:37 by ekeisler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3d_bonus.h"
 
 static void	perform_dda_step(t_data *data, int i);
 static void	perform_dda(t_data *data, int i);
