@@ -6,7 +6,7 @@
 /*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 17:48:15 by lcalero           #+#    #+#             */
-/*   Updated: 2025/08/26 16:46:33 by ekeisler         ###   ########.fr       */
+/*   Updated: 2025/08/27 15:46:49 by ekeisler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,11 @@ void	update_player_movement(t_data *data)
 	rotation_speed = ROTATION_SPEED * delta_time;
 	determine_rotation(data, rotation_speed);
 	determine_movement(data, move_speed);
+	if (data->keys.run && data->player.stamina > 0)
+		data->player.is_running = 1;
+	else
+		data->player.is_running = 0;
+	update_player_stamina_status(data, delta_time);
 }
 
 void	handle_forward_backward(t_data *data, t_vector *move,

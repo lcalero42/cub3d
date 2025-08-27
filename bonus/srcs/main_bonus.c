@@ -6,7 +6,7 @@
 /*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 11:53:44 by lcalero           #+#    #+#             */
-/*   Updated: 2025/08/26 16:51:29 by ekeisler         ###   ########.fr       */
+/*   Updated: 2025/08/27 15:43:53 by ekeisler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 int	key_release_hook(int keycode, t_data *data)
 {
-	if (keycode == XK_d || keycode == XK_d
-		|| keycode == XK_d || keycode == XK_d)
+	if (keycode == XK_d || keycode == XK_a
+		|| keycode == XK_w || keycode == XK_s)
 		data->player.is_moving = 0;
 	if (keycode == XK_d)
 		data->keys.d = 0;
@@ -30,7 +30,7 @@ int	key_release_hook(int keycode, t_data *data)
 	if (keycode == XK_Left)
 		data->keys.left = 0;
 	if (keycode == XK_Shift_L)
-		data->player.is_running = 0;
+		data->keys.run = 0;
 	return (0);
 }
 
@@ -41,6 +41,8 @@ int	key_press_hook(int keycode, t_data *data)
 		data->player.is_moving = 1;
 	if (keycode == XK_Escape)
 		close_window(data);
+	if (keycode == XK_Shift_L)
+		data->keys.run = 1;
 	if (keycode == XK_f && data->render_fog)
 		data->render_fog = 0;
 	else if (keycode == XK_f && !data->render_fog)
@@ -59,8 +61,6 @@ int	key_press_hook(int keycode, t_data *data)
 		data->keys.left = 1;
 	if (keycode == XK_m || keycode == XK_M)
 		toggle_mouse_control(data);
-	if (keycode == XK_Shift_L)
-		data->player.is_running = 1;
 	return (0);
 }
 

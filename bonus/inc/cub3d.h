@@ -6,7 +6,7 @@
 /*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 14:01:03 by lcalero           #+#    #+#             */
-/*   Updated: 2025/08/26 13:55:15 by ekeisler         ###   ########.fr       */
+/*   Updated: 2025/08/27 16:08:41 by ekeisler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,12 +48,24 @@
 #  define PITCH_MIN -3.0f
 # endif
 
+# ifndef STAMINA_DRAIN_RATE
+#  define STAMINA_DRAIN_RATE 20.0f
+# endif
+
+# ifndef STAMINA_REGEN_RATE
+#  define STAMINA_REGEN_RATE 10.0f
+# endif
+
+# ifndef MAX_STAMINA
+#  define MAX_STAMINA 30.0f
+# endif
+
 # ifndef ROTATION_SPEED
 #  define ROTATION_SPEED 3.0f
 # endif
 
 # ifndef RUN_MULTIPLIER
-#  define RUN_MULTIPLIER 2.0f
+#  define RUN_MULTIPLIER 1.6f
 # endif
 
 # ifndef RENDER_DISTANCE
@@ -77,7 +89,7 @@
 #  define CROSSHAIR_SIZE 10
 # endif
 # ifndef CROSSHAIR_THICKNESS
-#  define CROSSHAIR_THICKNESS 2
+#  define CROSSHAIR_THICKNESS 1
 # endif
 # ifndef CROSSHAIR_COLOR
 #  define CROSSHAIR_COLOR 0x00FF00
@@ -165,6 +177,7 @@ typedef struct s_player
 	double			pitch;
 	int				is_moving;
 	int				is_running;
+	double			stamina;
 }	t_player;
 
 typedef struct s_keys
@@ -292,6 +305,8 @@ void				init_ray_steps(t_data *data, int i);
 void				init_mouse_control(t_data *data);
 int					mouse_move(int x, int y, void *param);
 void				toggle_mouse_control(t_data *data);
+void				update_player_stamina_status(t_data *data,
+						double delta_time);
 
 // UTILS
 int					u_rgb_to_hex(int r, int g, int b, int a);

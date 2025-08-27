@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   u_init.c                                           :+:      :+:    :+:   */
+/*   u_init_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/30 14:21:07 by lcalero           #+#    #+#             */
-/*   Updated: 2025/07/30 18:16:33 by ekeisler         ###   ########.fr       */
+/*   Updated: 2025/08/27 13:25:31 by ekeisler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void	init(t_data *data, char **argv)
 			WINDOW_HEIGHT, "cub3d");
 	init_walls(data);
 	init_mouse_control(data);
+	data->player.stamina = MAX_STAMINA;
 }
 
 void	load_texture(t_data *data, char *path, t_render *texture)
