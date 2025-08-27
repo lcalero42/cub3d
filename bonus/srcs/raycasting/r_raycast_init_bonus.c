@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   r_raycast_init.c                                   :+:      :+:    :+:   */
+/*   r_raycast_init_bonus.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 17:11:51 by lcalero           #+#    #+#             */
-/*   Updated: 2025/07/28 19:55:50 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/08/27 17:56:44 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3d_bonus.h"
 
 void	init_player_direction(t_data *data, double angle)
 {

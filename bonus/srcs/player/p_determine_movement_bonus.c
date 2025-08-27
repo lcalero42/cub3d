@@ -6,11 +6,11 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 17:48:15 by lcalero           #+#    #+#             */
-/*   Updated: 2025/07/31 13:59:13 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/08/27 17:56:29 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3d_bonus.h"
 
 static void	determine_movement(t_data *data, double move_speed);
 static void	determine_rotation(t_data *data, double rotation_speed);

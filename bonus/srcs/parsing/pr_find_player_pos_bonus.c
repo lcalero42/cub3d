@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pr_find_player_pos.c                               :+:      :+:    :+:   */
+/*   pr_find_player_pos_bonus.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/22 14:45:42 by ekeisler          #+#    #+#             */
-/*   Updated: 2025/07/29 13:53:04 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/08/27 17:55:51 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3d_bonus.h"
 
 static int	set_player_angle(int i, int j, t_data *data);
 static int	player_is_found(int i, int j, t_data *data);

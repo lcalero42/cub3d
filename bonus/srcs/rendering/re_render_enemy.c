@@ -6,12 +6,12 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/31 16:48:01 by lcalero           #+#    #+#             */
-/*   Updated: 2025/07/31 18:47:25 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/08/27 17:56:57 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <math.h>
-#include "cub3d.h"
+#include "cub3d_bonus.h"
 
 unsigned int	get_texture_pixel(t_texture_info *texture_info, int x, int y)
 {
@@ -89,8 +89,7 @@ static void	draw_sprite_column(t_data *data, t_sprite_params *params)
 			tex_y = 64 - 1;
 		
 		color = get_texture_pixel(params->tex_info, params->tex_x, tex_y);
-		
-		// Skip transparent (black) pixels
+
 		if (!is_transparent_color(color))
 			put_pixel_to_image(data, params->x, y, color);
 		
@@ -99,7 +98,7 @@ static void	draw_sprite_column(t_data *data, t_sprite_params *params)
 }
 
 void	draw_sprite_at(t_data *data, t_render *render, int screen_x, 
-	int sprite_top, int sprite_height)
+	int sprite_top, int sprite_height, t_enemy *enemy)
 {
 	t_sprite_bounds	bounds;
 	t_sprite_params	params;
@@ -115,6 +114,11 @@ void	draw_sprite_at(t_data *data, t_render *render, int screen_x,
 	while (x <= bounds.end_x)
 	{
 		// Map x screen coordinate to texture coordinate (0 to 64)
+		if (data->rays[x].hit == 1 && data->rays[x].perp_wall_dist < sqrtf((enemy->position.x - data->player.position.x) * (enemy->position.x - data->player.position.x)  + (enemy->position.y - data->player.position.y)  * (enemy->position.y - data->player.position.y)))
+		{
+			x++;
+			continue ;
+		}
 		params.tex_x = (int)((float)(x - (screen_x - bounds.half_width)) 
 			* 64 / sprite_height);
 		if (params.tex_x < 0)
@@ -195,6 +199,6 @@ void	render_enemy(t_data *data)
 	if (render_data.visible)
 	{
 		draw_sprite_at(data, &enemy->render, render_data.screen_x, 
-			render_data.sprite_top, render_data.sprite_height);
+			render_data.sprite_top, render_data.sprite_height, enemy);
 	}
 }

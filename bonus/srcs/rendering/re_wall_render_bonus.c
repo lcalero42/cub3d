@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   r_wall_render.c                                    :+:      :+:    :+:   */
+/*   re_wall_render_bonus.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 17:13:46 by lcalero           #+#    #+#             */
-/*   Updated: 2025/07/29 15:18:44 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/08/27 17:57:07 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3d_bonus.h"
 
 static double	calculate_perp_wall_dist(t_data *data, int x);
 static void		calculate_wall_bounds(double perp_wall_dist, int *draw_start,

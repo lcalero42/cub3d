@@ -6,11 +6,11 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/31 13:52:58 by lcalero           #+#    #+#             */
-/*   Updated: 2025/07/31 14:00:17 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/08/27 17:57:58 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3d_bonus.h"
 
 void	normalize_movement(t_data *data, t_vector *move,
 			double *magnitude, double move_speed)

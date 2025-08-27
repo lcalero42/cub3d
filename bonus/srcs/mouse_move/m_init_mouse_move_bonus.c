@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   m_init_mouse_move.c                                :+:      :+:    :+:   */
+/*   m_init_mouse_move_bonus.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/30 14:19:07 by ekeisler          #+#    #+#             */
-/*   Updated: 2025/07/30 18:08:20 by ekeisler         ###   ########.fr       */
+/*   Updated: 2025/08/27 17:55:36 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3d_bonus.h"
 
 void	init_mouse_control(t_data *data)
 {

@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   m_mouse_move_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/30 14:14:46 by ekeisler          #+#    #+#             */
-/*   Updated: 2025/07/30 19:21:19 by ekeisler         ###   ########.fr       */
+/*   Updated: 2025/08/27 17:55:41 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3d_bonus.h"
 
 static void	apply_rotation(t_data *data, int center_x, int center_y, int x);
 

@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   c_check_sourrounded_bw.c                           :+:      :+:    :+:   */
+/*   c_check_sourrounded_bw_bonus.c                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 14:47:10 by ekeisler          #+#    #+#             */
-/*   Updated: 2025/07/29 15:15:28 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/08/27 17:55:31 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3d_bonus.h"
 
 static int	is_walkable_space(char c);
 static int	has_open_neighbor(t_data *data, int x, int y);
