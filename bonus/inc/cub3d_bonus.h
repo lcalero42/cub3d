@@ -6,7 +6,7 @@
 /*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 14:01:03 by lcalero           #+#    #+#             */
-/*   Updated: 2025/08/27 19:01:31 by ekeisler         ###   ########.fr       */
+/*   Updated: 2025/08/28 17:41:22 by ekeisler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,8 @@
 # define FOG_COLOR_R 0
 # define FOG_COLOR_G 0
 # define FOG_COLOR_B 0
+# define MOUSE_DEAD_ZONE 2
+# define MOUSE_MAX_DELTA 200
 
 # define FOV 60.0f
 # define CAMERA_PLANE_LENGTH 0.57735f
@@ -234,8 +236,10 @@ typedef struct s_mouse
 {
 	int				first_move;
 	int				last_x;
+	int				last_y;
 	int				enabled;
 	int				sensitivity;
+	double			smoothing;
 }	t_mouse;
 
 typedef struct s_data
