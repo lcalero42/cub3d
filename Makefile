@@ -3,8 +3,8 @@
 # ---------------------------------------------------------------------------- #
 
 # ---------------------------------- window ---------------------------------- #
-WINDOW_WIDTH = 1920		# width of window
-WINDOW_HEIGHT = 1080		# height of window
+WINDOW_WIDTH = 640		# width of window
+WINDOW_HEIGHT = 480		# height of window
 
 # --------------------------------- gameplay --------------------------------- #
 MOVE_SPEED = 2.0f		   # player movement speed
@@ -104,7 +104,7 @@ SRCS_BONUS = main_bonus.c					\
 		re_wall_texture_bonus.c			\
 		re_render_fog_bonus.c			\
 		re_render_crosshair_bonus.c		\
-		re_render_enemy.c				\
+		re_sprite_render.c			\
 		r_wall_side_bonus.c				\
 		r_raycast_dda_bonus.c			\
 		r_raycast_init_bonus.c			\
@@ -123,6 +123,7 @@ SRCS_BONUS = main_bonus.c					\
 		u_map_checking_bonus.c			\
 		u_init_bonus.c					\
 		u_player_movement.c				\
+		u_sprite_utils.c				\
 		m_init_mouse_move_bonus.c		\
 		m_mouse_move_bonus.c			\
 
