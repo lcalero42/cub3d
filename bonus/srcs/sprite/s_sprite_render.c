@@ -6,22 +6,22 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 19:04:42 by lcalero           #+#    #+#             */
-/*   Updated: 2025/08/28 15:38:10 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/08/28 15:41:07 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <math.h>
 #include "cub3d_bonus.h"
+#include <math.h>
 
 static void	draw_sprite_at(t_data *data, t_render *render,
-	t_sprite_bounds *bounds, t_enemy *enemy)
+		t_sprite_bounds *bounds, t_enemy *enemy)
 {
 	t_sprite_params	params;
 	int				x;
 	int				screen_x;
 
-	params = init_sprite_params(&render->info,
-			bounds->sprite_top, bounds->sprite_height);
+	params = init_sprite_params(&render->info, bounds->sprite_top,
+			bounds->sprite_height);
 	x = bounds->start_x;
 	screen_x = enemy->enemy_data.screen_x;
 	while (x <= bounds->end_x)
@@ -31,8 +31,8 @@ static void	draw_sprite_at(t_data *data, t_render *render,
 			x++;
 			continue ;
 		}
-		params.tex_x = (int)((float)((x - (screen_x - bounds->half_width))
-					* 64) / bounds->sprite_height);
+		params.tex_x = (int)((float)((x - (screen_x - bounds->half_width)) * 64)
+				/ bounds->sprite_height);
 		if (params.tex_x < 0)
 			params.tex_x = 0;
 		if (params.tex_x >= 64)
@@ -52,7 +52,7 @@ static void	normalize_angle(double *angle)
 }
 
 static void	calculate_angle_diff(t_enemy *enemy, t_player *player,
-	t_enemy_render_data *render_data)
+		t_enemy_render_data *render_data)
 {
 	float	dx;
 	float	dy;
@@ -73,7 +73,7 @@ static void	calculate_angle_diff(t_enemy *enemy, t_player *player,
 }
 
 static void	calculate_enemy_screen_pos(t_enemy *enemy, t_player *player,
-	t_enemy_render_data *render_data)
+		t_enemy_render_data *render_data)
 {
 	float	dx;
 	float	dy;
@@ -96,13 +96,13 @@ static void	calculate_enemy_screen_pos(t_enemy *enemy, t_player *player,
 	render_data->sprite_height = (int)(WINDOW_HEIGHT / dist);
 	if (render_data->sprite_height > WINDOW_HEIGHT)
 		render_data->sprite_height = WINDOW_HEIGHT;
-	render_data->sprite_top = (WINDOW_HEIGHT / 2)
-		- (render_data->sprite_height / 2);
+	render_data->sprite_top = (WINDOW_HEIGHT / 2) - (render_data->sprite_height
+			/ 2);
 }
 
 void	render_enemy(t_data *data)
 {
-	t_sprite_bounds		bounds;
+	t_sprite_bounds	bounds;
 
 	calculate_enemy_screen_pos(&data->enemy, &data->player,
 		&data->enemy.enemy_data);

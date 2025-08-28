@@ -6,7 +6,7 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 11:53:44 by lcalero           #+#    #+#             */
-/*   Updated: 2025/08/27 18:59:50 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/08/28 18:58:12 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ int	render_loop(t_data *data)
 {
 	data->game_started = 1;
 	update_player_movement(data);
+	update_enemy_movement(data);
 	trace_ray(data, data->player.angle);
 	clear_screen(data);
 	render_walls(data);

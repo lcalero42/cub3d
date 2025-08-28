@@ -1,5 +1,4 @@
 *
-!sprites
 !Makefile
 !inc
 !libft
@@ -11,6 +10,7 @@
 !rendering
 !utils
 !mouse_move
+!sprite
 !mandatory
 !bonus
 !lib

@@ -6,7 +6,7 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 14:01:03 by lcalero           #+#    #+#             */
-/*   Updated: 2025/08/28 15:36:38 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/08/28 20:41:17 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,10 @@
 # endif
 
 # ifndef MOVE_SPEED
-#  define MOVE_SPEED 3.0f
+#  define MOVE_SPEED 7.0f
 # endif
+
+# define ENEMY_SPEED 4.0f
 
 # ifndef SENSITIVITY
 #  define SENSITIVITY 100
@@ -63,12 +65,16 @@
 # ifndef CROSSHAIR_SIZE
 #  define CROSSHAIR_SIZE 10
 # endif
+
 # ifndef CROSSHAIR_THICKNESS
 #  define CROSSHAIR_THICKNESS 2
 # endif
+
 # ifndef CROSSHAIR_COLOR
 #  define CROSSHAIR_COLOR 0x00FF00
 # endif
+
+# define MAX_NODES 4096
 
 typedef struct s_pos
 {
@@ -243,6 +249,25 @@ typedef struct s_enemy
 	t_enemy_render_data	enemy_data;
 }						t_enemy;
 
+typedef struct s_astar_node
+{
+	t_pos				pos;
+	int					g_cost;
+	int					h_cost;
+	int					f_cost;
+	struct s_astar_node	*parent;
+	int					open;
+	int					closed;
+}						t_astar_node;
+
+typedef struct s_astar_data
+{
+	t_astar_node	nodes[MAX_NODES];
+	int				node_count;
+	int				width;
+	int				height;
+}	t_astar_data;
+
 typedef struct s_data
 {
 	int					game_started;
@@ -305,6 +330,9 @@ t_texture_info			get_texture_info_by_side(t_data *data,
 void					apply_fog_overlay(t_data *data);
 void					render_crosshair(t_data *data);
 void					render_enemy(t_data *data);
+void					update_enemy_movement(t_data *data);
+int						find_astar_path(t_data *data, t_pos start, t_pos goal,
+							t_pos *out_path, int max_len);
 
 // RAYCASTING INIT FUNCTIONS
 void					init_player_direction(t_data *data, double angle);
@@ -356,7 +384,17 @@ void					calculate_sprite_bounds(int screen_x, int sprite_height,
 							t_sprite_bounds *bounds);
 void					draw_sprite_column(t_data *data,
 							t_sprite_params *params);
-t_sprite_params			init_sprite_params(t_texture_info *info,
-							int spr_top, int spr_height);
+t_sprite_params			init_sprite_params(t_texture_info *info, int spr_top,
+							int spr_height);
+void					add_neighbor(t_astar_data *astar, t_astar_node *curr,
+							int nx, int ny, t_pos goal);
+int						is_valid_neighbor(t_data *data, t_astar_data *astar, int nx, int ny);
+int						reconstruct_path(t_astar_node *goal_node, t_pos *out_path,
+							int max_len);
+int						find_lowest_f_cost(t_astar_data *astar);
+void					init_astar_data(t_data *data, t_astar_data *astar, t_pos start,
+							t_pos goal);
+int						is_valid_position(t_data *data, double x, double y);
+int						heuristic(t_pos a, t_pos b);
 
 #endif
