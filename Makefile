@@ -3,11 +3,11 @@
 # ---------------------------------------------------------------------------- #
 
 # ---------------------------------- window ---------------------------------- #
-WINDOW_WIDTH = 1920		# width of window
-WINDOW_HEIGHT = 1080		# height of window
+WINDOW_WIDTH = 640		# width of window
+WINDOW_HEIGHT = 480		# height of window
 
 # --------------------------------- gameplay --------------------------------- #
-MOVE_SPEED = 2.0f		   # player movement speed
+MOVE_SPEED = 7.0f		   # player movement speed
 ROT_SPEED = 3.0f	       # player rotation speed
 CROSSHAIR_SIZE = 1        # size of the crosshair
 CROSSHAIR_THICKNESS = 1   # thickness of the crosshair
@@ -55,6 +55,7 @@ VPATH = $(SRC_DIR)/srcs:$(SRC_DIR)/srcs/raycasting \
         $(SRC_DIR)/srcs:$(SRC_DIR)/srcs/utils      \
         $(SRC_DIR)/srcs:$(SRC_DIR)/srcs/rendering  \
         $(SRC_DIR)/srcs:$(SRC_DIR)/srcs/mouse_move \
+		$(SRC_DIR)/srcs:$(SRC_DIR)/srcs/sprite	   \
 
 # Mandatory source files
 SRCS_MANDATORY = main.c				\
@@ -124,8 +125,13 @@ SRCS_BONUS = main_bonus.c				\
 		u_init_bonus.c					\
 		u_player_movement.c				\
 		u_get_current_speed_bonus.c 	\
+		u_sprite_utils.c				\
+		u_pathfinding.c					\
 		m_init_mouse_move_bonus.c		\
 		m_mouse_move_bonus.c			\
+		s_sprite_render.c			    \
+		s_enemy_movement.c			    \
+		s_enemy_find_path.c				\
 
 # Select source files based on mode
 ifeq ($(MODE), bonus)

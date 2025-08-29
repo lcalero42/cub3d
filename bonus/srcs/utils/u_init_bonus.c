@@ -6,7 +6,7 @@
 /*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/30 14:21:07 by lcalero           #+#    #+#             */
-/*   Updated: 2025/08/27 16:23:17 by ekeisler         ###   ########.fr       */
+/*   Updated: 2025/08/29 08:57:48 by ekeisler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,9 @@ void	init(t_data *data, char **argv)
 	data->window = mlx_new_window(data->mlx, WINDOW_WIDTH,
 			WINDOW_HEIGHT, "cub3d");
 	init_walls(data);
+	load_texture(data, "bonus/textures/enemy.xpm", &data->enemy.render);
+	data->enemy.position.x = data->player.position.x + 1.0;
+	data->enemy.position.y = data->player.position.y + 1.0;
 	init_mouse_control(data);
 	data->player.stamina = MAX_STAMINA;
 }
@@ -41,4 +44,15 @@ void	load_texture(t_data *data, char *path, t_render *texture)
 			&texture->info.bpp,
 			&texture->info.line_len,
 			&texture->texture_endian);
+}
+
+t_sprite_params	init_sprite_params(t_texture_info *info,
+					int spr_top, int spr_height)
+{
+	t_sprite_params	params;
+
+	params.tex_info = info;
+	params.sprite_height = spr_height;
+	params.sprite_top = spr_top;
+	return (params);
 }

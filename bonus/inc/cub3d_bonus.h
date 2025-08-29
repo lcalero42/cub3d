@@ -6,13 +6,15 @@
 /*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 14:01:03 by lcalero           #+#    #+#             */
-/*   Updated: 2025/08/27 19:01:31 by ekeisler         ###   ########.fr       */
+/*   Updated: 2025/08/29 09:18:26 by ekeisler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_BONUS_H
 # define CUB3D_BONUS_H
 
+# include "../minilibx-linux/mlx.h"
+# include "libft.h"
 # include <X11/X.h>
 # include <X11/keysym.h>
 # include <fcntl.h>
@@ -20,9 +22,6 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
-
-# include "../minilibx-linux/mlx.h"
-# include "libft.h"
 
 # ifndef WINDOW_WIDTH
 #  define WINDOW_WIDTH 640
@@ -33,8 +32,10 @@
 # endif
 
 # ifndef MOVE_SPEED
-#  define MOVE_SPEED 3.0f
+#  define MOVE_SPEED 7.0f
 # endif
+
+# define ENEMY_SPEED 4.0f
 
 # ifndef SENSITIVITY
 #  define SENSITIVITY 100
@@ -95,18 +96,20 @@
 #  define CROSSHAIR_COLOR 0x00FF00
 # endif
 
+# define MAX_NODES 4096
+
 typedef struct s_pos
 {
-	int				x;
-	int				y;
-}	t_pos;
+	int					x;
+	int					y;
+}						t_pos;
 
 typedef struct s_dda_vars
 {
-	int				map_x;
-	int				map_y;
-	int				steps;
-}	t_dda_vars;
+	int					map_x;
+	int					map_y;
+	int					steps;
+}						t_dda_vars;
 
 typedef enum e_wall_side
 {
@@ -118,117 +121,170 @@ typedef enum e_wall_side
 
 typedef struct s_color
 {
-	int				base_r;
-	int				base_g;
-	int				base_b;
-	int				fog_r;
-	int				fog_g;
-	int				fog_b;
-}	t_color;
+	int					base_r;
+	int					base_g;
+	int					base_b;
+	int					fog_r;
+	int					fog_g;
+	int					fog_b;
+}						t_color;
 
 typedef struct s_fog_params
 {
-	int				x;
-	int				wall_start;
-	int				wall_end;
-	int				fog_alpha;
-	int				fog_color;
+	int					x;
+	int					wall_start;
+	int					wall_end;
+	int					fog_alpha;
+	int					fog_color;
 }	t_fog_params;
 
 typedef struct s_wall_bounds
 {
-	int				wall_start;
-	int				wall_end;
+	int					wall_start;
+	int					wall_end;
 }	t_wall_bounds;
 
 typedef struct s_vector
 {
-	double			x;
-	double			y;
+	double				x;
+	double				y;
 }	t_vector;
 
 typedef struct s_ray
 {
-	t_vector		ray_dir;
-	t_vector		map_pos;
-	t_vector		side_dist;
-	t_vector		delta_dist;
-	t_vector		step;
-	double			perp_wall_dist;
-	int				hit;
-	int				side;
-	int				must_render;
+	t_vector			ray_dir;
+	t_vector			map_pos;
+	t_vector			side_dist;
+	t_vector			delta_dist;
+	t_vector			step;
+	double				perp_wall_dist;
+	int					hit;
+	int					side;
+	int					must_render;
 }	t_ray;
 
 typedef struct s_grid
 {
-	char			**grid;
-	int				width;
-	int				height;
+	char				**grid;
+	int					width;
+	int					height;
 }	t_grid;
 
 typedef struct s_player
 {
-	t_vector		position;
-	t_vector		camera_segment;
-	t_vector		dir;
-	double			fov;
-	double			angle;
-	double			pitch;
-	int				is_moving;
-	int				is_running;
-	double			stamina;
+	t_vector			position;
+	t_vector			camera_segment;
+	t_vector			dir;
+	double				fov;
+	double				angle;
+	double				pitch;
+	int					is_moving;
+	int					is_running;
+	double				stamina;
 }	t_player;
 
 typedef struct s_keys
 {
-	int				a;
-	int				d;
-	int				w;
-	int				s;
-	int				left;
-	int				right;
-	int				run;
+	int					a;
+	int					d;
+	int					w;
+	int					s;
+	int					left;
+	int					right;
+	int					run;
 }	t_keys;
 
 typedef struct s_sprite
 {
-	double			x;
-	double			y;
-	int				texture_id;
-	double			distance;
+	double				x;
+	double				y;
+	int					texture_id;
+	double				distance;
 }	t_sprite;
 
 typedef struct s_sprite_calc
 {
-	double			sprite_x;
-	double			sprite_y;
-	double			inv_det;
-	double			transform_x;
-	double			transform_y;
-	int				screen_x;
-	int				sprite_height;
-	int				sprite_width;
-	int				draw_start_y;
-	int				draw_end_y;
-	int				draw_start_x;
-	int				draw_end_x;
+	double				sprite_x;
+	double				sprite_y;
+	double				inv_det;
+	double				transform_x;
+	double				transform_y;
+	int					screen_x;
+	int					sprite_height;
+	int					sprite_width;
+	int					draw_start_y;
+	int					draw_end_y;
+	int					draw_start_x;
+	int					draw_end_x;
 }	t_sprite_calc;
 
 typedef struct s_texture_info
 {
-	char			*addr;
-	int				bpp;
-	int				line_len;
+	char				*addr;
+	int					bpp;
+	int					line_len;
 }	t_texture_info;
 
 typedef struct s_render
 {
-	void			*texture_img;
-	char			*texture_path;
-	t_texture_info	info;
-	int				texture_endian;
+	void				*texture_img;
+	char				*texture_path;
+	t_texture_info		info;
+	int					texture_endian;
 }	t_render;
+
+typedef struct	s_sprite_bounds
+{
+	int 				start_x;
+	int 				end_x;
+	int 				half_width;
+	int 				sprite_height;
+	int 				sprite_top;
+} 	t_sprite_bounds;
+
+typedef struct	s_sprite_params
+{
+	t_texture_info		*tex_info;
+	int					x;
+	int					tex_x;
+	int					sprite_top;
+	int					sprite_height;
+}	t_sprite_params;
+
+typedef struct	s_enemy_render_data
+{
+	int					visible;
+	int					screen_x;
+	int					sprite_height;
+	int					sprite_top;
+	double				angle_diff;
+}	t_enemy_render_data;
+
+typedef struct	s_enemy
+{
+	t_vector			position;
+	t_render			render;
+	t_enemy_render_data	enemy_data;
+}	t_enemy;
+
+typedef struct	s_astar_node
+{
+	t_pos				pos;
+	int					g_cost;
+	int					h_cost;
+	int					f_cost;
+	struct s_astar_node	*parent;
+	int					open;
+	int					closed;
+}	t_astar_node;
+
+typedef struct	s_astar_data
+{
+	t_astar_node		nodes[MAX_NODES];
+	int					node_count;
+	int					width;
+	int					height;
+}	t_astar_data;
 
 typedef struct s_mouse
 {
@@ -238,7 +294,7 @@ typedef struct s_mouse
 	int				sensitivity;
 }	t_mouse;
 
-typedef struct s_data
+typedef struct	s_data
 {
 	int				game_started;
 	t_render		north_wall;
@@ -257,6 +313,7 @@ typedef struct s_data
 	void			*mlx;
 	void			*window;
 	t_player		player;
+	t_enemy			enemy;
 	t_mouse			mouse;
 	t_grid			grid;
 	t_ray			rays[WINDOW_WIDTH];
@@ -265,7 +322,7 @@ typedef struct s_data
 	int				frame_count;
 	double			fps;
 	long long		last_time;
-}	t_data;
+} t_data;
 
 // PARSING
 int					parse_file(char *filename, t_data *data);
@@ -295,10 +352,13 @@ void				update_player_movement(t_data *data);
 t_wall_side			get_wall_side(t_data *data, int ray_index);
 t_texture_info		get_texture_info_by_side(t_data *data, t_wall_side side);
 void				apply_fog_overlay(t_data *data);
+void 				draw_sprite_column(t_data *data, t_sprite_params *params);
 void				render_crosshair(t_data *data);
+void				update_enemy_movement(t_data *data);
+void				render_enemy(t_data *data);
 
 // RAYCASTING INIT FUNCTIONS
-void				init_player_direction(t_data *data, double angle);
+void init_player_direction(t_data *data, double angle);
 void				init_ray_direction(t_data *data, int i);
 void				init_ray_distances(t_data *data, int i);
 void				init_ray_steps(t_data *data, int i);
@@ -307,9 +367,11 @@ int					mouse_move(int x, int y, void *param);
 void				toggle_mouse_control(t_data *data);
 void				update_player_stamina_status(t_data *data,
 						double delta_time);
+t_sprite_params		init_sprite_params(t_texture_info *info, int spr_top,
+                        int spr_height);
 
-// UTILS
-int					u_rgb_to_hex(int r, int g, int b, int a);
+    // UTILS
+    int u_rgb_to_hex(int r, int g, int b, int a);
 int					u_is_empty_line(char *line);
 int					u_is_config_line(char *line);
 void				u_calculate_map_width(t_data *data);
@@ -339,5 +401,18 @@ void				handle_strafe(t_data *data, t_vector *move,
 void				normalize_movement(t_data *data, t_vector *move,
 						double *magnitude, double move_speed);
 double				u_get_current_speed(t_data *data);
+int					heuristic(t_pos a, t_pos b);
+int					is_valid_position(t_data *data, double x, double y);
+int 				check_wall_occlusion(t_data *data, int x, t_enemy *enemy);
+void				calculate_sprite_bounds(int screen_x, int sprite_height,
+    					t_sprite_bounds *bounds);
+int					find_astar_path(t_data *data, t_pos start, t_pos goal, t_pos *out_path,
+						int max_len);
+int					is_valid_neighbor(t_data *data, t_astar_data *astar, int nx, int ny);
+void				add_neighbor(t_astar_data *astar, t_astar_node *curr, int nx, int ny,
+                  		t_pos goal);
+int					find_lowest_f_cost(t_astar_data *astar);
+int					reconstruct_path(t_astar_node *goal_node, t_pos *out_path, int max_len);
+void				init_astar_data(t_data *data, t_astar_data *astar, t_pos start, t_pos goal);
 
 #endif

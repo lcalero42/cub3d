@@ -6,7 +6,7 @@
 /*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 11:53:44 by lcalero           #+#    #+#             */
-/*   Updated: 2025/08/27 16:27:52 by ekeisler         ###   ########.fr       */
+/*   Updated: 2025/08/29 08:58:09 by ekeisler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,11 +68,13 @@ int	render_loop(t_data *data)
 {
 	data->game_started = 1;
 	update_player_movement(data);
+	update_enemy_movement(data);
 	trace_ray(data, data->player.angle);
 	clear_screen(data);
 	render_walls(data);
 	if (data->render_fog)
 		apply_fog_overlay(data);
+	render_enemy(data);
 	render_crosshair(data);
 	mlx_put_image_to_window(data->mlx, data->window, data->render_img, 0, 0);
 	calculate_fps(data);
