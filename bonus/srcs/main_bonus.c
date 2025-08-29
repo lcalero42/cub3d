@@ -6,13 +6,13 @@
 /*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 11:53:44 by lcalero           #+#    #+#             */
-/*   Updated: 2025/08/29 08:58:09 by ekeisler         ###   ########.fr       */
+/*   Updated: 2025/08/29 12:58:07 by ekeisler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d_bonus.h"
 
-int	key_release_hook(int keycode, t_data *data)
+int key_release_hook(int keycode, t_data *data)
 {
 	if (keycode == XK_d || keycode == XK_a
 		|| keycode == XK_w || keycode == XK_s)
@@ -81,6 +81,13 @@ int	render_loop(t_data *data)
 	return (1);
 }
 
+static int	mouse_hook(int keycode)
+{
+	if (keycode == 1)
+		printf("PEW\n");
+	return (0);
+}
+
 int	main(int argc, char **argv)
 {
 	t_data	data;
@@ -96,6 +103,7 @@ int	main(int argc, char **argv)
 	mlx_hook(data.window, 3, 1L << 1, key_release_hook, &data);
 	mlx_hook(data.window, 6, (1L << 6), mouse_move, &data);
 	mlx_hook(data.window, 17, 1L << 17, close_window, &data);
+	mlx_mouse_hook(data.window, mouse_hook, &data);
 	mlx_loop_hook(data.mlx, render_loop, &data);
 	mlx_loop(data.mlx);
 	mlx_destroy_display(data.mlx);

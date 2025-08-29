@@ -7,7 +7,7 @@ WINDOW_WIDTH = 640		# width of window
 WINDOW_HEIGHT = 480		# height of window
 
 # --------------------------------- gameplay --------------------------------- #
-MOVE_SPEED = 7.0f		   # player movement speed
+MOVE_SPEED = 4.0f		   # player movement speed
 ROT_SPEED = 3.0f	       # player rotation speed
 CROSSHAIR_SIZE = 1        # size of the crosshair
 CROSSHAIR_THICKNESS = 1   # thickness of the crosshair

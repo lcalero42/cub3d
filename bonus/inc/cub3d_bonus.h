@@ -6,7 +6,7 @@
 /*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 14:01:03 by lcalero           #+#    #+#             */
-/*   Updated: 2025/08/29 09:18:26 by ekeisler         ###   ########.fr       */
+/*   Updated: 2025/08/29 13:03:48 by ekeisler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@
 #  define MOVE_SPEED 7.0f
 # endif
 
-# define ENEMY_SPEED 4.0f
+# define ENEMY_SPEED 2.0f
 
 # ifndef SENSITIVITY
 #  define SENSITIVITY 100
@@ -233,16 +233,16 @@ typedef struct s_render
 	int					texture_endian;
 }	t_render;
 
-typedef struct	s_sprite_bounds
+typedef struct s_sprite_bounds
 {
-	int 				start_x;
-	int 				end_x;
-	int 				half_width;
-	int 				sprite_height;
-	int 				sprite_top;
-} 	t_sprite_bounds;
+	int					start_x;
+	int					end_x;
+	int					half_width;
+	int					sprite_height;
+	int					sprite_top;
+}	t_sprite_bounds;
 
-typedef struct	s_sprite_params
+typedef struct s_sprite_params
 {
 	t_texture_info		*tex_info;
 	int					x;
@@ -251,7 +251,7 @@ typedef struct	s_sprite_params
 	int					sprite_height;
 }	t_sprite_params;
 
-typedef struct	s_enemy_render_data
+typedef struct s_enemy_render_data
 {
 	int					visible;
 	int					screen_x;
@@ -260,14 +260,14 @@ typedef struct	s_enemy_render_data
 	double				angle_diff;
 }	t_enemy_render_data;
 
-typedef struct	s_enemy
+typedef struct s_enemy
 {
 	t_vector			position;
 	t_render			render;
 	t_enemy_render_data	enemy_data;
 }	t_enemy;
 
-typedef struct	s_astar_node
+typedef struct s_astar_node
 {
 	t_pos				pos;
 	int					g_cost;
@@ -278,7 +278,7 @@ typedef struct	s_astar_node
 	int					closed;
 }	t_astar_node;
 
-typedef struct	s_astar_data
+typedef struct s_astar_data
 {
 	t_astar_node		nodes[MAX_NODES];
 	int					node_count;
@@ -294,7 +294,7 @@ typedef struct s_mouse
 	int				sensitivity;
 }	t_mouse;
 
-typedef struct	s_data
+typedef struct s_data
 {
 	int				game_started;
 	t_render		north_wall;
@@ -322,7 +322,7 @@ typedef struct	s_data
 	int				frame_count;
 	double			fps;
 	long long		last_time;
-} t_data;
+}	t_data;
 
 // PARSING
 int					parse_file(char *filename, t_data *data);
@@ -352,13 +352,13 @@ void				update_player_movement(t_data *data);
 t_wall_side			get_wall_side(t_data *data, int ray_index);
 t_texture_info		get_texture_info_by_side(t_data *data, t_wall_side side);
 void				apply_fog_overlay(t_data *data);
-void 				draw_sprite_column(t_data *data, t_sprite_params *params);
+void				draw_sprite_column(t_data *data, t_sprite_params *params);
 void				render_crosshair(t_data *data);
 void				update_enemy_movement(t_data *data);
 void				render_enemy(t_data *data);
 
 // RAYCASTING INIT FUNCTIONS
-void init_player_direction(t_data *data, double angle);
+void				init_player_direction(t_data *data, double angle);
 void				init_ray_direction(t_data *data, int i);
 void				init_ray_distances(t_data *data, int i);
 void				init_ray_steps(t_data *data, int i);
@@ -368,10 +368,10 @@ void				toggle_mouse_control(t_data *data);
 void				update_player_stamina_status(t_data *data,
 						double delta_time);
 t_sprite_params		init_sprite_params(t_texture_info *info, int spr_top,
-                        int spr_height);
+						int spr_height);
 
-    // UTILS
-    int u_rgb_to_hex(int r, int g, int b, int a);
+// UTILS
+int					u_rgb_to_hex(int r, int g, int b, int a);
 int					u_is_empty_line(char *line);
 int					u_is_config_line(char *line);
 void				u_calculate_map_width(t_data *data);
@@ -403,16 +403,19 @@ void				normalize_movement(t_data *data, t_vector *move,
 double				u_get_current_speed(t_data *data);
 int					heuristic(t_pos a, t_pos b);
 int					is_valid_position(t_data *data, double x, double y);
-int 				check_wall_occlusion(t_data *data, int x, t_enemy *enemy);
+int					check_wall_occlusion(t_data *data, int x, t_enemy *enemy);
 void				calculate_sprite_bounds(int screen_x, int sprite_height,
-    					t_sprite_bounds *bounds);
-int					find_astar_path(t_data *data, t_pos start, t_pos goal, t_pos *out_path,
-						int max_len);
-int					is_valid_neighbor(t_data *data, t_astar_data *astar, int nx, int ny);
-void				add_neighbor(t_astar_data *astar, t_astar_node *curr, int nx, int ny,
-                  		t_pos goal);
+						t_sprite_bounds *bounds);
+int					find_astar_path(t_data *data, t_pos start, t_pos goal,
+						t_pos *out_path, int max_len);
+int					is_valid_neighbor(t_data *data, t_astar_data *astar,
+						int nx, int ny);
+void				add_neighbor(t_astar_data *astar, t_astar_node *curr,
+						int nx, int ny, t_pos goal);
 int					find_lowest_f_cost(t_astar_data *astar);
-int					reconstruct_path(t_astar_node *goal_node, t_pos *out_path, int max_len);
-void				init_astar_data(t_data *data, t_astar_data *astar, t_pos start, t_pos goal);
+int					reconstruct_path(t_astar_node *goal_node, t_pos *out_path,
+						int max_len);
+void				init_astar_data(t_data *data, t_astar_data *astar,
+						t_pos start, t_pos goal);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/30 14:21:07 by lcalero           #+#    #+#             */
-/*   Updated: 2025/08/29 08:57:48 by ekeisler         ###   ########.fr       */
+/*   Updated: 2025/08/29 13:10:27 by ekeisler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	init(t_data *data, char **argv)
 	data->window = mlx_new_window(data->mlx, WINDOW_WIDTH,
 			WINDOW_HEIGHT, "cub3d");
 	init_walls(data);
-	load_texture(data, "bonus/textures/enemy.xpm", &data->enemy.render);
+	load_texture(data, "bonus/textures/enemy_jaurel.xpm", &data->enemy.render);
 	data->enemy.position.x = data->player.position.x + 1.0;
 	data->enemy.position.y = data->player.position.y + 1.0;
 	init_mouse_control(data);
@@ -37,7 +37,7 @@ void	load_texture(t_data *data, char *path, t_render *texture)
 			&width, &height);
 	if (!texture->texture_img)
 	{
-		printf("Error: Cannot load wall texture\n");
+		u_print_error("Cannot load wall texture");
 		exit(1);
 	}
 	texture->info.addr = mlx_get_data_addr(texture->texture_img,
