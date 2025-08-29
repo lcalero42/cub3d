@@ -6,7 +6,7 @@
 /*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 14:01:03 by lcalero           #+#    #+#             */
-/*   Updated: 2025/08/28 17:41:22 by ekeisler         ###   ########.fr       */
+/*   Updated: 2025/08/29 08:06:15 by ekeisler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,11 +53,11 @@
 # endif
 
 # ifndef STAMINA_REGEN_RATE
-#  define STAMINA_REGEN_RATE 10.0f
+#  define STAMINA_REGEN_RATE 7.0f
 # endif
 
 # ifndef MAX_STAMINA
-#  define MAX_STAMINA 15.0f
+#  define MAX_STAMINA 30.0f
 # endif
 
 # ifndef ROTATION_SPEED
