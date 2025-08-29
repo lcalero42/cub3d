@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   re_sprite_render.c                                 :+:      :+:    :+:   */
+/*   s_sprite_render.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 19:04:42 by lcalero           #+#    #+#             */
-/*   Updated: 2025/08/28 15:41:07 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/08/29 14:23:06 by ekeisler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,5 +113,6 @@ void	render_enemy(t_data *data)
 		bounds.sprite_height = data->enemy.enemy_data.sprite_height;
 		bounds.sprite_top = data->enemy.enemy_data.sprite_top;
 		draw_sprite_at(data, &data->enemy.render, &bounds, &data->enemy);
+		
 	}
 }
