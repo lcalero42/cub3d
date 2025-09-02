@@ -1,30 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pr_check_file_extension_bonus.c                    :+:      :+:    :+:   */
+/*   u_get_current_speed_bonus.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/09/02 17:32:45 by lcalero          ###   ########.fr       */
+/*   Created: 2025/08/26 13:33:10 by ekeisler          #+#    #+#             */
+/*   Updated: 2025/08/29 08:02:45 by ekeisler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "cub3d_bonus.h"
 
-int	check_file_extension(char *filename)
+double	u_get_current_speed(t_data *data)
 {
-	int	len;
-
-	if (!filename)
-		return (0);
-	len = ft_strlen(filename);
-	if (len < 4)
-	{
-		return (0);
-	}
-	if (ft_strncmp(filename + len - 4, ".cub", 4))
-		return (1);
-	return (0);
+	if (data->keys.run && data->player.stamina > 0)
+		return (MOVE_SPEED * RUN_MULTIPLIER);
+	else
+		return (MOVE_SPEED);
 }

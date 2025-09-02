@@ -5,10 +5,11 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/30 14:19:07 by ekeisler          #+#    #+#             */
-/*   Updated: 2025/08/27 17:55:36 by lcalero          ###   ########.fr       */
+/*   Created: Invalid date        by                   #+#    #+#             */
+/*   Updated: 2025/09/02 17:21:42 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "cub3d_bonus.h"
 
@@ -18,6 +19,7 @@ void	init_mouse_control(t_data *data)
 	int	center_y;
 
 	data->mouse.enabled = 1;
+	data->player.pitch = 0.0;
 	data->mouse.first_move = 1;
 	data->mouse.sensitivity = SENSITIVITY;
 	center_x = WINDOW_WIDTH / 2;

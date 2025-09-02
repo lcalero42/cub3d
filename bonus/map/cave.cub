@@ -1,7 +1,7 @@
-NO textures/wall.xpm
-SO textures/wall.xpm
-WE textures/wall.xpm
-EA textures/wall.xpm
+NO bonus/textures/cavewall.xpm
+SO bonus/textures/cavewall.xpm
+WE bonus/textures/cavewall.xpm
+EA bonus/textures/cavewall.xpm
 
 
 F 138,138,138

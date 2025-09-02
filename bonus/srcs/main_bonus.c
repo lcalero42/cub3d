@@ -6,16 +6,19 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 11:53:44 by lcalero           #+#    #+#             */
-/*   Updated: 2025/08/28 18:58:12 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/09/02 17:29:05 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d_bonus.h"
 
+static int	handle_mouse(int keycode);
+#include "cub3d_bonus.h"
+
 int	key_release_hook(int keycode, t_data *data)
 {
-	if (keycode == XK_d || keycode == XK_d
-		|| keycode == XK_d || keycode == XK_d)
+	if (keycode == XK_d || keycode == XK_a
+		|| keycode == XK_w || keycode == XK_s)
 		data->player.is_moving = 0;
 	if (keycode == XK_d)
 		data->keys.d = 0;
@@ -29,6 +32,8 @@ int	key_release_hook(int keycode, t_data *data)
 		data->keys.right = 0;
 	if (keycode == XK_Left)
 		data->keys.left = 0;
+	if (keycode == XK_Shift_L)
+		data->keys.run = 0;
 	return (0);
 }
 
@@ -39,6 +44,8 @@ int	key_press_hook(int keycode, t_data *data)
 		data->player.is_moving = 1;
 	if (keycode == XK_Escape)
 		close_window(data);
+	if (keycode == XK_Shift_L)
+		data->keys.run = 1;
 	if (keycode == XK_f && data->render_fog)
 		data->render_fog = 0;
 	else if (keycode == XK_f && !data->render_fog)
@@ -57,6 +64,15 @@ int	key_press_hook(int keycode, t_data *data)
 		data->keys.left = 1;
 	if (keycode == XK_m || keycode == XK_M)
 		toggle_mouse_control(data);
+	return (0);
+}
+
+static int	handle_mouse(int keycode)
+{
+	if (keycode == 1)
+		printf("PEW!\n");
+	else
+		return (0);
 	return (0);
 }
 
@@ -92,6 +108,7 @@ int	main(int argc, char **argv)
 	mlx_hook(data.window, 3, 1L << 1, key_release_hook, &data);
 	mlx_hook(data.window, 6, (1L << 6), mouse_move, &data);
 	mlx_hook(data.window, 17, 1L << 17, close_window, &data);
+	mlx_mouse_hook(data.window, handle_mouse, &data);
 	mlx_loop_hook(data.mlx, render_loop, &data);
 	mlx_loop(data.mlx);
 	mlx_destroy_display(data.mlx);

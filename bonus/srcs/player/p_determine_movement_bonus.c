@@ -6,10 +6,11 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 17:48:15 by lcalero           #+#    #+#             */
-/*   Updated: 2025/08/27 17:56:29 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/09/02 17:24:37 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "cub3d_bonus.h"
 #include "cub3d_bonus.h"
 
 static void	determine_movement(t_data *data, double move_speed);
@@ -30,10 +31,15 @@ void	update_player_movement(t_data *data)
 	}
 	delta_time = (current_time - data->last_time) / 1000.0;
 	data->last_time = current_time;
-	move_speed = MOVE_SPEED * delta_time;
+	move_speed = u_get_current_speed(data) * delta_time;
 	rotation_speed = ROTATION_SPEED * delta_time;
 	determine_rotation(data, rotation_speed);
 	determine_movement(data, move_speed);
+	if (data->keys.run && data->player.stamina > 0)
+		data->player.is_running = 1;
+	else if (!data->keys.run)
+		data->player.is_running = 0;
+	update_player_stamina_status(data, delta_time);
 }
 
 void	handle_forward_backward(t_data *data, t_vector *move,

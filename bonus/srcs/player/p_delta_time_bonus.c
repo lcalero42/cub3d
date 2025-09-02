@@ -5,10 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/24 14:33:02 by lcalero           #+#    #+#             */
-/*   Updated: 2025/08/27 17:56:24 by lcalero          ###   ########.fr       */
+/*   Created: Invalid date        by                   #+#    #+#             */
+/*   Updated: 2025/09/02 17:24:28 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+
 
 #include "cub3d_bonus.h"
 #include <sys/time.h>

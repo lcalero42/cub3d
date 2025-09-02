@@ -5,10 +5,11 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/30 14:21:07 by lcalero           #+#    #+#             */
-/*   Updated: 2025/09/02 16:12:33 by lcalero          ###   ########.fr       */
+/*   Created: Invalid date        by                   #+#    #+#             */
+/*   Updated: 2025/09/02 17:28:23 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "cub3d_bonus.h"
 
@@ -25,6 +26,7 @@ void	init(t_data *data, char **argv)
 	data->enemy.position.x = data->player.position.x + 1.0;
 	data->enemy.position.y = data->player.position.y + 1.0;
 	init_mouse_control(data);
+	data->player.stamina = MAX_STAMINA;
 }
 
 void	load_texture(t_data *data, char *path, t_render *texture)

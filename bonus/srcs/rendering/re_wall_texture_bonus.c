@@ -6,10 +6,11 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 17:10:47 by lcalero           #+#    #+#             */
-/*   Updated: 2025/08/27 17:57:12 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/09/02 17:27:30 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "cub3d_bonus.h"
 #include "cub3d_bonus.h"
 
 void	init_walls(t_data *data)
@@ -62,21 +63,34 @@ void	put_pixel_to_image(t_data *data, int x, int y, int color)
 
 void	clear_screen(t_data *data)
 {
-	int	x;
-	int	y;
+	int		x;
+	int		y;
+	double	pitch_offset;
+	int		horizon_line;
 
-	y = -1;
-	while (y++ < WINDOW_HEIGHT / 2)
+	pitch_offset = data->player.pitch * (WINDOW_HEIGHT * 0.5);
+	horizon_line = WINDOW_HEIGHT / 2 + (int)pitch_offset;
+	if (horizon_line < 0)
+		horizon_line = 0;
+	if (horizon_line >= WINDOW_HEIGHT)
+		horizon_line = WINDOW_HEIGHT - 1;
+	y = 0;
+	while (y < horizon_line)
 	{
-		x = -1;
-		while (x++ < WINDOW_WIDTH)
-			put_pixel_to_image(data, x, y,
-				u_rgb_to_hex(data->ceiling.base_r,
-					data->ceiling.base_g, data->ceiling.base_b, 0));
+		x = 0;
+		while (x < WINDOW_WIDTH)
+		{
+			put_pixel_to_image(
+				data, x, y,
+				u_rgb_to_hex(data->ceiling.base_r, data->ceiling.base_g,
+					data->ceiling.base_b, 0));
+			x++;
+		}
+		y++;
 	}
-	while (y++ < WINDOW_HEIGHT)
+	while (y < WINDOW_HEIGHT)
 	{
-		x = -1;
-		draw_floor(data, x, y);
+		draw_floor(data, 0, y);
+		y++;
 	}
 }

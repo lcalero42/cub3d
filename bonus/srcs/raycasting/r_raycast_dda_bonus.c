@@ -6,10 +6,11 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 17:13:02 by lcalero           #+#    #+#             */
-/*   Updated: 2025/08/27 17:56:42 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/09/02 17:26:43 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "cub3d_bonus.h"
 #include "cub3d_bonus.h"
 
 static void	perform_dda_step(t_data *data, int i);

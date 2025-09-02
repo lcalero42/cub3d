@@ -12,7 +12,7 @@ ROT_SPEED = 3.0f	       # player rotation speed
 CROSSHAIR_SIZE = 5         # size of the crosshair
 CROSSHAIR_THICKNESS = 1    # thickness of the crosshair
 CROSSHAIR_COLOR = 0x00FF00 # color of the crosshair in hexa
-SENSITIVITY = 2			   # player mouse sensitivity
+SENSITIVITY = 1	# player mouse sensitivity
 
 # -------------------------------- performance ------------------------------- #
 RENDER_DISTANCE = 1000	   # the maximum distance where the walls will be rendered 
@@ -58,7 +58,7 @@ VPATH = $(SRC_DIR)/srcs:$(SRC_DIR)/srcs/raycasting \
 		$(SRC_DIR)/srcs:$(SRC_DIR)/srcs/sprite	   \
 
 # Mandatory source files
-SRCS_MANDATORY = main.c						\
+SRCS_MANDATORY = main.c				\
 		pr_parse_config_lines.c		\
 		pr_parse_file.c				\
 		pr_parse_map.c				\
@@ -90,7 +90,7 @@ SRCS_MANDATORY = main.c						\
 		u_init.c					\
 
 # Bonus source files (with _bonus suffix)
-SRCS_BONUS = main_bonus.c					\
+SRCS_BONUS = main_bonus.c				\
 		pr_parse_config_lines_bonus.c	\
 		pr_parse_file_bonus.c			\
 		pr_parse_map_bonus.c			\
@@ -106,6 +106,7 @@ SRCS_BONUS = main_bonus.c					\
 		re_render_fog_bonus.c			\
 		re_render_crosshair_bonus.c		\
 		r_wall_side_bonus.c				\
+		p_update_stamina_status_bonus.c \
 		r_raycast_dda_bonus.c			\
 		r_raycast_init_bonus.c			\
 		p_determine_movement_bonus.c	\
@@ -125,6 +126,7 @@ SRCS_BONUS = main_bonus.c					\
 		u_player_movement.c				\
 		u_sprite_utils.c				\
 		u_pathfinding.c					\
+		u_get_current_speed_bonus.c 	\
 		m_init_mouse_move_bonus.c		\
 		m_mouse_move_bonus.c			\
 		s_sprite_render.c			    \

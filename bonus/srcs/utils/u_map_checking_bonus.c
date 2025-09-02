@@ -6,10 +6,11 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 15:14:06 by lcalero           #+#    #+#             */
-/*   Updated: 2025/08/27 17:57:53 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/09/02 17:28:38 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "cub3d_bonus.h"
 #include "cub3d_bonus.h"
 
 int	is_out_of_bounds(int x, int y, int height, int width)

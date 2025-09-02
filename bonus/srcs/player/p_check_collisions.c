@@ -6,10 +6,11 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/31 12:34:22 by lcalero           #+#    #+#             */
-/*   Updated: 2025/08/27 17:56:21 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/09/02 17:24:11 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "cub3d_bonus.h"
 #include "cub3d_bonus.h"
 
 static int	check_point(t_data *data, double x, double y);
