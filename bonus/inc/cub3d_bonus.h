@@ -6,7 +6,7 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 14:01:03 by lcalero           #+#    #+#             */
-/*   Updated: 2025/08/28 20:41:17 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/09/02 16:20:39 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@
 #  define MOVE_SPEED 7.0f
 # endif
 
-# define ENEMY_SPEED 4.0f
+# define ENEMY_SPEED 2.0f
 
 # ifndef SENSITIVITY
 #  define SENSITIVITY 100
@@ -74,6 +74,8 @@
 #  define CROSSHAIR_COLOR 0x00FF00
 # endif
 
+# define MAX_GRID_HEIGHT 400
+# define MAX_GRID_WIDTH 400
 # define MAX_NODES 4096
 
 typedef struct s_pos
@@ -262,11 +264,19 @@ typedef struct s_astar_node
 
 typedef struct s_astar_data
 {
-	t_astar_node	nodes[MAX_NODES];
-	int				node_count;
-	int				width;
-	int				height;
-}	t_astar_data;
+	t_astar_node		nodes[MAX_NODES];
+	int					node_count;
+	int					width;
+	int					height;
+}						t_astar_data;
+
+typedef struct s_movement_data
+{
+	double				move_speed;
+	t_pos				start;
+	t_pos				goal;
+	t_pos				path[128];
+}						t_movement_data;
 
 typedef struct s_data
 {
@@ -297,6 +307,14 @@ typedef struct s_data
 	double				fps;
 	long long			last_time;
 }						t_data;
+
+typedef struct s_neighbor_context
+{
+	t_data				*data;
+	t_astar_data		*astar;
+	t_pos				goal;
+	int					(*visited)[400];
+}						t_neighbor_context;
 
 // PARSING
 int						parse_file(char *filename, t_data *data);
@@ -332,7 +350,7 @@ void					render_crosshair(t_data *data);
 void					render_enemy(t_data *data);
 void					update_enemy_movement(t_data *data);
 int						find_astar_path(t_data *data, t_pos start, t_pos goal,
-							t_pos *out_path, int max_len);
+							t_pos *out_path);
 
 // RAYCASTING INIT FUNCTIONS
 void					init_player_direction(t_data *data, double angle);
@@ -386,14 +404,15 @@ void					draw_sprite_column(t_data *data,
 							t_sprite_params *params);
 t_sprite_params			init_sprite_params(t_texture_info *info, int spr_top,
 							int spr_height);
-void					add_neighbor(t_astar_data *astar, t_astar_node *curr,
-							int nx, int ny, t_pos goal);
-int						is_valid_neighbor(t_data *data, t_astar_data *astar, int nx, int ny);
-int						reconstruct_path(t_astar_node *goal_node, t_pos *out_path,
-							int max_len);
+void					add_neighbor(t_neighbor_context *ctx,
+							t_astar_node *curr, int nx, int ny);
+int						is_valid_neighbor(t_data *data, t_astar_data *astar,
+							int nx, int ny);
+int						reconstruct_path(t_astar_node *goal_node,
+							t_pos *out_path, int max_len);
 int						find_lowest_f_cost(t_astar_data *astar);
-void					init_astar_data(t_data *data, t_astar_data *astar, t_pos start,
-							t_pos goal);
+void					init_astar_data(t_data *data, t_astar_data *astar,
+							t_pos start, t_pos goal);
 int						is_valid_position(t_data *data, double x, double y);
 int						heuristic(t_pos a, t_pos b);
 
