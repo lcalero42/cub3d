@@ -6,7 +6,7 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 14:01:03 by lcalero           #+#    #+#             */
-/*   Updated: 2025/09/02 18:22:59 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/09/02 19:02:06 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -448,5 +448,6 @@ void					init_astar_data(t_data *data, t_astar_data *astar,
 							t_pos start, t_pos goal);
 int						is_valid_position(t_data *data, double x, double y);
 int						heuristic(t_pos a, t_pos b);
+int						calc_horizon_line(t_data *data);
 
 #endif

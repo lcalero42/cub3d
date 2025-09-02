@@ -6,7 +6,7 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 17:10:47 by lcalero           #+#    #+#             */
-/*   Updated: 2025/09/02 18:20:05 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/09/02 19:01:51 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,15 +64,9 @@ void	clear_screen(t_data *data)
 {
 	int		x;
 	int		y;
-	double	pitch_offset;
 	int		horizon_line;
 
-	pitch_offset = data->player.pitch * (WINDOW_HEIGHT * 0.5);
-	horizon_line = WINDOW_HEIGHT / 2 + (int)pitch_offset;
-	if (horizon_line < 0)
-		horizon_line = 0;
-	if (horizon_line >= WINDOW_HEIGHT)
-		horizon_line = WINDOW_HEIGHT - 1;
+	horizon_line = calc_horizon_line(data);
 	y = 0;
 	while (y < horizon_line)
 	{
@@ -92,4 +86,17 @@ void	clear_screen(t_data *data)
 		draw_floor(data, 0, y);
 		y++;
 	}
+}
+
+int	calc_horizon_line(t_data *data)
+{
+	int		horizon_line;
+
+	data->player.pitch_offset = data->player.pitch * (WINDOW_HEIGHT * 0.5);
+	horizon_line = WINDOW_HEIGHT / 2 + (int)data->player.pitch_offset;
+	if (horizon_line < 0)
+		horizon_line = 0;
+	if (horizon_line >= WINDOW_HEIGHT)
+		horizon_line = WINDOW_HEIGHT - 1;
+	return (horizon_line);
 }

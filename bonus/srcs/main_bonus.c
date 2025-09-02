@@ -6,18 +6,16 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 11:53:44 by lcalero           #+#    #+#             */
-/*   Updated: 2025/09/02 18:08:54 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/09/02 19:23:54 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d_bonus.h"
 
-static int	handle_mouse(int keycode);
-
 int	key_release_hook(int keycode, t_data *data)
 {
-	if (keycode == XK_d || keycode == XK_a
-		|| keycode == XK_w || keycode == XK_s)
+	if (keycode == XK_d || keycode == XK_a || keycode == XK_w
+		|| keycode == XK_s)
 		data->player.is_moving = 0;
 	if (keycode == XK_d)
 		data->keys.d = 0;
@@ -38,8 +36,8 @@ int	key_release_hook(int keycode, t_data *data)
 
 int	key_press_hook(int keycode, t_data *data)
 {
-	if (keycode == XK_d || keycode == XK_a
-		|| keycode == XK_w || keycode == XK_s)
+	if (keycode == XK_d || keycode == XK_a || keycode == XK_w
+		|| keycode == XK_s)
 		data->player.is_moving = 1;
 	if (keycode == XK_Escape)
 		close_window(data);
@@ -66,13 +64,14 @@ int	key_press_hook(int keycode, t_data *data)
 	return (0);
 }
 
-static int	handle_mouse(int keycode)
+static void	render_stamina(t_data *data)
 {
-	if (keycode == 1)
-		printf("PEW!\n");
-	else
-		return (0);
-	return (0);
+	char	*s;
+
+	s = ft_itoa((int)data->player.stamina);
+	mlx_string_put(data->mlx, data->window, WINDOW_WIDTH * 0.05, WINDOW_HEIGHT
+		* 0.05, 0xFFFFFF, s);
+	free(s);
 }
 
 int	render_loop(t_data *data)
@@ -89,6 +88,7 @@ int	render_loop(t_data *data)
 	render_crosshair(data);
 	mlx_put_image_to_window(data->mlx, data->window, data->render_img, 0, 0);
 	calculate_fps(data);
+	render_stamina(data);
 	return (1);
 }
 
@@ -107,7 +107,6 @@ int	main(int argc, char **argv)
 	mlx_hook(data.window, 3, 1L << 1, key_release_hook, &data);
 	mlx_hook(data.window, 6, (1L << 6), mouse_move, &data);
 	mlx_hook(data.window, 17, 1L << 17, close_window, &data);
-	mlx_mouse_hook(data.window, handle_mouse, &data);
 	mlx_loop_hook(data.mlx, render_loop, &data);
 	mlx_loop(data.mlx);
 	mlx_destroy_display(data.mlx);
