@@ -6,11 +6,10 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/28 14:25:57 by lcalero           #+#    #+#             */
-/*   Updated: 2025/09/02 17:28:56 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/09/02 18:21:25 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d_bonus.h"
 #include "cub3d_bonus.h"
 
 static int	blend_component(int base, int fog, double alpha);

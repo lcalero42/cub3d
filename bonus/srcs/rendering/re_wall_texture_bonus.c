@@ -6,11 +6,10 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 17:10:47 by lcalero           #+#    #+#             */
-/*   Updated: 2025/09/02 17:27:30 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/09/02 18:20:05 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d_bonus.h"
 #include "cub3d_bonus.h"
 
 void	init_walls(t_data *data)

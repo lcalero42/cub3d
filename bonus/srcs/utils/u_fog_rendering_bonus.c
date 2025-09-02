@@ -6,11 +6,10 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/28 14:23:43 by lcalero           #+#    #+#             */
-/*   Updated: 2025/09/02 17:28:06 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/09/02 18:20:44 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d_bonus.h"
 #include "cub3d_bonus.h"
 
 int	calculate_fog_alpha(double distance)

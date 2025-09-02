@@ -6,14 +6,13 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 11:53:44 by lcalero           #+#    #+#             */
-/*   Updated: 2025/09/02 17:29:05 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/09/02 18:08:54 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d_bonus.h"
 
 static int	handle_mouse(int keycode);
-#include "cub3d_bonus.h"
 
 int	key_release_hook(int keycode, t_data *data)
 {

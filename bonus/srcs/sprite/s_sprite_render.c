@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   re_sprite_render.c                                 :+:      :+:    :+:   */
+/*   s_sprite_render.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 19:04:42 by lcalero           #+#    #+#             */
-/*   Updated: 2025/08/28 15:41:07 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/09/02 18:07:24 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static void	draw_sprite_at(t_data *data, t_render *render,
 
 	params = init_sprite_params(&render->info, bounds->sprite_top,
 			bounds->sprite_height);
-	x = bounds->start_x;
+	x = bounds->start_x - data->player.pitch;
 	screen_x = enemy->enemy_data.screen_x;
 	while (x <= bounds->end_x)
 	{
@@ -82,6 +82,7 @@ static void	calculate_enemy_screen_pos(t_enemy *enemy, t_player *player,
 
 	dx = enemy->position.x - player->position.x;
 	dy = enemy->position.y - player->position.y;
+	player->pitch_offset = player->pitch * (WINDOW_HEIGHT * 0.5);
 	dist = sqrtf(dx * dx + dy * dy);
 	calculate_angle_diff(enemy, player, render_data);
 	fov = M_PI / 3;
@@ -97,7 +98,7 @@ static void	calculate_enemy_screen_pos(t_enemy *enemy, t_player *player,
 	if (render_data->sprite_height > WINDOW_HEIGHT)
 		render_data->sprite_height = WINDOW_HEIGHT;
 	render_data->sprite_top = (WINDOW_HEIGHT / 2) - (render_data->sprite_height
-			/ 2);
+			/ 2) + player->pitch_offset;
 }
 
 void	render_enemy(t_data *data)
