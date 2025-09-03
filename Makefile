@@ -106,12 +106,13 @@ SRCS_BONUS = main_bonus.c				\
 		re_render_fog_bonus.c			\
 		re_render_crosshair_bonus.c		\
 		r_wall_side_bonus.c				\
-		p_update_stamina_status_bonus.c \
+		r_door_handling.c				\
 		r_raycast_dda_bonus.c			\
 		r_raycast_init_bonus.c			\
 		p_determine_movement_bonus.c	\
 		p_delta_time_bonus.c			\
-		p_check_collisions.c			\
+		p_check_collisions_bonus.c		\
+		p_update_stamina_status_bonus.c \
 		u_calculate_map_width_bonus.c	\
 		u_is_config_line_bonus.c		\
 		u_is_empty_line_bonus.c			\

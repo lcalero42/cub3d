@@ -6,7 +6,7 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 18:17:11 by lcalero           #+#    #+#             */
-/*   Updated: 2025/09/02 18:17:17 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/09/03 13:57:32 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ static int	is_mfw(int i, int j, t_data *data)
 	if (data->grid.grid[i][j] == '0')
 		return (1);
 	if (data->grid.grid[i][j] == '1')
+		return (1);
+	if (data->grid.grid[i][j] == '2')
 		return (1);
 	if (data->grid.grid[i][j] == 'N')
 		return (1);

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   p_check_collisions.c                               :+:      :+:    :+:   */
+/*   p_check_collisions_bonus.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 18:18:50 by lcalero           #+#    #+#             */
-/*   Updated: 2025/09/02 18:18:52 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/09/03 15:02:36 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,8 @@ static int	check_point(t_data *data, double x, double y)
 		return (1);
 	if (!data->grid.grid[grid_y] || !data->grid.grid[grid_y][grid_x])
 		return (1);
-	if (data->grid.grid[grid_y][grid_x] == '1')
+	if (data->grid.grid[grid_y][grid_x] == '1'
+		|| data->grid.grid[grid_y][grid_x] == '2')
 		return (1);
 	return (0);
 }

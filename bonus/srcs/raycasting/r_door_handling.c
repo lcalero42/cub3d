@@ -1,24 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   u_map_checking_bonus.c                             :+:      :+:    :+:   */
+/*   r_door_handling.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/29 15:14:06 by lcalero           #+#    #+#             */
-/*   Updated: 2025/09/03 14:20:00 by lcalero          ###   ########.fr       */
+/*   Created: 2025/09/03 13:59:19 by lcalero           #+#    #+#             */
+/*   Updated: 2025/09/03 15:02:12 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d_bonus.h"
 
-int	is_out_of_bounds(int x, int y, int height, int width)
+void	check_door_distance(t_data *data, int keycode)
 {
-	return (x < 0 || x >= height || y < 0 || y >= width);
-}
+	int		map_x;
+	int		map_y;
+	t_ray	middle_ray;
 
-int	is_valid_map_char(char c)
-{
-	return (c == '1' || c == '0' || c == 'N' || c == 'S' || c == 'E' || c == 'W'
-		|| c == '2');
+	middle_ray = data->rays[WINDOW_WIDTH / 2];
+	map_x = (int)middle_ray.map_pos.x;
+	map_y = (int)middle_ray.map_pos.y;
+	if (middle_ray.hit == 2 && data->rays[WINDOW_WIDTH
+			/ 2].perp_wall_dist < 1.0f && keycode == XK_space)
+		data->grid.grid[map_y][map_x] = '0';
 }

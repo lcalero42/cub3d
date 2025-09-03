@@ -6,7 +6,7 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 14:01:03 by lcalero           #+#    #+#             */
-/*   Updated: 2025/09/02 19:02:06 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/09/03 14:46:28 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -316,6 +316,7 @@ typedef struct s_data
 	t_render			east_wall;
 	t_render			west_wall;
 	t_render			crosshair;
+	t_render			door;
 	t_color				floor;
 	t_color				ceiling;
 	void				*render_img;
@@ -449,5 +450,6 @@ void					init_astar_data(t_data *data, t_astar_data *astar,
 int						is_valid_position(t_data *data, double x, double y);
 int						heuristic(t_pos a, t_pos b);
 int						calc_horizon_line(t_data *data);
+void					check_door_distance(t_data *data, int keycode);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 11:53:44 by lcalero           #+#    #+#             */
-/*   Updated: 2025/09/02 19:23:54 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/09/03 14:14:51 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ int	key_press_hook(int keycode, t_data *data)
 		data->keys.left = 1;
 	if (keycode == XK_m || keycode == XK_M)
 		toggle_mouse_control(data);
+	check_door_distance(data, keycode);
 	return (0);
 }
 
