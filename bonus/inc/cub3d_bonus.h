@@ -6,7 +6,7 @@
 /*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 14:01:03 by lcalero           #+#    #+#             */
-/*   Updated: 2025/09/03 11:54:05 by ekeisler         ###   ########.fr       */
+/*   Updated: 2025/09/03 12:29:51 by ekeisler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -315,6 +315,7 @@ typedef struct s_data
 	t_render			south_wall;
 	t_render			east_wall;
 	t_render			west_wall;
+	t_render			enemy_render;
 	t_render			crosshair;
 	t_color				floor;
 	t_color				ceiling;

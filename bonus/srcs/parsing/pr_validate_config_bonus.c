@@ -6,7 +6,7 @@
 /*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 18:18:41 by lcalero           #+#    #+#             */
-/*   Updated: 2025/09/03 11:51:31 by ekeisler         ###   ########.fr       */
+/*   Updated: 2025/09/03 13:46:05 by ekeisler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	validate_config(t_data *data)
 {
 	int	required_elements;
 
-	required_elements = 6;
+	required_elements = 7;
 	if (data->config_lines < required_elements)
 	{
 		printf("Error\nExpected %d config elements, got %d\n",
@@ -24,7 +24,8 @@ int	validate_config(t_data *data)
 		return (0);
 	}
 	if (!data->north_wall.texture_path || !data->south_wall.texture_path
-		|| !data->west_wall.texture_path || !data->east_wall.texture_path)
+		|| !data->west_wall.texture_path || !data->east_wall.texture_path
+		|| !data->enemy_render.texture_path)
 	{
 		printf("Error\nMissing texture configuration\n");
 		return (0);

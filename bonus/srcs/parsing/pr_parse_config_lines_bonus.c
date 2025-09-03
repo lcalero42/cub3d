@@ -6,7 +6,7 @@
 /*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 18:18:08 by lcalero           #+#    #+#             */
-/*   Updated: 2025/09/03 11:51:20 by ekeisler         ###   ########.fr       */
+/*   Updated: 2025/09/03 13:54:39 by ekeisler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,8 @@ static int	parse_wall_texture(char *key, char *value, t_data *data)
 		return (parse_texture_path(&data->west_wall.texture_path, value));
 	else if (ft_strncmp(key, "EA", 2) == 0)
 		return (parse_texture_path(&data->east_wall.texture_path, value));
+	else if (ft_strncmp(key, "EN", 2) == 0)
+		return (parse_texture_path(&data->enemy_render.texture_path, value));
 	return (0);
 }
 
