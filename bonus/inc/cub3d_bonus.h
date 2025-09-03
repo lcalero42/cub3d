@@ -6,7 +6,7 @@
 /*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 14:01:03 by lcalero           #+#    #+#             */
-/*   Updated: 2025/08/29 13:15:09 by ekeisler         ###   ########.fr       */
+/*   Updated: 2025/09/03 11:54:05 by ekeisler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,43 @@
 #  define SENSITIVITY 100
 # endif
 
+# ifndef ROTATION_SPEED
+#  define ROTATION_SPEED 3.0f
+# endif
+
+# ifndef RENDER_DISTANCE
+#  define RENDER_DISTANCE 1000
+# endif
+
+# define FOG_START_DISTANCE 0.1f
+# define FOG_END_DISTANCE 8.0f
+# define FOG_MAX_ALPHA 255
+# define FOG_COLOR_R 0
+# define FOG_COLOR_G 0
+# define FOG_COLOR_B 0
+
+# define FOV 60.0f
+# define CAMERA_PLANE_LENGTH 0.57735f
+
+# define RAY_HIT 1
+# define RAY_CONTINUE 0
+
+# ifndef CROSSHAIR_SIZE
+#  define CROSSHAIR_SIZE 10
+# endif
+
+# ifndef CROSSHAIR_THICKNESS
+#  define CROSSHAIR_THICKNESS 2
+# endif
+
+# ifndef CROSSHAIR_COLOR
+#  define CROSSHAIR_COLOR 0x00FF00
+# endif
+
+# define MAX_GRID_HEIGHT 400
+# define MAX_GRID_WIDTH 400
+# define MAX_NODES 4096
+
 # ifndef PITCH_MAX
 #  define PITCH_MAX 3.0f
 # endif
@@ -54,51 +91,16 @@
 # endif
 
 # ifndef STAMINA_REGEN_RATE
-#  define STAMINA_REGEN_RATE 7.0f
+#  define STAMINA_REGEN_RATE 10.0f
 # endif
 
 # ifndef MAX_STAMINA
-#  define MAX_STAMINA 30.0f
-# endif
-
-# ifndef ROTATION_SPEED
-#  define ROTATION_SPEED 3.0f
+#  define MAX_STAMINA 15.0f
 # endif
 
 # ifndef RUN_MULTIPLIER
 #  define RUN_MULTIPLIER 1.6f
 # endif
-
-# ifndef RENDER_DISTANCE
-#  define RENDER_DISTANCE 1000
-# endif
-
-# define FOG_START_DISTANCE 0.1f
-# define FOG_END_DISTANCE 8.0f
-# define FOG_MAX_ALPHA 255
-# define FOG_COLOR_R 0
-# define FOG_COLOR_G 0
-# define FOG_COLOR_B 0
-# define MOUSE_DEAD_ZONE 2
-# define MOUSE_MAX_DELTA 200
-
-# define FOV 60.0f
-# define CAMERA_PLANE_LENGTH 0.57735f
-
-# define RAY_HIT 1
-# define RAY_CONTINUE 0
-
-# ifndef CROSSHAIR_SIZE
-#  define CROSSHAIR_SIZE 10
-# endif
-# ifndef CROSSHAIR_THICKNESS
-#  define CROSSHAIR_THICKNESS 1
-# endif
-# ifndef CROSSHAIR_COLOR
-#  define CROSSHAIR_COLOR 0x00FF00
-# endif
-
-# define MAX_NODES 4096
 
 typedef struct s_pos
 {
@@ -119,7 +121,7 @@ typedef enum e_wall_side
 	SOUTH = 1,
 	EAST = 2,
 	WEST = 3
-}	t_wall_side;
+}						t_wall_side;
 
 typedef struct s_color
 {
@@ -178,12 +180,13 @@ typedef struct s_player
 	t_vector			camera_segment;
 	t_vector			dir;
 	double				fov;
+	double				pitch_offset;
 	double				angle;
-	double				pitch;
 	int					is_moving;
-	int					is_running;
+	double				pitch;
 	double				stamina;
-}	t_player;
+	int					is_running;
+}						t_player;
 
 typedef struct s_keys
 {
@@ -194,7 +197,7 @@ typedef struct s_keys
 	int					left;
 	int					right;
 	int					run;
-}	t_keys;
+}						t_keys;
 
 typedef struct s_sprite
 {
@@ -260,7 +263,16 @@ typedef struct s_enemy_render_data
 	int					sprite_height;
 	int					sprite_top;
 	double				angle_diff;
-}	t_enemy_render_data;
+}						t_enemy_render_data;
+
+typedef struct s_mouse
+{
+	int					first_move;
+	int					last_x;
+	int					last_y;
+	int					enabled;
+	int					sensitivity;
+}						t_mouse;
 
 typedef struct s_enemy
 {
@@ -286,140 +298,156 @@ typedef struct s_astar_data
 	int					node_count;
 	int					width;
 	int					height;
-}	t_astar_data;
+}						t_astar_data;
 
-typedef struct s_mouse
+typedef struct s_movement_data
 {
-	int				first_move;
-	int				last_x;
-	int				last_y;
-	int				enabled;
-	int				sensitivity;
-	double			smoothing;
-}	t_mouse;
+	double				move_speed;
+	t_pos				start;
+	t_pos				goal;
+	t_pos				path[128];
+}						t_movement_data;
 
 typedef struct s_data
 {
-	int				game_started;
-	t_render		north_wall;
-	t_render		south_wall;
-	t_render		east_wall;
-	t_render		west_wall;
-	t_render		crosshair;
-	t_color			floor;
-	t_color			ceiling;
-	void			*render_img;
-	t_texture_info	render_info;
-	int				render_endian;
-	t_sprite		*sprites;
-	int				sprite_count;
-	int				config_lines;
-	void			*mlx;
-	void			*window;
-	t_player		player;
-	t_enemy			enemy;
-	t_mouse			mouse;
-	t_grid			grid;
-	t_ray			rays[WINDOW_WIDTH];
-	t_keys			keys;
-	int				render_fog;
-	int				frame_count;
-	double			fps;
-	long long		last_time;
-}	t_data;
+	int					game_started;
+	t_render			north_wall;
+	t_render			south_wall;
+	t_render			east_wall;
+	t_render			west_wall;
+	t_render			crosshair;
+	t_color				floor;
+	t_color				ceiling;
+	void				*render_img;
+	t_texture_info		render_info;
+	int					render_endian;
+	t_sprite			*sprites;
+	int					sprite_count;
+	int					config_lines;
+	void				*mlx;
+	void				*window;
+	t_player			player;
+	t_enemy				enemy;
+	t_mouse				mouse;
+	t_grid				grid;
+	t_ray				rays[WINDOW_WIDTH];
+	t_keys				keys;
+	int					render_fog;
+	int					frame_count;
+	double				fps;
+	long long			last_time;
+}						t_data;
+
+typedef struct s_neighbor_context
+{
+	t_data				*data;
+	t_astar_data		*astar;
+	t_pos				goal;
+	int					(*visited)[400];
+}						t_neighbor_context;
 
 // PARSING
-int					parse_file(char *filename, t_data *data);
-int					parse_map(char **all_lines, t_data *data);
-int					parse_config_section(char **all_lines, t_data *data);
-int					parse_texture_path(char **texture_ptr, char *path);
-int					parse_color(char *color_str, t_color *color);
-int					check_file_extension(char *filename);
-int					validate_config(t_data *data);
-int					find_player_pos(t_data *data);
+int						parse_file(char *filename, t_data *data);
+int						parse_map(char **all_lines, t_data *data);
+int						parse_config_section(char **all_lines, t_data *data);
+int						parse_texture_path(char **texture_ptr, char *path);
+int						parse_color(char *color_str, t_color *color);
+int						check_file_extension(char *filename);
+int						validate_config(t_data *data);
+int						find_player_pos(t_data *data);
 
 // CHECKER
-int					check_map(t_data *data);
-int					is_map_surrounded(t_data *data);
+int						check_map(t_data *data);
+int						is_map_surrounded(t_data *data);
 
 // FUNCTIONS
 // RAYCASTING/RENDERING FUNCTIONS
-void				trace_ray(t_data *data, double angle);
-void				render_walls(t_data *data);
-void				init_walls(t_data *data);
-void				clear_screen(t_data *data);
-void				draw_floor(t_data *data, int start_x, int y);
-void				put_pixel_to_image(t_data *data, int x, int y, int color);
-int					get_wall_texture_pixel(t_data *data, int x, int y,
-						int side);
-void				update_player_movement(t_data *data);
-t_wall_side			get_wall_side(t_data *data, int ray_index);
-t_texture_info		get_texture_info_by_side(t_data *data, t_wall_side side);
-void				apply_fog_overlay(t_data *data);
-void				draw_sprite_column(t_data *data, t_sprite_params *params);
-void				render_crosshair(t_data *data);
-void				update_enemy_movement(t_data *data);
-void				render_enemy(t_data *data);
+void					trace_ray(t_data *data, double angle);
+void					render_walls(t_data *data);
+void					init_walls(t_data *data);
+void					clear_screen(t_data *data);
+void					draw_floor(t_data *data, int x, int y);
+void					put_pixel_to_image(t_data *data, int x, int y,
+							int color);
+int						get_wall_texture_pixel(t_data *data, int x, int y,
+							int side);
+void					update_player_movement(t_data *data);
+t_wall_side				get_wall_side(t_data *data, int ray_index);
+t_texture_info			get_texture_info_by_side(t_data *data,
+							t_wall_side side);
+void					apply_fog_overlay(t_data *data);
+void					render_crosshair(t_data *data);
+void					render_enemy(t_data *data);
+void					update_enemy_movement(t_data *data);
+int						find_astar_path(t_data *data, t_pos start, t_pos goal,
+							t_pos *out_path);
+void					update_player_stamina_status(t_data *data,
+							double delta_time);
+double					u_get_current_speed(t_data *data);
 
 // RAYCASTING INIT FUNCTIONS
-void				init_player_direction(t_data *data, double angle);
-void				init_ray_direction(t_data *data, int i);
-void				init_ray_distances(t_data *data, int i);
-void				init_ray_steps(t_data *data, int i);
-void				init_mouse_control(t_data *data);
-int					mouse_move(int x, int y, void *param);
-void				toggle_mouse_control(t_data *data);
-void				update_player_stamina_status(t_data *data,
-						double delta_time);
-t_sprite_params		init_sprite_params(t_texture_info *info, int spr_top,
-						int spr_height);
+void					init_player_direction(t_data *data, double angle);
+void					init_ray_direction(t_data *data, int i);
+void					init_ray_distances(t_data *data, int i);
+void					init_ray_steps(t_data *data, int i);
+void					init_mouse_control(t_data *data);
+int						mouse_move(int x, int y, void *param);
+void					toggle_mouse_control(t_data *data);
 
 // UTILS
-int					u_rgb_to_hex(int r, int g, int b, int a);
-int					u_is_empty_line(char *line);
-int					u_is_config_line(char *line);
-void				u_calculate_map_width(t_data *data);
-void				u_ft_free(char **res);
-int					close_window(t_data *data);
-void				u_print_error(char *msg);
-int					u_is_empty_line(char *line);
-int					u_is_config_line(char *line);
-void				u_calculate_map_width(t_data *data);
-void				u_ft_free(char **res);
-long long			get_current_time(void);
-void				calculate_fps(t_data *data);
-void				extract_base_colors(int base_color, int *r, int *g, int *b);
-void				extract_fog_colors(int fog_color, int *r, int *g, int *b);
-int					calculate_fog_alpha(double distance);
-int					get_pixel_from_image(t_data *data, int x, int y);
-int					blend_colors(t_color *colors, double alpha);
-int					is_out_of_bounds(int x, int y, int height, int width);
-int					is_valid_map_char(char c);
-void				load_texture(t_data *data, char *path, t_render *texture);
-void				init(t_data *data, char **argv);
-int					check_collisions(t_data *data, t_vector move);
-void				handle_forward_backward(t_data *data, t_vector *move,
-						double move_speed);
-void				handle_strafe(t_data *data, t_vector *move,
-						double move_speed);
-void				normalize_movement(t_data *data, t_vector *move,
-						double *magnitude, double move_speed);
-double				u_get_current_speed(t_data *data);
-int					heuristic(t_pos a, t_pos b);
-int					is_valid_position(t_data *data, double x, double y);
-int					check_wall_occlusion(t_data *data, int x, t_enemy *enemy);
-void				calculate_sprite_bounds(int screen_x, int sprite_height,
-						t_sprite_bounds *bounds);
-int					find_astar_path(t_data *data, t_pos start, t_pos goal,
-						t_pos *out_path, int max_len);
-int					is_valid_neighbor(t_data *data, t_astar_data *astar,
-						int nx, int ny);
-void				add_neighbor(t_astar_data *astar, t_astar_node *curr,
-						int nx, int ny, t_pos goal);
-int					find_lowest_f_cost(t_astar_data *astar);
-int					reconstruct_path(t_astar_node *goal_node, t_pos *out_path,
-						int max_len);
-void				init_astar_data(t_data *data, t_astar_data *astar,
-						t_pos start, t_pos goal);
+int						u_rgb_to_hex(int r, int g, int b, int a);
+int						u_is_empty_line(char *line);
+int						u_is_config_line(char *line);
+void					u_calculate_map_width(t_data *data);
+void					u_ft_free(char **res);
+int						close_window(t_data *data);
+void					u_print_error(char *msg);
+int						u_is_empty_line(char *line);
+int						u_is_config_line(char *line);
+void					u_calculate_map_width(t_data *data);
+void					u_ft_free(char **res);
+long long				get_current_time(void);
+void					calculate_fps(t_data *data);
+void					extract_base_colors(int base_color, int *r, int *g,
+							int *b);
+void					extract_fog_colors(int fog_color, int *r, int *g,
+							int *b);
+int						calculate_fog_alpha(double distance);
+int						get_pixel_from_image(t_data *data, int x, int y);
+unsigned int			get_texture_pixel(t_texture_info *texture_info, int x,
+							int y);
+int						blend_colors(t_color *colors, double alpha);
+int						is_out_of_bounds(int x, int y, int height, int width);
+int						is_valid_map_char(char c);
+void					load_texture(t_data *data, char *path,
+							t_render *texture);
+void					init(t_data *data, char **argv);
+int						check_collisions(t_data *data, t_vector move);
+void					handle_forward_backward(t_data *data, t_vector *move,
+							double move_speed);
+void					handle_strafe(t_data *data, t_vector *move,
+							double move_speed);
+void					normalize_movement(t_data *data, t_vector *move,
+							double *magnitude, double move_speed);
+int						check_wall_occlusion(t_data *data, int x,
+							t_enemy *enemy);
+void					calculate_sprite_bounds(int screen_x, int sprite_height,
+							t_sprite_bounds *bounds);
+void					draw_sprite_column(t_data *data,
+							t_sprite_params *params);
+t_sprite_params			init_sprite_params(t_texture_info *info, int spr_top,
+							int spr_height);
+void					add_neighbor(t_neighbor_context *ctx,
+							t_astar_node *curr, int nx, int ny);
+int						is_valid_neighbor(t_data *data, t_astar_data *astar,
+							int nx, int ny);
+int						reconstruct_path(t_astar_node *goal_node,
+							t_pos *out_path, int max_len);
+int						find_lowest_f_cost(t_astar_data *astar);
+void					init_astar_data(t_data *data, t_astar_data *astar,
+							t_pos start, t_pos goal);
+int						is_valid_position(t_data *data, double x, double y);
+int						heuristic(t_pos a, t_pos b);
+int						calc_horizon_line(t_data *data);
 
 #endif

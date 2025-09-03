@@ -3,19 +3,19 @@
 # ---------------------------------------------------------------------------- #
 
 # ---------------------------------- window ---------------------------------- #
-WINDOW_WIDTH = 640		# width of window
+WINDOW_WIDTH = 640		    # width of window
 WINDOW_HEIGHT = 480		# height of window
 
 # --------------------------------- gameplay --------------------------------- #
-MOVE_SPEED = 4.0f		   # player movement speed
+MOVE_SPEED = 5.0f		   # player movement speed
 ROT_SPEED = 3.0f	       # player rotation speed
-CROSSHAIR_SIZE = 1        # size of the crosshair
-CROSSHAIR_THICKNESS = 1   # thickness of the crosshair
+CROSSHAIR_SIZE = 5         # size of the crosshair
+CROSSHAIR_THICKNESS = 1    # thickness of the crosshair
 CROSSHAIR_COLOR = 0x00FF00 # color of the crosshair in hexa
 SENSITIVITY = 1	# player mouse sensitivity
 
 # -------------------------------- performance ------------------------------- #
-RENDER_DISTANCE = 1000		# the maximum distance where the walls will be rendered
+RENDER_DISTANCE = 1000	   # the maximum distance where the walls will be rendered
 
 # ------------------------------------- - ------------------------------------ #
 
@@ -124,9 +124,9 @@ SRCS_BONUS = main_bonus.c				\
 		u_map_checking_bonus.c			\
 		u_init_bonus.c					\
 		u_player_movement.c				\
-		u_get_current_speed_bonus.c 	\
 		u_sprite_utils.c				\
 		u_pathfinding.c					\
+		u_get_current_speed_bonus.c 	\
 		m_init_mouse_move_bonus.c		\
 		m_mouse_move_bonus.c			\
 		s_sprite_render.c			    \

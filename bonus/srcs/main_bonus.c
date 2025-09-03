@@ -6,16 +6,16 @@
 /*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 11:53:44 by lcalero           #+#    #+#             */
-/*   Updated: 2025/08/29 14:23:53 by ekeisler         ###   ########.fr       */
+/*   Updated: 2025/09/03 11:54:37 by ekeisler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d_bonus.h"
 
-int key_release_hook(int keycode, t_data *data)
+int	key_release_hook(int keycode, t_data *data)
 {
-	if (keycode == XK_d || keycode == XK_a
-		|| keycode == XK_w || keycode == XK_s)
+	if (keycode == XK_d || keycode == XK_a || keycode == XK_w
+		|| keycode == XK_s)
 		data->player.is_moving = 0;
 	if (keycode == XK_d)
 		data->keys.d = 0;
@@ -36,8 +36,8 @@ int key_release_hook(int keycode, t_data *data)
 
 int	key_press_hook(int keycode, t_data *data)
 {
-	if (keycode == XK_d || keycode == XK_a
-		|| keycode == XK_w || keycode == XK_s)
+	if (keycode == XK_d || keycode == XK_a || keycode == XK_w
+		|| keycode == XK_s)
 		data->player.is_moving = 1;
 	if (keycode == XK_Escape)
 		close_window(data);
@@ -64,6 +64,16 @@ int	key_press_hook(int keycode, t_data *data)
 	return (0);
 }
 
+static void	render_stamina(t_data *data)
+{
+	char	*s;
+
+	s = ft_itoa((int)data->player.stamina);
+	mlx_string_put(data->mlx, data->window, WINDOW_WIDTH * 0.05, WINDOW_HEIGHT
+		* 0.05, 0xFFFFFF, s);
+	free(s);
+}
+
 int	render_loop(t_data *data)
 {
 	data->game_started = 1;
@@ -78,6 +88,7 @@ int	render_loop(t_data *data)
 	render_crosshair(data);
 	mlx_put_image_to_window(data->mlx, data->window, data->render_img, 0, 0);
 	calculate_fps(data);
+	render_stamina(data);
 	return (1);
 }
 

@@ -6,10 +6,11 @@
 /*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/31 13:52:58 by lcalero           #+#    #+#             */
-/*   Updated: 2025/08/29 08:57:55 by ekeisler         ###   ########.fr       */
+/*   Updated: 2025/09/03 11:52:43 by ekeisler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "cub3d_bonus.h"
 #include "cub3d_bonus.h"
 
 void	normalize_movement(t_data *data, t_vector *move,

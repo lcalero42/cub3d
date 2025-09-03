@@ -5,11 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/17 17:48:15 by lcalero           #+#    #+#             */
-/*   Updated: 2025/08/29 13:14:31 by ekeisler         ###   ########.fr       */
+/*   Created: 2025/09/02 18:19:04 by lcalero           #+#    #+#             */
+/*   Updated: 2025/09/03 11:51:43 by ekeisler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "cub3d_bonus.h"
 #include "cub3d_bonus.h"
 
 static void	determine_movement(t_data *data, double move_speed);

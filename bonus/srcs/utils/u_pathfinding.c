@@ -6,7 +6,7 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 19:34:56 by lcalero           #+#    #+#             */
-/*   Updated: 2025/08/28 20:39:37 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/09/02 16:19:56 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	find_lowest_f_cost(t_astar_data *astar)
 	i = 0;
 	while (i < astar->node_count)
 	{
-		if (astar->nodes[i].open && (lowest == -1 
+		if (astar->nodes[i].open && (lowest == -1
 				|| astar->nodes[i].f_cost < astar->nodes[lowest].f_cost))
 			lowest = i;
 		i++;
@@ -79,16 +79,16 @@ int	is_valid_neighbor(t_data *data, t_astar_data *astar, int nx, int ny)
 	return (1);
 }
 
-void	add_neighbor(t_astar_data *astar, t_astar_node *curr,
-	int nx, int ny, t_pos goal)
+void	add_neighbor(t_neighbor_context *ctx,
+			t_astar_node *curr, int nx, int ny)
 {
 	t_astar_node	*next;
 
-	next = &astar->nodes[astar->node_count++];
+	next = &ctx->astar->nodes[ctx->astar->node_count++];
 	next->pos.x = nx;
 	next->pos.y = ny;
 	next->g_cost = curr->g_cost + 1;
-	next->h_cost = heuristic((t_pos){nx, ny}, goal);
+	next->h_cost = heuristic((t_pos){nx, ny}, ctx->goal);
 	next->f_cost = next->g_cost + next->h_cost;
 	next->parent = curr;
 	next->open = 1;

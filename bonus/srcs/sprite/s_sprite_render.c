@@ -6,7 +6,7 @@
 /*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 19:04:42 by lcalero           #+#    #+#             */
-/*   Updated: 2025/08/29 14:23:06 by ekeisler         ###   ########.fr       */
+/*   Updated: 2025/09/03 11:55:21 by ekeisler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static void	draw_sprite_at(t_data *data, t_render *render,
 
 	params = init_sprite_params(&render->info, bounds->sprite_top,
 			bounds->sprite_height);
-	x = bounds->start_x;
+	x = bounds->start_x - data->player.pitch;
 	screen_x = enemy->enemy_data.screen_x;
 	while (x <= bounds->end_x)
 	{
@@ -82,6 +82,7 @@ static void	calculate_enemy_screen_pos(t_enemy *enemy, t_player *player,
 
 	dx = enemy->position.x - player->position.x;
 	dy = enemy->position.y - player->position.y;
+	player->pitch_offset = player->pitch * (WINDOW_HEIGHT * 0.5);
 	dist = sqrtf(dx * dx + dy * dy);
 	calculate_angle_diff(enemy, player, render_data);
 	fov = M_PI / 3;
@@ -97,7 +98,7 @@ static void	calculate_enemy_screen_pos(t_enemy *enemy, t_player *player,
 	if (render_data->sprite_height > WINDOW_HEIGHT)
 		render_data->sprite_height = WINDOW_HEIGHT;
 	render_data->sprite_top = (WINDOW_HEIGHT / 2) - (render_data->sprite_height
-			/ 2);
+			/ 2) + player->pitch_offset;
 }
 
 void	render_enemy(t_data *data)
@@ -113,6 +114,5 @@ void	render_enemy(t_data *data)
 		bounds.sprite_height = data->enemy.enemy_data.sprite_height;
 		bounds.sprite_top = data->enemy.enemy_data.sprite_top;
 		draw_sprite_at(data, &data->enemy.render, &bounds, &data->enemy);
-		
 	}
 }

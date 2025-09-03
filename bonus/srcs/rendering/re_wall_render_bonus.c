@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/17 17:13:46 by lcalero           #+#    #+#             */
-/*   Updated: 2025/08/29 08:57:29 by ekeisler         ###   ########.fr       */
+/*   Created: 2025/09/02 18:19:52 by lcalero           #+#    #+#             */
+/*   Updated: 2025/09/03 11:52:02 by ekeisler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static double	calculate_perp_wall_dist(t_data *data, int x)
 }
 
 static void	calculate_wall_bounds(t_data *data, double perp_wall_dist,
-				int *draw_start, int *draw_end)
+		int *draw_start, int *draw_end)
 {
 	int		line_height;
 	double	pitch_offset;
@@ -74,11 +74,11 @@ static int	calculate_texture_x(t_data *data, int x, double perp_wall_dist)
 	int		tex_x;
 
 	if (data->rays[x].side == 0)
-		wall_x = data->player.position.y
-			+ perp_wall_dist * data->rays[x].ray_dir.y;
+		wall_x = data->player.position.y + perp_wall_dist
+			* data->rays[x].ray_dir.y;
 	else
-		wall_x = data->player.position.x
-			+ perp_wall_dist * data->rays[x].ray_dir.x;
+		wall_x = data->player.position.x + perp_wall_dist
+			* data->rays[x].ray_dir.x;
 	wall_x -= floor(wall_x);
 	tex_x = (int)(wall_x * 64);
 	if (data->rays[x].side == 0 && data->rays[x].ray_dir.x > 0)
@@ -88,30 +88,27 @@ static int	calculate_texture_x(t_data *data, int x, double perp_wall_dist)
 	return (tex_x);
 }
 
-static void	draw_wall_column(t_data *data, int x, int draw_start,
-				int draw_end)
+static void	draw_wall_column(t_data *data, int x, int draw_start, int draw_end)
 {
-	double	perp_wall_dist;
 	int		tex_x;
 	double	step;
 	double	tex_pos;
-	double	pitch_offset;
 	int		original_wall_center;
 	int		y;
 
-	perp_wall_dist = calculate_perp_wall_dist(data, x);
-	tex_x = calculate_texture_x(data, x, perp_wall_dist);
-	step = 1.0 * 64 / (WINDOW_HEIGHT / perp_wall_dist);
+	data->rays[x].perp_wall_dist = calculate_perp_wall_dist(data, x);
+	tex_x = calculate_texture_x(data, x, data->rays[x].perp_wall_dist);
+	step = 1.0 * 64 / (WINDOW_HEIGHT / data->rays[x].perp_wall_dist);
 	original_wall_center = WINDOW_HEIGHT / 2;
-	pitch_offset = data->player.pitch * (WINDOW_HEIGHT * 0.5);
-	tex_pos = (draw_start - original_wall_center - (int)pitch_offset
-			+ (WINDOW_HEIGHT / perp_wall_dist) / 2) * step;
+	data->player.pitch_offset = data->player.pitch * (WINDOW_HEIGHT * 0.5);
+	tex_pos = (draw_start - original_wall_center
+			- (int)data->player.pitch_offset + (WINDOW_HEIGHT
+				/ data->rays[x].perp_wall_dist) / 2) * step;
 	y = draw_start;
 	while (y < draw_end)
 	{
-		put_pixel_to_image(
-			data, x, y,
-			get_wall_texture_pixel(data, tex_x, (int)tex_pos & (64 - 1), x));
+		put_pixel_to_image(data, x, y, get_wall_texture_pixel(data, tex_x,
+				(int)tex_pos & (64 - 1), x));
 		tex_pos += step;
 		y++;
 	}
