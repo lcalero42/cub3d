@@ -6,7 +6,7 @@
 /*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 18:17:24 by lcalero           #+#    #+#             */
-/*   Updated: 2025/09/03 11:50:58 by ekeisler         ###   ########.fr       */
+/*   Updated: 2025/09/03 14:23:44 by ekeisler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ void	toggle_mouse_control(t_data *data)
 
 	center_x = WINDOW_WIDTH / 2;
 	center_y = WINDOW_HEIGHT / 2;
+	data->mouse.last_x = center_x;
+	data->mouse.last_y = center_y;
 	if (data->mouse.enabled)
 	{
 		data->mouse.enabled = 0;
