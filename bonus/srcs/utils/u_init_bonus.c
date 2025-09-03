@@ -6,24 +6,27 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 18:20:59 by lcalero           #+#    #+#             */
-/*   Updated: 2025/09/02 18:21:00 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/09/03 17:18:49 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d_bonus.h"
+#include <time.h>
+
+static void	spawn_enemy(t_data *data);
 
 void	init(t_data *data, char **argv)
 {
+	srand(time(NULL));
 	if (parse_file(argv[1], data))
 		close_window(data);
 	data->render_fog = 1;
 	data->mlx = mlx_init();
-	data->window = mlx_new_window(data->mlx, WINDOW_WIDTH,
-			WINDOW_HEIGHT, "cub3d");
+	data->window = mlx_new_window(data->mlx, WINDOW_WIDTH, WINDOW_HEIGHT,
+			"cub3d");
 	init_walls(data);
 	load_texture(data, "bonus/textures/enemy_jaurel.xpm", &data->enemy.render);
-	data->enemy.position.x = data->player.position.x + 1.0;
-	data->enemy.position.y = data->player.position.y + 1.0;
+	spawn_enemy(data);
 	init_mouse_control(data);
 	data->player.stamina = MAX_STAMINA;
 }
@@ -33,21 +36,20 @@ void	load_texture(t_data *data, char *path, t_render *texture)
 	int	width;
 	int	height;
 
-	texture->texture_img = mlx_xpm_file_to_image(data->mlx, path,
-			&width, &height);
+	texture->texture_img = mlx_xpm_file_to_image(data->mlx, path, &width,
+			&height);
 	if (!texture->texture_img)
 	{
 		printf("Error: Cannot load wall texture\n");
 		exit(1);
 	}
 	texture->info.addr = mlx_get_data_addr(texture->texture_img,
-			&texture->info.bpp,
-			&texture->info.line_len,
+			&texture->info.bpp, &texture->info.line_len,
 			&texture->texture_endian);
 }
 
-t_sprite_params	init_sprite_params(t_texture_info *info,
-					int spr_top, int spr_height)
+t_sprite_params	init_sprite_params(t_texture_info *info, int spr_top,
+		int spr_height)
 {
 	t_sprite_params	params;
 
@@ -55,4 +57,22 @@ t_sprite_params	init_sprite_params(t_texture_info *info,
 	params.sprite_height = spr_height;
 	params.sprite_top = spr_top;
 	return (params);
+}
+
+static void	spawn_enemy(t_data *data)
+{
+	double	pos_x;
+	double	pos_y;
+
+	data->enemy.position.x = rand() % (data->grid.width);
+	data->enemy.position.y = rand() % (data->grid.height);
+	pos_x = data->enemy.position.x;
+	pos_y = data->enemy.position.y;
+	while (data->grid.grid[(int)pos_y][(int)pos_x] != '0')
+	{
+		data->enemy.position.x = rand() % (data->grid.width);
+		data->enemy.position.y = rand() % (data->grid.height);
+		pos_x = data->enemy.position.x;
+		pos_y = data->enemy.position.y;
+	}
 }

@@ -6,7 +6,7 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 19:04:02 by lcalero           #+#    #+#             */
-/*   Updated: 2025/08/28 14:37:02 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/09/03 16:39:04 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ int	check_wall_occlusion(t_data *data, int x, t_enemy *enemy)
 	float	player_dist;
 	float	wall_dist;
 
-	if (data->rays[x].hit != 1)
+	if (data->rays[x].hit != 1 && data->rays[x].hit != 2)
 		return (0);
 	player_dist = sqrtf((enemy->position.x - data->player.position.x)
 			* (enemy->position.x - data->player.position.x)

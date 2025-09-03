@@ -6,7 +6,7 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 19:37:20 by lcalero           #+#    #+#             */
-/*   Updated: 2025/09/02 16:09:29 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/09/03 17:19:23 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,8 @@ int	is_valid_position(t_data *data, double x, double y)
 	if (map_x < 0 || map_x >= data->grid.width
 		|| map_y < 0 || map_y >= data->grid.height)
 		return (0);
-	return (data->grid.grid[map_y][map_x] != '1');
+	return (data->grid.grid[map_y][map_x] != '1'
+			&& data->grid.grid[map_y][map_x] != '2');
 }
 
 int	find_astar_path(t_data *data, t_pos start, t_pos goal, t_pos *out_path)
