@@ -6,7 +6,7 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 18:20:59 by lcalero           #+#    #+#             */
-/*   Updated: 2025/09/03 17:18:49 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/09/04 16:36:24 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,4 +75,6 @@ static void	spawn_enemy(t_data *data)
 		pos_x = data->enemy.position.x;
 		pos_y = data->enemy.position.y;
 	}
+	data->enemy.position.x += 0.5;
+	data->enemy.position.y += 0.5;
 }

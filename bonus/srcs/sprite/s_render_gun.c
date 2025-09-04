@@ -1,24 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   u_map_checking_bonus.c                             :+:      :+:    :+:   */
+/*   s_render_gun.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/29 15:14:06 by lcalero           #+#    #+#             */
-/*   Updated: 2025/09/04 18:04:36 by lcalero          ###   ########.fr       */
+/*   Created: 2025/09/04 15:52:11 by lcalero           #+#    #+#             */
+/*   Updated: 2025/09/04 16:08:05 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d_bonus.h"
 
-int	is_out_of_bounds(int x, int y, int height, int width)
+void	render_gun(t_data *data)
 {
-	return (x < 0 || x >= height || y < 0 || y >= width);
-}
+	t_sprite_bounds	bounds;
 
-int	is_valid_map_char(char c)
-{
-	return (c == '1' || c == '0' || c == 'N' || c == 'S' || c == 'E' || c == 'W'
-		|| c == '2');
+	calculate_sprite_bounds(0, 64, &bounds);
+	bounds.sprite_height = WINDOW_HEIGHT * 0.4;
+	bounds.sprite_top = WINDOW_HEIGHT * 0.4;
+	draw_sprite_at(data, &data->gun, &bounds, &data->enemy);
 }

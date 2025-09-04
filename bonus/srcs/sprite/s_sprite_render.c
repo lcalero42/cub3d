@@ -6,14 +6,14 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 19:04:42 by lcalero           #+#    #+#             */
-/*   Updated: 2025/09/02 18:07:24 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/09/04 15:53:37 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d_bonus.h"
 #include <math.h>
 
-static void	draw_sprite_at(t_data *data, t_render *render,
+void	draw_sprite_at(t_data *data, t_render *render,
 		t_sprite_bounds *bounds, t_enemy *enemy)
 {
 	t_sprite_params	params;
@@ -86,11 +86,6 @@ static void	calculate_enemy_screen_pos(t_enemy *enemy, t_player *player,
 	dist = sqrtf(dx * dx + dy * dy);
 	calculate_angle_diff(enemy, player, render_data);
 	fov = M_PI / 3;
-	if (render_data->angle_diff < -fov / 2 || render_data->angle_diff > fov / 2)
-	{
-		render_data->visible = 0;
-		return ;
-	}
 	render_data->visible = 1;
 	render_data->screen_x = (int)((render_data->angle_diff + fov / 2)
 			* (WINDOW_WIDTH / fov));

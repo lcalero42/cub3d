@@ -6,11 +6,35 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 15:53:18 by lcalero           #+#    #+#             */
-/*   Updated: 2025/09/02 16:18:31 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/09/04 15:28:00 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d_bonus.h"
+
+static double	calculate_delta_time(void);
+static void		init_movement_data(t_data *data, t_movement_data *move_data,
+					double delta_time);
+static void		move_enemy_towards_target(t_data *data, t_pos target,
+					double move_speed);
+static double	calc_player_distance(t_data *data);
+
+void	update_enemy_movement(t_data *data)
+{
+	t_movement_data	move_data;
+	double			delta_time;
+	int				path_len;
+
+	delta_time = calculate_delta_time();
+	if (delta_time == 0.0)
+		return ;
+	init_movement_data(data, &move_data, delta_time);
+	path_len = find_astar_path(data, move_data.start, move_data.goal,
+			move_data.path);
+	if (path_len >= 2)
+		move_enemy_towards_target(data, move_data.path[1],
+			move_data.move_speed);
+}
 
 static double	calculate_delta_time(void)
 {
@@ -30,7 +54,7 @@ static double	calculate_delta_time(void)
 }
 
 static void	init_movement_data(t_data *data, t_movement_data *move_data,
-	double delta_time)
+		double delta_time)
 {
 	move_data->move_speed = ENEMY_SPEED * delta_time;
 	move_data->start.x = (int)data->enemy.position.x;
@@ -39,8 +63,20 @@ static void	init_movement_data(t_data *data, t_movement_data *move_data,
 	move_data->goal.y = (int)data->player.position.y;
 }
 
+static double	calc_player_distance(t_data *data)
+{
+	double	dx;
+	double	dy;
+	double	dist;
+
+	dx = data->player.position.x - data->enemy.position.x;
+	dy = data->player.position.y - data->enemy.position.y;
+	dist = sqrt(dx * dx + dy * dy);
+	return (dist);
+}
+
 static void	move_enemy_towards_target(t_data *data, t_pos target,
-	double move_speed)
+		double move_speed)
 {
 	double	target_x;
 	double	target_y;
@@ -53,7 +89,7 @@ static void	move_enemy_towards_target(t_data *data, t_pos target,
 	dx = target_x - data->enemy.position.x;
 	dy = target_y - data->enemy.position.y;
 	distance = sqrt(dx * dx + dy * dy);
-	if (distance > 0.01)
+	if (distance > 0.01f && calc_player_distance(data))
 	{
 		dx = (dx / distance) * move_speed;
 		dy = (dy / distance) * move_speed;
@@ -64,21 +100,4 @@ static void	move_enemy_towards_target(t_data *data, t_pos target,
 			data->enemy.position.y += dy;
 		}
 	}
-}
-
-void	update_enemy_movement(t_data *data)
-{
-	t_movement_data	move_data;
-	double			delta_time;
-	int				path_len;
-
-	delta_time = calculate_delta_time();
-	if (delta_time == 0.0)
-		return ;
-	init_movement_data(data, &move_data, delta_time);
-	path_len = find_astar_path(data, move_data.start, move_data.goal,
-			move_data.path);
-	if (path_len >= 2)
-		move_enemy_towards_target(data, move_data.path[1],
-			move_data.move_speed);
 }

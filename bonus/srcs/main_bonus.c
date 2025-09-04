@@ -6,7 +6,7 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 11:53:44 by lcalero           #+#    #+#             */
-/*   Updated: 2025/09/03 14:14:51 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/09/04 16:36:41 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,8 +87,10 @@ int	render_loop(t_data *data)
 		apply_fog_overlay(data);
 	render_enemy(data);
 	render_crosshair(data);
+	// render_gun(data);
 	mlx_put_image_to_window(data->mlx, data->window, data->render_img, 0, 0);
 	calculate_fps(data);
+	print_door_mess(data);
 	render_stamina(data);
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 14:01:03 by lcalero           #+#    #+#             */
-/*   Updated: 2025/09/03 14:46:28 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/09/04 18:19:00 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -317,6 +317,7 @@ typedef struct s_data
 	t_render			west_wall;
 	t_render			crosshair;
 	t_render			door;
+	t_render			gun;
 	t_color				floor;
 	t_color				ceiling;
 	void				*render_img;
@@ -344,7 +345,7 @@ typedef struct s_neighbor_context
 	t_data				*data;
 	t_astar_data		*astar;
 	t_pos				goal;
-	int					(*visited)[400];
+	int (*visited)[400];
 }						t_neighbor_context;
 
 // PARSING
@@ -385,6 +386,9 @@ int						find_astar_path(t_data *data, t_pos start, t_pos goal,
 void					update_player_stamina_status(t_data *data,
 							double delta_time);
 double					u_get_current_speed(t_data *data);
+void					draw_sprite_at(t_data *data, t_render *render,
+							t_sprite_bounds *bounds, t_enemy *enemy);
+void					render_gun(t_data *data);
 
 // RAYCASTING INIT FUNCTIONS
 void					init_player_direction(t_data *data, double angle);
@@ -451,5 +455,6 @@ int						is_valid_position(t_data *data, double x, double y);
 int						heuristic(t_pos a, t_pos b);
 int						calc_horizon_line(t_data *data);
 void					check_door_distance(t_data *data, int keycode);
+void					print_door_mess(t_data *data);
 
 #endif

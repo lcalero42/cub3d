@@ -15,7 +15,7 @@ CROSSHAIR_COLOR = 0x00FF00 # color of the crosshair in hexa
 SENSITIVITY = 1	# player mouse sensitivity
 
 # -------------------------------- performance ------------------------------- #
-RENDER_DISTANCE = 1000	   # the maximum distance where the walls will be rendered 
+RENDER_DISTANCE = 1000	   # the maximum distance where the walls will be rendered
 
 # ------------------------------------- - ------------------------------------ #
 
@@ -132,6 +132,7 @@ SRCS_BONUS = main_bonus.c				\
 		m_mouse_move_bonus.c			\
 		s_sprite_render.c			    \
 		s_enemy_movement.c			    \
+		s_render_gun.c					\
 		s_enemy_find_path.c				\
 
 # Select source files based on mode
