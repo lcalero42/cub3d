@@ -6,7 +6,7 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 11:53:44 by lcalero           #+#    #+#             */
-/*   Updated: 2025/09/04 16:36:41 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/09/08 16:46:56 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,12 +87,18 @@ int	render_loop(t_data *data)
 		apply_fog_overlay(data);
 	render_enemy(data);
 	render_crosshair(data);
-	// render_gun(data);
+	render_gun(data);
 	mlx_put_image_to_window(data->mlx, data->window, data->render_img, 0, 0);
 	calculate_fps(data);
-	print_door_mess(data);
 	render_stamina(data);
 	return (1);
+}
+
+static int	mouse_hook(int keycode)
+{
+	if (keycode == 1)
+		printf("PEW\n");
+	return (0);
 }
 
 int	main(int argc, char **argv)
@@ -110,6 +116,7 @@ int	main(int argc, char **argv)
 	mlx_hook(data.window, 3, 1L << 1, key_release_hook, &data);
 	mlx_hook(data.window, 6, (1L << 6), mouse_move, &data);
 	mlx_hook(data.window, 17, 1L << 17, close_window, &data);
+	mlx_mouse_hook(data.window, mouse_hook, &data);
 	mlx_loop_hook(data.mlx, render_loop, &data);
 	mlx_loop(data.mlx);
 	mlx_destroy_display(data.mlx);

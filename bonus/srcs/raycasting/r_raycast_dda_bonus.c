@@ -6,7 +6,7 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 17:13:02 by lcalero           #+#    #+#             */
-/*   Updated: 2025/09/04 18:16:45 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/09/08 14:51:42 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,8 +83,6 @@ static void	perform_dda(t_data *data, int i)
 			data->rays[i].hit = 1;
 		else if (data->grid.grid[map_y][map_x] == '2')
 			data->rays[i].hit = 2;
-		else if (data->grid.grid[map_y][map_x] == '3')
-			data->rays[i].hit = 3;
 		steps++;
 		if (steps > RENDER_DISTANCE)
 		{

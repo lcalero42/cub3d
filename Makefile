@@ -11,7 +11,7 @@ MOVE_SPEED = 5.0f		   # player movement speed
 ROT_SPEED = 3.0f	       # player rotation speed
 CROSSHAIR_SIZE = 5         # size of the crosshair
 CROSSHAIR_THICKNESS = 1    # thickness of the crosshair
-CROSSHAIR_COLOR = 0x00FF00 # color of the crosshair in hexa
+CROSSHAIR_COLOR = 0x00FF00 # color of the crosshair in hexa format
 SENSITIVITY = 1	# player mouse sensitivity
 
 # -------------------------------- performance ------------------------------- #

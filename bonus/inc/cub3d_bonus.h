@@ -6,7 +6,7 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 14:01:03 by lcalero           #+#    #+#             */
-/*   Updated: 2025/09/04 18:19:00 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/09/08 16:34:18 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -316,7 +316,7 @@ typedef struct s_data
 	t_render			east_wall;
 	t_render			west_wall;
 	t_render			crosshair;
-	t_render			door;
+	t_render			door_opened;
 	t_render			gun;
 	t_color				floor;
 	t_color				ceiling;
@@ -345,7 +345,7 @@ typedef struct s_neighbor_context
 	t_data				*data;
 	t_astar_data		*astar;
 	t_pos				goal;
-	int (*visited)[400];
+	int					(*visited)[400];
 }						t_neighbor_context;
 
 // PARSING
@@ -456,5 +456,6 @@ int						heuristic(t_pos a, t_pos b);
 int						calc_horizon_line(t_data *data);
 void					check_door_distance(t_data *data, int keycode);
 void					print_door_mess(t_data *data);
+int						is_transparent_color(unsigned int color);
 
 #endif

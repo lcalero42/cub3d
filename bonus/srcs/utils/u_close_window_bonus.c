@@ -6,7 +6,7 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 18:20:34 by lcalero           #+#    #+#             */
-/*   Updated: 2025/09/02 18:20:37 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/09/08 16:22:42 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ static void	free_paths(t_data *data)
 		free(data->east_wall.texture_path);
 	if (data->west_wall.texture_path)
 		free(data->west_wall.texture_path);
+	if (data->gun.texture_path)
+		free(data->gun.texture_path);
 }
 
 static void	destroy_images(t_data *data)

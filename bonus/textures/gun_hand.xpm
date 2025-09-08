@@ -1,7 +1,7 @@
 /* XPM */
 static char * gun_hand_xpm[] = {
 "64 64 6 1",
-" 	c None",
+" 	c #00FFFFFF",
 ".	c #000000",
 "+	c #F5E49C",
 "@	c #AA9E6C",
