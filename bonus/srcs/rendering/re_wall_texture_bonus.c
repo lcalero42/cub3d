@@ -6,7 +6,7 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 17:10:47 by lcalero           #+#    #+#             */
-/*   Updated: 2025/09/08 14:50:40 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/09/09 16:32:28 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	init_walls(t_data *data)
 	load_texture(data, data->south_wall.texture_path, &data->south_wall);
 	load_texture(data, data->west_wall.texture_path, &data->west_wall);
 	load_texture(data, data->east_wall.texture_path, &data->east_wall);
-	load_texture(data, "bonus/textures/door-open.xpm", &data->door_opened);
+	load_texture(data, "bonus/textures/door-open.xpm", &data->door);
 	data->render_img = mlx_new_image(data->mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
 	if (!data->render_img)
 	{
@@ -46,9 +46,9 @@ int	get_wall_texture_pixel(t_data *data, int x, int y, int ray_index)
 	texture = get_texture_info_by_side(data, side);
 	if (data->rays[ray_index].hit == 2)
 	{
-		texture.addr = data->door_opened.info.addr;
-		texture.bpp = data->door_opened.info.bpp;
-		texture.line_len = data->door_opened.info.line_len;
+		texture.addr = data->door.info.addr;
+		texture.bpp = data->door.info.bpp;
+		texture.line_len = data->door.info.line_len;
 	}
 	if (!texture.addr)
 		return (0x808080);

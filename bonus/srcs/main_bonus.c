@@ -6,7 +6,7 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 11:53:44 by lcalero           #+#    #+#             */
-/*   Updated: 2025/09/08 16:46:56 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/09/09 20:21:09 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ static void	render_stamina(t_data *data)
 {
 	char	*s;
 
-	s = ft_itoa((int)data->player.stamina);
+	s = ft_itoa((int)data->enemy.health);
 	mlx_string_put(data->mlx, data->window, WINDOW_WIDTH * 0.05, WINDOW_HEIGHT
 		* 0.05, 0xFFFFFF, s);
 	free(s);
@@ -81,6 +81,7 @@ int	render_loop(t_data *data)
 	update_player_movement(data);
 	update_enemy_movement(data);
 	trace_ray(data, data->player.angle);
+	animation_routine(data);
 	clear_screen(data);
 	render_walls(data);
 	if (data->render_fog)
@@ -94,10 +95,18 @@ int	render_loop(t_data *data)
 	return (1);
 }
 
-static int	mouse_hook(int keycode)
+static int	mouse_hook(int keycode, int x, int y, t_data *data)
 {
+	(void)x;
+	(void)y;
 	if (keycode == 1)
-		printf("PEW\n");
+	{
+		data->shot.is_playing = 1;
+		data->shot.index = 0;
+		data->shot.index = 0;
+		data->gun.is_playing = 0;
+		trace_shot(data);
+	}
 	return (0);
 }
 

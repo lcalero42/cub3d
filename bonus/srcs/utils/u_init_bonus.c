@@ -6,14 +6,14 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 18:20:59 by lcalero           #+#    #+#             */
-/*   Updated: 2025/09/08 16:11:41 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/09/09 20:26:36 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d_bonus.h"
 #include <time.h>
 
-static void	spawn_enemy(t_data *data);
+static void		spawn_enemy(t_data *data);
 
 void	init(t_data *data, char **argv)
 {
@@ -26,7 +26,16 @@ void	init(t_data *data, char **argv)
 			"cub3d");
 	init_walls(data);
 	load_texture(data, "bonus/textures/enemy_jaurel.xpm", &data->enemy.render);
-	load_texture(data, "bonus/textures/gun_hand.xpm", &data->gun);
+	load_texture(data, "bonus/textures/gun-hand-0.xpm",
+		&data->gun.render_arr[0]);
+	load_texture(data, "bonus/textures/gun-hand-1.xpm",
+		&data->gun.render_arr[1]);
+	load_texture(data, "bonus/textures/gun-hand-2.xpm",
+		&data->gun.render_arr[2]);
+	load_texture(data, "bonus/textures/shot-0.xpm", &data->shot.render_arr[0]);
+	load_texture(data, "bonus/textures/shot-1.xpm", &data->shot.render_arr[1]);
+	load_texture(data, "bonus/textures/shot-2.xpm", &data->shot.render_arr[2]);
+	data->gun.is_playing = 1;
 	spawn_enemy(data);
 	init_mouse_control(data);
 	data->player.stamina = MAX_STAMINA;
@@ -76,4 +85,5 @@ static void	spawn_enemy(t_data *data)
 		pos_x = data->enemy.position.x;
 		pos_y = data->enemy.position.y;
 	}
+	data->enemy.health = 100;
 }

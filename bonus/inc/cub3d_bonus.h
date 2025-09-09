@@ -6,7 +6,7 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 14:01:03 by lcalero           #+#    #+#             */
-/*   Updated: 2025/09/08 16:34:18 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/09/09 20:29:47 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,10 @@
 # ifndef RUN_MULTIPLIER
 #  define RUN_MULTIPLIER 1.6f
 # endif
+
+# define ANIMATION_INTERVAL 2
+
+# define MAX_ANIM_LENGTH 4
 
 typedef struct s_pos
 {
@@ -238,6 +242,13 @@ typedef struct s_render
 	int					texture_endian;
 }						t_render;
 
+typedef struct s_anim
+{
+	t_render			render_arr[MAX_ANIM_LENGTH];
+	int					is_playing;
+	unsigned int		index;
+}						t_anim;
+
 typedef struct s_sprite_bounds
 {
 	int					start_x;
@@ -279,6 +290,7 @@ typedef struct s_enemy
 	t_vector			position;
 	t_render			render;
 	t_enemy_render_data	enemy_data;
+	int					health;
 }						t_enemy;
 
 typedef struct s_astar_node
@@ -316,8 +328,9 @@ typedef struct s_data
 	t_render			east_wall;
 	t_render			west_wall;
 	t_render			crosshair;
-	t_render			door_opened;
-	t_render			gun;
+	t_render			door;
+	t_anim				gun;
+	t_anim				shot;
 	t_color				floor;
 	t_color				ceiling;
 	void				*render_img;
@@ -333,6 +346,7 @@ typedef struct s_data
 	t_mouse				mouse;
 	t_grid				grid;
 	t_ray				rays[WINDOW_WIDTH];
+	t_ray				shot_ray;
 	t_keys				keys;
 	int					render_fog;
 	int					frame_count;
@@ -389,6 +403,8 @@ double					u_get_current_speed(t_data *data);
 void					draw_sprite_at(t_data *data, t_render *render,
 							t_sprite_bounds *bounds, t_enemy *enemy);
 void					render_gun(t_data *data);
+void					animation_routine(t_data *data);
+void					trace_shot(t_data *data);
 
 // RAYCASTING INIT FUNCTIONS
 void					init_player_direction(t_data *data, double angle);
@@ -455,7 +471,9 @@ int						is_valid_position(t_data *data, double x, double y);
 int						heuristic(t_pos a, t_pos b);
 int						calc_horizon_line(t_data *data);
 void					check_door_distance(t_data *data, int keycode);
-void					print_door_mess(t_data *data);
 int						is_transparent_color(unsigned int color);
+void					init_ray_direction_shot(t_data *data);
+void					init_ray_distances_shot(t_data *data);
+void					init_ray_steps_shot(t_data *data);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/04 15:52:11 by lcalero           #+#    #+#             */
-/*   Updated: 2025/09/08 16:32:50 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/09/09 18:27:08 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,5 +50,8 @@ void	render_gun(t_data *data)
 	bounds.sprite_top = WINDOW_HEIGHT - gun_height;
 	bounds.sprite_height = gun_height;
 	bounds.half_width = gun_width / 2;
-	draw_gun_at(data, &data->gun, &bounds);
+	if (data->gun.is_playing)
+		draw_gun_at(data, &data->gun.render_arr[data->gun.index], &bounds);
+	else if (data->shot.is_playing)
+		draw_gun_at(data, &data->shot.render_arr[data->shot.index], &bounds);
 }

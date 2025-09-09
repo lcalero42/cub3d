@@ -1,7 +1,7 @@
 /* XPM */
 static char * door_closed_xpm[] = {
 "64 64 4 1",
-" 	c None",
+" 	c #00FFFFFF",
 ".	c #000000",
 "+	c #4F2B1B",
 "@	c #361D12",
