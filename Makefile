@@ -9,7 +9,7 @@ WINDOW_HEIGHT = 480			# height of window
 # --------------------------------- gameplay --------------------------------- #
 MOVE_SPEED = 5.0f		   # player movement speed
 ROT_SPEED = 3.0f	       # player rotation speed
-CROSSHAIR_SIZE = 5         # size of the crosshair
+CROSSHAIR_SIZE = 3         # size of the crosshair
 CROSSHAIR_THICKNESS = 1    # thickness of the crosshair
 CROSSHAIR_COLOR = 0x00FF00 # color of the crosshair in hexa format
 SENSITIVITY = 1	# player mouse sensitivity
@@ -105,6 +105,7 @@ SRCS_BONUS = main_bonus.c				\
 		re_wall_texture_bonus.c			\
 		re_render_fog_bonus.c			\
 		re_render_crosshair_bonus.c		\
+		re_update_animations.c			\
 		r_wall_side_bonus.c				\
 		r_door_handling.c				\
 		r_raycast_dda_bonus.c			\

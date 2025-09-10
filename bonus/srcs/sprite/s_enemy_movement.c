@@ -6,7 +6,7 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 15:53:18 by lcalero           #+#    #+#             */
-/*   Updated: 2025/09/04 15:28:00 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/09/10 17:27:40 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ static void	move_enemy_towards_target(t_data *data, t_pos target,
 	dx = target_x - data->enemy.position.x;
 	dy = target_y - data->enemy.position.y;
 	distance = sqrt(dx * dx + dy * dy);
-	if (distance > 0.01f && calc_player_distance(data))
+	if (distance > 0.01f && calc_player_distance(data) > 1.5f)
 	{
 		dx = (dx / distance) * move_speed;
 		dy = (dy / distance) * move_speed;
