@@ -6,7 +6,7 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 18:20:59 by lcalero           #+#    #+#             */
-/*   Updated: 2025/09/11 15:14:09 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/09/11 15:20:28 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	init(t_data *data, char **argv)
 	data->window = mlx_new_window(data->mlx, WINDOW_WIDTH, WINDOW_HEIGHT,
 			"cub3d");
 	init_walls(data);
-	load_texture(data, "bonus/textures/enemy_jaurel.xpm", &data->enemy.render);
+	load_texture(data, data->enemy_render.texture_path, &data->enemy.render);
 	load_texture(data, "bonus/textures/gun-hand-0.xpm",
 		&data->gun.render_arr[0]);
 	load_texture(data, "bonus/textures/gun-hand-1.xpm",
