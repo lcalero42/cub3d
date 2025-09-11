@@ -6,7 +6,7 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/10 17:18:30 by lcalero           #+#    #+#             */
-/*   Updated: 2025/09/10 17:23:34 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/09/11 16:23:43 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	animation_routine(t_data *data)
 	double				delta_time;
 	double				animation_speed;
 
-	animation_speed = 5.0;
+	animation_speed = 10.0;
 	current_time = get_current_time();
 	if (last_anim_time == 0)
 	{

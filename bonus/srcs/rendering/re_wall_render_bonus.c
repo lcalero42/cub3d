@@ -6,7 +6,7 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 18:19:52 by lcalero           #+#    #+#             */
-/*   Updated: 2025/09/11 15:13:34 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/09/11 16:22:14 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,10 +56,10 @@ static void	calculate_wall_bounds(t_data *data, double perp_wall_dist,
 
 	line_height = (int)(WINDOW_HEIGHT / perp_wall_dist);
 	pitch_offset = data->player.pitch * (WINDOW_HEIGHT * 0.5);
-	*draw_start = -line_height / 2 + WINDOW_HEIGHT / 2 + (int)pitch_offset;
+	*draw_start = (-line_height / 2 + WINDOW_HEIGHT / 2) + (int)pitch_offset;
 	if (*draw_start < 0)
 		*draw_start = 0;
-	*draw_end = line_height / 2 + WINDOW_HEIGHT / 2 + (int)pitch_offset;
+	*draw_end = (line_height / 2 + WINDOW_HEIGHT / 2) + (int)pitch_offset;
 	if (*draw_end >= WINDOW_HEIGHT)
 		*draw_end = WINDOW_HEIGHT - 1;
 	if (*draw_start >= WINDOW_HEIGHT)
