@@ -6,7 +6,7 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 11:53:44 by lcalero           #+#    #+#             */
-/*   Updated: 2025/09/11 14:03:44 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/09/11 15:13:05 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,13 @@ int	render_loop(t_data *data)
 	calculate_fps(data);
 	render_stamina(data);
 	return (1);
+}
+
+static int	mouse_hook(int keycode)
+{
+	if (keycode == 1)
+		printf("PEW\n");
+	return (0);
 }
 
 int	main(int argc, char **argv)

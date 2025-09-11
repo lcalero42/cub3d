@@ -6,7 +6,7 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 14:01:03 by lcalero           #+#    #+#             */
-/*   Updated: 2025/09/11 14:03:32 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/09/11 15:12:06 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,19 +146,19 @@ typedef struct s_fog_params
 	int					wall_end;
 	int					fog_alpha;
 	int					fog_color;
-}						t_fog_params;
+}	t_fog_params;
 
 typedef struct s_wall_bounds
 {
 	int					wall_start;
 	int					wall_end;
-}						t_wall_bounds;
+}	t_wall_bounds;
 
 typedef struct s_vector
 {
 	double				x;
 	double				y;
-}						t_vector;
+}	t_vector;
 
 typedef struct s_ray
 {
@@ -171,14 +171,14 @@ typedef struct s_ray
 	int					hit;
 	int					side;
 	int					must_render;
-}						t_ray;
+}	t_ray;
 
 typedef struct s_grid
 {
 	char				**grid;
 	int					width;
 	int					height;
-}						t_grid;
+}	t_grid;
 
 typedef struct s_player
 {
@@ -211,7 +211,7 @@ typedef struct s_sprite
 	double				y;
 	int					texture_id;
 	double				distance;
-}						t_sprite;
+}	t_sprite;
 
 typedef struct s_sprite_calc
 {
@@ -227,14 +227,14 @@ typedef struct s_sprite_calc
 	int					draw_end_y;
 	int					draw_start_x;
 	int					draw_end_x;
-}						t_sprite_calc;
+}	t_sprite_calc;
 
 typedef struct s_texture_info
 {
 	char				*addr;
 	int					bpp;
 	int					line_len;
-}						t_texture_info;
+}	t_texture_info;
 
 typedef struct s_render
 {
@@ -258,7 +258,7 @@ typedef struct s_sprite_bounds
 	int					half_width;
 	int					sprite_height;
 	int					sprite_top;
-}						t_sprite_bounds;
+}	t_sprite_bounds;
 
 typedef struct s_sprite_params
 {
@@ -267,7 +267,7 @@ typedef struct s_sprite_params
 	int					tex_x;
 	int					sprite_top;
 	int					sprite_height;
-}						t_sprite_params;
+}	t_sprite_params;
 
 typedef struct s_enemy_render_data
 {
@@ -283,6 +283,10 @@ typedef struct s_mouse
 	int					first_move;
 	int					last_x;
 	int					last_y;
+	int					delta_x;
+	int					delta_y;
+	int					center_x;
+	int					center_y;
 	int					enabled;
 	int					sensitivity;
 }						t_mouse;
@@ -341,6 +345,7 @@ typedef struct s_data
 	t_render			south_wall;
 	t_render			east_wall;
 	t_render			west_wall;
+	t_render			enemy_render;
 	t_render			crosshair;
 	t_render			door;
 	t_anim				gun;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   u_calculate_map_width_bonus.c                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 18:20:29 by lcalero           #+#    #+#             */
-/*   Updated: 2025/09/02 18:20:31 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/09/03 11:52:24 by ekeisler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

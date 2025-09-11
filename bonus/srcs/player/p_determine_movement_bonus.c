@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   p_determine_movement_bonus.c                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 18:19:04 by lcalero           #+#    #+#             */
-/*   Updated: 2025/09/02 18:19:06 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/09/03 11:51:43 by ekeisler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

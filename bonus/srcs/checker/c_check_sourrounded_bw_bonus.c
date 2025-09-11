@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   c_check_sourrounded_bw_bonus.c                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 18:16:02 by lcalero           #+#    #+#             */
-/*   Updated: 2025/09/02 18:16:38 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/09/03 11:50:51 by ekeisler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

@@ -6,7 +6,7 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 18:20:59 by lcalero           #+#    #+#             */
-/*   Updated: 2025/09/10 19:22:52 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/09/11 15:14:09 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	load_texture(t_data *data, char *path, t_render *texture)
 			&height);
 	if (!texture->texture_img)
 	{
-		printf("Error: Cannot load wall texture\n");
+		u_print_error("Cannot load wall texture");
 		exit(1);
 	}
 	texture->info.addr = mlx_get_data_addr(texture->texture_img,

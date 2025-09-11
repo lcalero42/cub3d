@@ -6,7 +6,7 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 18:17:24 by lcalero           #+#    #+#             */
-/*   Updated: 2025/09/09 14:39:29 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/09/11 15:13:19 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ void	toggle_mouse_control(t_data *data)
 
 	center_x = WINDOW_WIDTH / 2;
 	center_y = WINDOW_HEIGHT / 2;
+	data->mouse.last_x = center_x;
+	data->mouse.last_y = center_y;
 	if (data->mouse.enabled)
 	{
 		data->mouse.enabled = 0;
