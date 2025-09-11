@@ -6,7 +6,7 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 14:01:03 by lcalero           #+#    #+#             */
-/*   Updated: 2025/09/10 19:23:33 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/09/11 14:03:32 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,8 @@
 # define ANIMATION_INTERVAL 2
 
 # define MAX_ANIM_LENGTH 4
+
+# define ENEMY_RADIUS 0.380f
 
 typedef struct s_pos
 {
@@ -304,6 +306,18 @@ typedef struct s_astar_node
 	int					closed;
 }						t_astar_node;
 
+typedef struct s_discriminant
+{
+	double	a;
+	double	b;
+	double	c;
+	double	dx;
+	double	dy;
+	double	ray_dx;
+	double	ray_dy;
+	double	discriminant;
+}						t_discriminant;
+
 typedef struct s_astar_data
 {
 	t_astar_node		nodes[MAX_NODES];
@@ -352,6 +366,7 @@ typedef struct s_data
 	int					frame_count;
 	double				fps;
 	long long			last_time;
+	t_discriminant		disc;
 }						t_data;
 
 typedef struct s_neighbor_context
@@ -475,5 +490,10 @@ int						is_transparent_color(unsigned int color);
 void					init_ray_direction_shot(t_data *data);
 void					init_ray_distances_shot(t_data *data);
 void					init_ray_steps_shot(t_data *data);
+int						ray_hits_enemy(t_data *data);
+void					handle_move_keys(t_data *data, int keycode);
+int						key_release_hook(int keycode, t_data *data);
+int						key_press_hook(int keycode, t_data *data);
+int						mouse_hook(int keycode, int x, int y, t_data *data);
 
 #endif

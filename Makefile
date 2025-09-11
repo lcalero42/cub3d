@@ -115,6 +115,8 @@ SRCS_BONUS = main_bonus.c				\
 		p_delta_time_bonus.c			\
 		p_check_collisions_bonus.c		\
 		p_update_stamina_status_bonus.c \
+		p_key_handling.c				\
+		p_hooks.c						\
 		u_calculate_map_width_bonus.c	\
 		u_is_config_line_bonus.c		\
 		u_is_empty_line_bonus.c			\
@@ -131,6 +133,7 @@ SRCS_BONUS = main_bonus.c				\
 		u_pathfinding.c					\
 		u_get_current_speed_bonus.c 	\
 		u_trace_shot.c					\
+		u_calc_hitbox.c					\
 		m_init_mouse_move_bonus.c		\
 		m_mouse_move_bonus.c			\
 		s_sprite_render.c			    \

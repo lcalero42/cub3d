@@ -6,64 +6,11 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 11:53:44 by lcalero           #+#    #+#             */
-/*   Updated: 2025/09/10 19:23:22 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/09/11 14:03:44 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d_bonus.h"
-
-int	key_release_hook(int keycode, t_data *data)
-{
-	if (keycode == XK_d || keycode == XK_a || keycode == XK_w
-		|| keycode == XK_s)
-		data->player.is_moving = 0;
-	if (keycode == XK_d)
-		data->keys.d = 0;
-	if (keycode == XK_a)
-		data->keys.a = 0;
-	if (keycode == XK_w)
-		data->keys.w = 0;
-	if (keycode == XK_s)
-		data->keys.s = 0;
-	if (keycode == XK_Right)
-		data->keys.right = 0;
-	if (keycode == XK_Left)
-		data->keys.left = 0;
-	if (keycode == XK_Shift_L)
-		data->keys.run = 0;
-	return (0);
-}
-
-int	key_press_hook(int keycode, t_data *data)
-{
-	if (keycode == XK_d || keycode == XK_a || keycode == XK_w
-		|| keycode == XK_s)
-		data->player.is_moving = 1;
-	if (keycode == XK_Escape)
-		close_window(data);
-	if (keycode == XK_Shift_L)
-		data->keys.run = 1;
-	if (keycode == XK_f && data->render_fog)
-		data->render_fog = 0;
-	else if (keycode == XK_f && !data->render_fog)
-		data->render_fog = 1;
-	if (keycode == XK_d)
-		data->keys.d = 1;
-	if (keycode == XK_a)
-		data->keys.a = 1;
-	if (keycode == XK_w)
-		data->keys.w = 1;
-	if (keycode == XK_s)
-		data->keys.s = 1;
-	if (keycode == XK_Right)
-		data->keys.right = 1;
-	if (keycode == XK_Left)
-		data->keys.left = 1;
-	if (keycode == XK_m || keycode == XK_M)
-		toggle_mouse_control(data);
-	check_door_distance(data, keycode);
-	return (0);
-}
 
 static void	render_stamina(t_data *data)
 {
@@ -93,21 +40,6 @@ int	render_loop(t_data *data)
 	calculate_fps(data);
 	render_stamina(data);
 	return (1);
-}
-
-static int	mouse_hook(int keycode, int x, int y, t_data *data)
-{
-	(void)x;
-	(void)y;
-	if (keycode == 1)
-	{
-		data->shot.is_playing = 1;
-		data->shot.index = 0;
-		data->shot.index = 0;
-		data->gun.is_playing = 0;
-		trace_shot(data);
-	}
-	return (0);
 }
 
 int	main(int argc, char **argv)
