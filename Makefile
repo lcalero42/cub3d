@@ -108,6 +108,7 @@ SRCS_BONUS = main_bonus.c							\
 		re_update_animations.c						\
 		re_render_health_bar_background.c			\
 		re_fill_health_bar.c						\
+		re_stamina_bar.c							\
 		r_wall_side_bonus.c							\
 		r_door_handling.c							\
 		r_raycast_dda_bonus.c						\
@@ -142,6 +143,7 @@ SRCS_BONUS = main_bonus.c							\
 		s_enemy_movement.c			    			\
 		s_render_gun.c								\
 		s_enemy_find_path.c							\
+		s_render_enemy_health.c						\
 
 # Select source files based on mode
 ifeq ($(MODE), bonus)

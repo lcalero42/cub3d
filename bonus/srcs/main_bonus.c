@@ -6,21 +6,11 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 11:53:44 by lcalero           #+#    #+#             */
-/*   Updated: 2025/09/12 15:15:20 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/09/12 17:55:30 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d_bonus.h"
-
-static void	render_stamina(t_data *data)
-{
-	char	*s;
-
-	s = ft_itoa((int)data->enemy.health);
-	mlx_string_put(data->mlx, data->window, WINDOW_WIDTH * 0.05, WINDOW_HEIGHT
-		* 0.05, 0xFFFFFF, s);
-	free(s);
-}
 
 int	render_loop(t_data *data)
 {
@@ -33,13 +23,13 @@ int	render_loop(t_data *data)
 	render_walls(data);
 	if (data->render_fog)
 		apply_fog_overlay(data);
-	render_enemy(data);
+	render_enemy_with_health(data, &data->enemy);
 	render_crosshair(data);
 	render_gun(data);
 	render_health_bar(data, &data->health_bar);
+	render_stamina(data, &data->stamina_bar);
 	mlx_put_image_to_window(data->mlx, data->window, data->render_img, 0, 0);
 	calculate_fps(data);
-	render_stamina(data);
 	return (1);
 }
 

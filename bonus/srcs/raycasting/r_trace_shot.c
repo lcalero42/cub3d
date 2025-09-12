@@ -6,7 +6,7 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/09 20:08:27 by lcalero           #+#    #+#             */
-/*   Updated: 2025/09/11 13:41:44 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/09/12 17:08:39 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static void	perform_dda_shot(t_data *data)
 			break ;
 		if (ray_hits_enemy(data))
 		{
-			data->enemy.health -= 10;
+			data->enemy.current_health -= 10;
 			break ;
 		}
 		steps++;

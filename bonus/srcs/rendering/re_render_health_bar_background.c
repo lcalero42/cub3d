@@ -6,16 +6,16 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/12 14:21:27 by lcalero           #+#    #+#             */
-/*   Updated: 2025/09/12 15:36:50 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/09/12 17:29:51 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d_bonus.h"
 
-void	init_health_bar(t_health_bar *health_bar)
+void	init_health_bar(t_health_bar *health_bar, t_data *data)
 {
-	health_bar->current_health = MAX_HEALTH;
-	health_bar->max_health = MAX_HEALTH;
+	data->player.current_health = MAX_HEALTH;
+	data->player.max_health = MAX_HEALTH;
 	health_bar->x = HEALTH_BAR_X;
 	health_bar->y = HEALTH_BAR_Y;
 	health_bar->width = HEALTH_BAR_WIDTH;
@@ -66,11 +66,11 @@ void	draw_health_bar_background(t_data *data, t_health_bar *health_bar)
 	draw_background(data, health_bar);
 }
 
-unsigned int	get_health_color(t_health_bar *health_bar)
+unsigned int	get_health_color(t_data *data)
 {
-	if (health_bar->current_health > health_bar->max_health * 0.6)
+	if (data->player.current_health > data->player.max_health * 0.6)
 		return (0x00FF00);
-	else if (health_bar->current_health > health_bar->max_health * 0.3)
+	else if (data->player.current_health > data->player.max_health * 0.3)
 		return (0xFFFF00);
 	else
 		return (0xFF0000);

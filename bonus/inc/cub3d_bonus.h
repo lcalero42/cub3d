@@ -6,7 +6,7 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 14:01:03 by lcalero           #+#    #+#             */
-/*   Updated: 2025/09/12 15:38:16 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/09/12 18:09:25 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@
 #  define MOVE_SPEED 7.0f
 # endif
 
-# define ENEMY_SPEED 2.0f
+# define ENEMY_SPEED 4.0f
 
 # ifndef SENSITIVITY
 #  define SENSITIVITY 1.0f
@@ -124,6 +124,14 @@ typedef struct s_health_bar
 	int	height;
 }						t_health_bar;
 
+typedef struct s_enemy_health_bar
+{
+	int	x;
+	int	y;
+	int	width;
+	int	height;
+}						t_enemy_health_bar;
+
 typedef struct s_pos
 {
 	int					x;
@@ -208,6 +216,8 @@ typedef struct s_player
 	double				pitch;
 	double				stamina;
 	int					is_running;
+	double				current_health;
+	double				max_health;
 }						t_player;
 
 typedef struct s_keys
@@ -312,7 +322,8 @@ typedef struct s_enemy
 	t_vector			position;
 	t_render			render;
 	t_enemy_render_data	enemy_data;
-	int					health;
+	int					current_health;
+	int					max_health;
 }						t_enemy;
 
 typedef struct s_astar_node
@@ -389,6 +400,7 @@ typedef struct s_data
 	long long			last_time;
 	t_discriminant		disc;
 	t_health_bar		health_bar;
+	t_health_bar		stamina_bar;
 }						t_data;
 
 typedef struct s_neighbor_context
@@ -430,7 +442,6 @@ t_texture_info			get_texture_info_by_side(t_data *data,
 							t_wall_side side);
 void					apply_fog_overlay(t_data *data);
 void					render_crosshair(t_data *data);
-void					render_enemy(t_data *data);
 void					update_enemy_movement(t_data *data);
 int						find_astar_path(t_data *data, t_pos start, t_pos goal,
 							t_pos *out_path);
@@ -444,6 +455,8 @@ void					animation_routine(t_data *data);
 void					trace_shot(t_data *data);
 void					render_health_bar(t_data *data,
 							t_health_bar *health_bar);
+void					render_enemy_with_health(t_data *data, t_enemy *enemy);
+void					render_stamina(t_data *data, t_health_bar *bar);
 
 // RAYCASTING INIT FUNCTIONS
 void					init_player_direction(t_data *data, double angle);
@@ -519,9 +532,13 @@ void					handle_move_keys(t_data *data, int keycode);
 int						key_release_hook(int keycode, t_data *data);
 int						key_press_hook(int keycode, t_data *data);
 int						mouse_hook(int keycode, int x, int y, t_data *data);
-void					init_health_bar(t_health_bar *health_bar);
-unsigned int			get_health_color(t_health_bar *health_bar);
+void					init_health_bar(t_health_bar *health_bar, t_data *data);
+unsigned int			get_health_color(t_data *data);
 void					draw_health_bar_background(t_data *data,
-							_health_bar *health_bar);
+							t_health_bar *health_bar);
+void					calculate_health_bar_position(t_enemy_render_data *r_dt,
+							t_enemy_health_bar *health_bar);
+void					calculate_enemy_screen_pos(t_enemy *enemy,
+							t_player *player, t_enemy_render_data *render_data);
 
 #endif

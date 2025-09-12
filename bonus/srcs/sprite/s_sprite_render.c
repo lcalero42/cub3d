@@ -6,12 +6,73 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 19:04:42 by lcalero           #+#    #+#             */
-/*   Updated: 2025/09/11 16:23:21 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/09/12 17:21:31 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d_bonus.h"
 #include <math.h>
+#include "cub3d_bonus.h"
+
+static void	draw_enemy_health_background(t_data *data,
+	t_enemy_health_bar *health_bar)
+{
+	int	x;
+	int	y;
+
+	y = health_bar->y;
+	while (y < health_bar->y + health_bar->height)
+	{
+		x = health_bar->x;
+		while (x < health_bar->x + health_bar->width)
+		{
+			if (x >= 0 && x < WINDOW_WIDTH && y >= 0 && y < WINDOW_HEIGHT)
+				put_pixel_to_image(data, x, y, 0x440000);
+			x++;
+		}
+		y++;
+	}
+}
+
+static void	draw_enemy_health_fill(t_data *data, t_enemy_health_bar *health_bar,
+	t_enemy *enemy)
+{
+	int	x;
+	int	y;
+	int	fill_width;
+
+	if (enemy->max_health <= 0)
+		return ;
+	fill_width = (enemy->current_health * health_bar->width)
+		/ enemy->max_health;
+	y = health_bar->y;
+	while (y < health_bar->y + health_bar->height)
+	{
+		x = health_bar->x;
+		while (x < health_bar->x + fill_width)
+		{
+			if (x >= 0 && x < WINDOW_WIDTH && y >= 0 && y < WINDOW_HEIGHT)
+				put_pixel_to_image(data, x, y, 0xFF0000);
+			x++;
+		}
+		y++;
+	}
+}
+
+static void	render_enemy_health_bar(t_data *data, t_enemy *enemy,
+	t_enemy_render_data *render_data)
+{
+	t_enemy_health_bar	health_bar;
+
+	if (!render_data->visible || enemy->current_health <= 0)
+		return ;
+	calculate_health_bar_position(render_data, &health_bar);
+	if (health_bar.x + health_bar.width < 0 || health_bar.x >= WINDOW_WIDTH)
+		return ;
+	if (health_bar.y + health_bar.height < 0 || health_bar.y >= WINDOW_HEIGHT)
+		return ;
+	draw_enemy_health_background(data, &health_bar);
+	draw_enemy_health_fill(data, &health_bar, enemy);
+}
 
 void	draw_sprite_at(t_data *data, t_render *render,
 		t_sprite_bounds *bounds, t_enemy *enemy)
@@ -43,71 +104,18 @@ void	draw_sprite_at(t_data *data, t_render *render,
 	}
 }
 
-static void	normalize_angle(double *angle)
+void	render_enemy_with_health(t_data *data, t_enemy *enemy)
 {
-	while (*angle < 0)
-		*angle += 2 * M_PI;
-	while (*angle >= 2 * M_PI)
-		*angle -= 2 * M_PI;
-}
+	t_sprite_bounds		bounds;
 
-static void	calculate_angle_diff(t_enemy *enemy, t_player *player,
-		t_enemy_render_data *render_data)
-{
-	float	dx;
-	float	dy;
-	double	enemy_angle;
-	float	angle_diff;
-
-	dx = enemy->position.x - player->position.x;
-	dy = enemy->position.y - player->position.y;
-	enemy_angle = atan2f(dy, dx);
-	normalize_angle(&enemy_angle);
-	normalize_angle(&player->angle);
-	angle_diff = enemy_angle - player->angle;
-	if (angle_diff > M_PI)
-		angle_diff -= 2 * M_PI;
-	else if (angle_diff < -M_PI)
-		angle_diff += 2 * M_PI;
-	render_data->angle_diff = angle_diff;
-}
-
-static void	calculate_enemy_screen_pos(t_enemy *enemy, t_player *player,
-		t_enemy_render_data *render_data)
-{
-	float	dx;
-	float	dy;
-	float	dist;
-	float	fov;
-
-	dx = enemy->position.x - player->position.x;
-	dy = enemy->position.y - player->position.y;
-	player->pitch_offset = player->pitch * (WINDOW_HEIGHT * 0.5);
-	dist = sqrtf(dx * dx + dy * dy);
-	calculate_angle_diff(enemy, player, render_data);
-	fov = M_PI / 3;
-	render_data->visible = 1;
-	render_data->screen_x = (int)((render_data->angle_diff + fov / 2)
-			* (WINDOW_WIDTH / fov));
-	render_data->sprite_height = (int)(WINDOW_HEIGHT / dist);
-	if (render_data->sprite_height > WINDOW_HEIGHT)
-		render_data->sprite_height = WINDOW_HEIGHT;
-	render_data->sprite_top = (WINDOW_HEIGHT / 2) - (render_data->sprite_height
-			/ 2) + player->pitch_offset;
-}
-
-void	render_enemy(t_data *data)
-{
-	t_sprite_bounds	bounds;
-
-	calculate_enemy_screen_pos(&data->enemy, &data->player,
-		&data->enemy.enemy_data);
-	if (data->enemy.enemy_data.visible)
+	calculate_enemy_screen_pos(enemy, &data->player, &enemy->enemy_data);
+	if (enemy->enemy_data.visible)
 	{
 		calculate_sprite_bounds(data->enemy.enemy_data.screen_x,
 			data->enemy.enemy_data.sprite_height, &bounds);
 		bounds.sprite_height = data->enemy.enemy_data.sprite_height;
 		bounds.sprite_top = data->enemy.enemy_data.sprite_top;
 		draw_sprite_at(data, &data->enemy.render, &bounds, &data->enemy);
+		render_enemy_health_bar(data, enemy, &enemy->enemy_data);
 	}
 }
