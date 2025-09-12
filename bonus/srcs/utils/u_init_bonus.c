@@ -6,7 +6,7 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 18:20:59 by lcalero           #+#    #+#             */
-/*   Updated: 2025/09/11 16:22:30 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/09/12 14:49:58 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ void	init(t_data *data, char **argv)
 	spawn_enemy(data);
 	init_mouse_control(data);
 	data->player.stamina = MAX_STAMINA;
+	init_health_bar(&data->health_bar);
 }
 
 void	load_texture(t_data *data, char *path, t_render *texture)

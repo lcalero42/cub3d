@@ -6,7 +6,7 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 14:01:03 by lcalero           #+#    #+#             */
-/*   Updated: 2025/09/11 16:21:09 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/09/12 15:38:16 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@
 # define ENEMY_SPEED 2.0f
 
 # ifndef SENSITIVITY
-#  define SENSITIVITY 100
+#  define SENSITIVITY 1.0f
 # endif
 
 # ifndef ROTATION_SPEED
@@ -107,6 +107,22 @@
 # define MAX_ANIM_LENGTH 4
 
 # define ENEMY_RADIUS 0.380f
+
+# define HEALTH_BAR_WIDTH 200
+# define HEALTH_BAR_HEIGHT 20
+# define HEALTH_BAR_X 50
+# define HEALTH_BAR_Y 50
+# define MAX_HEALTH 100
+
+typedef struct s_health_bar
+{
+	int	current_health;
+	int	max_health;
+	int	x;
+	int	y;
+	int	width;
+	int	height;
+}						t_health_bar;
 
 typedef struct s_pos
 {
@@ -288,7 +304,7 @@ typedef struct s_mouse
 	int					center_x;
 	int					center_y;
 	int					enabled;
-	int					sensitivity;
+	double				sensitivity;
 }						t_mouse;
 
 typedef struct s_enemy
@@ -372,6 +388,7 @@ typedef struct s_data
 	double				fps;
 	long long			last_time;
 	t_discriminant		disc;
+	t_health_bar		health_bar;
 }						t_data;
 
 typedef struct s_neighbor_context
@@ -425,6 +442,8 @@ void					draw_sprite_at(t_data *data, t_render *render,
 void					render_gun(t_data *data);
 void					animation_routine(t_data *data);
 void					trace_shot(t_data *data);
+void					render_health_bar(t_data *data,
+							t_health_bar *health_bar);
 
 // RAYCASTING INIT FUNCTIONS
 void					init_player_direction(t_data *data, double angle);
@@ -500,5 +519,9 @@ void					handle_move_keys(t_data *data, int keycode);
 int						key_release_hook(int keycode, t_data *data);
 int						key_press_hook(int keycode, t_data *data);
 int						mouse_hook(int keycode, int x, int y, t_data *data);
+void					init_health_bar(t_health_bar *health_bar);
+unsigned int			get_health_color(t_health_bar *health_bar);
+void					draw_health_bar_background(t_data *data,
+							_health_bar *health_bar);
 
 #endif

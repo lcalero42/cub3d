@@ -12,7 +12,7 @@ ROT_SPEED = 3.0f	       # player rotation speed
 CROSSHAIR_SIZE = 3         # size of the crosshair
 CROSSHAIR_THICKNESS = 1    # thickness of the crosshair
 CROSSHAIR_COLOR = 0x00FF00 # color of the crosshair in hexa format
-SENSITIVITY = 1	# player mouse sensitivity
+SENSITIVITY = 0.5f			# player mouse sensitivity
 
 # -------------------------------- performance ------------------------------- #
 RENDER_DISTANCE = 1000	   # the maximum distance where the walls will be rendered
@@ -21,7 +21,7 @@ RENDER_DISTANCE = 1000	   # the maximum distance where the walls will be rendere
 
 NAME = cub3d
 MODE ?= release
-CONFIG = -g3 -D WINDOW_WIDTH=$(WINDOW_WIDTH) -D WINDOW_HEIGHT=$(WINDOW_HEIGHT) -D MOVE_SPEED=$(MOVE_SPEED) -D ROT_SPEED=$(ROT_SPEED) -D RENDER_DISTANCE=$(RENDER_DISTANCE) \
+CONFIG = -D WINDOW_WIDTH=$(WINDOW_WIDTH) -D WINDOW_HEIGHT=$(WINDOW_HEIGHT) -D MOVE_SPEED=$(MOVE_SPEED) -D ROT_SPEED=$(ROT_SPEED) -D RENDER_DISTANCE=$(RENDER_DISTANCE) \
 		 -D CROSSHAIR_SIZE=$(CROSSHAIR_SIZE) -D CROSSHAIR_THICKNESS=$(CROSSHAIR_THICKNESS) -D CROSSHAIR_COLOR=$(CROSSHAIR_COLOR) -D SENSITIVITY=$(SENSITIVITY)
 DEBUG_CONFIG = -D WINDOW_WIDTH=$(WINDOW_WIDTH) -D WINDOW_HEIGHT=$(WINDOW_HEIGHT) -D MOVE_SPEED=3.0f -D ROT_SPEED=2.0f -D RENDER_DISTANCE=10 \
 			   -D CROSSHAIR_SIZE=$(CROSSHAIR_SIZE) -D CROSSHAIR_THICKNESS=$(CROSSHAIR_THICKNESS) -D CROSSHAIR_COLOR=$(CROSSHAIR_COLOR) -D SENSITIVITY=$(SENSITIVITY)
@@ -90,56 +90,58 @@ SRCS_MANDATORY = main.c				\
 		u_init.c					\
 
 # Bonus source files (with _bonus suffix)
-SRCS_BONUS = main_bonus.c				\
-		pr_parse_config_lines_bonus.c	\
-		pr_parse_file_bonus.c			\
-		pr_parse_map_bonus.c			\
-		pr_parse_texture_bonus.c		\
-		pr_parse_color_bonus.c			\
-		pr_check_file_extension_bonus.c	\
-		pr_validate_config_bonus.c		\
-		pr_find_player_pos_bonus.c		\
-		c_check_map_bonus.c				\
-		c_check_sourrounded_bw_bonus.c	\
-		re_wall_render_bonus.c			\
-		re_wall_texture_bonus.c			\
-		re_render_fog_bonus.c			\
-		re_render_crosshair_bonus.c		\
-		re_update_animations.c			\
-		r_wall_side_bonus.c				\
-		r_door_handling.c				\
-		r_raycast_dda_bonus.c			\
-		r_raycast_init_bonus.c			\
-		r_trace_shot.c					\
-		p_determine_movement_bonus.c	\
-		p_delta_time_bonus.c			\
-		p_check_collisions_bonus.c		\
-		p_update_stamina_status_bonus.c \
-		p_key_handling.c				\
-		p_hooks.c						\
-		u_calculate_map_width_bonus.c	\
-		u_is_config_line_bonus.c		\
-		u_is_empty_line_bonus.c			\
-		u_ft_free_bonus.c				\
-		u_close_window_bonus.c			\
-		u_rgb_to_hex_bonus.c			\
-		u_print_error_bonus.c			\
-		u_fog_rendering_bonus.c			\
-		u_rendering_bonus.c				\
-		u_map_checking_bonus.c			\
-		u_init_bonus.c					\
-		u_player_movement.c				\
-		u_sprite_utils.c				\
-		u_pathfinding.c					\
-		u_get_current_speed_bonus.c 	\
-		u_trace_shot.c					\
-		u_calc_hitbox.c					\
-		m_init_mouse_move_bonus.c		\
-		m_mouse_move_bonus.c			\
-		s_sprite_render.c			    \
-		s_enemy_movement.c			    \
-		s_render_gun.c					\
-		s_enemy_find_path.c				\
+SRCS_BONUS = main_bonus.c							\
+		pr_parse_config_lines_bonus.c				\
+		pr_parse_file_bonus.c						\
+		pr_parse_map_bonus.c						\
+		pr_parse_texture_bonus.c					\
+		pr_parse_color_bonus.c						\
+		pr_check_file_extension_bonus.c				\
+		pr_validate_config_bonus.c					\
+		pr_find_player_pos_bonus.c					\
+		c_check_map_bonus.c							\
+		c_check_sourrounded_bw_bonus.c				\
+		re_wall_render_bonus.c						\
+		re_wall_texture_bonus.c						\
+		re_render_fog_bonus.c						\
+		re_render_crosshair_bonus.c					\
+		re_update_animations.c						\
+		re_render_health_bar_background.c			\
+		re_fill_health_bar.c						\
+		r_wall_side_bonus.c							\
+		r_door_handling.c							\
+		r_raycast_dda_bonus.c						\
+		r_raycast_init_bonus.c						\
+		r_trace_shot.c								\
+		p_determine_movement_bonus.c				\
+		p_delta_time_bonus.c						\
+		p_check_collisions_bonus.c					\
+		p_update_stamina_status_bonus.c 			\
+		p_key_handling.c							\
+		p_hooks.c									\
+		u_calculate_map_width_bonus.c				\
+		u_is_config_line_bonus.c					\
+		u_is_empty_line_bonus.c						\
+		u_ft_free_bonus.c							\
+		u_close_window_bonus.c						\
+		u_rgb_to_hex_bonus.c						\
+		u_print_error_bonus.c						\
+		u_fog_rendering_bonus.c						\
+		u_rendering_bonus.c							\
+		u_map_checking_bonus.c						\
+		u_init_bonus.c								\
+		u_player_movement.c							\
+		u_sprite_utils.c							\
+		u_pathfinding.c								\
+		u_get_current_speed_bonus.c 				\
+		u_trace_shot.c								\
+		u_calc_hitbox.c								\
+		m_init_mouse_move_bonus.c					\
+		m_mouse_move_bonus.c						\
+		s_sprite_render.c			    			\
+		s_enemy_movement.c			    			\
+		s_render_gun.c								\
+		s_enemy_find_path.c							\
 
 # Select source files based on mode
 ifeq ($(MODE), bonus)

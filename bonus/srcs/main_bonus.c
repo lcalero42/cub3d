@@ -6,7 +6,7 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 11:53:44 by lcalero           #+#    #+#             */
-/*   Updated: 2025/09/11 15:14:59 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/09/12 15:15:20 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ int	render_loop(t_data *data)
 	render_enemy(data);
 	render_crosshair(data);
 	render_gun(data);
+	render_health_bar(data, &data->health_bar);
 	mlx_put_image_to_window(data->mlx, data->window, data->render_img, 0, 0);
 	calculate_fps(data);
 	render_stamina(data);
