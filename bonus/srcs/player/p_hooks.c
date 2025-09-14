@@ -6,7 +6,7 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 14:02:02 by lcalero           #+#    #+#             */
-/*   Updated: 2025/09/12 14:51:09 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/09/14 18:30:34 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,9 @@ int	mouse_hook(int keycode, int x, int y, t_data *data)
 	(void)y;
 	if (keycode == 1)
 	{
+		if (get_current_time() - data->last_shot_time < RELOAD_TIME_MS)
+			return (1);
+		data->last_shot_time = get_current_time();
 		data->shot.is_playing = 1;
 		data->shot.index = 0;
 		data->shot.index = 0;

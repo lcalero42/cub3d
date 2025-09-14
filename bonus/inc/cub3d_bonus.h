@@ -6,7 +6,7 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 14:01:03 by lcalero           #+#    #+#             */
-/*   Updated: 2025/09/12 18:09:25 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/09/14 18:30:27 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,10 @@
 
 # ifndef RUN_MULTIPLIER
 #  define RUN_MULTIPLIER 1.6f
+# endif
+
+# ifndef RELOAD_TIME_MS
+#  define RELOAD_TIME_MS 2000ll
 # endif
 
 # define ANIMATION_INTERVAL 2
@@ -398,6 +402,7 @@ typedef struct s_data
 	int					frame_count;
 	double				fps;
 	long long			last_time;
+	long long			last_shot_time;
 	t_discriminant		disc;
 	t_health_bar		health_bar;
 	t_health_bar		stamina_bar;

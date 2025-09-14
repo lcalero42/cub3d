@@ -9,10 +9,11 @@ WINDOW_HEIGHT = 480			# height of window
 # --------------------------------- gameplay --------------------------------- #
 MOVE_SPEED = 5.0f		   # player movement speed
 ROT_SPEED = 3.0f	       # player rotation speed
-CROSSHAIR_SIZE = 3         # size of the crosshair
+CROSSHAIR_SIZE = 1         # size of the crosshair
 CROSSHAIR_THICKNESS = 1    # thickness of the crosshair
 CROSSHAIR_COLOR = 0x00FF00 # color of the crosshair in hexa format
-SENSITIVITY = 0.5f			# player mouse sensitivity
+SENSITIVITY = 0.5f		   # player mouse sensitivity
+RELOAD_TIME_MS = 1000	   # reload time of the weapon
 
 # -------------------------------- performance ------------------------------- #
 RENDER_DISTANCE = 1000	   # the maximum distance where the walls will be rendered
@@ -22,9 +23,11 @@ RENDER_DISTANCE = 1000	   # the maximum distance where the walls will be rendere
 NAME = cub3d
 MODE ?= release
 CONFIG = -D WINDOW_WIDTH=$(WINDOW_WIDTH) -D WINDOW_HEIGHT=$(WINDOW_HEIGHT) -D MOVE_SPEED=$(MOVE_SPEED) -D ROT_SPEED=$(ROT_SPEED) -D RENDER_DISTANCE=$(RENDER_DISTANCE) \
-		 -D CROSSHAIR_SIZE=$(CROSSHAIR_SIZE) -D CROSSHAIR_THICKNESS=$(CROSSHAIR_THICKNESS) -D CROSSHAIR_COLOR=$(CROSSHAIR_COLOR) -D SENSITIVITY=$(SENSITIVITY)
+		 -D CROSSHAIR_SIZE=$(CROSSHAIR_SIZE) -D CROSSHAIR_THICKNESS=$(CROSSHAIR_THICKNESS) -D CROSSHAIR_COLOR=$(CROSSHAIR_COLOR) -D SENSITIVITY=$(SENSITIVITY) \
+		 -D RELOAD_TIME_MS=$(RELOAD_TIME_MS)
 DEBUG_CONFIG = -D WINDOW_WIDTH=$(WINDOW_WIDTH) -D WINDOW_HEIGHT=$(WINDOW_HEIGHT) -D MOVE_SPEED=3.0f -D ROT_SPEED=2.0f -D RENDER_DISTANCE=10 \
-			   -D CROSSHAIR_SIZE=$(CROSSHAIR_SIZE) -D CROSSHAIR_THICKNESS=$(CROSSHAIR_THICKNESS) -D CROSSHAIR_COLOR=$(CROSSHAIR_COLOR) -D SENSITIVITY=$(SENSITIVITY)
+			   -D CROSSHAIR_SIZE=$(CROSSHAIR_SIZE) -D CROSSHAIR_THICKNESS=$(CROSSHAIR_THICKNESS) -D CROSSHAIR_COLOR=$(CROSSHAIR_COLOR) \
+			   -D SENSITIVITY=$(SENSITIVITY) -D RELOAD_TIME_MS=$(RELOAD_TIME_MS)
 OPTI = -O3 -flto -march=native -mtune=native -funroll-loops
 
 # Directory structure

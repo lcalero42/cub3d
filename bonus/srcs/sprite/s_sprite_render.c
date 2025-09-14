@@ -6,7 +6,7 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 19:04:42 by lcalero           #+#    #+#             */
-/*   Updated: 2025/09/12 17:21:31 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/09/14 18:01:52 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,8 @@ static void	render_enemy_health_bar(t_data *data, t_enemy *enemy,
 	if (health_bar.x + health_bar.width < 0 || health_bar.x >= WINDOW_WIDTH)
 		return ;
 	if (health_bar.y + health_bar.height < 0 || health_bar.y >= WINDOW_HEIGHT)
+		return ;
+	if (check_wall_occlusion(data, health_bar.x, enemy))
 		return ;
 	draw_enemy_health_background(data, &health_bar);
 	draw_enemy_health_fill(data, &health_bar, enemy);
