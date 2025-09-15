@@ -108,21 +108,21 @@ SRCS_BONUS = main_bonus.c							\
 		re_wall_texture_bonus.c						\
 		re_render_fog_bonus.c						\
 		re_render_crosshair_bonus.c					\
-		re_update_animations.c						\
-		re_render_health_bar_background.c			\
-		re_fill_health_bar.c						\
-		re_stamina_bar.c							\
+		re_update_animations_bonus.c				\
+		re_render_health_bar_bg_bonus.c				\
+		re_fill_health_bar_bonus.c					\
+		re_stamina_bar_bonus.c						\
 		r_wall_side_bonus.c							\
-		r_door_handling.c							\
+		r_door_handling_bonus.c						\
 		r_raycast_dda_bonus.c						\
 		r_raycast_init_bonus.c						\
-		r_trace_shot.c								\
+		r_trace_shot_bonus.c						\
 		p_determine_movement_bonus.c				\
 		p_delta_time_bonus.c						\
 		p_check_collisions_bonus.c					\
 		p_update_stamina_status_bonus.c 			\
-		p_key_handling.c							\
-		p_hooks.c									\
+		p_key_handling_bonus.c						\
+		p_hooks_bonus.c								\
 		u_calculate_map_width_bonus.c				\
 		u_is_config_line_bonus.c					\
 		u_is_empty_line_bonus.c						\
@@ -134,19 +134,19 @@ SRCS_BONUS = main_bonus.c							\
 		u_rendering_bonus.c							\
 		u_map_checking_bonus.c						\
 		u_init_bonus.c								\
-		u_player_movement.c							\
-		u_sprite_utils.c							\
-		u_pathfinding.c								\
+		u_player_movement_bonus.c					\
+		u_sprite_utils_bonus.c						\
+		u_pathfinding_bonus.c						\
 		u_get_current_speed_bonus.c 				\
-		u_trace_shot.c								\
-		u_calc_hitbox.c								\
+		u_trace_shot_bonus.c						\
+		u_calc_hitbox_bonus.c						\
 		m_init_mouse_move_bonus.c					\
 		m_mouse_move_bonus.c						\
-		s_sprite_render.c			    			\
-		s_enemy_movement.c			    			\
-		s_render_gun.c								\
-		s_enemy_find_path.c							\
-		s_render_enemy_health.c						\
+		s_sprite_render_bonus.c		    			\
+		s_enemy_movement_bonus.c	    			\
+		s_render_gun_bonus.c						\
+		s_enemy_find_path_bonus.c					\
+		s_render_enemy_health_bonus.c				\
 
 # Select source files based on mode
 ifeq ($(MODE), bonus)
