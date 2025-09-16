@@ -6,7 +6,7 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 17:13:02 by lcalero           #+#    #+#             */
-/*   Updated: 2025/09/14 18:42:40 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/09/16 15:59:51 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,19 @@
 static void	perform_dda_step(t_data *data, int i);
 static void	perform_dda(t_data *data, int i);
 static void	trace_single_ray(t_data *data, int i);
+
+void	trace_ray(t_data *data, double angle)
+{
+	int	i;
+
+	init_player_direction(data, angle);
+	i = 0;
+	while (i < WINDOW_WIDTH)
+	{
+		trace_single_ray(data, i);
+		i++;
+	}
+}
 
 t_wall_side	get_wall_side(t_data *data, int ray_index)
 {
@@ -35,19 +48,6 @@ t_wall_side	get_wall_side(t_data *data, int ray_index)
 			return (NORTH);
 		else
 			return (SOUTH);
-	}
-}
-
-void	trace_ray(t_data *data, double angle)
-{
-	int	i;
-
-	init_player_direction(data, angle);
-	i = 0;
-	while (i < WINDOW_WIDTH)
-	{
-		trace_single_ray(data, i);
-		i++;
 	}
 }
 

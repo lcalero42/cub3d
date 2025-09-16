@@ -1,16 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   re_render_health_bar_background.c                  :+:      :+:    :+:   */
+/*   re_render_health_bar_bg_bonus.c                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/12 14:21:27 by lcalero           #+#    #+#             */
-/*   Updated: 2025/09/12 17:29:51 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/09/16 16:10:40 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d_bonus.h"
+
+static void	draw_border(t_data *data, t_health_bar *health_bar);
+static void	draw_background(t_data *data, t_health_bar *health_bar);
+
+void	draw_health_bar_background(t_data *data, t_health_bar *health_bar)
+{
+	draw_border(data, health_bar);
+	draw_background(data, health_bar);
+}
 
 void	init_health_bar(t_health_bar *health_bar, t_data *data)
 {
@@ -20,6 +29,16 @@ void	init_health_bar(t_health_bar *health_bar, t_data *data)
 	health_bar->y = HEALTH_BAR_Y;
 	health_bar->width = HEALTH_BAR_WIDTH;
 	health_bar->height = HEALTH_BAR_HEIGHT;
+}
+
+unsigned int	get_health_color(t_data *data)
+{
+	if (data->player.current_health > data->player.max_health * 0.6)
+		return (0x00FF00);
+	else if (data->player.current_health > data->player.max_health * 0.3)
+		return (0xFFFF00);
+	else
+		return (0xFF0000);
 }
 
 static void	draw_border(t_data *data, t_health_bar *health_bar)
@@ -58,20 +77,4 @@ static void	draw_background(t_data *data, t_health_bar *health_bar)
 		}
 		y++;
 	}
-}
-
-void	draw_health_bar_background(t_data *data, t_health_bar *health_bar)
-{
-	draw_border(data, health_bar);
-	draw_background(data, health_bar);
-}
-
-unsigned int	get_health_color(t_data *data)
-{
-	if (data->player.current_health > data->player.max_health * 0.6)
-		return (0x00FF00);
-	else if (data->player.current_health > data->player.max_health * 0.3)
-		return (0xFFFF00);
-	else
-		return (0xFF0000);
 }

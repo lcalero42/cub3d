@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   s_enemy_find_path.c                                :+:      :+:    :+:   */
+/*   s_enemy_find_path_bonus.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 19:37:20 by lcalero           #+#    #+#             */
-/*   Updated: 2025/09/04 15:22:43 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/09/16 16:15:04 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,18 @@ static void	process_neighbors_with_visited(t_neighbor_context *ctx,
 	}
 }
 
+static void	init_directions(int dirs[4][2])
+{
+	dirs[0][0] = 0;
+	dirs[0][1] = 1;
+	dirs[1][0] = 1;
+	dirs[1][1] = 0;
+	dirs[2][0] = 0;
+	dirs[2][1] = -1;
+	dirs[3][0] = -1;
+	dirs[3][1] = 0;
+}
+
 int	is_valid_position(t_data *data, double x, double y)
 {
 	int	map_x;
@@ -86,16 +98,4 @@ int	is_valid_position(t_data *data, double x, double y)
 int	heuristic(t_pos a, t_pos b)
 {
 	return (abs(a.x - b.x) + abs(a.y - b.y));
-}
-
-static void	init_directions(int dirs[4][2])
-{
-	dirs[0][0] = 0;
-	dirs[0][1] = 1;
-	dirs[1][0] = 1;
-	dirs[1][1] = 0;
-	dirs[2][0] = 0;
-	dirs[2][1] = -1;
-	dirs[3][0] = -1;
-	dirs[3][1] = 0;
 }

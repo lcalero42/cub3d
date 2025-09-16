@@ -1,18 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   s_render_gun.c                                     :+:      :+:    :+:   */
+/*   s_render_gun_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/04 15:52:11 by lcalero           #+#    #+#             */
-/*   Updated: 2025/09/10 19:23:18 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/09/16 16:18:13 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d_bonus.h"
 
-void	draw_gun_at(t_data *data, t_render *render,
+static void	draw_gun_at(t_data *data, t_render *render,
+				t_sprite_bounds *bounds);
+
+void	render_gun(t_data *data)
+{
+	t_sprite_bounds	bounds;
+	int				gun_width;
+	int				gun_height;
+
+	gun_width = WINDOW_WIDTH * 0.7;
+	gun_height = WINDOW_HEIGHT * 0.7;
+	bounds.start_x = (WINDOW_WIDTH - gun_width) / 2;
+	bounds.end_x = bounds.start_x + gun_width - 1;
+	bounds.sprite_top = WINDOW_HEIGHT - gun_height;
+	bounds.sprite_height = gun_height;
+	bounds.half_width = gun_width / 2;
+	if (data->gun.is_playing)
+		draw_gun_at(data, &data->gun.render_arr[data->gun.index], &bounds);
+	else if (data->shot.is_playing)
+		draw_gun_at(data, &data->shot.render_arr[data->shot.index], &bounds);
+}
+
+static void	draw_gun_at(t_data *data, t_render *render,
 		t_sprite_bounds *bounds)
 {
 	t_sprite_params	params;
@@ -35,23 +57,4 @@ void	draw_gun_at(t_data *data, t_render *render,
 		draw_sprite_column(data, &params);
 		x++;
 	}
-}
-
-void	render_gun(t_data *data)
-{
-	t_sprite_bounds	bounds;
-	int				gun_width;
-	int				gun_height;
-
-	gun_width = WINDOW_WIDTH * 0.7;
-	gun_height = WINDOW_HEIGHT * 0.7;
-	bounds.start_x = (WINDOW_WIDTH - gun_width) / 2;
-	bounds.end_x = bounds.start_x + gun_width - 1;
-	bounds.sprite_top = WINDOW_HEIGHT - gun_height;
-	bounds.sprite_height = gun_height;
-	bounds.half_width = gun_width / 2;
-	if (data->gun.is_playing)
-		draw_gun_at(data, &data->gun.render_arr[data->gun.index], &bounds);
-	else if (data->shot.is_playing)
-		draw_gun_at(data, &data->shot.render_arr[data->shot.index], &bounds);
 }

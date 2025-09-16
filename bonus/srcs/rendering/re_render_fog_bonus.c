@@ -6,61 +6,29 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/28 14:09:27 by lcalero           #+#    #+#             */
-/*   Updated: 2025/09/11 16:21:38 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/09/16 16:08:43 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d_bonus.h"
 #include "cub3d_bonus.h"
 
-int	blend_fog_with_pixel(int base_color, int fog_color, int fog_alpha)
-{
-	t_color	colors;
-	double	alpha_factor;
-
-	extract_base_colors(base_color, &colors.base_r, &colors.base_g,
-		&colors.base_b);
-	extract_fog_colors(fog_color, &colors.fog_r, &colors.fog_g, &colors.fog_b);
-	alpha_factor = fog_alpha / 255.0;
-	return (blend_colors(&colors, alpha_factor));
-}
-
-static void	apply_fog_column(t_data *data, t_fog_params *params)
-{
-	int	y;
-	int	existing_color;
-	int	blended_color;
-
-	y = params->wall_start;
-	while (y < params->wall_end)
-	{
-		existing_color = get_pixel_from_image(data, params->x, y);
-		blended_color = blend_fog_with_pixel(existing_color, params->fog_color,
-				params->fog_alpha);
-		put_pixel_to_image(data, params->x, y, blended_color);
-		y++;
-	}
-}
-
+static void	process_fog_column(t_data *data, int x);
+static void	apply_fog_column(t_data *data, t_fog_params *params);
+static int	blend_fog_with_pixel(int base_color, int fog_color, int fog_alpha);
 static void	calculate_wall_bounds(t_data *data, double distance,
-				t_wall_bounds *bounds)
-{
-	int		wall_height;
-	double	pitch_offset;
+				t_wall_bounds *bounds);
 
-	wall_height = (int)(WINDOW_HEIGHT / distance);
-	pitch_offset = data->player.pitch * (WINDOW_HEIGHT * 0.5);
-	bounds->wall_start = (-wall_height) / 2 + WINDOW_HEIGHT
-		/ 2 + (int)pitch_offset;
-	bounds->wall_end = wall_height / 2 + WINDOW_HEIGHT / 2 + (int)pitch_offset;
-	if (bounds->wall_start < 0)
-		bounds->wall_start = 0;
-	if (bounds->wall_end >= WINDOW_HEIGHT)
-		bounds->wall_end = WINDOW_HEIGHT - 1;
-	if (bounds->wall_start >= WINDOW_HEIGHT)
-		bounds->wall_start = WINDOW_HEIGHT - 1;
-	if (bounds->wall_end < 0)
-		bounds->wall_end = 0;
+void	apply_fog_overlay(t_data *data)
+{
+	int	x;
+
+	x = 0;
+	while (x < WINDOW_WIDTH)
+	{
+		process_fog_column(data, x);
+		x++;
+	}
 }
 
 static void	process_fog_column(t_data *data, int x)
@@ -83,14 +51,52 @@ static void	process_fog_column(t_data *data, int x)
 	}
 }
 
-void	apply_fog_overlay(t_data *data)
+static void	apply_fog_column(t_data *data, t_fog_params *params)
 {
-	int	x;
+	int	y;
+	int	existing_color;
+	int	blended_color;
 
-	x = 0;
-	while (x < WINDOW_WIDTH)
+	y = params->wall_start;
+	while (y < params->wall_end)
 	{
-		process_fog_column(data, x);
-		x++;
+		existing_color = get_pixel_from_image(data, params->x, y);
+		blended_color = blend_fog_with_pixel(existing_color, params->fog_color,
+				params->fog_alpha);
+		put_pixel_to_image(data, params->x, y, blended_color);
+		y++;
 	}
+}
+
+static int	blend_fog_with_pixel(int base_color, int fog_color, int fog_alpha)
+{
+	t_color	colors;
+	double	alpha_factor;
+
+	extract_base_colors(base_color, &colors.base_r, &colors.base_g,
+		&colors.base_b);
+	extract_fog_colors(fog_color, &colors.fog_r, &colors.fog_g, &colors.fog_b);
+	alpha_factor = fog_alpha / 255.0;
+	return (blend_colors(&colors, alpha_factor));
+}
+
+static void	calculate_wall_bounds(t_data *data, double distance,
+				t_wall_bounds *bounds)
+{
+	int		wall_height;
+	double	pitch_offset;
+
+	wall_height = (int)(WINDOW_HEIGHT / distance);
+	pitch_offset = data->player.pitch * (WINDOW_HEIGHT * 0.5);
+	bounds->wall_start = (-wall_height) / 2 + WINDOW_HEIGHT
+		/ 2 + (int)pitch_offset;
+	bounds->wall_end = wall_height / 2 + WINDOW_HEIGHT / 2 + (int)pitch_offset;
+	if (bounds->wall_start < 0)
+		bounds->wall_start = 0;
+	if (bounds->wall_end >= WINDOW_HEIGHT)
+		bounds->wall_end = WINDOW_HEIGHT - 1;
+	if (bounds->wall_start >= WINDOW_HEIGHT)
+		bounds->wall_start = WINDOW_HEIGHT - 1;
+	if (bounds->wall_end < 0)
+		bounds->wall_end = 0;
 }

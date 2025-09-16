@@ -6,7 +6,7 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 14:01:03 by lcalero           #+#    #+#             */
-/*   Updated: 2025/09/14 18:30:27 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/09/16 16:27:08 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -453,8 +453,6 @@ int						find_astar_path(t_data *data, t_pos start, t_pos goal,
 void					update_player_stamina_status(t_data *data,
 							double delta_time);
 double					u_get_current_speed(t_data *data);
-void					draw_sprite_at(t_data *data, t_render *render,
-							t_sprite_bounds *bounds, t_enemy *enemy);
 void					render_gun(t_data *data);
 void					animation_routine(t_data *data);
 void					trace_shot(t_data *data);
@@ -492,8 +490,6 @@ void					extract_fog_colors(int fog_color, int *r, int *g,
 							int *b);
 int						calculate_fog_alpha(double distance);
 int						get_pixel_from_image(t_data *data, int x, int y);
-unsigned int			get_texture_pixel(t_texture_info *texture_info, int x,
-							int y);
 int						blend_colors(t_color *colors, double alpha);
 int						is_out_of_bounds(int x, int y, int height, int width);
 int						is_valid_map_char(char c);
@@ -528,7 +524,6 @@ int						is_valid_position(t_data *data, double x, double y);
 int						heuristic(t_pos a, t_pos b);
 int						calc_horizon_line(t_data *data);
 void					check_door_distance(t_data *data, int keycode);
-int						is_transparent_color(unsigned int color);
 void					init_ray_direction_shot(t_data *data);
 void					init_ray_distances_shot(t_data *data);
 void					init_ray_steps_shot(t_data *data);

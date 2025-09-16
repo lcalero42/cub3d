@@ -1,38 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   r_trace_shot.c                                     :+:      :+:    :+:   */
+/*   r_trace_shot_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/09 20:08:27 by lcalero           #+#    #+#             */
-/*   Updated: 2025/09/12 17:08:39 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/09/16 16:01:14 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d_bonus.h"
 
 static void	trace_single_ray(t_data *data);
+static void	perform_dda_shot(t_data *data);
+static void	perform_dda_step_shot(t_data *data);
 
 void	trace_shot(t_data *data)
 {
 	trace_single_ray(data);
 }
 
-static void	perform_dda_step_shot(t_data *data)
+static void	trace_single_ray(t_data *data)
 {
-	if (data->shot_ray.side_dist.x < data->shot_ray.side_dist.y)
-	{
-		data->shot_ray.side_dist.x += data->shot_ray.delta_dist.x;
-		data->shot_ray.map_pos.x += data->shot_ray.step.x;
-		data->shot_ray.side = 0;
-	}
-	else
-	{
-		data->shot_ray.side_dist.y += data->shot_ray.delta_dist.y;
-		data->shot_ray.map_pos.y += data->shot_ray.step.y;
-		data->shot_ray.side = 1;
-	}
+	init_ray_direction_shot(data);
+	init_ray_distances_shot(data);
+	init_ray_steps_shot(data);
+	perform_dda_shot(data);
 }
 
 static void	perform_dda_shot(t_data *data)
@@ -59,10 +53,18 @@ static void	perform_dda_shot(t_data *data)
 	}
 }
 
-static void	trace_single_ray(t_data *data)
+static void	perform_dda_step_shot(t_data *data)
 {
-	init_ray_direction_shot(data);
-	init_ray_distances_shot(data);
-	init_ray_steps_shot(data);
-	perform_dda_shot(data);
+	if (data->shot_ray.side_dist.x < data->shot_ray.side_dist.y)
+	{
+		data->shot_ray.side_dist.x += data->shot_ray.delta_dist.x;
+		data->shot_ray.map_pos.x += data->shot_ray.step.x;
+		data->shot_ray.side = 0;
+	}
+	else
+	{
+		data->shot_ray.side_dist.y += data->shot_ray.delta_dist.y;
+		data->shot_ray.map_pos.y += data->shot_ray.step.y;
+		data->shot_ray.side = 1;
+	}
 }

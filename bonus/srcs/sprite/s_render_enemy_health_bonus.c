@@ -1,46 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   s_render_enemy_health.c                            :+:      :+:    :+:   */
+/*   s_render_enemy_health_bonus.c                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/12 16:42:45 by lcalero           #+#    #+#             */
-/*   Updated: 2025/09/12 18:09:45 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/09/16 16:28:46 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <math.h>
 #include "cub3d_bonus.h"
 
-static void	normalize_angle(double *angle)
-{
-	while (*angle < 0)
-		*angle += 2 * M_PI;
-	while (*angle >= 2 * M_PI)
-		*angle -= 2 * M_PI;
-}
-
+static void	normalize_angle(double *angle);
 static void	calculate_angle_diff(t_enemy *enemy, t_player *player,
-	t_enemy_render_data *render_data)
-{
-	float	dx;
-	float	dy;
-	double	enemy_angle;
-	float	angle_diff;
-
-	dx = enemy->position.x - player->position.x;
-	dy = enemy->position.y - player->position.y;
-	enemy_angle = atan2f(dy, dx);
-	normalize_angle(&enemy_angle);
-	normalize_angle(&player->angle);
-	angle_diff = enemy_angle - player->angle;
-	if (angle_diff > M_PI)
-		angle_diff -= 2 * M_PI;
-	else if (angle_diff < -M_PI)
-		angle_diff += 2 * M_PI;
-	render_data->angle_diff = angle_diff;
-}
+				t_enemy_render_data *render_data);
 
 void	calculate_enemy_screen_pos(t_enemy *enemy, t_player *player,
 	t_enemy_render_data *render_data)
@@ -82,4 +57,33 @@ void	calculate_health_bar_position(t_enemy_render_data *r_dt,
 	health_bar->y = r_dt->sprite_top - bar_height - 10;
 	health_bar->width = bar_width;
 	health_bar->height = bar_height;
+}
+
+static void	calculate_angle_diff(t_enemy *enemy, t_player *player,
+	t_enemy_render_data *render_data)
+{
+	float	dx;
+	float	dy;
+	double	enemy_angle;
+	float	angle_diff;
+
+	dx = enemy->position.x - player->position.x;
+	dy = enemy->position.y - player->position.y;
+	enemy_angle = atan2f(dy, dx);
+	normalize_angle(&enemy_angle);
+	normalize_angle(&player->angle);
+	angle_diff = enemy_angle - player->angle;
+	if (angle_diff > M_PI)
+		angle_diff -= 2 * M_PI;
+	else if (angle_diff < -M_PI)
+		angle_diff += 2 * M_PI;
+	render_data->angle_diff = angle_diff;
+}
+
+static void	normalize_angle(double *angle)
+{
+	while (*angle < 0)
+		*angle += 2 * M_PI;
+	while (*angle >= 2 * M_PI)
+		*angle -= 2 * M_PI;
 }
