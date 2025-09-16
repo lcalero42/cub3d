@@ -3,41 +3,49 @@
 /*                                                        :::      ::::::::   */
 /*   u_rendering_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/28 14:25:57 by lcalero           #+#    #+#             */
-/*   Updated: 2025/09/03 11:52:49 by ekeisler         ###   ########.fr       */
+/*   Updated: 2025/09/16 17:49:32 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d_bonus.h"
 
-static int	calc_floor_color(t_data *data, char color, float t);
-
-void	draw_floor(t_data *data, int start_x, int y)
+int	get_wall_texture_pixel(t_data *data, int x, int y, int ray_index)
 {
-	float	t;
-	int		adjusted_horizon;
-	int		x;
-	int		floor_height;
+	t_texture_info	texture;
+	t_wall_side		side;
+	char			*dst;
 
-	adjusted_horizon = calc_horizon_line(data);
-	floor_height = WINDOW_HEIGHT - adjusted_horizon;
-	if (floor_height <= 0)
-		floor_height = 1;
-	t = (float)(y - adjusted_horizon) / (float)floor_height;
-	if (t > 1.0f)
-		t = 1.0f;
-	if (t < 0.0f)
-		t = 0.0f;
-	x = start_x;
-	while (x < WINDOW_WIDTH)
+	if (x < 0 || x >= 64 || y < 0 || y >= 64)
+		return (0x808080);
+	if (!data->rays[ray_index].must_render)
+		return (u_rgb_to_hex(data->ceiling.base_r,
+				data->ceiling.base_g, data->ceiling.base_b, 255));
+	side = get_wall_side(data, ray_index);
+	texture = get_texture_info_by_side(data, side);
+	if (data->rays[ray_index].hit == 2)
 	{
-		put_pixel_to_image(data, x, y, u_rgb_to_hex(calc_floor_color(data, 'r',
-					t), calc_floor_color(data, 'g', t), calc_floor_color(data,
-					'b', t), 0));
-		x++;
+		texture.addr = data->door.info.addr;
+		texture.bpp = data->door.info.bpp;
+		texture.line_len = data->door.info.line_len;
 	}
+	if (!texture.addr)
+		return (0x808080);
+	dst = texture.addr + (y * texture.line_len + x * (texture.bpp / 8));
+	return (*(unsigned int *)dst);
+}
+
+void	put_pixel_to_image(t_data *data, int x, int y, int color)
+{
+	char	*dst;
+
+	if (x < 0 || x >= WINDOW_WIDTH || y < 0 || y >= WINDOW_HEIGHT)
+		return ;
+	dst = data->render_info.addr + (y * data->render_info.line_len
+			+ x * (data->render_info.bpp / 8));
+	*(unsigned int *)dst = color;
 }
 
 int	get_pixel_from_image(t_data *data, int x, int y)
@@ -70,30 +78,4 @@ void	extract_base_colors(int base_color, int *r, int *g, int *b)
 	*r = (base_color >> 16) & 0xFF;
 	*g = (base_color >> 8) & 0xFF;
 	*b = base_color & 0xFF;
-}
-
-static int	calc_floor_color(t_data *data, char color, float t)
-{
-	int	floor_r;
-	int	floor_g;
-	int	floor_b;
-
-	if (data->render_fog)
-	{
-		floor_r = (int)(data->floor.base_r * (0.3f + 0.7f * t));
-		floor_g = (int)(data->floor.base_g * (0.3f + 0.7f * t));
-		floor_b = (int)(data->floor.base_b * (0.3f + 0.7f * t));
-	}
-	else
-	{
-		floor_r = data->floor.base_r;
-		floor_g = data->floor.base_g;
-		floor_b = data->floor.base_b;
-	}
-	if (color == 'r')
-		return (floor_r);
-	else if (color == 'g')
-		return (floor_g);
-	else
-		return (floor_b);
 }

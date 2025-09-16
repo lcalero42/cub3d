@@ -6,7 +6,7 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/28 14:09:27 by lcalero           #+#    #+#             */
-/*   Updated: 2025/09/16 16:08:43 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/09/16 17:21:22 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 static void	process_fog_column(t_data *data, int x);
 static void	apply_fog_column(t_data *data, t_fog_params *params);
-static int	blend_fog_with_pixel(int base_color, int fog_color, int fog_alpha);
 static void	calculate_wall_bounds(t_data *data, double distance,
 				t_wall_bounds *bounds);
 
@@ -68,7 +67,7 @@ static void	apply_fog_column(t_data *data, t_fog_params *params)
 	}
 }
 
-static int	blend_fog_with_pixel(int base_color, int fog_color, int fog_alpha)
+int	blend_fog_with_pixel(int base_color, int fog_color, int fog_alpha)
 {
 	t_color	colors;
 	double	alpha_factor;

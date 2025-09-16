@@ -6,11 +6,33 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 17:10:47 by lcalero           #+#    #+#             */
-/*   Updated: 2025/09/11 16:21:52 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/09/16 17:51:31 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d_bonus.h"
+
+static int	calc_horizon_line(t_data *data);
+static void	draw_floor_line_with_fog(t_data *data, int y, int horizon_line);
+
+void	clear_screen(t_data *data)
+{
+	int	y;
+	int	horizon_line;
+
+	horizon_line = calc_horizon_line(data);
+	y = 0;
+	while (y < horizon_line)
+	{
+		draw_sky_line_with_fog(data, y, horizon_line);
+		y++;
+	}
+	while (y < WINDOW_HEIGHT)
+	{
+		draw_floor_line_with_fog(data, y, horizon_line);
+		y++;
+	}
+}
 
 void	init_walls(t_data *data)
 {
@@ -26,76 +48,36 @@ void	init_walls(t_data *data)
 		exit(1);
 	}
 	data->render_info.addr = mlx_get_data_addr(data->render_img,
-			&data->render_info.bpp,
-			&data->render_info.line_len,
+			&data->render_info.bpp, &data->render_info.line_len,
 			&data->render_endian);
 }
 
-int	get_wall_texture_pixel(t_data *data, int x, int y, int ray_index)
+static void	draw_floor_line_with_fog(t_data *data, int y, int horizon_line)
 {
-	t_texture_info	texture;
-	t_wall_side		side;
-	char			*dst;
+	int	x;
+	int	fog_alpha;
+	int	base_color;
+	int	fog_color;
+	int	final_color;
 
-	if (x < 0 || x >= 64 || y < 0 || y >= 64)
-		return (0x808080);
-	if (!data->rays[ray_index].must_render)
-		return (u_rgb_to_hex(data->ceiling.base_r,
-				data->ceiling.base_g, data->ceiling.base_b, 255));
-	side = get_wall_side(data, ray_index);
-	texture = get_texture_info_by_side(data, side);
-	if (data->rays[ray_index].hit == 2)
+	fog_alpha = calculate_ground_fog_alpha(y, horizon_line);
+	base_color = u_rgb_to_hex(data->floor.base_r, data->floor.base_g,
+			data->floor.base_b, 255);
+	fog_color = u_rgb_to_hex(FOG_COLOR_R, FOG_COLOR_G, FOG_COLOR_B, 255);
+	x = 0;
+	while (x < WINDOW_WIDTH)
 	{
-		texture.addr = data->door.info.addr;
-		texture.bpp = data->door.info.bpp;
-		texture.line_len = data->door.info.line_len;
-	}
-	if (!texture.addr)
-		return (0x808080);
-	dst = texture.addr + (y * texture.line_len + x * (texture.bpp / 8));
-	return (*(unsigned int *)dst);
-}
-
-void	put_pixel_to_image(t_data *data, int x, int y, int color)
-{
-	char	*dst;
-
-	if (x < 0 || x >= WINDOW_WIDTH || y < 0 || y >= WINDOW_HEIGHT)
-		return ;
-	dst = data->render_info.addr + (y * data->render_info.line_len
-			+ x * (data->render_info.bpp / 8));
-	*(unsigned int *)dst = color;
-}
-
-void	clear_screen(t_data *data)
-{
-	int		x;
-	int		y;
-	int		horizon_line;
-
-	horizon_line = calc_horizon_line(data);
-	y = 0;
-	while (y < horizon_line)
-	{
-		x = 0;
-		while (x < WINDOW_WIDTH)
-		{
-			put_pixel_to_image(
-				data, x, y,
-				u_rgb_to_hex(data->ceiling.base_r, data->ceiling.base_g,
-					data->ceiling.base_b, 0));
-			x++;
-		}
-		y++;
-	}
-	while (y < WINDOW_HEIGHT)
-	{
-		draw_floor(data, 0, y);
-		y++;
+		if (fog_alpha > 0)
+			final_color = blend_fog_with_pixel(base_color,
+					fog_color, fog_alpha);
+		else
+			final_color = base_color;
+		put_pixel_to_image(data, x, y, final_color);
+		x++;
 	}
 }
 
-int	calc_horizon_line(t_data *data)
+static int	calc_horizon_line(t_data *data)
 {
 	int		horizon_line;
 

@@ -6,7 +6,7 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 14:01:03 by lcalero           #+#    #+#             */
-/*   Updated: 2025/09/16 16:27:08 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/09/16 17:51:19 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@
 # endif
 
 # define FOG_START_DISTANCE 0.1f
-# define FOG_END_DISTANCE 8.0f
+# define FOG_END_DISTANCE 5.0f
 # define FOG_MAX_ALPHA 255
 # define FOG_COLOR_R 0
 # define FOG_COLOR_G 0
@@ -436,7 +436,7 @@ void					trace_ray(t_data *data, double angle);
 void					render_walls(t_data *data);
 void					init_walls(t_data *data);
 void					clear_screen(t_data *data);
-void					draw_floor(t_data *data, int x, int y);
+// void					draw_floor(t_data *data, int x, int y);
 void					put_pixel_to_image(t_data *data, int x, int y,
 							int color);
 int						get_wall_texture_pixel(t_data *data, int x, int y,
@@ -522,7 +522,6 @@ void					init_astar_data(t_data *data, t_astar_data *astar,
 							t_pos start, t_pos goal);
 int						is_valid_position(t_data *data, double x, double y);
 int						heuristic(t_pos a, t_pos b);
-int						calc_horizon_line(t_data *data);
 void					check_door_distance(t_data *data, int keycode);
 void					init_ray_direction_shot(t_data *data);
 void					init_ray_distances_shot(t_data *data);
@@ -540,5 +539,11 @@ void					calculate_health_bar_position(t_enemy_render_data *r_dt,
 							t_enemy_health_bar *health_bar);
 void					calculate_enemy_screen_pos(t_enemy *enemy,
 							t_player *player, t_enemy_render_data *render_data);
+int						blend_fog_with_pixel(int base_color,
+							int fog_color, int fog_alpha);
+int						calculate_ground_fog_alpha(int y,
+							int horizon_line);
+void					draw_sky_line_with_fog(t_data *data, int y,
+							int horizon_line);
 
 #endif
