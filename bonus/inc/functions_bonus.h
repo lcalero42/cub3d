@@ -6,7 +6,7 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 13:18:22 by lcalero           #+#    #+#             */
-/*   Updated: 2025/09/22 13:23:31 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/09/22 13:56:20 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void			draw_health_bar_background(t_data *data,
 					t_health_bar *health_bar);
 
 /* PLAYER & MOVEMENT */
-void			update_player_stamina_status(t_data *data, double delta_time);
+void			update_player_stamina_status(t_data *data);
 double			u_get_current_speed(t_data *data);
 int				check_collisions(t_data *data, t_vector move);
 void			handle_forward_backward(t_data *data, t_vector *move,
@@ -127,6 +127,7 @@ int				is_out_of_bounds(int x, int y, int height, int width);
 int				is_valid_map_char(char c);
 void			load_texture(t_data *data, char *path, t_render *texture);
 void			init(t_data *data, char **argv);
+void			calc_delta_time_ms(t_data *data);
 
 /* COLOR & FOG */
 void			extract_base_colors(int base_color, int *r, int *g, int *b);
@@ -142,6 +143,6 @@ void			draw_sky_line_with_fog(t_data *data, int y, int horizon_line);
 void			calculate_health_bar_position(t_enemy_render_data *r_dt,
 					t_enemy_health_bar *health_bar);
 void			calculate_enemy_screen_pos(t_enemy *enemy, t_player *player,
-					t_enemy_render_data *render_data);
+					t_enemy_render_data *render_data, t_data *data);
 
 #endif

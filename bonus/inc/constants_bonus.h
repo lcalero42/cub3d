@@ -6,7 +6,7 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 13:17:32 by lcalero           #+#    #+#             */
-/*   Updated: 2025/09/22 13:20:07 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/09/22 14:00:25 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,10 @@
 
 # ifndef RELOAD_TIME_MS
 #  define RELOAD_TIME_MS 2000ll
+# endif
+
+# ifndef LIFE_DRAIN_RATE
+#  define LIFE_DRAIN_RATE 20.0f
 # endif
 
 # define ANIMATION_INTERVAL 2

@@ -6,7 +6,7 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 13:18:32 by lcalero           #+#    #+#             */
-/*   Updated: 2025/09/22 13:20:34 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/09/22 14:41:35 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -278,6 +278,7 @@ typedef struct s_movement_data
 typedef struct s_data
 {
 	int				game_started;
+	double			delta_time;
 	t_render		north_wall;
 	t_render		south_wall;
 	t_render		east_wall;

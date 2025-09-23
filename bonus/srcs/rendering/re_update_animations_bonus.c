@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   re_update_animations.c                             :+:      :+:    :+:   */
+/*   re_update_animations_bonus.c                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/10 17:18:30 by lcalero           #+#    #+#             */
-/*   Updated: 2025/09/11 16:23:43 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/09/22 13:57:36 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,24 +16,13 @@ static void	update_indexes(t_data *data, double *acc_time, double anim_speed);
 
 void	animation_routine(t_data *data)
 {
-	static long long	last_anim_time = 0;
 	static double		accumulated_time = 0.0;
-	long long			current_time;
-	double				delta_time;
 	double				animation_speed;
 
 	animation_speed = 10.0;
-	current_time = get_current_time();
-	if (last_anim_time == 0)
-	{
-		last_anim_time = current_time;
-		return ;
-	}
-	delta_time = (current_time - last_anim_time) / 1000.0;
-	accumulated_time += delta_time;
+	accumulated_time += data->delta_time;
 	while (accumulated_time >= 1.0 / animation_speed)
 		update_indexes(data, &accumulated_time, animation_speed);
-	last_anim_time = current_time;
 }
 
 static void	update_indexes(t_data *data, double *acc_time, double anim_speed)

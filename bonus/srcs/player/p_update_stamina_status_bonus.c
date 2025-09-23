@@ -3,20 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   p_update_stamina_status_bonus.c                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 12:56:28 by ekeisler          #+#    #+#             */
-/*   Updated: 2025/08/29 08:08:38 by ekeisler         ###   ########.fr       */
+/*   Updated: 2025/09/22 13:55:58 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d_bonus.h"
 
-void	update_player_stamina_status(t_data *data, double delta_time)
+void	update_player_stamina_status(t_data *data)
 {
 	if (data->player.is_running)
 	{
-		data->player.stamina -= STAMINA_DRAIN_RATE * delta_time;
+		data->player.stamina -= STAMINA_DRAIN_RATE * data->delta_time;
 		if (data->player.stamina <= 0)
 		{
 			data->keys.run = 0;
@@ -26,7 +26,7 @@ void	update_player_stamina_status(t_data *data, double delta_time)
 	}
 	else if (!data->player.is_running)
 	{
-		data->player.stamina += (STAMINA_REGEN_RATE * delta_time);
+		data->player.stamina += (STAMINA_REGEN_RATE * data->delta_time);
 		if (data->player.stamina > MAX_STAMINA)
 			data->player.stamina = MAX_STAMINA;
 	}

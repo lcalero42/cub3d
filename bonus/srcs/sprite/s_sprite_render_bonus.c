@@ -6,7 +6,7 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 19:04:42 by lcalero           #+#    #+#             */
-/*   Updated: 2025/09/16 16:28:26 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/09/22 13:48:41 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	render_enemy_with_health(t_data *data, t_enemy *enemy)
 {
 	t_sprite_bounds		bounds;
 
-	calculate_enemy_screen_pos(enemy, &data->player, &enemy->enemy_data);
+	calculate_enemy_screen_pos(enemy, &data->player, &enemy->enemy_data, data);
 	if (enemy->enemy_data.visible)
 	{
 		calculate_sprite_bounds(data->enemy.enemy_data.screen_x,

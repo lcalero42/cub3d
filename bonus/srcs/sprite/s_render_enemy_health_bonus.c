@@ -6,7 +6,7 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/12 16:42:45 by lcalero           #+#    #+#             */
-/*   Updated: 2025/09/16 16:28:46 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/09/22 14:40:39 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void	calculate_angle_diff(t_enemy *enemy, t_player *player,
 				t_enemy_render_data *render_data);
 
 void	calculate_enemy_screen_pos(t_enemy *enemy, t_player *player,
-	t_enemy_render_data *render_data)
+	t_enemy_render_data *render_data, t_data *data)
 {
 	float	dx;
 	float	dy;
@@ -30,7 +30,7 @@ void	calculate_enemy_screen_pos(t_enemy *enemy, t_player *player,
 	player->pitch_offset = player->pitch * (WINDOW_HEIGHT * 0.5);
 	dist = sqrtf(dx * dx + dy * dy);
 	if (dist <= 2.0f)
-		player->current_health -= 0.02;
+		player->current_health -= LIFE_DRAIN_RATE * data->delta_time;
 	calculate_angle_diff(enemy, player, render_data);
 	fov = M_PI / 3;
 	render_data->visible = 1;

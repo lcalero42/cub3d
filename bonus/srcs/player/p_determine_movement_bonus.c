@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   p_determine_movement_bonus.c                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 18:19:04 by lcalero           #+#    #+#             */
-/*   Updated: 2025/09/03 11:51:43 by ekeisler         ###   ########.fr       */
+/*   Updated: 2025/09/22 13:58:33 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,28 +18,18 @@ static void	determine_rotation(t_data *data, double rotation_speed);
 
 void	update_player_movement(t_data *data)
 {
-	long long	current_time;
-	double		delta_time;
 	double		move_speed;
 	double		rotation_speed;
 
-	current_time = get_current_time();
-	if (data->last_time == 0)
-	{
-		data->last_time = current_time;
-		return ;
-	}
-	delta_time = (current_time - data->last_time) / 1000.0;
-	data->last_time = current_time;
-	move_speed = u_get_current_speed(data) * delta_time;
-	rotation_speed = ROTATION_SPEED * delta_time;
+	move_speed = u_get_current_speed(data) * data->delta_time;
+	rotation_speed = ROTATION_SPEED * data->delta_time;
 	determine_rotation(data, rotation_speed);
 	determine_movement(data, move_speed);
 	if (data->keys.run && data->player.stamina > 0)
 		data->player.is_running = 1;
 	else if (!data->keys.run)
 		data->player.is_running = 0;
-	update_player_stamina_status(data, delta_time);
+	update_player_stamina_status(data);
 }
 
 void	handle_forward_backward(t_data *data, t_vector *move,
