@@ -6,7 +6,7 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 19:04:02 by lcalero           #+#    #+#             */
-/*   Updated: 2025/09/16 16:29:29 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/09/23 13:11:24 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,8 @@ void	calculate_sprite_bounds(int screen_x, int sprite_height,
 		bounds->end_x = WINDOW_WIDTH - 1;
 }
 
-void	draw_sprite_column(t_data *data, t_sprite_params *params)
+void	draw_sprite_column(t_data *data, t_sprite_params *params,
+			t_sprite_bounds *bounds)
 {
 	int				y;
 	int				tex_y;
@@ -47,12 +48,12 @@ void	draw_sprite_column(t_data *data, t_sprite_params *params)
 			y++;
 			continue ;
 		}
-		tex_y = (int)((float)(y - params->sprite_top) * 64
+		tex_y = (int)((float)(y - params->sprite_top) * bounds->sprite_size
 				/ params->sprite_height);
 		if (tex_y < 0)
 			tex_y = 0;
-		if (tex_y >= 64)
-			tex_y = 64 - 1;
+		if (tex_y >= bounds->sprite_size)
+			tex_y = bounds->sprite_size;
 		color = get_texture_pixel(params->tex_info, params->tex_x, tex_y);
 		if (!is_transparent_color(color))
 			put_pixel_to_image(data, params->x, y, color);

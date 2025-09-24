@@ -3,8 +3,8 @@
 # ---------------------------------------------------------------------------- #
 
 # ---------------------------------- window ---------------------------------- #
-WINDOW_WIDTH = 640		    # width of window
-WINDOW_HEIGHT = 480			# height of window
+WINDOW_WIDTH = 1920		    # width of window
+WINDOW_HEIGHT = 1080			# height of window
 
 # --------------------------------- gameplay --------------------------------- #
 MOVE_SPEED = 5.0f		   # player movement speed
@@ -59,6 +59,7 @@ VPATH = $(SRC_DIR)/srcs:$(SRC_DIR)/srcs/raycasting \
         $(SRC_DIR)/srcs:$(SRC_DIR)/srcs/rendering  \
         $(SRC_DIR)/srcs:$(SRC_DIR)/srcs/mouse_move \
 		$(SRC_DIR)/srcs:$(SRC_DIR)/srcs/sprite	   \
+		$(SRC_DIR)/srcs:$(SRC_DIR)/srcs/UI		   \
 
 # Mandatory source files
 SRCS_MANDATORY = main.c				\
@@ -147,6 +148,7 @@ SRCS_BONUS = main_bonus.c							\
 		s_render_gun_bonus.c						\
 		s_enemy_find_path_bonus.c					\
 		s_render_enemy_health_bonus.c				\
+		ui_render_menu_bonus.c						\
 
 # Select source files based on mode
 ifeq ($(MODE), bonus)

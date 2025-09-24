@@ -6,7 +6,7 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 13:18:22 by lcalero           #+#    #+#             */
-/*   Updated: 2025/09/22 13:23:31 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/09/24 15:34:26 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,9 @@ void			init_health_bar(t_health_bar *health_bar, t_data *data);
 unsigned int	get_health_color(t_data *data);
 void			draw_health_bar_background(t_data *data,
 					t_health_bar *health_bar);
+void			render_menu(t_data *data);
+int				handle_menu_button_clicks(t_data *data,
+					int mouse_x, int mouse_y);
 
 /* PLAYER & MOVEMENT */
 void			update_player_stamina_status(t_data *data, double delta_time);
@@ -89,7 +92,8 @@ int				mouse_hook(int keycode, int x, int y, t_data *data);
 int				check_wall_occlusion(t_data *data, int x, t_enemy *enemy);
 void			calculate_sprite_bounds(int screen_x, int sprite_height,
 					t_sprite_bounds *bounds);
-void			draw_sprite_column(t_data *data, t_sprite_params *params);
+void			draw_sprite_column(t_data *data, t_sprite_params *params,
+					t_sprite_bounds *bounds);
 t_sprite_params	init_sprite_params(t_texture_info *info, int spr_top,
 					int spr_height);
 

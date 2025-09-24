@@ -6,7 +6,7 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 13:18:32 by lcalero           #+#    #+#             */
-/*   Updated: 2025/09/22 13:20:34 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/09/24 15:18:29 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -194,6 +194,7 @@ typedef struct s_sprite_bounds
 	int	half_width;
 	int	sprite_height;
 	int	sprite_top;
+	int	sprite_size;
 }	t_sprite_bounds;
 
 typedef struct s_sprite_params
@@ -285,6 +286,11 @@ typedef struct s_data
 	t_render		enemy_render;
 	t_render		crosshair;
 	t_render		door;
+	t_render		play_button;
+	t_sprite_bounds	play_bounds;
+	t_render		leave_button;
+	t_sprite_bounds	leave_bounds;
+	t_render		menu_background;
 	t_anim			gun;
 	t_anim			shot;
 	t_color			floor;
