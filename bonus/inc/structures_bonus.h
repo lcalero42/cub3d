@@ -6,7 +6,7 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 13:18:32 by lcalero           #+#    #+#             */
-/*   Updated: 2025/09/22 13:20:34 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/09/24 16:19:21 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,23 @@ typedef enum e_wall_side
 	EAST = 2,
 	WEST = 3
 }	t_wall_side;
+
+typedef enum e_door_state
+{
+	DOOR_CLOSED = 0,
+	DOOR_OPEN = 1,
+	DOOR_OPENING = 2,
+	DOOR_CLOSING = 3
+}	t_door_state;
+
+typedef struct s_door
+{
+	int			x;
+	int			y;
+	t_door_state state;
+	double		open_progress;  // 0.0 = closed, 1.0 = fully open
+	long long	last_interaction_time;
+}	t_door;
 
 typedef struct s_health_bar
 {
@@ -284,7 +301,8 @@ typedef struct s_data
 	t_render		west_wall;
 	t_render		enemy_render;
 	t_render		crosshair;
-	t_render		door;
+	t_render		door_opened;
+	t_render		door_closed;
 	t_anim			gun;
 	t_anim			shot;
 	t_color			floor;
@@ -312,6 +330,9 @@ typedef struct s_data
 	t_discriminant	disc;
 	t_health_bar	health_bar;
 	t_health_bar	stamina_bar;
+	t_door 			doors[MAX_DOORS];
+	int				door_count;
+	long long		last_door_interaction;
 }	t_data;
 
 typedef struct s_neighbor_context

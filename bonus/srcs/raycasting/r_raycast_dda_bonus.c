@@ -6,7 +6,7 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 17:13:02 by lcalero           #+#    #+#             */
-/*   Updated: 2025/09/16 15:59:51 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/09/24 17:12:12 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,9 +69,10 @@ static void	perform_dda_step(t_data *data, int i)
 
 static void	perform_dda(t_data *data, int i)
 {
-	int	steps;
-	int	map_x;
-	int	map_y;
+	int		steps;
+	int		map_x;
+	int		map_y;
+	t_door	*door;
 
 	steps = 0;
 	while (data->rays[i].hit == 0)
@@ -82,7 +83,16 @@ static void	perform_dda(t_data *data, int i)
 		if (data->grid.grid[map_y][map_x] == '1')
 			data->rays[i].hit = 1;
 		else if (data->grid.grid[map_y][map_x] == '2')
-			data->rays[i].hit = 2;
+		{
+			door = find_door_at(data, map_x, map_y);
+			if (door)
+			{
+				if (should_door_block_ray(door, &data->rays[i]))
+					data->rays[i].hit = 2;
+			}
+			else
+				data->rays[i].hit = 2;
+		}
 		steps++;
 		if (steps > RENDER_DISTANCE)
 		{

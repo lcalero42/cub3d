@@ -6,7 +6,7 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 17:10:47 by lcalero           #+#    #+#             */
-/*   Updated: 2025/09/16 17:51:31 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/09/24 16:52:02 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,8 @@ void	init_walls(t_data *data)
 	load_texture(data, data->south_wall.texture_path, &data->south_wall);
 	load_texture(data, data->west_wall.texture_path, &data->west_wall);
 	load_texture(data, data->east_wall.texture_path, &data->east_wall);
-	load_texture(data, "bonus/textures/door-open.xpm", &data->door);
+	load_texture(data, "bonus/textures/door-open.xpm", &data->door_closed);
+	load_texture(data, "bonus/textures/door-closed.xpm", &data->door_opened);
 	data->render_img = mlx_new_image(data->mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
 	if (!data->render_img)
 	{

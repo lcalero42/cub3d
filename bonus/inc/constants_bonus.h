@@ -6,7 +6,7 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 13:17:32 by lcalero           #+#    #+#             */
-/*   Updated: 2025/09/22 13:20:07 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/09/24 16:14:32 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,5 +104,9 @@
 # define HEALTH_BAR_X 50
 # define HEALTH_BAR_Y 50
 # define MAX_HEALTH 100
+
+#define MAX_DOORS 64
+#define DOOR_INTERACTION_COOLDOWN 300
+#define DOOR_ANIMATION_SPEED 2.0
 
 #endif

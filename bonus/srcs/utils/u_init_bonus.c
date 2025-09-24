@@ -6,7 +6,7 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 18:20:59 by lcalero           #+#    #+#             */
-/*   Updated: 2025/09/12 17:32:16 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/09/24 16:45:43 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ void	init(t_data *data, char **argv)
 	load_texture(data, "bonus/textures/shot-0.xpm", &data->shot.render_arr[0]);
 	load_texture(data, "bonus/textures/shot-1.xpm", &data->shot.render_arr[1]);
 	load_texture(data, "bonus/textures/shot-2.xpm", &data->shot.render_arr[2]);
+	init_door_system(data);
 	data->gun.is_playing = 1;
 	spawn_enemy(data);
 	init_mouse_control(data);

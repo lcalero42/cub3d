@@ -6,7 +6,7 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 19:37:20 by lcalero           #+#    #+#             */
-/*   Updated: 2025/09/16 16:15:04 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/09/24 18:55:31 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,16 +83,25 @@ static void	init_directions(int dirs[4][2])
 
 int	is_valid_position(t_data *data, double x, double y)
 {
-	int	map_x;
-	int	map_y;
+	int		map_x;
+	int		map_y;
+	t_door	*door;
 
 	map_x = (int)x;
 	map_y = (int)y;
 	if (map_x < 0 || map_x >= data->grid.width
 		|| map_y < 0 || map_y >= data->grid.height)
 		return (0);
-	return (data->grid.grid[map_y][map_x] != '1'
-			&& data->grid.grid[map_y][map_x] != '2');
+	if (data->grid.grid[map_y][map_x] == '2')
+	{
+		door = find_door_at(data, map_x, map_y);
+		if (door)
+		{
+			if (door->state == DOOR_CLOSED)
+				return (0);
+		}
+	}
+	return (data->grid.grid[map_y][map_x] != '1');
 }
 
 int	heuristic(t_pos a, t_pos b)

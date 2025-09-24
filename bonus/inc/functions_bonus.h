@@ -6,7 +6,7 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 13:18:22 by lcalero           #+#    #+#             */
-/*   Updated: 2025/09/22 13:23:31 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/09/24 16:47:50 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,11 @@ void			render_crosshair(t_data *data);
 void			render_gun(t_data *data);
 void			animation_routine(t_data *data);
 void			trace_shot(t_data *data);
+void			update_doors(t_data *data);
+void			toggle_door(t_door *door);
+t_door			*find_door_at(t_data *data, int x, int y);
+int				should_door_block_ray(t_door *door, t_ray *ray);
+void			check_door_interaction(t_data *data, int keycode);
 
 /* RAYCASTING INIT */
 void			init_player_direction(t_data *data, double angle);
@@ -107,7 +112,6 @@ int				is_valid_position(t_data *data, double x, double y);
 int				heuristic(t_pos a, t_pos b);
 
 /* SHOOTING */
-void			check_door_distance(t_data *data, int keycode);
 void			init_ray_direction_shot(t_data *data);
 void			init_ray_distances_shot(t_data *data);
 void			init_ray_steps_shot(t_data *data);
@@ -127,6 +131,8 @@ int				is_out_of_bounds(int x, int y, int height, int width);
 int				is_valid_map_char(char c);
 void			load_texture(t_data *data, char *path, t_render *texture);
 void			init(t_data *data, char **argv);
+t_texture_info	get_door_texture(t_data *data, t_door *door);
+void			init_door_system(t_data *data);
 
 /* COLOR & FOG */
 void			extract_base_colors(int base_color, int *r, int *g, int *b);

@@ -6,7 +6,7 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/28 14:25:57 by lcalero           #+#    #+#             */
-/*   Updated: 2025/09/16 17:49:32 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/09/24 16:50:03 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,7 @@ int	get_wall_texture_pixel(t_data *data, int x, int y, int ray_index)
 	side = get_wall_side(data, ray_index);
 	texture = get_texture_info_by_side(data, side);
 	if (data->rays[ray_index].hit == 2)
-	{
-		texture.addr = data->door.info.addr;
-		texture.bpp = data->door.info.bpp;
-		texture.line_len = data->door.info.line_len;
-	}
+		texture = get_door_texture(data, find_door_at(data, data->rays[ray_index].map_pos.x, data->rays[ray_index].map_pos.y));
 	if (!texture.addr)
 		return (0x808080);
 	dst = texture.addr + (y * texture.line_len + x * (texture.bpp / 8));
