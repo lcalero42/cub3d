@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   functions_bonus.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 13:18:22 by lcalero           #+#    #+#             */
-/*   Updated: 2025/09/22 13:23:31 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/09/25 15:10:10 by ekeisler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ void			init_health_bar(t_health_bar *health_bar, t_data *data);
 unsigned int	get_health_color(t_data *data);
 void			draw_health_bar_background(t_data *data,
 					t_health_bar *health_bar);
+void			render_minimap(t_data *data);
 
 /* PLAYER & MOVEMENT */
 void			update_player_stamina_status(t_data *data, double delta_time);
