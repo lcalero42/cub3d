@@ -6,7 +6,7 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/03 13:59:19 by lcalero           #+#    #+#             */
-/*   Updated: 2025/09/24 17:22:18 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/09/25 15:47:03 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,37 +57,6 @@ t_door	*find_door_at(t_data *data, int x, int y)
 	return (NULL);
 }
 
-void	update_doors(t_data *data)
-{
-	int		i;
-	t_door	*door;
-
-	i = 0;
-	while (i < data->door_count)
-	{
-		door = &data->doors[i];
-		if (door->state == DOOR_OPENING)
-		{
-			door->open_progress += DOOR_ANIMATION_SPEED;
-			if (door->open_progress >= 1.0)
-			{
-				door->open_progress = 1.0;
-				door->state = DOOR_OPEN;
-			}
-		}
-		else if (door->state == DOOR_CLOSING)
-		{
-			door->open_progress -= DOOR_ANIMATION_SPEED;
-			if (door->open_progress <= 0.0)
-			{
-				door->open_progress = 0.0;
-				door->state = DOOR_CLOSED;
-			}
-		}
-		i++;
-	}
-}
-
 void	check_door_interaction(t_data *data, int keycode)
 {
 	t_ray		middle_ray;
@@ -119,10 +88,10 @@ void	check_door_interaction(t_data *data, int keycode)
 
 void	toggle_door(t_door *door)
 {
-	if (door->state == DOOR_CLOSED || door->state == DOOR_CLOSING)
-		door->state = DOOR_OPENING;
-	else if (door->state == DOOR_OPEN || door->state == DOOR_OPENING)
-		door->state = DOOR_CLOSING;
+	if (door->state == DOOR_CLOSED)
+		door->state = DOOR_OPEN;
+	else if (door->state == DOOR_OPEN)
+		door->state = DOOR_CLOSED;
 }
 
 t_texture_info	get_door_texture(t_data *data, t_door *door)

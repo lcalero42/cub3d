@@ -6,7 +6,7 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 18:19:52 by lcalero           #+#    #+#             */
-/*   Updated: 2025/09/11 16:22:14 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/09/25 16:12:21 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,9 @@ static void	draw_wall_column(t_data *data, int x, int draw_start, int draw_end)
 	double	tex_pos;
 	int		original_wall_center;
 	int		y;
+	int		i;
 
+	i = 0;
 	data->rays[x].perp_wall_dist = calculate_perp_wall_dist(data, x);
 	tex_x = calculate_texture_x(data, x, data->rays[x].perp_wall_dist);
 	step = 1.0 * 64 / (WINDOW_HEIGHT / data->rays[x].perp_wall_dist);
@@ -107,8 +109,14 @@ static void	draw_wall_column(t_data *data, int x, int draw_start, int draw_end)
 	y = draw_start;
 	while (y < draw_end)
 	{
-		put_pixel_to_image(data, x, y, get_wall_texture_pixel(data, tex_x,
-				(int)tex_pos & (64 - 1), x));
+		while (i <= data->rays[x].index_hit)
+		{
+			if (!is_transparent_color(get_wall_texture_pixel(data, tex_x,
+					(int)tex_pos & (64 - 1), x, i)))
+				put_pixel_to_image(data, x, y, get_wall_texture_pixel(data, tex_x,
+						(int)tex_pos & (64 - 1), x, i));
+			i++;
+		}
 		tex_pos += step;
 		y++;
 	}

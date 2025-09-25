@@ -6,7 +6,7 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 13:18:32 by lcalero           #+#    #+#             */
-/*   Updated: 2025/09/24 16:19:21 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/09/25 16:01:10 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,8 @@ typedef struct s_ray
 	t_vector	delta_dist;
 	t_vector	step;
 	double		perp_wall_dist;
-	int			hit;
+	int			hit[MAX_RAY_HIT];
+	int			index_hit;
 	int			side;
 	int			must_render;
 }	t_ray;

@@ -6,7 +6,7 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/09 20:08:27 by lcalero           #+#    #+#             */
-/*   Updated: 2025/09/16 16:01:14 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/09/25 16:04:32 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static void	perform_dda_shot(t_data *data)
 	int	map_y;
 
 	steps = 0;
-	while (data->shot_ray.hit == 0)
+	while (data->shot_ray.hit[data->shot_ray.index_hit] != 1)
 	{
 		perform_dda_step_shot(data);
 		map_x = (int)data->shot_ray.map_pos.x;

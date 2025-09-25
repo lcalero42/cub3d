@@ -6,13 +6,13 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/28 14:25:57 by lcalero           #+#    #+#             */
-/*   Updated: 2025/09/24 16:50:03 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/09/25 16:10:38 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d_bonus.h"
 
-int	get_wall_texture_pixel(t_data *data, int x, int y, int ray_index)
+int	get_wall_texture_pixel(t_data *data, int x, int y, int ray_index, int index_hit)
 {
 	t_texture_info	texture;
 	t_wall_side		side;
@@ -25,7 +25,7 @@ int	get_wall_texture_pixel(t_data *data, int x, int y, int ray_index)
 				data->ceiling.base_g, data->ceiling.base_b, 255));
 	side = get_wall_side(data, ray_index);
 	texture = get_texture_info_by_side(data, side);
-	if (data->rays[ray_index].hit == 2)
+	if (data->rays[ray_index].hit[index_hit] == 2)
 		texture = get_door_texture(data, find_door_at(data, data->rays[ray_index].map_pos.x, data->rays[ray_index].map_pos.y));
 	if (!texture.addr)
 		return (0x808080);

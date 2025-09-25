@@ -6,7 +6,7 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 13:18:22 by lcalero           #+#    #+#             */
-/*   Updated: 2025/09/24 16:47:50 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/09/25 16:11:55 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void			render_walls(t_data *data);
 void			init_walls(t_data *data);
 void			clear_screen(t_data *data);
 void			put_pixel_to_image(t_data *data, int x, int y, int color);
-int				get_wall_texture_pixel(t_data *data, int x, int y, int side);
+int				get_wall_texture_pixel(t_data *data, int x, int y, int ray_index, int index_hit);
 void			update_player_movement(t_data *data);
 t_wall_side		get_wall_side(t_data *data, int ray_index);
 t_texture_info	get_texture_info_by_side(t_data *data, t_wall_side side);
@@ -133,6 +133,7 @@ void			load_texture(t_data *data, char *path, t_render *texture);
 void			init(t_data *data, char **argv);
 t_texture_info	get_door_texture(t_data *data, t_door *door);
 void			init_door_system(t_data *data);
+int				is_transparent_color(unsigned int color);
 
 /* COLOR & FOG */
 void			extract_base_colors(int base_color, int *r, int *g, int *b);
