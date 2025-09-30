@@ -6,7 +6,7 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 18:19:52 by lcalero           #+#    #+#             */
-/*   Updated: 2025/09/25 16:12:21 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/09/30 20:29:44 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,17 +107,14 @@ static void	draw_wall_column(t_data *data, int x, int draw_start, int draw_end)
 			- (int)data->player.pitch_offset + (WINDOW_HEIGHT
 				/ data->rays[x].perp_wall_dist) / 2) * step;
 	y = draw_start;
-	while (y < draw_end)
-	{
-		while (i <= data->rays[x].index_hit)
-		{
-			if (!is_transparent_color(get_wall_texture_pixel(data, tex_x,
-					(int)tex_pos & (64 - 1), x, i)))
-				put_pixel_to_image(data, x, y, get_wall_texture_pixel(data, tex_x,
-						(int)tex_pos & (64 - 1), x, i));
-			i++;
+	for (y = draw_start; y < draw_end; y++) {
+		for (i = data->rays[x].index_hit - 1; i >= 0; i--) { // Furthest to nearest
+			int pixel = get_wall_texture_pixel(data, tex_x, (int)tex_pos & (64 - 1), x, i);
+			if (!is_transparent_color(pixel)) {
+				put_pixel_to_image(data, x, y, pixel);
+				break; // Stop since we found a solid pixel
+			}
 		}
 		tex_pos += step;
-		y++;
 	}
 }
