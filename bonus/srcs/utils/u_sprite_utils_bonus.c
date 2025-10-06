@@ -6,7 +6,7 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 19:04:02 by lcalero           #+#    #+#             */
-/*   Updated: 2025/09/25 16:13:48 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/10/01 15:54:20 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,14 +64,11 @@ int	check_wall_occlusion(t_data *data, int x, t_enemy *enemy)
 	float	player_dist;
 	float	wall_dist;
 
-	if (data->rays[x].hit[data->rays[x].index_hit] != 1 && data->rays[x].hit[data->rays[x].index_hit] != 2
-		&& data->rays[x].hit[data->rays[x].index_hit] != 3)
-		return (0);
 	player_dist = sqrtf((enemy->position.x - data->player.position.x)
 			* (enemy->position.x - data->player.position.x)
 			+ (enemy->position.y - data->player.position.y)
 			* (enemy->position.y - data->player.position.y));
-	wall_dist = data->rays[x].perp_wall_dist;
+	wall_dist = data->rays[x].perp_wall_dist_per_hit[0];
 	return (wall_dist < player_dist);
 }
 

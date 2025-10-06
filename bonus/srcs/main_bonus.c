@@ -6,7 +6,7 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 11:53:44 by lcalero           #+#    #+#             */
-/*   Updated: 2025/09/30 19:31:45 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/10/06 19:03:14 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ int	render_loop(t_data *data)
 	animation_routine(data);
 	clear_screen(data);
 	render_walls(data);
-	if (data->render_fog)
-		apply_fog_overlay(data);
+	// if (data->render_fog)
+	// 	apply_fog_overlay(data);
 	render_enemy_with_health(data, &data->enemy);
 	render_crosshair(data);
 	render_gun(data);

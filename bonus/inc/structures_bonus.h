@@ -6,7 +6,7 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 13:18:32 by lcalero           #+#    #+#             */
-/*   Updated: 2025/09/30 20:12:04 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/10/06 18:53:52 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,6 +123,7 @@ typedef struct s_ray
 	int         hit[MAX_RAY_HIT];            // Hit types for each hit (e.g. wall=1, door=2)
 	t_pos       hit_map_pos[MAX_RAY_HIT];    // Map position of each hit
 	double      perp_wall_dist_per_hit[MAX_RAY_HIT]; // Perp distance of each hit for texture calculations
+	int         side_per_hit[MAX_RAY_HIT];
 	int         index_hit;                    // Number of hits recorded
 	int         must_render;                   // Flag to render or not
 } t_ray;
@@ -295,6 +296,12 @@ typedef struct s_movement_data
 	t_pos	path[128];
 }	t_movement_data;
 
+typedef struct s_render_info
+{
+    int     index_drawn;
+    double  distance_drawn;
+} t_render_info;
+
 typedef struct s_data
 {
 	int				game_started;
@@ -306,6 +313,7 @@ typedef struct s_data
 	t_render		crosshair;
 	t_render		door_opened;
 	t_render		door_closed;
+	t_render_info	pixel_render_info[WINDOW_WIDTH];
 	t_anim			gun;
 	t_anim			shot;
 	t_color			floor;

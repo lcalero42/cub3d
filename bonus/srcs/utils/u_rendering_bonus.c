@@ -6,47 +6,63 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/28 14:25:57 by lcalero           #+#    #+#             */
-/*   Updated: 2025/09/30 20:05:11 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/10/01 15:14:00 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d_bonus.h"
 
-int get_wall_texture_pixel(t_data *data, int x, int y, int ray_index, int index_hit)
+t_wall_side	get_wall_side_from_stored(int stored_side, t_data *data, int ray_index)
 {
-    t_texture_info  texture;
-    t_wall_side     side;
-    char            *dst;
+	if (stored_side == 0)
+	{
+		if (data->rays[ray_index].ray_dir.x > 0)
+			return (WEST);
+		else
+			return (EAST);
+	}
+	else
+	{
+		if (data->rays[ray_index].ray_dir.y > 0)
+			return (NORTH);
+		else
+			return (SOUTH);
+	}
+}
 
-    if (x < 0 || x >= 64 || y < 0 || y >= 64)
-        return (0x808080);
-    if (!data->rays[ray_index].must_render)
-        return (u_rgb_to_hex(data->ceiling.base_r,
-                data->ceiling.base_g, data->ceiling.base_b, 255));
-    int hit_type = data->rays[ray_index].hit[index_hit];
-    t_pos pos = data->rays[ray_index].hit_map_pos[index_hit];
-	if (ray_index == WINDOW_WIDTH / 2)
-		printf("HIT_TYPE  AAAAA: %d\n", data->rays[WINDOW_WIDTH / 2].hit[data->rays[WINDOW_WIDTH / 2].index_hit - 2]);
-    if (hit_type == 2)
-    {
+int	get_wall_texture_pixel(t_data *data, int x, int y, int ray_index, int index_hit)
+{
+	t_texture_info	texture;
+	t_wall_side		side;
+	char			*dst;
+
+	if (x < 0 || x >= 64 || y < 0 || y >= 64)
+		return (0x808080);
+	if (!data->rays[ray_index].must_render)
+		return (u_rgb_to_hex(data->ceiling.base_r,
+			data->ceiling.base_g, data->ceiling.base_b, 255));
+	int hit_type = data->rays[ray_index].hit[index_hit];
+	t_pos pos = data->rays[ray_index].hit_map_pos[index_hit];
+	int stored_side = data->rays[ray_index].side_per_hit[index_hit];
+	if (hit_type == 2)
+	{
 		t_door *door = find_door_at(data, pos.x, pos.y);
-		if (ray_index == WINDOW_WIDTH / 2)
-			printf("STATE : %d\n", door->state);
-        if (!door)
+		if (!door)
 			return (0x808080);
-        texture = get_door_texture(data, door);
-    }
-    else if (hit_type == 1)
-    {
-		side = get_wall_side(data, ray_index);
-        texture = get_texture_info_by_side(data, side);
-    }
-    else
-        return (0x808080);
-    if (!texture.addr)
-        return (0x808080);
-    dst = texture.addr + (y * texture.line_len + x * (texture.bpp / 8));
-    return (*(unsigned int *)dst);
+		t_texture_info tex_ptr = get_door_texture(data, door);
+		texture = tex_ptr;
+	}
+	else if (hit_type == 1)
+	{
+		side = get_wall_side_from_stored(stored_side, data, ray_index);
+		texture = get_texture_info_by_side(data, side);
+	}
+	else
+		return (0x808080);	
+	if (!texture.addr)
+		return (0x808080);
+	dst = texture.addr + (y * texture.line_len + x * (texture.bpp / 8));
+	return (*(unsigned int *)dst);
 }
 
 void	put_pixel_to_image(t_data *data, int x, int y, int color)
