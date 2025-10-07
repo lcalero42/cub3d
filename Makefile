@@ -3,8 +3,8 @@
 # ---------------------------------------------------------------------------- #
 
 # ---------------------------------- window ---------------------------------- #
-WINDOW_WIDTH = 1920		    # width of window
-WINDOW_HEIGHT = 1080			# height of window
+WINDOW_WIDTH = 640	    # width of window
+WINDOW_HEIGHT = 480			# height of window
 
 # --------------------------------- gameplay --------------------------------- #
 MOVE_SPEED = 5.0f		   # player movement speed
@@ -12,7 +12,7 @@ ROT_SPEED = 3.0f	       # player rotation speed
 CROSSHAIR_SIZE = 15		   # size of the crosshair
 CROSSHAIR_THICKNESS = 2    # thickness of the crosshair
 CROSSHAIR_COLOR = 0x00FF00 # color of the crosshair in hexa format
-SENSITIVITY = 0.5f		   # player mouse sensitivity
+SENSITIVITY = 0.7f		   # player mouse sensitivity
 RELOAD_TIME_MS = 1000	   # reload time of the weapon
 
 # -------------------------------- performance ------------------------------- #
@@ -143,6 +143,7 @@ SRCS_BONUS = main_bonus.c							\
 		u_calc_hitbox_bonus.c						\
 		m_init_mouse_move_bonus.c					\
 		m_mouse_move_bonus.c						\
+		m_mouse_utils_bonus.c						\
 		s_sprite_render_bonus.c		    			\
 		s_enemy_movement_bonus.c	    			\
 		s_render_gun_bonus.c						\
