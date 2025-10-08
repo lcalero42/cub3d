@@ -6,7 +6,7 @@
 /*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 13:18:32 by lcalero           #+#    #+#             */
-/*   Updated: 2025/10/06 18:49:22 by ekeisler         ###   ########.fr       */
+/*   Updated: 2025/10/08 17:09:26 by ekeisler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -225,17 +225,15 @@ typedef struct s_mouse_smooth
 typedef struct s_mouse
 {
 	int				first_move;
-	int				last_x;
-	int				last_y;
 	int				delta_x;
 	int				delta_y;
 	int				center_x;
 	int				center_y;
 	int				enabled;
+	int				recenter_frame_counter;
 	double			sensitivity;
 	t_mouse_smooth	m_smooth;
 }	t_mouse;
-
 
 typedef struct s_enemy
 {

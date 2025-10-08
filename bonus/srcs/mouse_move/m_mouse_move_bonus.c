@@ -6,14 +6,11 @@
 /*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/30 14:14:46 by ekeisler          #+#    #+#             */
-/*   Updated: 2025/10/07 14:47:13 by ekeisler         ###   ########.fr       */
+/*   Updated: 2025/10/08 17:22:10 by ekeisler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d_bonus.h"
-
-static void	mouse_rotation(int center_x, int center_y, t_data *data);
-static void	normalize_angle(double *angle, t_data *data);
 
 int	mouse_move(int x, int y, void *param)
 {
@@ -25,52 +22,46 @@ int	mouse_move(int x, int y, void *param)
 	data->mouse.center_x = WINDOW_WIDTH / 2;
 	data->mouse.center_y = WINDOW_HEIGHT / 2;
 	if (data->mouse.first_move)
-	{
-		data->mouse.first_move = 0;
-		mlx_mouse_move(data->mlx, data->window, data->mouse.center_x,
-			data->mouse.center_y);
+		return (handle_first_move(data));
+	if (check_out_of_bounds(x, y, data))
 		return (0);
-	}
 	data->mouse.delta_x = x - data->mouse.center_x;
 	data->mouse.delta_y = y - data->mouse.center_y;
 	mouse_rotation(data->mouse.delta_x, data->mouse.delta_y, data);
 	return (0);
 }
 
-static void	mouse_rotation(int delta_x, int delta_y, t_data *data)
+int	handle_first_move(t_data *data)
 {
-	int		smooth_x;
-	int		smooth_y;
-	double	magnitude;
-	double	clamp_factor;
+	data->mouse.first_move = 0;
+	mlx_mouse_move(data->mlx, data->window, data->mouse.center_x,
+		data->mouse.center_y);
+	return (0);
+}
 
-	magnitude = sqrt(delta_x * delta_x + delta_y * delta_y);
-	if (magnitude > 100)
+int	check_out_of_bounds(int x, int y, t_data *data)
+{
+	int	out_of_bounds;
+
+	out_of_bounds = (x < 10 || x > WINDOW_WIDTH - 10
+			|| y < 10 || y > WINDOW_HEIGHT - 10);
+	if (out_of_bounds)
 	{
 		mlx_mouse_move(data->mlx, data->window, data->mouse.center_x,
 			data->mouse.center_y);
+		return (1);
 	}
+	return (0);
+}
+
+void	clamp_delta(int *delta_x, int *delta_y, double magnitude)
+{
+	double	clamp_factor;
+
 	if (magnitude > 200)
 	{
 		clamp_factor = 200.0 / magnitude;
-		delta_x = (int)(delta_x * clamp_factor);
-		delta_y = (int)(delta_y * clamp_factor);
+		*delta_x = (int)(*delta_x * clamp_factor);
+		*delta_y = (int)(*delta_y * clamp_factor);
 	}
-	add_to_smooth_buffer(data, delta_x, delta_y);
-	get_smoothed_delta(data, &smooth_x, &smooth_y);
-	apply_rotation_with_limits(data, smooth_x, smooth_y);
-	normalize_angle(&data->player.angle, data);
-	update_player_direction(data);
-	mlx_mouse_move(data->mlx, data->window, data->mouse.center_x,
-		data->mouse.center_y);
 }
-
-static void	normalize_angle(double *angle, t_data *data)
-{
-	(void)data;
-	while (*angle < 0)
-		*angle += 2 * M_PI;
-	while (*angle >= 2 * M_PI)
-		*angle -= 2 * M_PI;
-}
-

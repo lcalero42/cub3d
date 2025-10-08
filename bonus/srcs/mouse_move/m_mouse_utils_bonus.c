@@ -6,7 +6,7 @@
 /*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/07 14:37:21 by ekeisler          #+#    #+#             */
-/*   Updated: 2025/10/07 14:40:03 by ekeisler         ###   ########.fr       */
+/*   Updated: 2025/10/08 17:19:49 by ekeisler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,13 @@ void	update_player_direction(t_data *data)
 
 void	add_to_smooth_buffer(t_data *data, int delta_x, int delta_y)
 {
-	data->mouse.m_smooth.buffer_x[data->mouse.m_smooth.buffer_index] = delta_x;
-	data->mouse.m_smooth.buffer_y[data->mouse.m_smooth.buffer_index] = delta_y;
-	data->mouse.m_smooth.buffer_index = (data->mouse.m_smooth.buffer_index + 1) % 5;
-	if (!data->mouse.m_smooth.buffer_filled 
+	int	idx;
+
+	idx = data->mouse.m_smooth.buffer_index;
+	data->mouse.m_smooth.buffer_x[idx] = delta_x;
+	data->mouse.m_smooth.buffer_y[idx] = delta_y;
+	data->mouse.m_smooth.buffer_index = (idx + 1) % 5;
+	if (!data->mouse.m_smooth.buffer_filled
 		&& data->mouse.m_smooth.buffer_index == 0)
 		data->mouse.m_smooth.buffer_filled = 1;
 }
@@ -55,8 +58,10 @@ void	get_smoothed_delta(t_data *data, int *smooth_x, int *smooth_y)
 
 	*smooth_x = 0;
 	*smooth_y = 0;
-	count = data->mouse.m_smooth.buffer_filled ? 5 : 
-		data->mouse.m_smooth.buffer_index;
+	if (data->mouse.m_smooth.buffer_filled)
+		count = 5;
+	else
+		count = data->mouse.m_smooth.buffer_index;
 	i = 0;
 	while (i < count)
 	{

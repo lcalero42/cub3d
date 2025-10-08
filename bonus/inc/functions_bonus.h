@@ -6,7 +6,7 @@
 /*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 13:18:22 by lcalero           #+#    #+#             */
-/*   Updated: 2025/10/07 14:40:50 by ekeisler         ###   ########.fr       */
+/*   Updated: 2025/10/08 17:26:50 by ekeisler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,10 +52,18 @@ void			init_ray_distances(t_data *data, int i);
 void			init_ray_steps(t_data *data, int i);
 void			init_mouse_control(t_data *data);
 int				mouse_move(int x, int y, void *param);
-void			apply_rotation_with_limits(t_data *data, int smooth_x, int smooth_y);
+void			apply_rotation_with_limits(t_data *data,
+					int smooth_x, int smooth_y);
 void			update_player_direction(t_data *data);
+void			handle_recenter(t_data *data, int force);
+void			mouse_rotation(int delta_x, int delta_y, t_data *data);
 void			add_to_smooth_buffer(t_data *data, int delta_x, int delta_y);
 void			get_smoothed_delta(t_data *data, int *smooth_x, int *smooth_y);
+int				handle_first_move(t_data *data);
+int				check_out_of_bounds(int x, int y, t_data *data);
+int				handle_first_move(t_data *data);
+void			norm_angle(double *angle, t_data *data);
+void			clamp_delta(int *delta_x, int *delta_y, double magnitude);
 void			toggle_mouse_control(t_data *data);
 
 /* ENEMY & AI */
