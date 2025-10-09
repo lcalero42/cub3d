@@ -6,7 +6,7 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 17:13:02 by lcalero           #+#    #+#             */
-/*   Updated: 2025/10/01 15:09:00 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/10/09 16:11:43 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,11 +69,12 @@ static void	perform_dda_step(t_data *data, int i)
 
 static void	perform_dda(t_data *data, int i)
 {
-	int steps = 0;
-	int map_x;
-	int map_y;
-	t_door *door;
-	
+	int		steps;
+	int		map_x;
+	int		map_y;
+	t_door	*door;
+
+	steps = 1;
 	while (1)
 	{
 		perform_dda_step(data, i);
@@ -84,15 +85,18 @@ static void	perform_dda(t_data *data, int i)
 			data->rays[i].hit[data->rays[i].index_hit] = 1;
 			data->rays[i].hit_map_pos[data->rays[i].index_hit].x = map_x;
 			data->rays[i].hit_map_pos[data->rays[i].index_hit].y = map_y;
-			data->rays[i].side_per_hit[data->rays[i].index_hit] = data->rays[i].side;
+			data->rays[i].side_per_hit[data->rays[i].index_hit]
+				= data->rays[i].side;
 			if (data->rays[i].side == 0)
-				data->rays[i].perp_wall_dist_per_hit[data->rays[i].index_hit] =
-					(data->rays[i].map_pos.x - data->player.position.x + 
-					(1 - data->rays[i].step.x) / 2) / data->rays[i].ray_dir.x;
+				data->rays[i].perp_wall_dist_per_hit[data->rays[i].index_hit]
+					= (data->rays[i].map_pos.x - data->player.position.x
+						+ (1 - data->rays[i].step.x) / 2)
+								/ data->rays[i].ray_dir.x;
 			else
-				data->rays[i].perp_wall_dist_per_hit[data->rays[i].index_hit] =
-					(data->rays[i].map_pos.y - data->player.position.y + 
-					(1 - data->rays[i].step.y) / 2) / data->rays[i].ray_dir.y;
+				data->rays[i].perp_wall_dist_per_hit[data->rays[i].index_hit]
+					= (data->rays[i].map_pos.y - data->player.position.y
+						+ (1 - data->rays[i].step.y) / 2)
+					/ data->rays[i].ray_dir.y;
 			data->rays[i].index_hit++;
 			break ;
 		}

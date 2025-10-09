@@ -140,6 +140,8 @@ SRCS_BONUS = main_bonus.c							\
 		u_get_current_speed_bonus.c 				\
 		u_trace_shot_bonus.c						\
 		u_calc_hitbox_bonus.c						\
+		u_check_wall_occlusion_bonus.c				\
+		u_get_door_pixel_bonus.c					\
 		m_init_mouse_move_bonus.c					\
 		m_mouse_move_bonus.c						\
 		s_sprite_render_bonus.c		    			\

@@ -6,7 +6,7 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 18:19:52 by lcalero           #+#    #+#             */
-/*   Updated: 2025/10/06 19:06:41 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/10/08 17:41:37 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ static void	draw_wall_column(t_data *data, int x)
 			int line_height = (int)(WINDOW_HEIGHT / perp_dist);
 			int wall_top = (-line_height / 2 + WINDOW_HEIGHT / 2) + (int)pitch_offset;
 			int wall_bottom = (line_height / 2 + WINDOW_HEIGHT / 2) + (int)pitch_offset - 1;
-			
+
 			if (y < wall_top || y > wall_bottom)
 				continue;
 

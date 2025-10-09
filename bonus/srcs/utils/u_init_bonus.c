@@ -6,7 +6,7 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 18:20:59 by lcalero           #+#    #+#             */
-/*   Updated: 2025/09/24 16:45:43 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/10/09 13:47:47 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,8 @@ static void	spawn_enemy(t_data *data)
 	data->enemy.position.y = rand() % (data->grid.height);
 	pos_x = data->enemy.position.x;
 	pos_y = data->enemy.position.y;
-	while (data->grid.grid[(int)pos_y][(int)pos_x] != '0')
+	while (data->grid.grid[(int)pos_y][(int)pos_x] != '0'
+			&& data->grid.grid[(int)pos_y][(int)pos_x])
 	{
 		data->enemy.position.x = rand() % (data->grid.width);
 		data->enemy.position.y = rand() % (data->grid.height);

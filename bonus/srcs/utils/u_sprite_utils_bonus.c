@@ -6,7 +6,7 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 19:04:02 by lcalero           #+#    #+#             */
-/*   Updated: 2025/10/01 15:54:20 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/10/09 15:16:22 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,18 +59,105 @@ void	draw_sprite_column(t_data *data, t_sprite_params *params)
 	}
 }
 
-int	check_wall_occlusion(t_data *data, int x, t_enemy *enemy)
-{
-	float	player_dist;
-	float	wall_dist;
+// static int get_door_pixel_at_position(t_data *data, int x, int y, int hit_index)
+// {
+//     int tex_x;
+//     double step;
+//     double tex_pos;
+//     int tex_y;
+//     int line_height;
+//     int wall_top;
+//     int wall_bottom;
+//     double perp_dist;
+//     double pitch_offset;
+//     t_render *door_texture;
+//     t_door *door;
+//     int map_x;
+//     int map_y;
+    
+//     perp_dist = data->rays[x].perp_wall_dist_per_hit[hit_index];
+//     pitch_offset = data->player.pitch * (WINDOW_HEIGHT * 0.5);
+//     line_height = (int)(WINDOW_HEIGHT / perp_dist);
+//     wall_top = (-line_height / 2 + WINDOW_HEIGHT / 2) + (int)pitch_offset;
+//     wall_bottom = (line_height / 2 + WINDOW_HEIGHT / 2) + (int)pitch_offset - 1;
+//     if (y < wall_top || y > wall_bottom)
+//         return (-1);
+//     tex_x = calculate_texture_x_for_hit(data, x, hit_index);
+//     step = 1.0 * 64 / line_height;
+//     tex_pos = (y - wall_top) * step;
+//     tex_y = (int)tex_pos & (64 - 1);
+//     map_x = data->rays[x].hit_map_pos[hit_index].x;
+//     map_y = data->rays[x].hit_map_pos[hit_index].y;
+//     door = find_door_at(data, map_x, map_y);
+//     if (!door)
+//         return (-1);
+//     if (door->state == DOOR_CLOSED || door->state == DOOR_CLOSING)
+//         door_texture = &data->door_closed;
+//     else
+//         door_texture = &data->door_opened;
+//     if (tex_x < 0 || tex_x >= 64 || tex_y < 0 || tex_y >= 64)
+//         return (-1);
+//     return (*(int *)(door_texture->info.addr + 
+//             (tex_y * door_texture->info.line_len + 
+//              tex_x * (door_texture->info.bpp / 8))));
+// }
 
-	player_dist = sqrtf((enemy->position.x - data->player.position.x)
-			* (enemy->position.x - data->player.position.x)
-			+ (enemy->position.y - data->player.position.y)
-			* (enemy->position.y - data->player.position.y));
-	wall_dist = data->rays[x].perp_wall_dist_per_hit[0];
-	return (wall_dist < player_dist);
-}
+// int check_wall_occlusion(t_data *data, int x, t_enemy *enemy)
+// {
+//     int i;
+//     int y;
+//     double enemy_distance;
+//     double dx;
+//     double dy;
+//     int sprite_top;
+//     int sprite_bottom;
+
+//     dx = enemy->position.x - data->player.position.x;
+//     dy = enemy->position.y - data->player.position.y;
+//     enemy_distance = sqrt(dx * dx + dy * dy);
+//     if (x < 0 || x >= WINDOW_WIDTH)
+//         return (1);
+//     sprite_top = enemy->enemy_data.sprite_top;
+//     sprite_bottom = sprite_top + enemy->enemy_data.sprite_height;
+//     if (sprite_top < 0)
+//         sprite_top = 0;
+//     if (sprite_bottom > WINDOW_HEIGHT)
+//         sprite_bottom = WINDOW_HEIGHT;
+//     i = 0;
+//     while (i < data->rays[x].index_hit)
+//     {
+//         double wall_distance = data->rays[x].perp_wall_dist_per_hit[i];
+//         int hit_type = data->rays[x].hit[i];
+//         if (wall_distance < enemy_distance)
+//         {
+//             if (hit_type == 1)
+//                 return (1);
+//             if (hit_type == 2)
+//             {
+//                 int sample_count = 0;
+//                 int opaque_count = 0;
+//                 int step_y = (sprite_bottom - sprite_top) / 5;
+//                 if (step_y < 1)
+//                     step_y = 1;
+//                 for (y = sprite_top; y < sprite_bottom; y += step_y)
+//                 {
+//                     int pixel = get_door_pixel_at_position(data, x, y, i);
+//                     if (pixel != -1)
+//                     {
+//                         sample_count++;
+//                         if (!is_transparent_color(pixel))
+//                             opaque_count++;
+//                     }
+//                 }
+//                 if (sample_count > 0 && opaque_count * 2 > sample_count)
+//                     return (1);
+//             }
+//         }
+//         i++;
+//     }
+    
+//     return (0);
+// }
 
 static unsigned int	get_texture_pixel(t_texture_info *texture_info,
 				int x, int y)

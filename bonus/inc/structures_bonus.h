@@ -6,7 +6,7 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 13:18:32 by lcalero           #+#    #+#             */
-/*   Updated: 2025/10/06 18:53:52 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/10/09 15:11:41 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,20 @@ typedef enum e_wall_side
 	EAST = 2,
 	WEST = 3
 }	t_wall_side;
+
+typedef struct s_wall_calc
+{
+	int			line_height;
+	int			wall_top;
+	int			wall_bottom;
+	int			tex_y;
+}	t_wall_calc;
+
+typedef struct s_occlusion_data
+{
+	double	enemy_distance;
+	int		sprite_bounds[2];
+}	t_occlusion_data;
 
 typedef enum e_door_state
 {
@@ -126,6 +140,7 @@ typedef struct s_ray
 	int         side_per_hit[MAX_RAY_HIT];
 	int         index_hit;                    // Number of hits recorded
 	int         must_render;                   // Flag to render or not
+	int			ray_hit_enemy;
 } t_ray;
 
 typedef struct s_grid
@@ -296,12 +311,6 @@ typedef struct s_movement_data
 	t_pos	path[128];
 }	t_movement_data;
 
-typedef struct s_render_info
-{
-    int     index_drawn;
-    double  distance_drawn;
-} t_render_info;
-
 typedef struct s_data
 {
 	int				game_started;
@@ -313,7 +322,6 @@ typedef struct s_data
 	t_render		crosshair;
 	t_render		door_opened;
 	t_render		door_closed;
-	t_render_info	pixel_render_info[WINDOW_WIDTH];
 	t_anim			gun;
 	t_anim			shot;
 	t_color			floor;
