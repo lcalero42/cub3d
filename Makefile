@@ -113,6 +113,7 @@ SRCS_BONUS = main_bonus.c							\
 		re_fill_health_bar_bonus.c					\
 		re_minimap_bonus.c							\
 		re_minimap_utils_bonus.c					\
+		re_minimap_ray_bonus.c						\
 		re_stamina_bar_bonus.c						\
 		r_wall_side_bonus.c							\
 		r_door_handling_bonus.c						\

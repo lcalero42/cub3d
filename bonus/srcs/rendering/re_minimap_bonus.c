@@ -6,7 +6,7 @@
 /*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/25 10:45:42 by ekeisler          #+#    #+#             */
-/*   Updated: 2025/10/09 15:19:19 by ekeisler         ###   ########.fr       */
+/*   Updated: 2025/10/09 15:28:26 by ekeisler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,20 +26,34 @@ static void	calculate_minimap_params(t_data *data, t_minimap_params *params)
 	params->start_y = params->minimap_margin;
 }
 
-static void	draw_minimap_cell(t_data *data, t_minimap_params *params, int i,
-	int j)
+static void	draw_cell_helper(t_data *data, char cell, t_square_params *square)
 {
-	int	pixel_x;
-	int	pixel_y;
+	if (cell != ' ')
+	{
+		square->color = 0xFFFFFF;
+		draw_square(data, *square);
+	}
+	if (cell == '1')
+	{
+		square->color = 0x000000;
+		draw_square(data, *square);
+	}
+	if (cell == '2')
+	{
+		square->color = 0x8B4513;
+		draw_square(data, *square);
+	}
+}
 
-	pixel_x = params->start_x + j * params->cell_size;
-	pixel_y = params->start_y + i * params->cell_size;
-	if (data->grid.grid[i][j] != ' ')
-		draw_square(data, pixel_x, pixel_y, 0xFFFFFF, params->cell_size);
-	if (data->grid.grid[i][j] == '1')
-		draw_square(data, pixel_x, pixel_y, 0x000000, params->cell_size);
-	if (data->grid.grid[i][j] == '2')
-		draw_square(data, pixel_x, pixel_y, 0x8B4513, params->cell_size);
+static void	draw_minimap_cell(t_data *data, t_minimap_params *params,
+	int i, int j)
+{
+	t_square_params	square;
+
+	square.x = params->start_x + j * params->cell_size;
+	square.y = params->start_y + i * params->cell_size;
+	square.scale = params->cell_size;
+	draw_cell_helper(data, data->grid.grid[i][j], &square);
 }
 
 static void	draw_minimap_grid(t_data *data, t_minimap_params *params)
@@ -66,6 +80,5 @@ void	render_minimap(t_data *data)
 
 	calculate_minimap_params(data, &params);
 	draw_minimap_grid(data, &params);
-	draw_minimap_player_with_direction(data, params.start_x,
-		params.start_y, params.cell_size);
+	draw_minimap_player_with_direction(data, &params);
 }

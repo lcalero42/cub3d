@@ -6,7 +6,7 @@
 /*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 13:18:32 by lcalero           #+#    #+#             */
-/*   Updated: 2025/10/09 15:20:31 by ekeisler         ###   ########.fr       */
+/*   Updated: 2025/10/09 15:34:31 by ekeisler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,33 @@ typedef struct s_grid
 	int		height;
 }	t_grid;
 
+typedef struct s_square_params
+{
+	int	x;
+	int	y;
+	int	color;
+	int	scale;
+}	t_square_params;
+
+typedef struct s_ray_draw_params
+{
+	int		start_x;
+	int		start_y;
+	int		cell_size;
+	double	angle;
+	int		color;
+}	t_ray_draw_params;
+
+typedef struct s_ray_state
+{
+	double	x;
+	double	y;
+	double	step;
+	int		grid_x;
+	int		grid_y;
+	int		i;
+}	t_ray_state;
+
 typedef struct s_minimap_params
 {
 	int	cell_size;
@@ -123,15 +150,13 @@ typedef struct s_minimap_params
 	int	start_y;
 }	t_minimap_params;
 
-typedef struct s_ray_params
+typedef struct s_fov_cone_params
 {
-	double	x;
-	double	y;
-	double	step;
-	int		grid_x;
-	int		grid_y;
-	int		i;
-}	t_ray_params;
+	double	fov;
+	int		rays;
+	double	start_angle;
+	double	end_angle;
+}	t_fov_cone_params;
 
 typedef struct s_player
 {
