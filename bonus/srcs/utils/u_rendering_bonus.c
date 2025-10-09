@@ -6,7 +6,7 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/28 14:25:57 by lcalero           #+#    #+#             */
-/*   Updated: 2025/10/08 18:21:54 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/10/01 15:14:00 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int	get_wall_texture_pixel(t_data *data, int x, int y, int ray_index, int index_
 		texture = get_texture_info_by_side(data, side);
 	}
 	else
-		return (0x808080);
+		return (0x808080);	
 	if (!texture.addr)
 		return (0x808080);
 	dst = texture.addr + (y * texture.line_len + x * (texture.bpp / 8));

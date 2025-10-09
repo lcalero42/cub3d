@@ -6,7 +6,7 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 13:18:22 by lcalero           #+#    #+#             */
-/*   Updated: 2025/10/09 16:12:02 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/10/09 17:11:38 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ int				is_map_surrounded(t_data *data);
 
 /* RAYCASTING/RENDERING */
 void			trace_ray(t_data *data, double angle);
-// void			perform_dda(t_data *data, int i);
-// void			perform_dda_step(t_data *data, int i);
+void			perform_dda(t_data *data, int i);
+void			perform_dda_step(t_data *data, int i);
 void			render_walls(t_data *data);
 void			init_walls(t_data *data);
 void			clear_screen(t_data *data);
