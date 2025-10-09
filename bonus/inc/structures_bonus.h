@@ -6,7 +6,7 @@
 /*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 13:18:32 by lcalero           #+#    #+#             */
-/*   Updated: 2025/10/08 17:09:26 by ekeisler         ###   ########.fr       */
+/*   Updated: 2025/10/09 15:20:31 by ekeisler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,25 @@ typedef struct s_grid
 	int		width;
 	int		height;
 }	t_grid;
+
+typedef struct s_minimap_params
+{
+	int	cell_size;
+	int	minimap_margin;
+	int	minimap_size;
+	int	start_x;
+	int	start_y;
+}	t_minimap_params;
+
+typedef struct s_ray_params
+{
+	double	x;
+	double	y;
+	double	step;
+	int		grid_x;
+	int		grid_y;
+	int		i;
+}	t_ray_params;
 
 typedef struct s_player
 {

@@ -6,7 +6,7 @@
 /*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 13:18:22 by lcalero           #+#    #+#             */
-/*   Updated: 2025/10/08 17:26:50 by ekeisler         ###   ########.fr       */
+/*   Updated: 2025/10/09 15:21:06 by ekeisler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,13 @@ unsigned int	get_health_color(t_data *data);
 void			draw_health_bar_background(t_data *data,
 					t_health_bar *health_bar);
 void			render_minimap(t_data *data);
+void			draw_square(t_data *data, int x, int y, int color, int scale);
+void			draw_minimap_player_with_direction(t_data *data, int start_x,
+					int start_y, int cell_size);
+void			draw_minimap_fov_cone(t_data *data, int start_x,
+					int start_y, int cell_size);
+void			draw_ray_on_minimap(t_data *data, int start_x, int start_y,
+					int cell_size, double angle, int color);
 
 /* PLAYER & MOVEMENT */
 void			update_player_stamina_status(t_data *data, double delta_time);
