@@ -6,13 +6,14 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/28 14:25:57 by lcalero           #+#    #+#             */
-/*   Updated: 2025/10/01 15:14:00 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/10/12 21:12:49 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d_bonus.h"
 
-t_wall_side	get_wall_side_from_stored(int stored_side, t_data *data, int ray_index)
+t_wall_side	get_wall_side_from_stored(int stored_side,
+				t_data *data, int ray_index)
 {
 	if (stored_side == 0)
 	{
@@ -28,41 +29,6 @@ t_wall_side	get_wall_side_from_stored(int stored_side, t_data *data, int ray_ind
 		else
 			return (SOUTH);
 	}
-}
-
-int	get_wall_texture_pixel(t_data *data, int x, int y, int ray_index, int index_hit)
-{
-	t_texture_info	texture;
-	t_wall_side		side;
-	char			*dst;
-
-	if (x < 0 || x >= 64 || y < 0 || y >= 64)
-		return (0x808080);
-	if (!data->rays[ray_index].must_render)
-		return (u_rgb_to_hex(data->ceiling.base_r,
-			data->ceiling.base_g, data->ceiling.base_b, 255));
-	int hit_type = data->rays[ray_index].hit[index_hit];
-	t_pos pos = data->rays[ray_index].hit_map_pos[index_hit];
-	int stored_side = data->rays[ray_index].side_per_hit[index_hit];
-	if (hit_type == 2)
-	{
-		t_door *door = find_door_at(data, pos.x, pos.y);
-		if (!door)
-			return (0x808080);
-		t_texture_info tex_ptr = get_door_texture(data, door);
-		texture = tex_ptr;
-	}
-	else if (hit_type == 1)
-	{
-		side = get_wall_side_from_stored(stored_side, data, ray_index);
-		texture = get_texture_info_by_side(data, side);
-	}
-	else
-		return (0x808080);	
-	if (!texture.addr)
-		return (0x808080);
-	dst = texture.addr + (y * texture.line_len + x * (texture.bpp / 8));
-	return (*(unsigned int *)dst);
 }
 
 void	put_pixel_to_image(t_data *data, int x, int y, int color)

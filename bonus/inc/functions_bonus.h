@@ -6,7 +6,7 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 13:18:22 by lcalero           #+#    #+#             */
-/*   Updated: 2025/10/09 17:11:38 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/10/12 21:37:00 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,8 @@ void			render_walls(t_data *data);
 void			init_walls(t_data *data);
 void			clear_screen(t_data *data);
 void			put_pixel_to_image(t_data *data, int x, int y, int color);
-int				get_wall_texture_pixel(t_data *data, int x, int y, int ray_index, int index_hit);
+int				get_wall_texture_pixel(t_data *data, int y,
+					int ray_index, int index_hit);
 void			update_player_movement(t_data *data);
 t_wall_side		get_wall_side(t_data *data, int ray_index);
 t_texture_info	get_texture_info_by_side(t_data *data, t_wall_side side);
@@ -47,9 +48,9 @@ void			animation_routine(t_data *data);
 void			trace_shot(t_data *data);
 void			toggle_door(t_door *door);
 t_door			*find_door_at(t_data *data, int x, int y);
-int				should_door_block_ray(t_door *door);
 void			check_door_interaction(t_data *data, int keycode);
-int				calculate_texture_x_for_hit(t_data *data, int ray_index, int hit_index);
+int				calculate_texture_x_for_hit(t_data *data,
+					int ray_index, int hit_index);
 
 /* RAYCASTING INIT */
 void			init_player_direction(t_data *data, double angle);
@@ -137,6 +138,8 @@ void			init_door_system(t_data *data);
 int				is_transparent_color(unsigned int color);
 int				get_door_pixel_at_position(t_data *data, int x,
 					int y, int hit_index);
+t_wall_side		get_wall_side_from_stored(int stored_side,
+					t_data *data, int ray_index);
 
 /* COLOR & FOG */
 void			extract_base_colors(int base_color, int *r, int *g, int *b);

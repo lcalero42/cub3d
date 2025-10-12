@@ -6,7 +6,7 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 13:18:32 by lcalero           #+#    #+#             */
-/*   Updated: 2025/10/09 15:11:41 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/10/12 21:39:57 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,11 +56,11 @@ typedef enum e_door_state
 
 typedef struct s_door
 {
-	int			x;
-	int			y;
-	t_door_state state;
-	double		open_progress;
-	long long	last_interaction_time;
+	int				x;
+	int				y;
+	t_door_state	state;
+	double			open_progress;
+	long long		last_interaction_time;
 }	t_door;
 
 typedef struct s_health_bar
@@ -127,21 +127,21 @@ typedef struct s_vector
 
 typedef struct s_ray
 {
-	t_vector    ray_dir;
-	t_vector    map_pos;            // Current map cell coords
-	t_vector    side_dist;          // Distances to next x/y side
-	t_vector    delta_dist;         // Length distance to next x/y side
-	t_vector    step;
-	double      perp_wall_dist;     // Perpendicular distance for closest hit (optional)
-	int         side;               // Hit side of closest hit
-	int         hit[MAX_RAY_HIT];            // Hit types for each hit (e.g. wall=1, door=2)
-	t_pos       hit_map_pos[MAX_RAY_HIT];    // Map position of each hit
-	double      perp_wall_dist_per_hit[MAX_RAY_HIT]; // Perp distance of each hit for texture calculations
-	int         side_per_hit[MAX_RAY_HIT];
-	int         index_hit;                    // Number of hits recorded
-	int         must_render;                   // Flag to render or not
+	t_vector	ray_dir;
+	t_vector	map_pos;
+	t_vector	side_dist;
+	t_vector	delta_dist;
+	t_vector	step;
+	double		perp_wall_dist;
+	int			side;
+	int			hit[MAX_RAY_HIT];
+	t_pos		hit_map_pos[MAX_RAY_HIT];
+	double		perp_wall_dist_per_hit[MAX_RAY_HIT];
+	int			side_per_hit[MAX_RAY_HIT];
+	int			index_hit;
+	int			must_render;
 	int			ray_hit_enemy;
-} t_ray;
+}	t_ray;
 
 typedef struct s_grid
 {
@@ -215,6 +215,13 @@ typedef struct s_render
 	t_texture_info	info;
 	int				texture_endian;
 }	t_render;
+
+typedef struct s_pixel_data
+{
+	int		pixel;
+	double	dist;
+	int		found;
+}	t_pixel_data;
 
 typedef struct s_anim
 {
@@ -349,9 +356,10 @@ typedef struct s_data
 	t_discriminant	disc;
 	t_health_bar	health_bar;
 	t_health_bar	stamina_bar;
-	t_door 			doors[MAX_DOORS];
+	t_door			doors[MAX_DOORS];
 	int				door_count;
 	long long		last_door_interaction;
+	int				current_ray_index;
 }	t_data;
 
 typedef struct s_neighbor_context
