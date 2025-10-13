@@ -6,7 +6,7 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 18:19:52 by lcalero           #+#    #+#             */
-/*   Updated: 2025/10/12 21:34:21 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/10/13 12:28:22 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,17 +105,19 @@ static void	find_visible_pixel(t_data *data, int x, int y,
 	i = -1;
 	while (++i < data->rays[x].index_hit)
 	{
-		wall_bottom = ((int)(WINDOW_HEIGHT / data->rays[x].\
-			perp_wall_dist_per_hit[i]) / 2 + WINDOW_HEIGHT / 2);
+		wall_bottom = ((int)(WINDOW_HEIGHT
+					/ data->rays[x].perp_wall_dist_per_hit[i])
+				/ 2 + WINDOW_HEIGHT / 2);
 		wall_bottom += (int)pitch_offset - 1;
-		if (y < (-((int)(WINDOW_HEIGHT / data->rays[x].\
-			perp_wall_dist_per_hit[i]) / 2) + WINDOW_HEIGHT / 2) \
+		if (y < (-((int)(WINDOW_HEIGHT
+					/ data->rays[x].perp_wall_dist_per_hit[i])
+				/ 2) + WINDOW_HEIGHT / 2)
 			+ (int)pitch_offset || y > wall_bottom)
 			continue ;
 		pixel = get_wall_pixel(data, x, y, i);
 		if (!is_transparent_color(pixel))
 			return (result->pixel = pixel,
-				result->dist = data->rays[x].perp_wall_dist_per_hit[i], \
+				result->dist = data->rays[x].perp_wall_dist_per_hit[i],
 				result->found = 1, (void)0);
 	}
 }

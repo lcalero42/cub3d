@@ -6,7 +6,7 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/12 21:07:25 by lcalero           #+#    #+#             */
-/*   Updated: 2025/10/12 21:34:36 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/10/13 12:28:59 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ static t_texture_info	get_door_tex(t_data *data, t_pos pos)
 	return (get_door_texture(data, door));
 }
 
-static t_texture_info	get_texture_by_hit(t_data *data, \
-	int ray_index, int index_hit)
+static t_texture_info	get_texture_by_hit(t_data *data,
+							int ray_index, int index_hit)
 {
 	int				hit_type;
 	t_pos			pos;
