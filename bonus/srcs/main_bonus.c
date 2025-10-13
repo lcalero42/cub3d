@@ -6,7 +6,7 @@
 /*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 11:53:44 by lcalero           #+#    #+#             */
-/*   Updated: 2025/10/13 15:58:11 by ekeisler         ###   ########.fr       */
+/*   Updated: 2025/10/13 16:05:05 by ekeisler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,11 @@ int	main(int argc, char **argv)
 	if (argc != 2)
 	{
 		u_print_error("missing map path");
+		return (1);
+	}
+	if (WINDOW_HEIGHT > 1080 || WINDOW_WIDTH > 1920)
+	{
+		u_print_error("resolution > 1920 x 1080");
 		return (1);
 	}
 	ft_bzero(&data, sizeof(t_data));
