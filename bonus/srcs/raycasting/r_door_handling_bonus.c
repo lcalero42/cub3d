@@ -6,7 +6,7 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/03 13:59:19 by lcalero           #+#    #+#             */
-/*   Updated: 2025/10/12 20:47:52 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/10/13 13:13:59 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ void	init_door_system(t_data *data)
 				data->doors[door_index].x = x;
 				data->doors[door_index].y = y;
 				data->doors[door_index].state = DOOR_CLOSED;
-				data->doors[door_index].last_interaction_time = 0;
 				door_index++;
 			}
 			x++;
@@ -61,16 +60,21 @@ void	check_door_interaction(t_data *data, int keycode)
 	long long	current_time;
 	int			dx;
 	int			dy;
+	double		dist;
 
 	if (keycode != XK_space)
 		return ;
 	current_time = get_current_time();
 	dx = (int)(data->player.position.x + cos(data->player.angle));
 	dy = (int)(data->player.position.y + sin(data->player.angle));
+	dist = sqrt((data->player.position.x - (dx + 0.5))
+			* (data->player.position.x - (dx + 0.5))
+			+ (data->player.position.y - (dy + 0.5))
+			* (data->player.position.y - (dy + 0.5)));
 	if (data->grid.grid[dy][dx] == '2')
 	{
 		door = find_door_at(data, dx, dy);
-		if (door)
+		if (door && dist > 0.7f)
 		{
 			toggle_door(door);
 			data->last_door_interaction = current_time;

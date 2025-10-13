@@ -6,7 +6,7 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 13:18:32 by lcalero           #+#    #+#             */
-/*   Updated: 2025/10/12 21:39:57 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/10/13 12:46:10 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,6 @@ typedef struct s_door
 	int				y;
 	t_door_state	state;
 	double			open_progress;
-	long long		last_interaction_time;
 }	t_door;
 
 typedef struct s_health_bar
