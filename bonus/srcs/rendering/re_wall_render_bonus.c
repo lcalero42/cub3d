@@ -6,110 +6,118 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 18:19:52 by lcalero           #+#    #+#             */
-/*   Updated: 2025/09/11 16:22:14 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/10/13 12:28:22 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d_bonus.h"
 
-static double	calculate_perp_wall_dist(t_data *data, int x);
-static void		calculate_wall_bounds(t_data *data, double perp_wall_dist,
-					int *draw_start, int *draw_end);
-static int		calculate_texture_x(t_data *data, int x, double perp_wall_dist);
-static void		draw_wall_column(t_data *data, int x, int draw_start,
-					int draw_end);
+static void		draw_wall_column(t_data *data, int x);
+static int		get_wall_pixel(t_data *data, int x, int y, int i);
+static void		find_visible_pixel(t_data *data, int x, int y,
+					t_pixel_data *result);
 
 void	render_walls(t_data *data)
 {
 	int		x;
-	int		draw_start;
-	int		draw_end;
-	double	perp_wall_dist;
 
 	x = 0;
 	while (x < WINDOW_WIDTH)
 	{
-		data->rays[x].perp_wall_dist = calculate_perp_wall_dist(data, x);
-		perp_wall_dist = data->rays[x].perp_wall_dist;
-		calculate_wall_bounds(data, perp_wall_dist, &draw_start, &draw_end);
-		draw_wall_column(data, x, draw_start, draw_end);
+		data->current_ray_index = x;
+		draw_wall_column(data, x);
 		x++;
 	}
 }
 
-static double	calculate_perp_wall_dist(t_data *data, int x)
-{
-	double	perp_wall_dist;
-
-	if (data->rays[x].side == 0)
-		perp_wall_dist = data->rays[x].side_dist.x - data->rays[x].delta_dist.x;
-	else
-		perp_wall_dist = data->rays[x].side_dist.y - data->rays[x].delta_dist.y;
-	return (perp_wall_dist);
-}
-
-static void	calculate_wall_bounds(t_data *data, double perp_wall_dist,
-		int *draw_start, int *draw_end)
-{
-	int		line_height;
-	double	pitch_offset;
-
-	line_height = (int)(WINDOW_HEIGHT / perp_wall_dist);
-	pitch_offset = data->player.pitch * (WINDOW_HEIGHT * 0.5);
-	*draw_start = (-line_height / 2 + WINDOW_HEIGHT / 2) + (int)pitch_offset;
-	if (*draw_start < 0)
-		*draw_start = 0;
-	*draw_end = (line_height / 2 + WINDOW_HEIGHT / 2) + (int)pitch_offset;
-	if (*draw_end >= WINDOW_HEIGHT)
-		*draw_end = WINDOW_HEIGHT - 1;
-	if (*draw_start >= WINDOW_HEIGHT)
-		*draw_start = WINDOW_HEIGHT - 1;
-	if (*draw_end < 0)
-		*draw_end = 0;
-}
-
-static int	calculate_texture_x(t_data *data, int x, double perp_wall_dist)
+int	calculate_texture_x_for_hit(t_data *data, int ray_index, int hit_index)
 {
 	double	wall_x;
 	int		tex_x;
+	double	perp_dist;
+	int		side;
 
-	if (data->rays[x].side == 0)
-		wall_x = data->player.position.y + perp_wall_dist
-			* data->rays[x].ray_dir.y;
+	perp_dist = data->rays[ray_index].perp_wall_dist_per_hit[hit_index];
+	side = data->rays[ray_index].side_per_hit[hit_index];
+	if (side == 0)
+		wall_x = data->player.position.y
+			+ perp_dist * data->rays[ray_index].ray_dir.y;
 	else
-		wall_x = data->player.position.x + perp_wall_dist
-			* data->rays[x].ray_dir.x;
+		wall_x = data->player.position.x
+			+ perp_dist * data->rays[ray_index].ray_dir.x;
 	wall_x -= floor(wall_x);
 	tex_x = (int)(wall_x * 64);
-	if (data->rays[x].side == 0 && data->rays[x].ray_dir.x > 0)
-		tex_x = 64 - tex_x - 1;
-	if (data->rays[x].side == 1 && data->rays[x].ray_dir.y < 0)
+	if ((side == 0 && data->rays[ray_index].ray_dir.x > 0)
+		|| (side == 1 && data->rays[ray_index].ray_dir.y < 0))
 		tex_x = 64 - tex_x - 1;
 	return (tex_x);
 }
 
-static void	draw_wall_column(t_data *data, int x, int draw_start, int draw_end)
+static void	draw_wall_column(t_data *data, int x)
 {
-	int		tex_x;
-	double	step;
-	double	tex_pos;
-	int		original_wall_center;
-	int		y;
+	int				y;
+	int				fog_alpha;
+	t_pixel_data	pix;
 
-	data->rays[x].perp_wall_dist = calculate_perp_wall_dist(data, x);
-	tex_x = calculate_texture_x(data, x, data->rays[x].perp_wall_dist);
-	step = 1.0 * 64 / (WINDOW_HEIGHT / data->rays[x].perp_wall_dist);
-	original_wall_center = WINDOW_HEIGHT / 2;
-	data->player.pitch_offset = data->player.pitch * (WINDOW_HEIGHT * 0.5);
-	tex_pos = (draw_start - original_wall_center
-			- (int)data->player.pitch_offset + (WINDOW_HEIGHT
-				/ data->rays[x].perp_wall_dist) / 2) * step;
-	y = draw_start;
-	while (y < draw_end)
+	y = 0;
+	while (y < WINDOW_HEIGHT)
 	{
-		put_pixel_to_image(data, x, y, get_wall_texture_pixel(data, tex_x,
-				(int)tex_pos & (64 - 1), x));
-		tex_pos += step;
+		find_visible_pixel(data, x, y, &pix);
+		if (pix.found)
+		{
+			fog_alpha = calculate_fog_alpha(pix.dist);
+			if (fog_alpha > 0 && data->render_fog)
+				pix.pixel = blend_fog_with_pixel(pix.pixel,
+						u_rgb_to_hex(FOG_COLOR_R, FOG_COLOR_G,
+							FOG_COLOR_B, 255), fog_alpha);
+			put_pixel_to_image(data, x, y, pix.pixel);
+		}
 		y++;
+	}
+}
+
+static int	get_wall_pixel(t_data *data, int x, int y, int i)
+{
+	t_ray	ray;
+	int		line_height;
+	int		wall_top;
+	double	step;
+
+	ray = data->rays[x];
+	line_height = (int)(WINDOW_HEIGHT / ray.perp_wall_dist_per_hit[i]);
+	wall_top = (-line_height / 2 + WINDOW_HEIGHT / 2);
+	wall_top += (int)(data->player.pitch * (WINDOW_HEIGHT * 0.5));
+	step = 64.0 / line_height;
+	return (get_wall_texture_pixel(data,
+			(int)((y - wall_top) * step) & 63, x, i));
+}
+
+static void	find_visible_pixel(t_data *data, int x, int y,
+	t_pixel_data *result)
+{
+	int		i;
+	int		wall_bottom;
+	int		pixel;
+	double	pitch_offset;
+
+	pitch_offset = data->player.pitch * (WINDOW_HEIGHT * 0.5);
+	result->found = 0;
+	i = -1;
+	while (++i < data->rays[x].index_hit)
+	{
+		wall_bottom = ((int)(WINDOW_HEIGHT
+					/ data->rays[x].perp_wall_dist_per_hit[i])
+				/ 2 + WINDOW_HEIGHT / 2);
+		wall_bottom += (int)pitch_offset - 1;
+		if (y < (-((int)(WINDOW_HEIGHT
+					/ data->rays[x].perp_wall_dist_per_hit[i])
+				/ 2) + WINDOW_HEIGHT / 2)
+			+ (int)pitch_offset || y > wall_bottom)
+			continue ;
+		pixel = get_wall_pixel(data, x, y, i);
+		if (!is_transparent_color(pixel))
+			return (result->pixel = pixel,
+				result->dist = data->rays[x].perp_wall_dist_per_hit[i],
+				result->found = 1, (void)0);
 	}
 }

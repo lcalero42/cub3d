@@ -22,7 +22,7 @@ RENDER_DISTANCE = 1000	   # the maximum distance where the walls will be rendere
 
 NAME = cub3d
 MODE ?= release
-CONFIG = -D WINDOW_WIDTH=$(WINDOW_WIDTH) -D WINDOW_HEIGHT=$(WINDOW_HEIGHT) -D MOVE_SPEED=$(MOVE_SPEED) -D ROT_SPEED=$(ROT_SPEED) -D RENDER_DISTANCE=$(RENDER_DISTANCE) \
+CONFIG = -g3 -D WINDOW_WIDTH=$(WINDOW_WIDTH) -D WINDOW_HEIGHT=$(WINDOW_HEIGHT) -D MOVE_SPEED=$(MOVE_SPEED) -D ROT_SPEED=$(ROT_SPEED) -D RENDER_DISTANCE=$(RENDER_DISTANCE) \
 		 -D CROSSHAIR_SIZE=$(CROSSHAIR_SIZE) -D CROSSHAIR_THICKNESS=$(CROSSHAIR_THICKNESS) -D CROSSHAIR_COLOR=$(CROSSHAIR_COLOR) -D SENSITIVITY=$(SENSITIVITY) \
 		 -D RELOAD_TIME_MS=$(RELOAD_TIME_MS)
 DEBUG_CONFIG = -D WINDOW_WIDTH=$(WINDOW_WIDTH) -D WINDOW_HEIGHT=$(WINDOW_HEIGHT) -D MOVE_SPEED=3.0f -D ROT_SPEED=2.0f -D RENDER_DISTANCE=10 \
@@ -117,6 +117,7 @@ SRCS_BONUS = main_bonus.c							\
 		r_raycast_dda_bonus.c						\
 		r_raycast_init_bonus.c						\
 		r_trace_shot_bonus.c						\
+		r_perform_dda_bonus.c						\
 		p_determine_movement_bonus.c				\
 		p_delta_time_bonus.c						\
 		p_check_collisions_bonus.c					\
@@ -140,6 +141,9 @@ SRCS_BONUS = main_bonus.c							\
 		u_get_current_speed_bonus.c 				\
 		u_trace_shot_bonus.c						\
 		u_calc_hitbox_bonus.c						\
+		u_get_door_pixel_bonus.c					\
+		u_check_wall_occlusion_bonus.c				\
+		u_get_wall_texture_pixel_bonus.c			\
 		m_init_mouse_move_bonus.c					\
 		m_mouse_move_bonus.c						\
 		s_sprite_render_bonus.c		    			\

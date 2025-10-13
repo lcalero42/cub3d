@@ -6,15 +6,12 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 17:13:02 by lcalero           #+#    #+#             */
-/*   Updated: 2025/09/16 15:59:51 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/10/09 17:30:29 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d_bonus.h"
-#include "cub3d_bonus.h"
 
-static void	perform_dda_step(t_data *data, int i);
-static void	perform_dda(t_data *data, int i);
 static void	trace_single_ray(t_data *data, int i);
 
 void	trace_ray(t_data *data, double angle)
@@ -51,7 +48,7 @@ t_wall_side	get_wall_side(t_data *data, int ray_index)
 	}
 }
 
-static void	perform_dda_step(t_data *data, int i)
+void	perform_dda_step(t_data *data, int i)
 {
 	if (data->rays[i].side_dist.x < data->rays[i].side_dist.y)
 	{
@@ -67,36 +64,11 @@ static void	perform_dda_step(t_data *data, int i)
 	}
 }
 
-static void	perform_dda(t_data *data, int i)
-{
-	int	steps;
-	int	map_x;
-	int	map_y;
-
-	steps = 0;
-	while (data->rays[i].hit == 0)
-	{
-		perform_dda_step(data, i);
-		map_x = (int)data->rays[i].map_pos.x;
-		map_y = (int)data->rays[i].map_pos.y;
-		if (data->grid.grid[map_y][map_x] == '1')
-			data->rays[i].hit = 1;
-		else if (data->grid.grid[map_y][map_x] == '2')
-			data->rays[i].hit = 2;
-		steps++;
-		if (steps > RENDER_DISTANCE)
-		{
-			data->rays[i].hit = 1;
-			data->rays[i].must_render = 0;
-			break ;
-		}
-	}
-}
-
 static void	trace_single_ray(t_data *data, int i)
 {
 	init_ray_direction(data, i);
 	init_ray_distances(data, i);
 	init_ray_steps(data, i);
+	data->rays[i].index_hit = 0;
 	perform_dda(data, i);
 }

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   p_hooks.c                                          :+:      :+:    :+:   */
+/*   p_hooks_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 14:02:02 by lcalero           #+#    #+#             */
-/*   Updated: 2025/09/14 18:30:34 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/09/24 16:28:35 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	key_press_hook(int keycode, t_data *data)
 		data->render_fog = 1;
 	if (keycode == XK_m || keycode == XK_M)
 		toggle_mouse_control(data);
-	check_door_distance(data, keycode);
+	check_door_interaction(data, keycode);
 	return (0);
 }
 

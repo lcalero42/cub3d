@@ -6,7 +6,7 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 19:04:02 by lcalero           #+#    #+#             */
-/*   Updated: 2025/09/16 16:29:29 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/10/09 17:29:39 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 static unsigned int	get_texture_pixel(t_texture_info *texture_info,
 						int x, int y);
-static int			is_transparent_color(unsigned int color);
 
 void	calculate_sprite_bounds(int screen_x, int sprite_height,
 	t_sprite_bounds *bounds)
@@ -60,22 +59,6 @@ void	draw_sprite_column(t_data *data, t_sprite_params *params)
 	}
 }
 
-int	check_wall_occlusion(t_data *data, int x, t_enemy *enemy)
-{
-	float	player_dist;
-	float	wall_dist;
-
-	if (data->rays[x].hit != 1 && data->rays[x].hit != 2
-		&& data->rays[x].hit != 3)
-		return (0);
-	player_dist = sqrtf((enemy->position.x - data->player.position.x)
-			* (enemy->position.x - data->player.position.x)
-			+ (enemy->position.y - data->player.position.y)
-			* (enemy->position.y - data->player.position.y));
-	wall_dist = data->rays[x].perp_wall_dist;
-	return (wall_dist < player_dist);
-}
-
 static unsigned int	get_texture_pixel(t_texture_info *texture_info,
 				int x, int y)
 {
@@ -98,7 +81,7 @@ static unsigned int	get_texture_pixel(t_texture_info *texture_info,
 	return (color);
 }
 
-static int	is_transparent_color(unsigned int color)
+int	is_transparent_color(unsigned int color)
 {
 	if (color == 0x00FFFFFF)
 		return (1);

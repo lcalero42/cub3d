@@ -6,7 +6,7 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 13:18:22 by lcalero           #+#    #+#             */
-/*   Updated: 2025/09/22 13:56:20 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/10/13 13:19:47 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,19 +31,26 @@ int				is_map_surrounded(t_data *data);
 
 /* RAYCASTING/RENDERING */
 void			trace_ray(t_data *data, double angle);
+void			perform_dda(t_data *data, int i);
+void			perform_dda_step(t_data *data, int i);
 void			render_walls(t_data *data);
 void			init_walls(t_data *data);
 void			clear_screen(t_data *data);
 void			put_pixel_to_image(t_data *data, int x, int y, int color);
-int				get_wall_texture_pixel(t_data *data, int x, int y, int side);
+int				get_wall_texture_pixel(t_data *data, int y,
+					int ray_index, int index_hit);
 void			update_player_movement(t_data *data);
 t_wall_side		get_wall_side(t_data *data, int ray_index);
 t_texture_info	get_texture_info_by_side(t_data *data, t_wall_side side);
-void			apply_fog_overlay(t_data *data);
 void			render_crosshair(t_data *data);
 void			render_gun(t_data *data);
 void			animation_routine(t_data *data);
 void			trace_shot(t_data *data);
+void			toggle_door(t_door *door);
+t_door			*find_door_at(t_data *data, int x, int y);
+void			check_door_interaction(t_data *data, int keycode);
+int				calculate_texture_x_for_hit(t_data *data,
+					int ray_index, int hit_index);
 
 /* RAYCASTING INIT */
 void			init_player_direction(t_data *data, double angle);
@@ -107,7 +114,6 @@ int				is_valid_position(t_data *data, double x, double y);
 int				heuristic(t_pos a, t_pos b);
 
 /* SHOOTING */
-void			check_door_distance(t_data *data, int keycode);
 void			init_ray_direction_shot(t_data *data);
 void			init_ray_distances_shot(t_data *data);
 void			init_ray_steps_shot(t_data *data);
@@ -127,6 +133,13 @@ int				is_out_of_bounds(int x, int y, int height, int width);
 int				is_valid_map_char(char c);
 void			load_texture(t_data *data, char *path, t_render *texture);
 void			init(t_data *data, char **argv);
+t_texture_info	get_door_texture(t_data *data, t_door *door);
+void			init_door_system(t_data *data);
+int				is_transparent_color(unsigned int color);
+int				get_door_pixel_at_position(t_data *data, int x,
+					int y, int hit_index);
+t_wall_side		get_wall_side_from_stored(int stored_side,
+					t_data *data, int ray_index);
 void			calc_delta_time_ms(t_data *data);
 
 /* COLOR & FOG */

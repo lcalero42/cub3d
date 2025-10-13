@@ -6,35 +6,29 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/28 14:25:57 by lcalero           #+#    #+#             */
-/*   Updated: 2025/09/16 17:49:32 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/10/12 21:12:49 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d_bonus.h"
 
-int	get_wall_texture_pixel(t_data *data, int x, int y, int ray_index)
+t_wall_side	get_wall_side_from_stored(int stored_side,
+				t_data *data, int ray_index)
 {
-	t_texture_info	texture;
-	t_wall_side		side;
-	char			*dst;
-
-	if (x < 0 || x >= 64 || y < 0 || y >= 64)
-		return (0x808080);
-	if (!data->rays[ray_index].must_render)
-		return (u_rgb_to_hex(data->ceiling.base_r,
-				data->ceiling.base_g, data->ceiling.base_b, 255));
-	side = get_wall_side(data, ray_index);
-	texture = get_texture_info_by_side(data, side);
-	if (data->rays[ray_index].hit == 2)
+	if (stored_side == 0)
 	{
-		texture.addr = data->door.info.addr;
-		texture.bpp = data->door.info.bpp;
-		texture.line_len = data->door.info.line_len;
+		if (data->rays[ray_index].ray_dir.x > 0)
+			return (WEST);
+		else
+			return (EAST);
 	}
-	if (!texture.addr)
-		return (0x808080);
-	dst = texture.addr + (y * texture.line_len + x * (texture.bpp / 8));
-	return (*(unsigned int *)dst);
+	else
+	{
+		if (data->rays[ray_index].ray_dir.y > 0)
+			return (NORTH);
+		else
+			return (SOUTH);
+	}
 }
 
 void	put_pixel_to_image(t_data *data, int x, int y, int color)

@@ -6,7 +6,7 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 13:18:32 by lcalero           #+#    #+#             */
-/*   Updated: 2025/09/22 14:41:35 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/10/13 13:16:50 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,36 @@ typedef enum e_wall_side
 	EAST = 2,
 	WEST = 3
 }	t_wall_side;
+
+typedef struct s_wall_calc
+{
+	int			line_height;
+	int			wall_top;
+	int			wall_bottom;
+	int			tex_y;
+}	t_wall_calc;
+
+typedef struct s_occlusion_data
+{
+	double	enemy_distance;
+	int		sprite_bounds[2];
+}	t_occlusion_data;
+
+typedef enum e_door_state
+{
+	DOOR_CLOSED = 0,
+	DOOR_OPEN = 1,
+	DOOR_OPENING = 2,
+	DOOR_CLOSING = 3
+}	t_door_state;
+
+typedef struct s_door
+{
+	int				x;
+	int				y;
+	t_door_state	state;
+	double			open_progress;
+}	t_door;
 
 typedef struct s_health_bar
 {
@@ -102,9 +132,14 @@ typedef struct s_ray
 	t_vector	delta_dist;
 	t_vector	step;
 	double		perp_wall_dist;
-	int			hit;
 	int			side;
+	int			hit[MAX_RAY_HIT];
+	t_pos		hit_map_pos[MAX_RAY_HIT];
+	double		perp_wall_dist_per_hit[MAX_RAY_HIT];
+	int			side_per_hit[MAX_RAY_HIT];
+	int			index_hit;
 	int			must_render;
+	int			ray_hit_enemy;
 }	t_ray;
 
 typedef struct s_grid
@@ -179,6 +214,13 @@ typedef struct s_render
 	t_texture_info	info;
 	int				texture_endian;
 }	t_render;
+
+typedef struct s_pixel_data
+{
+	int		pixel;
+	double	dist;
+	int		found;
+}	t_pixel_data;
 
 typedef struct s_anim
 {
@@ -285,7 +327,8 @@ typedef struct s_data
 	t_render		west_wall;
 	t_render		enemy_render;
 	t_render		crosshair;
-	t_render		door;
+	t_render		door_opened;
+	t_render		door_closed;
 	t_anim			gun;
 	t_anim			shot;
 	t_color			floor;
@@ -313,6 +356,10 @@ typedef struct s_data
 	t_discriminant	disc;
 	t_health_bar	health_bar;
 	t_health_bar	stamina_bar;
+	t_door			doors[MAX_DOORS];
+	int				door_count;
+	long long		last_door_interaction;
+	int				current_ray_index;
 }	t_data;
 
 typedef struct s_neighbor_context
