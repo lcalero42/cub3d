@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structures_bonus.h                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 13:18:32 by lcalero           #+#    #+#             */
-/*   Updated: 2025/10/13 13:34:26 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/10/13 15:58:05 by ekeisler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,6 +149,50 @@ typedef struct s_grid
 	int		height;
 }	t_grid;
 
+typedef struct s_square_params
+{
+	int	x;
+	int	y;
+	int	color;
+	int	scale;
+}	t_square_params;
+
+typedef struct s_ray_draw_params
+{
+	int		start_x;
+	int		start_y;
+	int		cell_size;
+	double	angle;
+	int		color;
+}	t_ray_draw_params;
+
+typedef struct s_ray_state
+{
+	double	x;
+	double	y;
+	double	step;
+	int		grid_x;
+	int		grid_y;
+	int		i;
+}	t_ray_state;
+
+typedef struct s_minimap_params
+{
+	int	cell_size;
+	int	minimap_margin;
+	int	minimap_size;
+	int	start_x;
+	int	start_y;
+}	t_minimap_params;
+
+typedef struct s_fov_cone_params
+{
+	double	fov;
+	int		rays;
+	double	start_angle;
+	double	end_angle;
+}	t_fov_cone_params;
+
 typedef struct s_player
 {
 	t_vector	position;
@@ -257,17 +301,25 @@ typedef struct s_enemy_render_data
 	double	angle_diff;
 }	t_enemy_render_data;
 
+typedef struct s_mouse_smooth
+{
+	int		buffer_x[5];
+	int		buffer_y[5];
+	int		buffer_index;
+	int		buffer_filled;
+}	t_mouse_smooth;
+
 typedef struct s_mouse
 {
-	int		first_move;
-	int		last_x;
-	int		last_y;
-	int		delta_x;
-	int		delta_y;
-	int		center_x;
-	int		center_y;
-	int		enabled;
-	double	sensitivity;
+	int				first_move;
+	int				delta_x;
+	int				delta_y;
+	int				center_x;
+	int				center_y;
+	int				enabled;
+	int				recenter_frame_counter;
+	double			sensitivity;
+	t_mouse_smooth	m_smooth;
 }	t_mouse;
 
 typedef struct s_enemy
