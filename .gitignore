@@ -6,6 +6,7 @@
 !raycasting
 !player
 !checker
+!UI
 !parsing
 !rendering
 !utils

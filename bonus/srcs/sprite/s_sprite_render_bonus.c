@@ -6,7 +6,7 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 19:04:42 by lcalero           #+#    #+#             */
-/*   Updated: 2025/09/22 13:48:41 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/10/13 13:35:59 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void	render_enemy_with_health(t_data *data, t_enemy *enemy)
 			data->enemy.enemy_data.sprite_height, &bounds);
 		bounds.sprite_height = data->enemy.enemy_data.sprite_height;
 		bounds.sprite_top = data->enemy.enemy_data.sprite_top;
+		bounds.sprite_size = 64;
 		draw_sprite_at(data, &data->enemy.render, &bounds, &data->enemy);
 		render_enemy_health_bar(data, enemy, &enemy->enemy_data);
 	}
@@ -63,7 +64,7 @@ static void	draw_sprite_at(t_data *data, t_render *render,
 		if (params.tex_x >= 64)
 			params.tex_x = 64 - 1;
 		params.x = x;
-		draw_sprite_column(data, &params);
+		draw_sprite_column(data, &params, bounds);
 		x++;
 	}
 }

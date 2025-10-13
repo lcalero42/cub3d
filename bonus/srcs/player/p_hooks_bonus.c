@@ -6,7 +6,7 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 14:02:02 by lcalero           #+#    #+#             */
-/*   Updated: 2025/09/24 16:28:35 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/10/13 13:35:52 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	key_press_hook(int keycode, t_data *data)
 		data->render_fog = 0;
 	else if (keycode == XK_f && !data->render_fog)
 		data->render_fog = 1;
-	if (keycode == XK_m || keycode == XK_M)
+	if ((keycode == XK_m || keycode == XK_M) && data->game_started)
 		toggle_mouse_control(data);
 	check_door_interaction(data, keycode);
 	return (0);
@@ -51,18 +51,29 @@ int	key_press_hook(int keycode, t_data *data)
 
 int	mouse_hook(int keycode, int x, int y, t_data *data)
 {
-	(void)x;
-	(void)y;
 	if (keycode == 1)
 	{
-		if (get_current_time() - data->last_shot_time < RELOAD_TIME_MS)
-			return (1);
-		data->last_shot_time = get_current_time();
-		data->shot.is_playing = 1;
-		data->shot.index = 0;
-		data->shot.index = 0;
-		data->gun.is_playing = 0;
-		trace_shot(data);
+		if (!data->game_started)
+		{
+			if (handle_menu_button_clicks(data, x, y) == 1)
+			{
+				data->game_started = 1;
+				toggle_mouse_control(data);
+			}
+			else if (handle_menu_button_clicks(data, x, y) == 2)
+				close_window(data);
+		}
+		else
+		{
+			if (get_current_time() - data->last_shot_time < RELOAD_TIME_MS)
+				return (1);
+			data->last_shot_time = get_current_time();
+			data->shot.is_playing = 1;
+			data->shot.index = 0;
+			data->shot.index = 0;
+			data->gun.is_playing = 0;
+			trace_shot(data);
+		}
 	}
 	return (0);
 }

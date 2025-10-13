@@ -6,7 +6,7 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 11:53:44 by lcalero           #+#    #+#             */
-/*   Updated: 2025/10/13 13:17:02 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/10/13 13:35:29 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,15 @@
 
 int	render_loop(t_data *data)
 {
-	data->game_started = 1;
+	if (!data->game_started)
+	{
+		if (data->mouse.enabled)
+			toggle_mouse_control(data);
+		render_menu(data);
+		mlx_put_image_to_window(data->mlx,
+			data->window, data->render_img, 0, 0);
+		return (0);
+	}
 	calc_delta_time_ms(data);
 	update_player_movement(data);
 	update_enemy_movement(data);
