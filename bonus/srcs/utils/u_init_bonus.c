@@ -6,7 +6,7 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 18:20:59 by lcalero           #+#    #+#             */
-/*   Updated: 2025/10/13 13:36:31 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/10/13 13:43:52 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void	init(t_data *data, char **argv)
 	data->window = mlx_new_window(data->mlx, WINDOW_WIDTH, WINDOW_HEIGHT,
 			"cub3d");
 	init_walls(data);
+	init_door_system(data);
 	load_sprites(data);
 	data->gun.is_playing = 1;
 	spawn_enemy(data);

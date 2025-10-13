@@ -6,7 +6,7 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 18:18:50 by lcalero           #+#    #+#             */
-/*   Updated: 2025/09/24 16:40:22 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/10/13 13:40:55 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,9 @@ int	check_collisions(t_data *data, t_vector move)
 
 static int	check_point(t_data *data, double x, double y)
 {
-	int	grid_x;
-	int	grid_y;
+	int		grid_x;
+	int		grid_y;
+	t_door	*door;
 
 	grid_x = (int)x;
 	grid_y = (int)y;
@@ -49,8 +50,12 @@ static int	check_point(t_data *data, double x, double y)
 		return (1);
 	else if (data->grid.grid[grid_y][grid_x] == '2')
 	{
-		if (find_door_at(data, grid_x, grid_y)->state == DOOR_CLOSED)
-			return (1);
+		door = find_door_at(data, grid_x, grid_y);
+		if (door)
+		{
+			if (door->state == DOOR_CLOSED)
+				return (1);
+		}
 	}
 	return (0);
 }
