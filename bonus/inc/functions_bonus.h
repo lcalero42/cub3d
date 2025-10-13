@@ -6,7 +6,7 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 13:18:22 by lcalero           #+#    #+#             */
-/*   Updated: 2025/10/13 13:33:51 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/10/13 15:40:30 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,8 @@ void			init_ray_steps(t_data *data, int i);
 void			init_mouse_control(t_data *data);
 int				mouse_move(int x, int y, void *param);
 void			toggle_mouse_control(t_data *data);
+void			reset_game(t_data *data);
+void			spawn_enemy(t_data *data);
 
 /* ENEMY & AI */
 void			update_enemy_movement(t_data *data);
@@ -78,6 +80,11 @@ void			draw_health_bar_background(t_data *data,
 void			render_menu(t_data *data);
 int				handle_menu_button_clicks(t_data *data,
 					int mouse_x, int mouse_y);
+void			draw_button_at(t_data *data, t_render *render,
+					t_sprite_bounds *bounds);
+void			render_game_over_screen(t_data *data);
+void			render_background(t_data *data);
+int				handle_scene(t_data *data);
 
 /* PLAYER & MOVEMENT */
 void			update_player_stamina_status(t_data *data);

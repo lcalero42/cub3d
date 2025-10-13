@@ -6,14 +6,13 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 18:20:59 by lcalero           #+#    #+#             */
-/*   Updated: 2025/10/13 13:43:52 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/10/13 15:35:59 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d_bonus.h"
 #include <time.h>
 
-static void		spawn_enemy(t_data *data);
 static void		load_sprites(t_data *data);
 
 void	init(t_data *data, char **argv)
@@ -63,7 +62,7 @@ t_sprite_params	init_sprite_params(t_texture_info *info, int spr_top,
 	return (params);
 }
 
-static void	spawn_enemy(t_data *data)
+void	spawn_enemy(t_data *data)
 {
 	double	pos_x;
 	double	pos_y;
@@ -99,4 +98,6 @@ static void	load_sprites(t_data *data)
 	load_texture(data, "bonus/textures/leave_button.xpm", &data->leave_button);
 	load_texture(data, "bonus/textures/menu_background.xpm",
 		&data->menu_background);
+	load_texture(data, "bonus/textures/game_over_print.xpm",
+		&data->game_over_print);
 }

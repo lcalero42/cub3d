@@ -6,7 +6,7 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/03 13:59:19 by lcalero           #+#    #+#             */
-/*   Updated: 2025/10/13 13:29:25 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/10/13 15:44:15 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void	init_door_system(t_data *data)
 	int		y;
 	char	*s;
 
+	data->door_count = 0;
 	y = 0;
 	while (y < data->grid.height && data->door_count < MAX_DOORS)
 	{

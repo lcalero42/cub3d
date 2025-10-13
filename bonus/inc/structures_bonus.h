@@ -6,7 +6,7 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 13:18:32 by lcalero           #+#    #+#             */
-/*   Updated: 2025/10/13 13:34:26 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/10/13 15:14:52 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -334,6 +334,8 @@ typedef struct s_data
 	t_sprite_bounds	play_bounds;
 	t_render		leave_button;
 	t_sprite_bounds	leave_bounds;
+	t_render		game_over_print;
+	t_sprite_bounds	game_over_bounds;
 	t_render		menu_background;
 	t_anim			gun;
 	t_anim			shot;
@@ -366,6 +368,8 @@ typedef struct s_data
 	int				door_count;
 	long long		last_door_interaction;
 	int				current_ray_index;
+	int				game_over;
+	long long		game_over_time;
 }	t_data;
 
 typedef struct s_neighbor_context

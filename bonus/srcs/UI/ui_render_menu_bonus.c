@@ -6,17 +6,17 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/23 12:40:43 by lcalero           #+#    #+#             */
-/*   Updated: 2025/09/24 15:45:59 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/10/13 15:48:05 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d_bonus.h"
 
-static void	draw_button_at(t_data *data, t_render *render,
-				t_sprite_bounds *bounds);
+void	draw_button_at(t_data *data, t_render *render,
+			t_sprite_bounds *bounds);
 
-static void	draw_button_at(t_data *data, t_render *render,
-				t_sprite_bounds *bounds)
+void	draw_button_at(t_data *data, t_render *render,
+			t_sprite_bounds *bounds)
 {
 	t_sprite_params	params;
 	int				x;
@@ -43,7 +43,7 @@ static void	draw_button_at(t_data *data, t_render *render,
 	}
 }
 
-static void	render_background(t_data *data)
+void	render_background(t_data *data)
 {
 	t_sprite_bounds	bg_bounds;
 
@@ -68,6 +68,7 @@ int	handle_menu_button_clicks(t_data *data, int mouse_x, int mouse_y)
 		&& mouse_y <= play_bounds.sprite_top + play_bounds.sprite_height)
 	{
 		data->game_started = 1;
+		data->player.current_health = 100;
 		return (1);
 	}
 	if (mouse_x >= leave_bounds.start_x && mouse_x <= leave_bounds.end_x

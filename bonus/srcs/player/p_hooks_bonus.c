@@ -6,7 +6,7 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 14:02:02 by lcalero           #+#    #+#             */
-/*   Updated: 2025/10/13 13:35:52 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/10/13 15:36:56 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,15 +51,12 @@ int	key_press_hook(int keycode, t_data *data)
 
 int	mouse_hook(int keycode, int x, int y, t_data *data)
 {
-	if (keycode == 1)
+	if (keycode == 1 && !data->game_over)
 	{
 		if (!data->game_started)
 		{
 			if (handle_menu_button_clicks(data, x, y) == 1)
-			{
-				data->game_started = 1;
-				toggle_mouse_control(data);
-			}
+				reset_game(data);
 			else if (handle_menu_button_clicks(data, x, y) == 2)
 				close_window(data);
 		}
