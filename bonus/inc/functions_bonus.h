@@ -6,7 +6,7 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 13:18:22 by lcalero           #+#    #+#             */
-/*   Updated: 2025/10/13 15:40:30 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/10/14 12:16:37 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,18 @@ void			init_ray_distances(t_data *data, int i);
 void			init_ray_steps(t_data *data, int i);
 void			init_mouse_control(t_data *data);
 int				mouse_move(int x, int y, void *param);
+void			apply_rotation_with_limits(t_data *data,
+					int smooth_x, int smooth_y);
+void			update_player_direction(t_data *data);
+void			handle_recenter(t_data *data, int force);
+void			mouse_rotation(int delta_x, int delta_y, t_data *data);
+void			add_to_smooth_buffer(t_data *data, int delta_x, int delta_y);
+void			get_smoothed_delta(t_data *data, int *smooth_x, int *smooth_y);
+int				handle_first_move(t_data *data);
+int				check_out_of_bounds(int x, int y, t_data *data);
+int				handle_first_move(t_data *data);
+void			norm_angle(double *angle, t_data *data);
+void			clamp_delta(int *delta_x, int *delta_y, double magnitude);
 void			toggle_mouse_control(t_data *data);
 void			reset_game(t_data *data);
 void			spawn_enemy(t_data *data);
@@ -77,6 +89,14 @@ void			init_health_bar(t_health_bar *health_bar, t_data *data);
 unsigned int	get_health_color(t_data *data);
 void			draw_health_bar_background(t_data *data,
 					t_health_bar *health_bar);
+void			render_minimap(t_data *data);
+void			draw_square(t_data *data, t_square_params params);
+void			draw_minimap_player_with_direction(t_data *data,
+					t_minimap_params *params);
+void			draw_minimap_fov_cone(t_data *data, t_minimap_params *params);
+void			draw_ray_on_minimap(t_data *data, t_ray_draw_params *params);
+void			init_ray_params(t_minimap_params *params,
+					t_ray_draw_params *ray);
 void			render_menu(t_data *data);
 int				handle_menu_button_clicks(t_data *data,
 					int mouse_x, int mouse_y);

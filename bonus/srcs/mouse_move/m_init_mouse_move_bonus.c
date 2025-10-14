@@ -3,14 +3,44 @@
 /*                                                        :::      ::::::::   */
 /*   m_init_mouse_move_bonus.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 18:17:24 by lcalero           #+#    #+#             */
-/*   Updated: 2025/09/11 15:13:19 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/10/08 17:20:33 by ekeisler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d_bonus.h"
+
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   m_init_mouse_move_bonus.c                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/09/02 18:17:24 by lcalero           #+#    #+#             */
+/*   Updated: 2025/10/08 16:51:28 by ekeisler         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "cub3d_bonus.h"
+
+static void	init_smooth_buffer(t_data *data)
+{
+	int	i;
+
+	data->mouse.m_smooth.buffer_index = 0;
+	data->mouse.m_smooth.buffer_filled = 0;
+	data->mouse.recenter_frame_counter = 0;
+	i = 0;
+	while (i < 5)
+	{
+		data->mouse.m_smooth.buffer_x[i] = 0;
+		data->mouse.m_smooth.buffer_y[i] = 0;
+		i++;
+	}
+}
 
 void	init_mouse_control(t_data *data)
 {
@@ -23,7 +53,7 @@ void	init_mouse_control(t_data *data)
 	data->mouse.sensitivity = SENSITIVITY;
 	center_x = WINDOW_WIDTH / 2;
 	center_y = WINDOW_HEIGHT / 2;
-	data->mouse.last_x = center_x;
+	init_smooth_buffer(data);
 	mlx_mouse_hide(data->mlx, data->window);
 	mlx_mouse_move(data->mlx, data->window, center_x, center_y);
 }
@@ -35,8 +65,6 @@ void	toggle_mouse_control(t_data *data)
 
 	center_x = WINDOW_WIDTH / 2;
 	center_y = WINDOW_HEIGHT / 2;
-	data->mouse.last_x = center_x;
-	data->mouse.last_y = center_y;
 	if (data->mouse.enabled)
 	{
 		data->mouse.enabled = 0;
@@ -46,6 +74,7 @@ void	toggle_mouse_control(t_data *data)
 	{
 		data->mouse.enabled = 1;
 		data->mouse.first_move = 1;
+		init_smooth_buffer(data);
 		mlx_mouse_hide(data->mlx, data->window);
 		mlx_mouse_move(data->mlx, data->window, center_x, center_y);
 	}
