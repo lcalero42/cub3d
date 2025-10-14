@@ -6,7 +6,7 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 18:20:59 by lcalero           #+#    #+#             */
-/*   Updated: 2025/10/13 15:35:59 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/10/14 12:02:58 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,4 +100,6 @@ static void	load_sprites(t_data *data)
 		&data->menu_background);
 	load_texture(data, "bonus/textures/game_over_print.xpm",
 		&data->game_over_print);
+	load_texture(data, "bonus/textures/you_won_print.xpm",
+		&data->you_won_print);
 }

@@ -6,7 +6,7 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 15:38:14 by lcalero           #+#    #+#             */
-/*   Updated: 2025/10/13 15:46:10 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/10/14 12:06:27 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,5 +47,12 @@ static void	handle_game_over(t_data *data)
 		data->game_over_time = get_current_time();
 		data->game_over = 1;
 		data->game_started = 0;
+	}
+	else if (data->enemy.current_health <= 0)
+	{
+		data->game_over_time = get_current_time();
+		data->game_over = 1;
+		data->game_started = 0;
+		data->player_won = 1;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 13:48:21 by lcalero           #+#    #+#             */
-/*   Updated: 2025/10/13 15:48:55 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/10/14 12:06:57 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,10 @@ void	render_game_over_screen(t_data *data)
 	data->game_over_bounds.half_width = button_width / 2;
 	data->game_over_bounds.sprite_size = 128;
 	die_time = get_current_time();
-	draw_button_at(data, &data->game_over_print, &data->game_over_bounds);
+	if (data->player_won)
+		draw_button_at(data, &data->you_won_print, &data->game_over_bounds);
+	else
+		draw_button_at(data, &data->game_over_print, &data->game_over_bounds);
 }
 
 void	reset_game(t_data *data)

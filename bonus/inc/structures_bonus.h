@@ -6,7 +6,7 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 13:18:32 by lcalero           #+#    #+#             */
-/*   Updated: 2025/10/13 15:14:52 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/10/14 12:03:45 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -322,6 +322,7 @@ typedef struct s_data
 {
 	int				game_started;
 	double			delta_time;
+	int				player_won;
 	t_render		north_wall;
 	t_render		south_wall;
 	t_render		east_wall;
@@ -337,6 +338,7 @@ typedef struct s_data
 	t_render		game_over_print;
 	t_sprite_bounds	game_over_bounds;
 	t_render		menu_background;
+	t_render		you_won_print;
 	t_anim			gun;
 	t_anim			shot;
 	t_color			floor;
