@@ -6,7 +6,7 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 13:18:22 by lcalero           #+#    #+#             */
-/*   Updated: 2025/10/14 12:16:37 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/10/14 13:14:45 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ void			render_gun(t_data *data);
 void			animation_routine(t_data *data);
 void			trace_shot(t_data *data);
 void			toggle_door(t_door *door);
-t_door			*find_door_at(t_data *data, int x, int y);
 void			check_door_interaction(t_data *data, int keycode);
 int				calculate_texture_x_for_hit(t_data *data,
 					int ray_index, int hit_index);

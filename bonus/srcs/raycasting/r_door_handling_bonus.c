@@ -6,11 +6,13 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/03 13:59:19 by lcalero           #+#    #+#             */
-/*   Updated: 2025/10/13 15:44:15 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/10/14 13:15:22 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d_bonus.h"
+
+static void	init_door_grid(t_data *data);
 
 void	init_door_system(t_data *data)
 {
@@ -38,20 +40,7 @@ void	init_door_system(t_data *data)
 		free(s);
 		y++;
 	}
-}
-
-t_door	*find_door_at(t_data *data, int x, int y)
-{
-	int	i;
-
-	i = 0;
-	while (i < data->door_count)
-	{
-		if (data->doors[i].x == x && data->doors[i].y == y)
-			return (&data->doors[i]);
-		i++;
-	}
-	return (NULL);
+	init_door_grid(data);
 }
 
 void	check_door_interaction(t_data *data, int keycode)
@@ -73,7 +62,7 @@ void	check_door_interaction(t_data *data, int keycode)
 			* (data->player.position.y - (dy + 0.5)));
 	if (data->grid.grid[dy][dx] == '2')
 	{
-		door = find_door_at(data, dx, dy);
+		door = &data->door_grid[dy][dx];
 		if (door && dist > 0.7f)
 		{
 			toggle_door(door);
@@ -96,4 +85,25 @@ t_texture_info	get_door_texture(t_data *data, t_door *door)
 		return (data->door_closed.info);
 	else
 		return (data->door_opened.info);
+}
+
+static void	init_door_grid(t_data *data)
+{
+	int i;
+	int y;
+	
+	data->door_grid = malloc(sizeof(t_door *) * data->grid.height);
+	y = 0;
+	while (y < data->grid.height)
+	{
+		data->door_grid[y] = malloc(sizeof(t_door *) * data->grid.width);
+		ft_memset(data->door_grid[y], 0, sizeof(t_door *) * data->grid.width);
+		y++;
+	}
+	i = 0;
+	while (i < data->door_count)
+	{
+		data->door_grid[data->doors[i].y][data->doors[i].x] = data->doors[i];
+		i++;
+	}
 }

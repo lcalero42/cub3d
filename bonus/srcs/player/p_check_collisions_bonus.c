@@ -6,7 +6,7 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 18:18:50 by lcalero           #+#    #+#             */
-/*   Updated: 2025/10/13 13:40:55 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/10/14 13:11:03 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static int	check_point(t_data *data, double x, double y)
 		return (1);
 	else if (data->grid.grid[grid_y][grid_x] == '2')
 	{
-		door = find_door_at(data, grid_x, grid_y);
+		door = &data->door_grid[grid_y][grid_x];
 		if (door)
 		{
 			if (door->state == DOOR_CLOSED)

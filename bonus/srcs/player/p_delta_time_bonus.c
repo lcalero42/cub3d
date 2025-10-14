@@ -6,7 +6,7 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 18:18:57 by lcalero           #+#    #+#             */
-/*   Updated: 2025/09/22 14:41:06 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/10/14 12:27:40 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,10 @@ void	calculate_fps(t_data *data)
 	if (current_time - last_sec_time >= 1000)
 	{
 		data->fps = frame_count;
+		data->average_fps += data->fps;
 		frame_count = 0;
 		last_sec_time = current_time;
+		data->fps_count++;
 	}
 	if (data->fps == 0)
 		return ;

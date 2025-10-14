@@ -6,7 +6,7 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/12 21:07:25 by lcalero           #+#    #+#             */
-/*   Updated: 2025/10/13 12:28:59 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/10/14 13:13:49 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static t_texture_info	get_door_tex(t_data *data, t_pos pos)
 	t_door			*door;
 	t_texture_info	tex;
 
-	door = find_door_at(data, pos.x, pos.y);
+	door = &data->door_grid[pos.y][pos.x];
 	if (!door)
 	{
 		tex.addr = NULL;

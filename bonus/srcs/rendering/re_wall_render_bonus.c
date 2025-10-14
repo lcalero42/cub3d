@@ -6,14 +6,15 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 18:19:52 by lcalero           #+#    #+#             */
-/*   Updated: 2025/10/13 12:28:22 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/10/14 12:56:53 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d_bonus.h"
 
 static void		draw_wall_column(t_data *data, int x);
-static int		get_wall_pixel(t_data *data, int x, int y, int i);
+static int		get_wall_pixel(t_data *data, int x, int y, 
+					int i, int line_height, int wall_top);
 static void		find_visible_pixel(t_data *data, int x, int y,
 					t_pixel_data *result);
 
@@ -22,6 +23,7 @@ void	render_walls(t_data *data)
 	int		x;
 
 	x = 0;
+	data->player.pitch_offset = data->player.pitch * (WINDOW_HEIGHT * 0.5);
 	while (x < WINDOW_WIDTH)
 	{
 		data->current_ray_index = x;
@@ -45,7 +47,7 @@ int	calculate_texture_x_for_hit(t_data *data, int ray_index, int hit_index)
 	else
 		wall_x = data->player.position.x
 			+ perp_dist * data->rays[ray_index].ray_dir.x;
-	wall_x -= floor(wall_x);
+	wall_x -= (int)wall_x;
 	tex_x = (int)(wall_x * 64);
 	if ((side == 0 && data->rays[ray_index].ray_dir.x > 0)
 		|| (side == 1 && data->rays[ray_index].ray_dir.y < 0))
@@ -76,45 +78,36 @@ static void	draw_wall_column(t_data *data, int x)
 	}
 }
 
-static int	get_wall_pixel(t_data *data, int x, int y, int i)
+static int	get_wall_pixel(t_data *data, int x, int y, 
+	int i, int line_height, int wall_top)
 {
-	t_ray	ray;
-	int		line_height;
-	int		wall_top;
-	double	step;
-
-	ray = data->rays[x];
-	line_height = (int)(WINDOW_HEIGHT / ray.perp_wall_dist_per_hit[i]);
-	wall_top = (-line_height / 2 + WINDOW_HEIGHT / 2);
-	wall_top += (int)(data->player.pitch * (WINDOW_HEIGHT * 0.5));
+	double step;
+	
 	step = 64.0 / line_height;
 	return (get_wall_texture_pixel(data,
-			(int)((y - wall_top) * step) & 63, x, i));
+		(int)((y - wall_top) * step) & 63, x, i));
 }
 
 static void	find_visible_pixel(t_data *data, int x, int y,
 	t_pixel_data *result)
 {
-	int		i;
-	int		wall_bottom;
-	int		pixel;
-	double	pitch_offset;
-
-	pitch_offset = data->player.pitch * (WINDOW_HEIGHT * 0.5);
+	int i;
+	int wall_bottom;
+	int line_height;
+	int wall_top;
+	int pixel;
+	
 	result->found = 0;
 	i = -1;
 	while (++i < data->rays[x].index_hit)
 	{
-		wall_bottom = ((int)(WINDOW_HEIGHT
-					/ data->rays[x].perp_wall_dist_per_hit[i])
-				/ 2 + WINDOW_HEIGHT / 2);
-		wall_bottom += (int)pitch_offset - 1;
-		if (y < (-((int)(WINDOW_HEIGHT
-					/ data->rays[x].perp_wall_dist_per_hit[i])
-				/ 2) + WINDOW_HEIGHT / 2)
-			+ (int)pitch_offset || y > wall_bottom)
+		line_height = (int)(WINDOW_HEIGHT 
+			/ data->rays[x].perp_wall_dist_per_hit[i]);
+		wall_top = -line_height / 2 + WINDOW_HEIGHT / 2 + (int)data->player.pitch_offset;
+		wall_bottom = line_height / 2 + WINDOW_HEIGHT / 2 + (int)data->player.pitch_offset - 1;
+		if (y < wall_top || y > wall_bottom)
 			continue ;
-		pixel = get_wall_pixel(data, x, y, i);
+		pixel = get_wall_pixel(data, x, y, i, line_height, wall_top);
 		if (!is_transparent_color(pixel))
 			return (result->pixel = pixel,
 				result->dist = data->rays[x].perp_wall_dist_per_hit[i],

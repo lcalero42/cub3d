@@ -6,7 +6,7 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 19:37:20 by lcalero           #+#    #+#             */
-/*   Updated: 2025/09/24 18:55:31 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/10/14 13:12:27 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ int	is_valid_position(t_data *data, double x, double y)
 		return (0);
 	if (data->grid.grid[map_y][map_x] == '2')
 	{
-		door = find_door_at(data, map_x, map_y);
+		door = &data->door_grid[map_y][map_x];
 		if (door)
 		{
 			if (door->state == DOOR_CLOSED)
