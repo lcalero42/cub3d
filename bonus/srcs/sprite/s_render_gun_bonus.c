@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   s_render_gun_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/04 15:52:11 by lcalero           #+#    #+#             */
-/*   Updated: 2025/09/23 13:07:06 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/10/14 18:30:07 by ekeisler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d_bonus.h"
 
-static void	draw_gun_at(t_data *data, t_render *render,
-				t_sprite_bounds *bounds);
+static void		draw_gun_at(t_data *data, t_render *render,
+					t_sprite_bounds *bounds);
 
 void	render_gun(t_data *data)
 {

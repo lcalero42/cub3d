@@ -6,13 +6,13 @@
 /*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 11:53:44 by lcalero           #+#    #+#             */
-/*   Updated: 2025/10/13 16:05:05 by ekeisler         ###   ########.fr       */
+/*   Updated: 2025/10/16 15:00:13 by ekeisler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d_bonus.h"
 
-int	render_loop(t_data *data)
+int render_loop(t_data *data)
 {
 	if (!data->game_started)
 	{
@@ -40,6 +40,7 @@ int	render_loop(t_data *data)
 	render_minimap(data);
 	return (1);
 }
+
 
 int	main(int argc, char **argv)
 {

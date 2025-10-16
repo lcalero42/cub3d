@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   u_map_checking_bonus.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 15:14:06 by lcalero           #+#    #+#             */
-/*   Updated: 2025/09/11 15:14:13 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/10/14 15:06:09 by ekeisler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,5 +20,5 @@ int	is_out_of_bounds(int x, int y, int height, int width)
 int	is_valid_map_char(char c)
 {
 	return (c == '1' || c == '0' || c == 'N' || c == 'S' || c == 'E' || c == 'W'
-		|| c == '2');
+		|| c == '2' || c == 'H');
 }

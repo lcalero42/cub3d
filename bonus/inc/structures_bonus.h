@@ -6,7 +6,7 @@
 /*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 13:18:32 by lcalero           #+#    #+#             */
-/*   Updated: 2025/10/13 15:58:05 by ekeisler         ###   ########.fr       */
+/*   Updated: 2025/10/16 16:06:19 by ekeisler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ typedef struct s_door
 	t_door_state	state;
 	double			open_progress;
 }	t_door;
+
 
 typedef struct s_health_bar
 {
@@ -123,6 +124,13 @@ typedef struct s_vector
 	double	x;
 	double	y;
 }	t_vector;
+
+typedef struct s_health_pad
+{
+	t_pos	pos;
+	int		state;
+	double	distance;
+}	t_health_pad;
 
 typedef struct s_ray
 {
@@ -389,6 +397,10 @@ typedef struct s_data
 	t_render		menu_background;
 	t_anim			gun;
 	t_anim			shot;
+	t_health_pad	**health_pad_grid;
+	t_health_pad	health_pad[MAX_HEALTH_PAD];
+	t_anim			health_pad_anim;
+	int				health_count;
 	t_color			floor;
 	t_color			ceiling;
 	void			*render_img;

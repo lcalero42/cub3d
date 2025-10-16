@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   u_init_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 18:20:59 by lcalero           #+#    #+#             */
-/*   Updated: 2025/10/13 13:43:52 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/10/16 15:51:30 by ekeisler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,11 @@ void	init(t_data *data, char **argv)
 	data->window = mlx_new_window(data->mlx, WINDOW_WIDTH, WINDOW_HEIGHT,
 			"cub3d");
 	init_walls(data);
+	data->door_count = 0;
 	init_door_system(data);
+	data->health_count = 0;
+	init_health_pad_system(data);
+	allocate_health_pad_grid(data);
 	load_sprites(data);
 	data->gun.is_playing = 1;
 	spawn_enemy(data);
@@ -92,6 +96,12 @@ static void	load_sprites(t_data *data)
 		&data->gun.render_arr[1]);
 	load_texture(data, "bonus/textures/gun-hand-2.xpm",
 		&data->gun.render_arr[2]);
+	load_texture(data, "bonus/textures/heal_1.xpm",
+		&data->health_pad_anim.render_arr[0]);
+	load_texture(data, "bonus/textures/heal_2.xpm",
+		&data->health_pad_anim.render_arr[1]);
+	load_texture(data, "bonus/textures/heal_3.xpm",
+		&data->health_pad_anim.render_arr[2]);
 	load_texture(data, "bonus/textures/shot-0.xpm", &data->shot.render_arr[0]);
 	load_texture(data, "bonus/textures/shot-1.xpm", &data->shot.render_arr[1]);
 	load_texture(data, "bonus/textures/shot-2.xpm", &data->shot.render_arr[2]);

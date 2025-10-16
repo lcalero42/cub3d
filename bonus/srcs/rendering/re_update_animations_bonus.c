@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   re_update_animations_bonus.c                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/10 17:18:30 by lcalero           #+#    #+#             */
-/*   Updated: 2025/09/22 13:57:36 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/10/14 17:04:32 by ekeisler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,9 @@ static void	update_indexes(t_data *data, double *acc_time, double anim_speed)
 		data->shot.is_playing = 0;
 		data->gun.is_playing = 1;
 	}
+	data->health_pad_anim.index++;
+	if (data->health_pad_anim.index == 3)
+		data->health_pad_anim.index = 0;
 	else if (data->shot.is_playing)
 		data->shot.index++;
 	*acc_time -= 1.0 / anim_speed;

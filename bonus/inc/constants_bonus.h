@@ -6,7 +6,7 @@
 /*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 13:17:32 by lcalero           #+#    #+#             */
-/*   Updated: 2025/10/13 15:57:33 by ekeisler         ###   ########.fr       */
+/*   Updated: 2025/10/14 16:55:59 by ekeisler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,7 @@
 # define MAX_HEALTH 100
 
 # define MAX_DOORS 64
+# define MAX_HEALTH_PAD 64
 # define DOOR_INTERACTION_COOLDOWN 300
 # define DOOR_ANIMATION_SPEED 2.0
 

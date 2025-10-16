@@ -6,7 +6,7 @@
 /*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 13:18:22 by lcalero           #+#    #+#             */
-/*   Updated: 2025/10/13 15:57:56 by ekeisler         ###   ########.fr       */
+/*   Updated: 2025/10/16 15:59:24 by ekeisler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,11 @@ void			animation_routine(t_data *data);
 void			trace_shot(t_data *data);
 void			toggle_door(t_door *door);
 t_door			*find_door_at(t_data *data, int x, int y);
+t_health_pad	*find_health_at(t_data *data, int x, int y);
 void			check_door_interaction(t_data *data, int keycode);
 int				calculate_texture_x_for_hit(t_data *data,
 					int ray_index, int hit_index);
+void    		render_health_sprite(t_data *data);
 
 /* RAYCASTING INIT */
 void			init_player_direction(t_data *data, double angle);
@@ -159,6 +161,8 @@ void			load_texture(t_data *data, char *path, t_render *texture);
 void			init(t_data *data, char **argv);
 t_texture_info	get_door_texture(t_data *data, t_door *door);
 void			init_door_system(t_data *data);
+void			init_health_pad_system(t_data *data);
+void			allocate_health_pad_grid(t_data *data);
 int				is_transparent_color(unsigned int color);
 int				get_door_pixel_at_position(t_data *data, int x,
 					int y, int hit_index);

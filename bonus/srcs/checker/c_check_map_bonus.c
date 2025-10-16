@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   c_check_map_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 18:17:11 by lcalero           #+#    #+#             */
-/*   Updated: 2025/09/11 15:13:14 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/10/14 15:01:50 by ekeisler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ static int	is_mfw(int i, int j, t_data *data)
 	if (data->grid.grid[i][j] == '1')
 		return (1);
 	if (data->grid.grid[i][j] == '2')
+		return (1);
+	if (data->grid.grid[i][j] == 'H')
 		return (1);
 	if (data->grid.grid[i][j] == 'N')
 		return (1);
