@@ -6,11 +6,35 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/09 15:26:18 by lcalero           #+#    #+#             */
-/*   Updated: 2025/10/14 13:16:36 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/10/16 15:04:02 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d_bonus.h"
+
+static void	calculate_wall_bounds(t_data *data,
+				int y, int hit_index, t_wall_calc *calc);
+static int	get_texture_pixel(t_texture_info *tex_info, int tex_x, int tex_y);
+
+int	get_door_pixel_at_position(t_data *data, int x,
+	int y, int hit_index)
+{
+	t_wall_calc		calc;
+	t_texture_info	tex_info;
+	t_door			*door;
+	int				tex_x;
+
+	calculate_wall_bounds(data, y, hit_index, &calc);
+	if (y < calc.wall_top || y > calc.wall_bottom)
+		return (-1);
+	tex_x = calculate_texture_x_for_hit(data, x, hit_index);
+	door = &data->door_grid[data->rays[x].hit_map_pos[hit_index].y]
+	[data->rays[x].hit_map_pos[hit_index].x];
+	if (!door)
+		return (-1);
+	tex_info = get_door_texture(data, door);
+	return (get_texture_pixel(&tex_info, tex_x, calc.tex_y));
+}
 
 static void	calculate_wall_bounds(t_data *data,
 	int y, int hit_index, t_wall_calc *calc)
@@ -41,23 +65,4 @@ static int	get_texture_pixel(t_texture_info *tex_info, int tex_x, int tex_y)
 	pixel_addr = tex_info->addr + (tex_y * tex_info->line_len
 			+ tex_x * (tex_info->bpp / 8));
 	return (*(int *)pixel_addr);
-}
-
-int	get_door_pixel_at_position(t_data *data, int x,
-	int y, int hit_index)
-{
-	t_wall_calc		calc;
-	t_texture_info	tex_info;
-	t_door			*door;
-	int				tex_x;
-
-	calculate_wall_bounds(data, y, hit_index, &calc);
-	if (y < calc.wall_top || y > calc.wall_bottom)
-		return (-1);
-	tex_x = calculate_texture_x_for_hit(data, x, hit_index);
-	door = &data->door_grid[data->rays[x].hit_map_pos[hit_index].y][data->rays[x].hit_map_pos[hit_index].x];
-	if (!door)
-		return (-1);
-	tex_info = get_door_texture(data, door);
-	return (get_texture_pixel(&tex_info, tex_x, calc.tex_y));
 }

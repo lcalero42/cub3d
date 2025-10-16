@@ -6,7 +6,7 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 13:18:32 by lcalero           #+#    #+#             */
-/*   Updated: 2025/10/14 13:04:28 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/10/16 15:07:19 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -385,7 +385,7 @@ typedef struct s_data
 	t_render		crosshair;
 	t_render		door_opened;
 	t_render		door_closed;
-	t_door 			**door_grid;
+	t_door			**door_grid;
 	t_render		play_button;
 	t_sprite_bounds	play_bounds;
 	t_render		leave_button;

@@ -6,12 +6,14 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 18:18:57 by lcalero           #+#    #+#             */
-/*   Updated: 2025/10/14 12:27:40 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/10/16 15:20:12 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d_bonus.h"
 #include <sys/time.h>
+
+static void	render_fps(t_data *data);
 
 long long	get_current_time(void)
 {
@@ -26,7 +28,6 @@ void	calculate_fps(t_data *data)
 	static int			frame_count = 0;
 	static long long	current_time = 0;
 	static long long	last_sec_time = 0;
-	char				*fps;
 
 	frame_count++;
 	if (current_time == 0)
@@ -44,12 +45,7 @@ void	calculate_fps(t_data *data)
 		last_sec_time = current_time;
 		data->fps_count++;
 	}
-	if (data->fps == 0)
-		return ;
-	fps = ft_itoa(data->fps);
-	mlx_string_put(data->mlx, data->window,
-		WINDOW_WIDTH * 0.95, WINDOW_HEIGHT * 0.05, 0xFFFFFF, fps);
-	free(fps);
+	render_fps(data);
 }
 
 void	calc_delta_time_ms(t_data *data)
@@ -68,4 +64,16 @@ void	calc_delta_time_ms(t_data *data)
 	if (delta_time > 0.1)
 		delta_time = 0.016667;
 	data->delta_time = delta_time;
+}
+
+static void	render_fps(t_data *data)
+{
+	char				*fps;
+
+	if (data->fps == 0)
+		return ;
+	fps = ft_itoa(data->fps);
+	mlx_string_put(data->mlx, data->window,
+		WINDOW_WIDTH * 0.95, WINDOW_HEIGHT * 0.05, 0xFFFFFF, fps);
+	free(fps);
 }

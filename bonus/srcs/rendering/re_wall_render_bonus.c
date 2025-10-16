@@ -6,15 +6,13 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 18:19:52 by lcalero           #+#    #+#             */
-/*   Updated: 2025/10/14 19:45:04 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/10/16 14:58:04 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d_bonus.h"
 
 static void		draw_wall_column(t_data *data, int x);
-static int		get_wall_pixel(t_data *data, int x, int y, 
-					int i, int line_height, int wall_top);
 static void		find_visible_pixel(t_data *data, int x, int y,
 					t_pixel_data *result);
 
@@ -78,36 +76,29 @@ static void	draw_wall_column(t_data *data, int x)
 	}
 }
 
-static int	get_wall_pixel(t_data *data, int x, int y, 
-	int i, int line_height, int wall_top)
-{
-	double step;
-	
-	step = 64.0 / line_height;
-	return (get_wall_texture_pixel(data,
-		(int)((y - wall_top) * step) & 63, x, i));
-}
-
 static void	find_visible_pixel(t_data *data, int x, int y,
 	t_pixel_data *result)
 {
-	int i;
-	int wall_bottom;
-	int line_height;
-	int wall_top;
-	int pixel;
-	
+	int	i;
+	int	wall_bottom;
+	int	line_height;
+	int	wall_top;
+	int	pixel;
+
 	result->found = 0;
 	i = -1;
 	while (++i < data->rays[x].index_hit)
 	{
-		line_height = (int)(WINDOW_HEIGHT 
-			/ data->rays[x].perp_wall_dist_per_hit[i]);
-		wall_top = -line_height / 2 + WINDOW_HEIGHT / 2 + (int)data->player.pitch_offset;
-		wall_bottom = line_height / 2 + WINDOW_HEIGHT / 2 + (int)data->player.pitch_offset - 1;
+		line_height = (int)(WINDOW_HEIGHT
+				/ data->rays[x].perp_wall_dist_per_hit[i]);
+		wall_top = -line_height / 2 + WINDOW_HEIGHT / 2
+			+ (int)data->player.pitch_offset;
+		wall_bottom = line_height / 2 + WINDOW_HEIGHT / 2
+			+ (int)data->player.pitch_offset - 1;
 		if (y < wall_top || y > wall_bottom)
 			continue ;
-		pixel = get_wall_pixel(data, x, y, i, line_height, wall_top);
+		pixel = get_wall_texture_pixel(data,
+				(int)((y - wall_top) * (64.0 / line_height)) & 63, x, i);
 		if (!is_transparent_color(pixel))
 			return (result->pixel = pixel,
 				result->dist = data->rays[x].perp_wall_dist_per_hit[i],

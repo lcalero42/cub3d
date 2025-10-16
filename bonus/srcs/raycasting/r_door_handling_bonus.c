@@ -6,7 +6,7 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/03 13:59:19 by lcalero           #+#    #+#             */
-/*   Updated: 2025/10/14 13:15:22 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/10/16 15:04:25 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,9 +89,9 @@ t_texture_info	get_door_texture(t_data *data, t_door *door)
 
 static void	init_door_grid(t_data *data)
 {
-	int i;
-	int y;
-	
+	int	i;
+	int	y;
+
 	data->door_grid = malloc(sizeof(t_door *) * data->grid.height);
 	y = 0;
 	while (y < data->grid.height)
