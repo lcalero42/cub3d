@@ -6,7 +6,7 @@
 /*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 18:20:59 by lcalero           #+#    #+#             */
-/*   Updated: 2025/10/16 15:51:30 by ekeisler         ###   ########.fr       */
+/*   Updated: 2025/10/16 17:28:55 by ekeisler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,12 @@ void	init(t_data *data, char **argv)
 	data->door_count = 0;
 	init_door_system(data);
 	data->health_count = 0;
-	init_health_pad_system(data);
-	allocate_health_pad_grid(data);
 	load_sprites(data);
 	data->gun.is_playing = 1;
 	spawn_enemy(data);
 	init_mouse_control(data);
 	data->player.stamina = MAX_STAMINA;
+	init_health_pad_system(data);
 	init_health_bar(&data->health_bar, data);
 }
 

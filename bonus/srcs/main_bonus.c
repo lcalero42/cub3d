@@ -6,7 +6,7 @@
 /*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 11:53:44 by lcalero           #+#    #+#             */
-/*   Updated: 2025/10/16 15:00:13 by ekeisler         ###   ########.fr       */
+/*   Updated: 2025/10/16 17:28:22 by ekeisler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ int render_loop(t_data *data)
 	trace_ray(data, data->player.angle);
 	animation_routine(data);
 	clear_screen(data);
+	render_all_health_pads(data);
+	check_health_pickup_collision(data); 
 	render_walls(data);
 	render_enemy_with_health(data, &data->enemy);
 	render_crosshair(data);
