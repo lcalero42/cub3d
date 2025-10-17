@@ -6,7 +6,7 @@
 /*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/14 14:56:24 by ekeisler          #+#    #+#             */
-/*   Updated: 2025/10/16 17:31:57 by ekeisler         ###   ########.fr       */
+/*   Updated: 2025/10/17 14:53:56 by ekeisler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,7 +128,7 @@ static void	draw_health_sprite_columns(t_data *data, t_sprite_calc *calc)
 				{
 					color = *(int *)(texture->addr + tex_y * texture->line_len
 							+ tex_x * (texture->bpp / 8));
-					if (is_transparent_color(0X00FFFFFF))
+					if (is_transparent_color(0X0FFFFFF))
 						put_pixel_to_image(data, x, y, color);
 				}
 				y++;
