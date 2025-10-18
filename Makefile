@@ -12,7 +12,7 @@ ROT_SPEED = 3.0f	       # player rotation speed
 CROSSHAIR_SIZE = 4		   # size of the crosshair
 CROSSHAIR_THICKNESS = 2    # thickness of the crosshair
 CROSSHAIR_COLOR = 0x00FF00 # color of the crosshair in hexa format
-SENSITIVITY = 0.5f		   # player mouse sensitivity
+SENSITIVITY = 0.25f		   # player mouse sensitivity
 RELOAD_TIME_MS = 1000	   # reload time of the weapon
 
 # -------------------------------- performance ------------------------------- #

@@ -6,7 +6,7 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/23 12:40:43 by lcalero           #+#    #+#             */
-/*   Updated: 2025/10/13 15:48:05 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/10/18 14:06:52 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,8 @@ void	draw_button_at(t_data *data, t_render *render,
 	t_sprite_params	params;
 	int				x;
 	int				texture_width;
-	int				texture_height;
 
 	texture_width = bounds->sprite_size;
-	texture_height = bounds->sprite_size;
 	params = init_sprite_params(&render->info, bounds->sprite_top,
 			bounds->sprite_height);
 	x = bounds->start_x;
