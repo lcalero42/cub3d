@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   constants_bonus.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 13:17:32 by lcalero           #+#    #+#             */
-/*   Updated: 2025/10/13 15:57:33 by ekeisler         ###   ########.fr       */
+/*   Updated: 2025/10/18 14:53:04 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,6 @@
 
 # ifndef SENSITIVITY
 #  define SENSITIVITY 1.0f
-# endif
-
-# ifndef ROTATION_SPEED
-#  define ROTATION_SPEED 3.0f
 # endif
 
 # ifndef RENDER_DISTANCE

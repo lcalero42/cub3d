@@ -6,7 +6,7 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 18:19:04 by lcalero           #+#    #+#             */
-/*   Updated: 2025/09/22 13:58:33 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/10/18 14:51:10 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	update_player_movement(t_data *data)
 	double		rotation_speed;
 
 	move_speed = u_get_current_speed(data) * data->delta_time;
-	rotation_speed = ROTATION_SPEED * data->delta_time;
+	rotation_speed = data->mouse.sensitivity * data->delta_time;
 	determine_rotation(data, rotation_speed);
 	determine_movement(data, move_speed);
 	if (data->keys.run && data->player.stamina > 0)

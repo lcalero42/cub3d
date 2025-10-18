@@ -8,7 +8,6 @@ WINDOW_HEIGHT = 720			# height of window
 
 # --------------------------------- gameplay --------------------------------- #
 MOVE_SPEED = 5.0f		   # player movement speed
-ROT_SPEED = 3.0f	       # player rotation speed
 CROSSHAIR_SIZE = 4		   # size of the crosshair
 CROSSHAIR_THICKNESS = 2    # thickness of the crosshair
 CROSSHAIR_COLOR = 0x00FF00 # color of the crosshair in hexa format
