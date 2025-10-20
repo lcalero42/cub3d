@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   functions_bonus.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 13:18:22 by lcalero           #+#    #+#             */
-/*   Updated: 2025/10/14 13:14:45 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/10/20 21:23:52 by ekeisler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,31 @@ void			render_gun(t_data *data);
 void			animation_routine(t_data *data);
 void			trace_shot(t_data *data);
 void			toggle_door(t_door *door);
+void			init_health_pad_system(t_data *data);
+void			render_all_health_pads(t_data *data);
+void			check_health_pickup_collision(t_data *data);
+t_health_pad	*find_health_at(t_data *data, int x, int y);
 void			check_door_interaction(t_data *data, int keycode);
 int				calculate_texture_x_for_hit(t_data *data,
 					int ray_index, int hit_index);
+void			render_health_sprite(t_data *data);
+int				collect_all_sprites(t_data *data, t_generic_sprite *sprites);
+void			sort_sprites_by_distance(t_generic_sprite *sprites, int count);
+void			calculate_sprite_position(t_data *data,
+					t_generic_sprite *sprite);
+void			calculate_sprite_size(t_generic_sprite *sprite);
+void			calculate_sprite_bounds_y(t_data *data, t_sprite_calc *calc);
+void			calculate_sprite_bounds_x(t_sprite_calc *calc);
+double			calculate_sprite_distance(t_vector sprite_pos,
+					t_player *player);
+void			calculate_sprite_bounds_from_calc(t_sprite_calc *calc,
+					int *sprite_top, int *sprite_bottom);
+int				check_door_occlusion_at_ray(t_data *data, int x,
+					int i, int sprite_bounds[2]);
+int				check_hit_occlusion(t_data *data, int x,
+					int i, t_occlusion_data *occ_data);
+int				check_hit_occlusion(t_data *data, int x,
+					int i, t_occlusion_data *occ_data);
 
 /* RAYCASTING INIT */
 void			init_player_direction(t_data *data, double angle);
@@ -99,6 +121,14 @@ void			init_ray_params(t_minimap_params *params,
 void			render_menu(t_data *data);
 int				handle_menu_button_clicks(t_data *data,
 					int mouse_x, int mouse_y);
+void			calculate_sprite_transform(t_data *data,
+					t_generic_sprite *sprite);
+void			render_sprite(t_data *data, t_generic_sprite *sprite);
+void			render_health_pad_sprite(t_data *data, t_health_pad *pad,
+					t_sprite_calc *calc);
+int				check_sprite_occlusion(t_data *data, int x, t_vector sprite_pos,
+					t_sprite_calc *calc);
+int				check_enemy_occlusion(t_data *data, int x, t_enemy *enemy);
 void			draw_button_at(t_data *data, t_render *render,
 					t_sprite_bounds *bounds);
 void			render_game_over_screen(t_data *data);
@@ -122,13 +152,18 @@ int				key_press_hook(int keycode, t_data *data);
 int				mouse_hook(int keycode, int x, int y, t_data *data);
 
 /* SPRITE RENDERING */
-int				check_wall_occlusion(t_data *data, int x, t_enemy *enemy);
+int				check_enemy_occlusion(t_data *data, int x, t_enemy *enemy);
 void			calculate_sprite_bounds(int screen_x, int sprite_height,
 					t_sprite_bounds *bounds);
 void			draw_sprite_column(t_data *data, t_sprite_params *params,
 					t_sprite_bounds *bounds);
 t_sprite_params	init_sprite_params(t_texture_info *info, int spr_top,
 					int spr_height);
+void			render_all_sprites(t_data *data);
+void			render_health_pad_sprite(t_data *data, t_health_pad *pad,
+					t_sprite_calc *calc);
+void			render_enemy_sprite(t_data *data, t_enemy *enemy,
+					t_sprite_calc *calc);
 
 /* ASTAR PATHFINDING */
 void			add_neighbor(t_neighbor_context *ctx, t_astar_node *curr,
@@ -165,12 +200,15 @@ void			load_texture(t_data *data, char *path, t_render *texture);
 void			init(t_data *data, char **argv);
 t_texture_info	get_door_texture(t_data *data, t_door *door);
 void			init_door_system(t_data *data);
+void			allocate_health_pad_grid(t_data *data);
 int				is_transparent_color(unsigned int color);
 int				get_door_pixel_at_position(t_data *data, int x,
 					int y, int hit_index);
 t_wall_side		get_wall_side_from_stored(int stored_side,
 					t_data *data, int ray_index);
 void			calc_delta_time_ms(t_data *data);
+int				check_sprite_occlusion(t_data *data, int x, t_vector sprite_pos,
+					t_sprite_calc *calc);
 
 /* COLOR & FOG */
 void			extract_base_colors(int base_color, int *r, int *g, int *b);

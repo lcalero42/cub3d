@@ -152,6 +152,12 @@ SRCS_BONUS = main_bonus.c							\
 		m_mouse_rotation_bonus.c					\
 		m_mouse_utils_bonus.c						\
 		s_sprite_render_bonus.c		    			\
+		s_hpad_bonus.c              				\
+		s_hpad_system_bonus.c       				\
+		s_hpad_collect_bonus.c      				\
+		s_hpad_transform_bonus.c    				\
+		s_hpad_bounds_bonus.c       				\
+		s_hpad_render_bonus.c       				\
 		s_enemy_movement_bonus.c	    			\
 		s_render_gun_bonus.c						\
 		s_enemy_find_path_bonus.c					\

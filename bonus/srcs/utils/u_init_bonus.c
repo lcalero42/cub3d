@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   u_init_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 18:20:59 by lcalero           #+#    #+#             */
-/*   Updated: 2025/10/14 12:02:58 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/10/20 21:24:07 by ekeisler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,15 @@ void	init(t_data *data, char **argv)
 	data->window = mlx_new_window(data->mlx, WINDOW_WIDTH, WINDOW_HEIGHT,
 			"cub3d");
 	init_walls(data);
+	data->door_count = 0;
 	init_door_system(data);
+	data->health_count = 0;
 	load_sprites(data);
 	data->gun.is_playing = 1;
 	spawn_enemy(data);
 	init_mouse_control(data);
 	data->player.stamina = MAX_STAMINA;
+	init_health_pad_system(data);
 	init_health_bar(&data->health_bar, data);
 }
 
@@ -91,6 +94,12 @@ static void	load_sprites(t_data *data)
 		&data->gun.render_arr[1]);
 	load_texture(data, "bonus/textures/gun-hand-2.xpm",
 		&data->gun.render_arr[2]);
+	load_texture(data, "bonus/textures/heal_1.xpm",
+		&data->health_pad_anim.render_arr[0]);
+	load_texture(data, "bonus/textures/heal_2.xpm",
+		&data->health_pad_anim.render_arr[1]);
+	load_texture(data, "bonus/textures/heal_3.xpm",
+		&data->health_pad_anim.render_arr[2]);
 	load_texture(data, "bonus/textures/shot-0.xpm", &data->shot.render_arr[0]);
 	load_texture(data, "bonus/textures/shot-1.xpm", &data->shot.render_arr[1]);
 	load_texture(data, "bonus/textures/shot-2.xpm", &data->shot.render_arr[2]);

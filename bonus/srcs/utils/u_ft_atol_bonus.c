@@ -1,24 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   u_map_checking_bonus.c                             :+:      :+:    :+:   */
+/*   u_ft_atol.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/29 15:14:06 by lcalero           #+#    #+#             */
-/*   Updated: 2025/10/14 15:06:09 by ekeisler         ###   ########.fr       */
+/*   Created: 2025/10/17 16:02:19 by ekeisler          #+#    #+#             */
+/*   Updated: 2025/10/17 16:02:31 by ekeisler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d_bonus.h"
 
-int	is_out_of_bounds(int x, int y, int height, int width)
+long	ft_atol(const char *str)
 {
-	return (x < 0 || x >= height || y < 0 || y >= width);
-}
+	long	result;
+	int		sign;
+	int		i;
 
-int	is_valid_map_char(char c)
-{
-	return (c == '1' || c == '0' || c == 'N' || c == 'S' || c == 'E' || c == 'W'
-		|| c == '2' || c == 'H');
+	result = 0;
+	sign = 1;
+	i = 0;
+	while (str[i] == ' ' || (str[i] >= 9 && str[i] <= 13))
+		i++;
+	if (str[i] == '-' || str[i] == '+')
+	{
+		if (str[i] == '-')
+			sign = -1;
+		i++;
+	}
+	while (str[i] >= '0' && str[i] <= '9')
+	{
+		result = result * 10 + (str[i] - '0');
+		i++;
+	}
+	return (result * sign);
 }

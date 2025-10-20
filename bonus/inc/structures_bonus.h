@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structures_bonus.h                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 13:18:32 by lcalero           #+#    #+#             */
-/*   Updated: 2025/10/16 15:07:19 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/10/20 21:23:57 by ekeisler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,12 @@ typedef enum e_wall_side
 	WEST = 3
 }	t_wall_side;
 
+typedef enum e_sprite_type
+{
+	SPRITE_ENEMY,
+	SPRITE_HEALTH_PAD
+}	t_sprite_type;
+
 typedef struct s_wall_calc
 {
 	int			line_height;
@@ -42,7 +48,7 @@ typedef struct s_wall_calc
 
 typedef struct s_occlusion_data
 {
-	double	enemy_distance;
+	double	sprite_distance;
 	int		sprite_bounds[2];
 }	t_occlusion_data;
 
@@ -123,6 +129,13 @@ typedef struct s_vector
 	double	x;
 	double	y;
 }	t_vector;
+
+typedef struct s_health_pad
+{
+	t_pos	pos;
+	int		state;
+	double	distance;
+}	t_health_pad;
 
 typedef struct s_ray
 {
@@ -243,6 +256,15 @@ typedef struct s_sprite_calc
 	int		draw_start_x;
 	int		draw_end_x;
 }	t_sprite_calc;
+
+typedef struct s_generic_sprite
+{
+	t_sprite_type	type;
+	t_vector		position;
+	double			distance;
+	void			*data;
+	t_sprite_calc	calc;
+}	t_generic_sprite;
 
 typedef struct s_texture_info
 {
@@ -396,6 +418,10 @@ typedef struct s_data
 	t_render		you_won_print;
 	t_anim			gun;
 	t_anim			shot;
+	t_health_pad	**health_pad_grid;
+	t_health_pad	health_pad[MAX_HEALTH_PAD];
+	t_anim			health_pad_anim;
+	int				health_count;
 	t_color			floor;
 	t_color			ceiling;
 	void			*render_img;

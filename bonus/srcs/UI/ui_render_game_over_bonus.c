@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ui_render_game_over_bonus.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 13:48:21 by lcalero           #+#    #+#             */
-/*   Updated: 2025/10/18 14:07:17 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/10/20 21:33:38 by ekeisler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,15 @@ void	render_game_over_screen(t_data *data)
 	data->game_over_bounds.half_width = button_width / 2;
 	data->game_over_bounds.sprite_size = 128;
 	if (data->player_won)
+	{
+		// printf("WON\n");
 		draw_button_at(data, &data->you_won_print, &data->game_over_bounds);
+	}
 	else
+	{
+		// printf("LOSE\n");
 		draw_button_at(data, &data->game_over_print, &data->game_over_bounds);
+	}
 }
 
 void	reset_game(t_data *data)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 11:53:44 by lcalero           #+#    #+#             */
-/*   Updated: 2025/10/14 19:29:34 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/10/20 21:24:02 by ekeisler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,12 @@ int	render_loop(t_data *data)
 	calc_delta_time_ms(data);
 	update_player_movement(data);
 	update_enemy_movement(data);
+	check_health_pickup_collision(data);
 	trace_ray(data, data->player.angle);
 	animation_routine(data);
 	clear_screen(data);
 	render_walls(data);
-	render_enemy_with_health(data, &data->enemy);
+	render_all_sprites(data);
 	render_crosshair(data);
 	render_gun(data);
 	render_health_bar(data, &data->health_bar);
@@ -41,6 +42,11 @@ int	main(int argc, char **argv)
 	if (argc != 2)
 	{
 		u_print_error("missing map path");
+		return (1);
+	}
+	if (WINDOW_HEIGHT > 1080 || WINDOW_WIDTH > 1920)
+	{
+		u_print_error("resolution > 1920 x 1080");
 		return (1);
 	}
 	ft_bzero(&data, sizeof(t_data));

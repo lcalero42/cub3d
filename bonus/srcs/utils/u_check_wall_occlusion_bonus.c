@@ -1,39 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   u_check_wall_occlusion.c                           :+:      :+:    :+:   */
+/*   u_check_wall_occlusion_bonus.c                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/09 15:09:40 by lcalero           #+#    #+#             */
-/*   Updated: 2025/10/09 15:26:08 by lcalero          ###   ########.fr       */
+/*   Created: 2025/10/20 18:06:00 by ekeisler          #+#    #+#             */
+/*   Updated: 2025/10/20 20:13:51 by ekeisler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d_bonus.h"
 
-static double	calculate_enemy_distance(t_enemy *enemy, t_player *player)
+double	calculate_sprite_distance(t_vector sprite_pos, t_player *player)
 {
 	double	dx;
 	double	dy;
 
-	dx = enemy->position.x - player->position.x;
-	dy = enemy->position.y - player->position.y;
+	dx = sprite_pos.x - player->position.x;
+	dy = sprite_pos.y - player->position.y;
 	return (sqrt(dx * dx + dy * dy));
 }
 
-static void	calculate_sprite_screen_bounds(t_enemy *enemy,
+void	calculate_sprite_bounds_from_calc(t_sprite_calc *calc,
 	int *sprite_top, int *sprite_bottom)
 {
-	*sprite_top = enemy->enemy_data.sprite_top;
-	*sprite_bottom = *sprite_top + enemy->enemy_data.sprite_height;
+	*sprite_top = calc->draw_start_y;
+	*sprite_bottom = calc->draw_end_y;
 	if (*sprite_top < 0)
 		*sprite_top = 0;
 	if (*sprite_bottom > WINDOW_HEIGHT)
 		*sprite_bottom = WINDOW_HEIGHT;
 }
 
-static int	check_door_occlusion_at_ray(t_data *data, int x,
+int	check_door_occlusion_at_ray(t_data *data, int x,
 	int i, int sprite_bounds[2])
 {
 	int	sample_count;
@@ -62,7 +62,7 @@ static int	check_door_occlusion_at_ray(t_data *data, int x,
 	return (sample_count > 0 && opaque_count * 2 > sample_count);
 }
 
-static int	check_hit_occlusion(t_data *data, int x,
+int	check_hit_occlusion(t_data *data, int x,
 	int i, t_occlusion_data *occ_data)
 {
 	double	wall_distance;
@@ -70,7 +70,7 @@ static int	check_hit_occlusion(t_data *data, int x,
 
 	wall_distance = data->rays[x].perp_wall_dist_per_hit[i];
 	hit_type = data->rays[x].hit[i];
-	if (wall_distance >= occ_data->enemy_distance)
+	if (wall_distance >= occ_data->sprite_distance)
 		return (0);
 	if (hit_type == 1)
 		return (1);
@@ -80,23 +80,12 @@ static int	check_hit_occlusion(t_data *data, int x,
 	return (0);
 }
 
-int	check_wall_occlusion(t_data *data, int x, t_enemy *enemy)
+int	check_enemy_occlusion(t_data *data, int x, t_enemy *enemy)
 {
-	t_occlusion_data	occ_data;
-	int					i;
+	t_sprite_calc	calc;
 
-	if (x < 0 || x >= WINDOW_WIDTH)
-		return (1);
-	occ_data.enemy_distance = calculate_enemy_distance(enemy,
-			&data->player);
-	calculate_sprite_screen_bounds(enemy, &occ_data.sprite_bounds[0],
-		&occ_data.sprite_bounds[1]);
-	i = 0;
-	while (i < data->rays[x].index_hit)
-	{
-		if (check_hit_occlusion(data, x, i, &occ_data))
-			return (1);
-		i++;
-	}
-	return (0);
+	calc.draw_start_y = enemy->enemy_data.sprite_top;
+	calc.draw_end_y = enemy->enemy_data.sprite_top
+		+ enemy->enemy_data.sprite_height;
+	return (check_sprite_occlusion(data, x, enemy->position, &calc));
 }

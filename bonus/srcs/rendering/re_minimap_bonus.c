@@ -6,7 +6,7 @@
 /*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/25 10:45:42 by ekeisler          #+#    #+#             */
-/*   Updated: 2025/10/09 15:28:26 by ekeisler         ###   ########.fr       */
+/*   Updated: 2025/10/20 19:26:41 by ekeisler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,11 @@ static void	draw_cell_helper(t_data *data, char cell, t_square_params *square)
 	if (cell == '2')
 	{
 		square->color = 0x8B4513;
+		draw_square(data, *square);
+	}
+	if (cell == 'H')
+	{
+		square->color = 0x228B22;
 		draw_square(data, *square);
 	}
 }
