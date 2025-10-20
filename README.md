@@ -1,0 +1,146 @@
+
+# **CUB3D PROJECT**
+
+## **Raycasting logic**
+
+Raycasting is a rendering technique that is used to reproduce 3D environment, even though it is not actual 3D.
+Raycasting is a technique that (based on a grid that is used as the map) consists of casting rays for each column of the screen until it reaches a wall or a blocking structure (such as closed doors) and renders right associated pixels in this column only.
+
+### **Algorithm used : DDA (Digital differential analyzer)**
+
+DDA (Digital Differential Analyzer) is a line drawing algorithm used in computer graphics to generate a line segment between two specified endpoints. Here, the two endpoints are the player (his position will be where the ray starts) and the wall or blocking structure.
+
+#### The steps involved in DDA line generation algorithm are :
+
+  1. Input the two endpoints of the line segment, (x1,y1) and (x2,y2).
+  2. Calculate the difference between the x-coordinates and y-coordinates of the endpoints as dx and dy respectively.
+  3. Calculate the slope of the line as m = dy/dx.
+  4. Set the initial point of the line as (x1,y1).
+  5. Loop through the x-coordinates of the line, incrementing by one each time, and calculate the corresponding y-coordinate using the equation y = y1 + m(x - x1).
+  6. Plot the pixel at the calculated (x,y) coordinate.
+  7. Repeat steps 5 and 6 until the endpoint (x2,y2) is reached.
+
+  Here, we have a subtle difference it term of use of the algorithm, which is that we don't know the coordinates of the point we want to go to, so we want to loop indefinitely until we reach a blocking structure.
+  I would sum up the use of the algorithm here to be : 
+
+  1. initiate the starting coordinates (player coordinates).
+  2. increment from the starting coordinates by adding the step accordingly 
+  ```
+  void	perform_dda_step(t_data *data, int i)
+{
+	if (data->rays[i].side_dist.x < data->rays[i].side_dist.y)
+	{
+		data->rays[i].side_dist.x += data->rays[i].delta_dist.x;
+		data->rays[i].map_pos.x += data->rays[i].step.x;
+		data->rays[i].side = 0;
+	}
+	else
+	{
+		data->rays[i].side_dist.y += data->rays[i].delta_dist.y;
+		data->rays[i].map_pos.y += data->rays[i].step.y;
+		data->rays[i].side = 1;
+	}
+}
+```
+3. Once we know we've reached a wall, we store the current coordinates of the ray and we calculate the distance between the player and the point reached
+```
+static int	handle_hit(t_data *data, int i, t_pos map_pos)
+{
+	t_door	*door;
+	char	cell;
+
+	if (map_pos.x < 0 || map_pos.x >= data->grid.width
+		|| map_pos.y < 0 || map_pos.y >= data->grid.height)
+		return (1);
+	cell = data->grid.grid[map_pos.y][map_pos.x];
+	if (cell == '1')
+	{
+		store_hit(data, i, map_pos, 1);
+		return (1);
+	}
+	else if (cell == '2')
+	{
+		door = &data->door_grid[map_pos.y][map_pos.x];
+		if (door)
+		{
+			store_hit(data, i, map_pos, 2);
+			if (door->state == DOOR_CLOSED)
+				return (1);
+		}
+	}
+	return (0);
+}
+```
+4. repeat these 3 first steps for each column of the screen/window width
+
+### **Rendering (using mlx) :**
+
+
+> info
+> Note that the logic of rendering should be the same even if you are not using  mlx but the code provided will be adapted to mlx and it can differ if you use an other library
+
+When building video games, one of the basics to know is a drawing loop. Here basically we want that loop to look be like this : 
+1. Clear the screen (needed because we want to completely clear whatever we have drawn in the previous frame)
+2. Update all the data we need (player position, cast rays, calculate delta time)
+3. Draw the walls and doors
+4. Draw the sprites
+
+And we want to iterate indefinitely in that loop until the user wants to leave. The order of rendering is very important if we want it to be a little realistic.
+> Example : 
+> In a FPS (First Person Shooter), we want to render the gun the player is holding in the lasts sprites that you render, otherwise you would see the textures of the game above the gun which would look pretty weird
+
+```
+int  render_loop(t_data  *data)
+{
+	if (!handle_scene(data))
+		return (0);
+	calc_delta_time_ms(data);
+	update_player_movement(data);
+	update_enemy_movement(data);
+	trace_ray(data, data->player.angle);
+	animation_routine(data);
+	clear_screen(data);
+	render_walls(data);
+	render_enemy_with_health(data, &data->enemy);
+	render_crosshair(data);
+	render_gun(data);
+	render_health_bar(data, &data->health_bar);
+	render_stamina(data, &data->stamina_bar);
+	mlx_put_image_to_window(data->mlx, data->window, data->render_img, 0, 0);
+	calculate_fps(data);
+	render_minimap(data);
+	return (1);
+}
+```
+
+> Info :
+> For the game to be **frame rate independent**, we calculate a **delta time**, which is the elapsed time since the program last updated and we will make scale all the movement/speed calculations with this delta time so that for example, the player goes the same speed when we have good or bad CPU
+
+ #### Floor/sky rendering :
+ The floor or Ceiling rendering here is very simple, we just need to draw for each row from top of the screen the color of the sky until we reach half the height of the screen and then, draw the other half with the floor color.
+ 
+```
+void	clear_screen(t_data *data)
+{
+	int	x;
+	int	y;
+
+	y = -1;
+	while (y++ < WINDOW_HEIGHT / 2)
+	{
+		x = -1;
+		while (x++ < WINDOW_WIDTH)
+			put_pixel_to_image(data, x, y,
+				u_rgb_to_hex(data->ceiling.base_r,
+					data->ceiling.base_g, data->ceiling.base_b, 0));
+	}
+	while (y++ < WINDOW_HEIGHT)
+	{
+		x = -1;
+		while (x++ < WINDOW_WIDTH)
+			put_pixel_to_image(data, x, y,
+				u_rgb_to_hex(data->floor.base_r,
+					data->floor.base_g, data->floor.base_b, 0));
+	}
+}
+```
