@@ -6,7 +6,7 @@
 /*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 13:18:22 by lcalero           #+#    #+#             */
-/*   Updated: 2025/10/20 19:15:12 by ekeisler         ###   ########.fr       */
+/*   Updated: 2025/10/20 20:16:26 by ekeisler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,24 @@ t_health_pad	*find_health_at(t_data *data, int x, int y);
 void			check_door_interaction(t_data *data, int keycode);
 int				calculate_texture_x_for_hit(t_data *data,
 					int ray_index, int hit_index);
-void    		render_health_sprite(t_data *data);
+void			render_health_sprite(t_data *data);
+int				collect_all_sprites(t_data *data, t_generic_sprite *sprites);
+void			sort_sprites_by_distance(t_generic_sprite *sprites, int count);
+void			calculate_sprite_position(t_data *data,
+					t_generic_sprite *sprite);
+void			calculate_sprite_size(t_generic_sprite *sprite);
+void			calculate_sprite_bounds_y(t_data *data, t_sprite_calc *calc);
+void			calculate_sprite_bounds_x(t_sprite_calc *calc);
+double			calculate_sprite_distance(t_vector sprite_pos,
+					t_player *player);
+void			calculate_sprite_bounds_from_calc(t_sprite_calc *calc,
+					int *sprite_top, int *sprite_bottom);
+int				check_door_occlusion_at_ray(t_data *data, int x,
+					int i, int sprite_bounds[2]);
+int				check_hit_occlusion(t_data *data, int x,
+					int i, t_occlusion_data *occ_data);
+int				check_hit_occlusion(t_data *data, int x,
+					int i, t_occlusion_data *occ_data);
 
 /* RAYCASTING INIT */
 void			init_player_direction(t_data *data, double angle);
@@ -103,6 +120,14 @@ void			init_ray_params(t_minimap_params *params,
 void			render_menu(t_data *data);
 int				handle_menu_button_clicks(t_data *data,
 					int mouse_x, int mouse_y);
+void			calculate_sprite_transform(t_data *data,
+					t_generic_sprite *sprite);
+void			render_sprite(t_data *data, t_generic_sprite *sprite);
+void			render_health_pad_sprite(t_data *data, t_health_pad *pad,
+					t_sprite_calc *calc);
+int				check_sprite_occlusion(t_data *data, int x, t_vector sprite_pos,
+					t_sprite_calc *calc);
+int				check_enemy_occlusion(t_data *data, int x, t_enemy *enemy);
 
 /* PLAYER & MOVEMENT */
 void			update_player_stamina_status(t_data *data);

@@ -6,7 +6,7 @@
 /*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 13:18:32 by lcalero           #+#    #+#             */
-/*   Updated: 2025/10/20 19:16:16 by ekeisler         ###   ########.fr       */
+/*   Updated: 2025/10/20 19:55:34 by ekeisler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,6 @@ typedef struct s_door
 	t_door_state	state;
 	double			open_progress;
 }	t_door;
-
 
 typedef struct s_health_bar
 {

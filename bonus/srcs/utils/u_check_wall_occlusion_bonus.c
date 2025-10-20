@@ -6,13 +6,13 @@
 /*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/20 18:06:00 by ekeisler          #+#    #+#             */
-/*   Updated: 2025/10/20 18:08:06 by ekeisler         ###   ########.fr       */
+/*   Updated: 2025/10/20 20:13:51 by ekeisler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d_bonus.h"
 
-static double	calculate_sprite_distance(t_vector sprite_pos, t_player *player)
+double	calculate_sprite_distance(t_vector sprite_pos, t_player *player)
 {
 	double	dx;
 	double	dy;
@@ -22,7 +22,7 @@ static double	calculate_sprite_distance(t_vector sprite_pos, t_player *player)
 	return (sqrt(dx * dx + dy * dy));
 }
 
-static void	calculate_sprite_bounds_from_calc(t_sprite_calc *calc,
+void	calculate_sprite_bounds_from_calc(t_sprite_calc *calc,
 	int *sprite_top, int *sprite_bottom)
 {
 	*sprite_top = calc->draw_start_y;
@@ -33,7 +33,7 @@ static void	calculate_sprite_bounds_from_calc(t_sprite_calc *calc,
 		*sprite_bottom = WINDOW_HEIGHT;
 }
 
-static int	check_door_occlusion_at_ray(t_data *data, int x,
+int	check_door_occlusion_at_ray(t_data *data, int x,
 	int i, int sprite_bounds[2])
 {
 	int	sample_count;
@@ -62,7 +62,7 @@ static int	check_door_occlusion_at_ray(t_data *data, int x,
 	return (sample_count > 0 && opaque_count * 2 > sample_count);
 }
 
-static int	check_hit_occlusion(t_data *data, int x,
+int	check_hit_occlusion(t_data *data, int x,
 	int i, t_occlusion_data *occ_data)
 {
 	double	wall_distance;
@@ -77,28 +77,6 @@ static int	check_hit_occlusion(t_data *data, int x,
 	if (hit_type == 2)
 		return (check_door_occlusion_at_ray(data, x, i,
 				occ_data->sprite_bounds));
-	return (0);
-}
-
-int	check_sprite_occlusion(t_data *data, int x, t_vector sprite_pos,
-	t_sprite_calc *calc)
-{
-	t_occlusion_data	occ_data;
-	int					i;
-
-	if (x < 0 || x >= WINDOW_WIDTH)
-		return (1);
-	occ_data.sprite_distance = calculate_sprite_distance(sprite_pos,
-			&data->player);
-	calculate_sprite_bounds_from_calc(calc, &occ_data.sprite_bounds[0],
-		&occ_data.sprite_bounds[1]);
-	i = 0;
-	while (i < data->rays[x].index_hit)
-	{
-		if (check_hit_occlusion(data, x, i, &occ_data))
-			return (1);
-		i++;
-	}
 	return (0);
 }
 

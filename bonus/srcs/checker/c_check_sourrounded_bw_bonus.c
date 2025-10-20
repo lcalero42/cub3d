@@ -6,7 +6,7 @@
 /*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 18:16:02 by lcalero           #+#    #+#             */
-/*   Updated: 2025/10/14 15:04:30 by ekeisler         ###   ########.fr       */
+/*   Updated: 2025/10/20 19:59:05 by ekeisler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	is_map_surrounded(t_data *data)
 static int	is_walkable_space(char c)
 {
 	return (c == '0' || c == 'N' || c == 'S'
-				|| c == 'E' || c == 'W' || c == 'H');
+		|| c == 'E' || c == 'W' || c == 'H');
 }
 
 static int	has_open_neighbor(t_data *data, int x, int y)
