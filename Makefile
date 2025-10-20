@@ -3,8 +3,8 @@
 # ---------------------------------------------------------------------------- #
 
 # ---------------------------------- window ---------------------------------- #
-WINDOW_WIDTH = 1920   # width of window
-WINDOW_HEIGHT = 1080			# height of window
+WINDOW_WIDTH = 1080   # width of window
+WINDOW_HEIGHT = 720			# height of window
 
 # --------------------------------- gameplay --------------------------------- #
 MOVE_SPEED = 5.0f		   # player movement speed
@@ -153,6 +153,7 @@ SRCS_BONUS = main_bonus.c							\
 		m_mouse_rotation_bonus.c					\
 		m_mouse_utils_bonus.c						\
 		s_sprite_render_bonus.c		    			\
+		s_render_sprite_bonus.c						\
 		s_enemy_movement_bonus.c	    			\
 		s_render_gun_bonus.c						\
 		s_enemy_find_path_bonus.c					\

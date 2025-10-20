@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   s_sprite_render_bonus.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 19:04:42 by lcalero           #+#    #+#             */
-/*   Updated: 2025/10/13 13:35:59 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/10/20 18:12:33 by ekeisler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static void	draw_sprite_at(t_data *data, t_render *render,
 	screen_x = enemy->enemy_data.screen_x;
 	while (x <= bounds->end_x)
 	{
-		if (check_wall_occlusion(data, x, enemy))
+		if (check_enemy_occlusion(data, x, enemy))
 		{
 			x++;
 			continue ;
@@ -81,7 +81,7 @@ static void	render_enemy_health_bar(t_data *data, t_enemy *enemy,
 		return ;
 	if (health_bar.y + health_bar.height < 0 || health_bar.y >= WINDOW_HEIGHT)
 		return ;
-	if (check_wall_occlusion(data, health_bar.x, enemy))
+	if (check_enemy_occlusion(data, health_bar.x, enemy))
 		return ;
 	draw_enemy_health_background(data, &health_bar);
 	draw_enemy_health_fill(data, &health_bar, enemy);

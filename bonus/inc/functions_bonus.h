@@ -6,7 +6,7 @@
 /*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 13:18:22 by lcalero           #+#    #+#             */
-/*   Updated: 2025/10/16 17:22:07 by ekeisler         ###   ########.fr       */
+/*   Updated: 2025/10/20 19:15:12 by ekeisler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,13 +121,18 @@ int				key_press_hook(int keycode, t_data *data);
 int				mouse_hook(int keycode, int x, int y, t_data *data);
 
 /* SPRITE RENDERING */
-int				check_wall_occlusion(t_data *data, int x, t_enemy *enemy);
+int				check_enemy_occlusion(t_data *data, int x, t_enemy *enemy);
 void			calculate_sprite_bounds(int screen_x, int sprite_height,
 					t_sprite_bounds *bounds);
 void			draw_sprite_column(t_data *data, t_sprite_params *params,
 					t_sprite_bounds *bounds);
 t_sprite_params	init_sprite_params(t_texture_info *info, int spr_top,
 					int spr_height);
+void			render_all_sprites(t_data *data);
+void			render_health_pad_sprite(t_data *data, t_health_pad *pad,
+					t_sprite_calc *calc);
+void			render_enemy_sprite(t_data *data, t_enemy *enemy,
+					t_sprite_calc *calc);
 
 /* ASTAR PATHFINDING */
 void			add_neighbor(t_neighbor_context *ctx, t_astar_node *curr,
@@ -171,6 +176,8 @@ int				get_door_pixel_at_position(t_data *data, int x,
 t_wall_side		get_wall_side_from_stored(int stored_side,
 					t_data *data, int ray_index);
 void			calc_delta_time_ms(t_data *data);
+int				check_sprite_occlusion(t_data *data, int x, t_vector sprite_pos,
+					t_sprite_calc *calc);
 
 /* COLOR & FOG */
 void			extract_base_colors(int base_color, int *r, int *g, int *b);

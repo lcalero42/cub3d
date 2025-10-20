@@ -6,7 +6,7 @@
 /*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 13:18:32 by lcalero           #+#    #+#             */
-/*   Updated: 2025/10/16 16:06:19 by ekeisler         ###   ########.fr       */
+/*   Updated: 2025/10/20 19:16:16 by ekeisler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,12 @@ typedef enum e_wall_side
 	WEST = 3
 }	t_wall_side;
 
+typedef enum e_sprite_type
+{
+	SPRITE_ENEMY,
+	SPRITE_HEALTH_PAD
+}	t_sprite_type;
+
 typedef struct s_wall_calc
 {
 	int			line_height;
@@ -42,7 +48,7 @@ typedef struct s_wall_calc
 
 typedef struct s_occlusion_data
 {
-	double	enemy_distance;
+	double	sprite_distance;
 	int		sprite_bounds[2];
 }	t_occlusion_data;
 
@@ -251,6 +257,15 @@ typedef struct s_sprite_calc
 	int		draw_start_x;
 	int		draw_end_x;
 }	t_sprite_calc;
+
+typedef struct s_generic_sprite
+{
+	t_sprite_type	type;
+	t_vector		position;
+	double			distance;
+	void			*data;
+	t_sprite_calc	calc;
+}	t_generic_sprite;
 
 typedef struct s_texture_info
 {
