@@ -1,14 +1,34 @@
+# :video_game: CUB3D - Raycasting Game Engine
 
-# **CUB3D PROJECT**
+[![Made with C](https://img.shields.io/badge/Made%20with-C-blue?style=for-the-badge&logo=c)](https://www.cprogramming.com/)
+[![42 School](https://img.shields.io/badge/42-School-000000?style=for-the-badge&logo=42&logoColor=white)](https://42.fr)
+[![Norminette](https://img.shields.io/badge/Norminette-passing-success?style=for-the-badge)](https://github.com/42School/norminette)
+
+*A 3D maze exploration game built from scratch using raycasting techniques*
+
+## Build project
+
+### Commands to build the project
+
+    git clone https://github.com/lcalero42/cub3d.git && cd cub3d
+    cd lib && git clone https://github.com/42paris/minilibx-linux
+    cd ..
+    make
+    ./cub3d mandatory/maps/deathcave.cub
+
+>Note :
+>make bonus if you want to build the bonus and launch the game with maps in `bonus/maps` 
 
 ## **Raycasting logic**
 
 Raycasting is a rendering technique that is used to reproduce 3D environment, even though it is not actual 3D.
 Raycasting is a technique that (based on a grid that is used as the map) consists of casting rays for each column of the screen until it reaches a wall or a blocking structure (such as closed doors) and renders right associated pixels in this column only.
 
+![Raycasting illustration](https://www.google.com/url?sa=i&url=https://lodev.org/cgtutor/raycasting.html&psig=AOvVaw2DVhSrt9C6pouh66Jmpk8A&ust=1761086158004000&source=images&cd=vfe&opi=89978449&ved=0CBUQjRxqFwoTCNimu6nrs5ADFQAAAAAdAAAAABAE)
+
 ### **Algorithm used : DDA (Digital differential analyzer)**
 
-DDA (Digital Differential Analyzer) is a line drawing algorithm used in computer graphics to generate a line segment between two specified endpoints. Here, the two endpoints are the player (his position will be where the ray starts) and the wall or blocking structure.
+**DDA (Digital Differential Analyzer)** is a line drawing algorithm used in computer graphics to generate a line segment between two specified endpoints. Here, the two endpoints are the player (his position will be where the ray starts) and the wall or blocking structure.
 
 #### The steps involved in DDA line generation algorithm are :
 
@@ -20,8 +40,8 @@ DDA (Digital Differential Analyzer) is a line drawing algorithm used in computer
   6. Plot the pixel at the calculated (x,y) coordinate.
   7. Repeat steps 5 and 6 until the endpoint (x2,y2) is reached.
 
-  Here, we have a subtle difference it term of use of the algorithm, which is that we don't know the coordinates of the point we want to go to, so we want to loop indefinitely until we reach a blocking structure.
-  I would sum up the use of the algorithm here to be : 
+Here, we have a subtle difference it term of use of the algorithm, which is that we don't know the coordinates of the point we want to go to, so we want to loop indefinitely until we reach a blocking structure.
+I would sum up the use of the algorithm here to be : 
 
   1. initiate the starting coordinates (player coordinates).
   2. increment from the starting coordinates by adding the step accordingly 
@@ -42,6 +62,7 @@ DDA (Digital Differential Analyzer) is a line drawing algorithm used in computer
 	}
 }
 ```
+
 3. Once we know we've reached a wall, we store the current coordinates of the ray and we calculate the distance between the player and the point reached
 ```
 static int	handle_hit(t_data *data, int i, t_pos map_pos)
@@ -144,3 +165,35 @@ void	clear_screen(t_data *data)
 	}
 }
 ```
+>Note :
+>knowing that in the bonus part we implemented a feature that permits to the player to look up and down, we should adapt rendering knowing this by adding *pitch offset* every time we want to render : walls, ground/sky, sprites...
+
+#### Wall rendering :
+
+Each vertical slice of the screen represents a **ray cast** into the game world to detect the distance to the nearest wall. That distance is used to calculate how tall the wall should appear on screen and where to start and stop drawing it, creating a sense of depth. Texture coordinates are then mapped proportionally to that wall segment, giving the **illusion of a 3D environment** from a 2D grid
+
+>Main wall rendering function :
+```
+void  render_walls(t_data  *data)
+{
+	int  x;
+	int  draw_start;
+	int  draw_end;
+	double  perp_wall_dist;
+
+	x  =  0;
+	while (x  <  WINDOW_WIDTH)
+	{
+		data->rays[x].perp_wall_dist  =  calculate_perp_wall_dist(data, x);
+		perp_wall_dist  =  data->rays[x].perp_wall_dist;
+		calculate_wall_bounds(perp_wall_dist, &draw_start, &draw_end);
+		draw_wall_column(data, x, draw_start, draw_end);
+		x++;
+	}
+}
+```
+You may now understood that it is not **actual** 3D, it is only creating an illusion of 3D by rendering an effect of depth. Nowhere in the code we use 3D coordinates, only 2D. And this **raycasting** system being very useful at the time it was created, is still limited. For example, the fact that we don't have 3D coordinates makes it impossible for the player to jump, or create different "floors". 
+
+#### Sprite rendering :
+Sprites (which are not mandatory in this project) can be hard to render properly. I would separate this part in two, first the static sprites that never move (for example: flowers, grass...) :
+1. First, the static sprites. An easy way to do this is by adding them to the map with a special letter/character. For example, in our game, we included heal pads that never moves. We choose to store all their positions in a big array at the initialization of the program. Then, if we have that, we can calculate distance
