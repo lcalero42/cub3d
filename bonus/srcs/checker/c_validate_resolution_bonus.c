@@ -6,7 +6,7 @@
 /*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/20 23:56:00 by ekeisler          #+#    #+#             */
-/*   Updated: 2025/10/21 00:11:01 by ekeisler         ###   ########.fr       */
+/*   Updated: 2025/10/21 00:16:16 by ekeisler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	validate_window_size(void)
 		ft_putstr_fd("\n", 2);
 		exit(1);
 	}
-    validate_aspect_ratio_resolution();
+	validate_aspect_ratio_resolution();
 }
 
 static void	validate_aspect_ratio_resolution(void)

@@ -6,13 +6,12 @@
 /*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 13:17:32 by lcalero           #+#    #+#             */
-/*   Updated: 2025/10/21 00:14:01 by ekeisler         ###   ########.fr       */
+/*   Updated: 2025/10/21 00:15:51 by ekeisler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CONSTANTS_BONUS_H
 # define CONSTANTS_BONUS_H
-
 
 # ifndef MIN_WIDTH
 #  define MIN_WIDTH	640
