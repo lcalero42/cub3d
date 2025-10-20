@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ui_render_game_over_bonus.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 13:48:21 by lcalero           #+#    #+#             */
-/*   Updated: 2025/10/20 21:33:38 by ekeisler         ###   ########.fr       */
+/*   Updated: 2025/10/20 21:38:40 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ void	reset_game(t_data *data)
 	spawn_enemy(data);
 	init_door_system(data);
 	data->game_started = 1;
+	data->player_won = 0;
 	toggle_mouse_control(data);
 	find_player_pos(data);
 }
