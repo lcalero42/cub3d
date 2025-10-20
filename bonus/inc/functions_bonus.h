@@ -6,7 +6,7 @@
 /*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 13:18:22 by lcalero           #+#    #+#             */
-/*   Updated: 2025/10/20 21:23:52 by ekeisler         ###   ########.fr       */
+/*   Updated: 2025/10/21 00:01:12 by ekeisler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ int				find_player_pos(t_data *data);
 /* CHECKER */
 int				check_map(t_data *data);
 int				is_map_surrounded(t_data *data);
+void			validate_window_size(void);
 
 /* RAYCASTING/RENDERING */
 void			trace_ray(t_data *data, double angle);

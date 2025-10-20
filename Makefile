@@ -3,8 +3,8 @@
 # ---------------------------------------------------------------------------- #
 
 # ---------------------------------- window ---------------------------------- #
-WINDOW_WIDTH = 1080   # width of window
-WINDOW_HEIGHT = 720			# height of window
+WINDOW_WIDTH = 640   # width of window
+WINDOW_HEIGHT = 360			# height of window
 
 # --------------------------------- gameplay --------------------------------- #
 MOVE_SPEED = 5.0f		   # player movement speed
@@ -104,6 +104,7 @@ SRCS_BONUS = main_bonus.c							\
 		pr_find_player_pos_bonus.c					\
 		c_check_map_bonus.c							\
 		c_check_sourrounded_bw_bonus.c				\
+		c_validate_resolution_bonus.c				\
 		re_wall_render_bonus.c						\
 		re_wall_texture_bonus.c						\
 		re_render_fog_bonus.c						\

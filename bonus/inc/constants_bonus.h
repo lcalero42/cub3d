@@ -6,19 +6,36 @@
 /*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 13:17:32 by lcalero           #+#    #+#             */
-/*   Updated: 2025/10/20 21:22:57 by ekeisler         ###   ########.fr       */
+/*   Updated: 2025/10/21 00:14:01 by ekeisler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CONSTANTS_BONUS_H
 # define CONSTANTS_BONUS_H
 
+
+# ifndef MIN_WIDTH
+#  define MIN_WIDTH	640
+# endif
+
+# ifndef MIN_HEIGHT
+#  define MIN_HEIGHT	360
+# endif
+
+# ifndef MAX_WIDTH
+#  define MAX_WIDTH	1920
+# endif
+
+# ifndef MAX_HEIGHT
+#  define MAX_HEIGHT	1080
+# endif
+
 # ifndef WINDOW_WIDTH
-#  define WINDOW_WIDTH 640
+#  define WINDOW_WIDTH	1280
 # endif
 
 # ifndef WINDOW_HEIGHT
-#  define WINDOW_HEIGHT 480
+#  define WINDOW_HEIGHT	720
 # endif
 
 # ifndef MOVE_SPEED
