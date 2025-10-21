@@ -6,7 +6,7 @@
 /*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/20 19:13:50 by ekeisler          #+#    #+#             */
-/*   Updated: 2025/10/20 20:05:52 by ekeisler         ###   ########.fr       */
+/*   Updated: 2025/10/21 04:51:04 by ekeisler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void	render_health_pad_sprite(t_data *data, t_health_pad *pad,
 
 	texture = &data->health_pad_anim.render_arr[
 		data->health_pad_anim.index].info;
-	if (!texture->addr)
+	if (!texture->addr || calc->sprite_width <= 0 || calc->sprite_height <= 0)
 		return ;
 	pad_pos.x = pad->pos.x + 0.5;
 	pad_pos.y = pad->pos.y + 0.5;

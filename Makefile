@@ -3,8 +3,8 @@
 # ---------------------------------------------------------------------------- #
 
 # ---------------------------------- window ---------------------------------- #
-WINDOW_WIDTH = 640   # width of window
-WINDOW_HEIGHT = 360			# height of window
+WINDOW_WIDTH = 1280   # width of window
+WINDOW_HEIGHT = 720			# height of window
 
 # --------------------------------- gameplay --------------------------------- #
 MOVE_SPEED = 5.0f		   # player movement speed
@@ -154,6 +154,8 @@ SRCS_BONUS = main_bonus.c							\
 		m_mouse_rotation_bonus.c					\
 		m_mouse_utils_bonus.c						\
 		s_sprite_render_bonus.c		    			\
+		s_init_hpad_bonus.c							\
+		s_hpad_sprite_calc_bonus.c					\
 		s_hpad_bonus.c              				\
 		s_hpad_system_bonus.c       				\
 		s_hpad_collect_bonus.c      				\

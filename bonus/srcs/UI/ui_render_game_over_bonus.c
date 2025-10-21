@@ -6,7 +6,7 @@
 /*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 13:48:21 by lcalero           #+#    #+#             */
-/*   Updated: 2025/10/21 00:15:38 by ekeisler         ###   ########.fr       */
+/*   Updated: 2025/10/21 05:04:03 by ekeisler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,14 @@ void	render_game_over_screen(t_data *data)
 
 void	reset_game(t_data *data)
 {
+	if (data->grid.grid)
+		u_ft_free(data->grid.grid);
+	parse_map(data->all_lines, data);
+	data->player.pitch = 0;
+	init_health_pad_system(data);
 	spawn_enemy(data);
+	if (data->door_grid)
+		u_ft_free_doors(data);
 	init_door_system(data);
 	data->game_started = 1;
 	data->player_won = 0;

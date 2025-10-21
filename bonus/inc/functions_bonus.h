@@ -6,7 +6,7 @@
 /*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 13:18:22 by lcalero           #+#    #+#             */
-/*   Updated: 2025/10/21 02:28:02 by ekeisler         ###   ########.fr       */
+/*   Updated: 2025/10/21 05:00:42 by ekeisler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -190,6 +190,7 @@ int				u_is_empty_line(char *line);
 int				u_is_config_line(char *line);
 void			u_calculate_map_width(t_data *data);
 void			u_ft_free(char **res);
+void			u_ft_free_doors(t_data *data);
 int				close_window(t_data *data);
 void			u_print_error(char *msg);
 long long		get_current_time(void);
@@ -201,7 +202,6 @@ void			load_texture(t_data *data, char *path, t_render *texture);
 void			init(t_data *data, char **argv);
 t_texture_info	get_door_texture(t_data *data, t_door *door);
 void			init_door_system(t_data *data);
-void			allocate_health_pad_grid(t_data *data);
 int				is_transparent_color(unsigned int color);
 int				get_door_pixel_at_position(t_data *data, int x,
 					int y, int hit_index);
@@ -213,6 +213,12 @@ int				check_sprite_occlusion(t_data *data, int x, t_vector sprite_pos,
 int				is_door_pos_valid(t_data *data, t_pos door_pos);
 int				sample_door_pixels(t_data *data, int x, int i,
 					int sprite_bounds[2]);
+void			init_health_pads(t_data *data);
+void			prepare_health_pad_sprite(t_data *data, int i,
+					t_generic_sprite *sprite);
+int				add_enemy_sprite(t_data *data, t_generic_sprite *sprites);
+void			add_health_pad_sprite(t_data *data, t_generic_sprite *sprites,
+					int *count, int i);
 
 /* COLOR & FOG */
 void			extract_base_colors(int base_color, int *r, int *g, int *b);

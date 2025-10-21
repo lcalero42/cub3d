@@ -6,7 +6,7 @@
 /*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 13:18:32 by lcalero           #+#    #+#             */
-/*   Updated: 2025/10/20 21:23:57 by ekeisler         ###   ########.fr       */
+/*   Updated: 2025/10/21 04:02:57 by ekeisler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -418,7 +418,6 @@ typedef struct s_data
 	t_render		you_won_print;
 	t_anim			gun;
 	t_anim			shot;
-	t_health_pad	**health_pad_grid;
 	t_health_pad	health_pad[MAX_HEALTH_PAD];
 	t_anim			health_pad_anim;
 	int				health_count;
@@ -432,6 +431,7 @@ typedef struct s_data
 	int				config_lines;
 	void			*mlx;
 	void			*window;
+	char			**all_lines;
 	t_player		player;
 	t_enemy			enemy;
 	t_mouse			mouse;

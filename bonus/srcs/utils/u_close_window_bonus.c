@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   u_close_window_bonus.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 18:20:34 by lcalero           #+#    #+#             */
-/*   Updated: 2025/10/14 13:08:52 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/10/21 04:05:30 by ekeisler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,10 @@ int	close_window(t_data *data)
 		free(data->mlx);
 	if (data->grid.grid)
 		u_ft_free(data->grid.grid);
+	if (data->door_grid)
+		u_ft_free_doors(data);
+	if (data->all_lines)
+		u_ft_free(data->all_lines);
 	free_paths(data);
 	printf("AVERAGE FPS : %f\n", data->average_fps / data->fps_count);
 	exit(0);

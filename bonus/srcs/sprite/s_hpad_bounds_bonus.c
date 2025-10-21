@@ -6,7 +6,7 @@
 /*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/20 20:01:00 by ekeisler          #+#    #+#             */
-/*   Updated: 2025/10/21 02:42:23 by ekeisler         ###   ########.fr       */
+/*   Updated: 2025/10/21 04:48:00 by ekeisler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ void	render_sprite(t_data *data, t_generic_sprite *sprite)
 	if (sprite->type == SPRITE_ENEMY)
 		render_enemy_with_health(data, &data->enemy);
 	else if (sprite->type == SPRITE_HEALTH_PAD)
+	{
 		render_health_pad_sprite(data, (t_health_pad *)sprite->data,
 			&sprite->calc);
+	}
 }
