@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   u_init_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 18:20:59 by lcalero           #+#    #+#             */
-/*   Updated: 2025/10/21 03:50:40 by ekeisler         ###   ########.fr       */
+/*   Updated: 2025/10/21 17:44:24 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,11 @@ void	init(t_data *data, char **argv)
 			"cub3d");
 	init_walls(data);
 	data->door_count = 0;
-	init_door_system(data);
 	data->health_count = 0;
 	load_sprites(data);
 	data->gun.is_playing = 1;
-	spawn_enemy(data);
 	init_mouse_control(data);
 	data->player.stamina = MAX_STAMINA;
-	init_health_pad_system(data);
 	init_health_bar(&data->health_bar, data);
 }
 
@@ -67,22 +64,26 @@ t_sprite_params	init_sprite_params(t_texture_info *info, int spr_top,
 
 void	spawn_enemy(t_data *data)
 {
-	double	pos_x;
-	double	pos_y;
+	int	x;
+	int	y;
+	int	attempts;
 
-	data->enemy.position.x = rand() % (data->grid.width);
-	data->enemy.position.y = rand() % (data->grid.height);
-	pos_x = data->enemy.position.x;
-	pos_y = data->enemy.position.y;
-	while (data->grid.grid[(int)pos_y][(int)pos_x] != '0')
+	attempts = 0;
+	while (attempts < 1000)
 	{
-		data->enemy.position.x = rand() % (data->grid.width);
-		data->enemy.position.y = rand() % (data->grid.height);
-		pos_x = data->enemy.position.x;
-		pos_y = data->enemy.position.y;
+		y = rand() % data->grid.height;
+		x = rand() % data->grid.width;
+		if (is_valid_spawn(data, x, y))
+		{
+			data->enemy.position.x = (double)x;
+			data->enemy.position.y = (double)y;
+			data->enemy.current_health = 100;
+			data->enemy.max_health = 100;
+			return ;
+		}
+		attempts++;
 	}
-	data->enemy.current_health = 100;
-	data->enemy.max_health = 100;
+	printf("Error: Could not find valid spawn position\n");
 }
 
 static void	load_sprites(t_data *data)

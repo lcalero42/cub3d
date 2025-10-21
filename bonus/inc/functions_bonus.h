@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   functions_bonus.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 13:18:22 by lcalero           #+#    #+#             */
-/*   Updated: 2025/10/21 05:00:42 by ekeisler         ###   ########.fr       */
+/*   Updated: 2025/10/21 17:45:48 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,13 +49,10 @@ void			animation_routine(t_data *data);
 void			trace_shot(t_data *data);
 void			toggle_door(t_door *door);
 void			init_health_pad_system(t_data *data);
-void			render_all_health_pads(t_data *data);
 void			check_health_pickup_collision(t_data *data);
-t_health_pad	*find_health_at(t_data *data, int x, int y);
 void			check_door_interaction(t_data *data, int keycode);
 int				calculate_texture_x_for_hit(t_data *data,
 					int ray_index, int hit_index);
-void			render_health_sprite(t_data *data);
 int				collect_all_sprites(t_data *data, t_generic_sprite *sprites);
 void			sort_sprites_by_distance(t_generic_sprite *sprites, int count);
 void			calculate_sprite_position(t_data *data,
@@ -163,8 +160,6 @@ t_sprite_params	init_sprite_params(t_texture_info *info, int spr_top,
 void			render_all_sprites(t_data *data);
 void			render_health_pad_sprite(t_data *data, t_health_pad *pad,
 					t_sprite_calc *calc);
-void			render_enemy_sprite(t_data *data, t_enemy *enemy,
-					t_sprite_calc *calc);
 
 /* ASTAR PATHFINDING */
 void			add_neighbor(t_neighbor_context *ctx, t_astar_node *curr,
@@ -213,12 +208,10 @@ int				check_sprite_occlusion(t_data *data, int x, t_vector sprite_pos,
 int				is_door_pos_valid(t_data *data, t_pos door_pos);
 int				sample_door_pixels(t_data *data, int x, int i,
 					int sprite_bounds[2]);
-void			init_health_pads(t_data *data);
-void			prepare_health_pad_sprite(t_data *data, int i,
-					t_generic_sprite *sprite);
 int				add_enemy_sprite(t_data *data, t_generic_sprite *sprites);
 void			add_health_pad_sprite(t_data *data, t_generic_sprite *sprites,
 					int *count, int i);
+int				is_valid_spawn(t_data *data, int x, int y);
 
 /* COLOR & FOG */
 void			extract_base_colors(int base_color, int *r, int *g, int *b);
