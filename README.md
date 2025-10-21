@@ -17,14 +17,65 @@
     ./cub3d mandatory/maps/deathcave.cub
 
 >Note :
->make bonus if you want to build the bonus and launch the game with maps in `bonus/maps` 
+>`make bonus` if you want to build the bonus and launch the game with maps in `bonus/maps` 
+
+## Showcase
+
+PUT IMAGES HERE
+
+## Features implemented
+- ### Walls
+- ### Doors
+- ### Fog
+- ### Shooting
+- ### Pitch
+- ### Player movement (with running)
+- ### Collisions
+- ### Enemy (With pathfinding)
+- ### Health pads
+- ### Menu
+- ### Health/Stamina bar
+- ### Minimap
+
+## What is cub3d ?
+Cu3d is a project in which you need to build a Raycaster engine, coming from a map looking like this : 
+
+```
+NO mandatory/textures/376.xpm
+SO mandatory/textures/376.xpm
+WE mandatory/textures/376.xpm
+EA mandatory/textures/376.xpm
+
+F 139,0,0
+C 139,0,0
+
+        1111111111111111111111111
+        1000000000110000000000001
+        1011000001110000000000001
+        1001000000000000E00000001
+111111111011000001110000000000001
+100000000011000001110111111111111
+11110111111111011100000010001
+11110111111111011101010010001
+11000000110101011100000010001
+10000000000000001100000010001
+10000000000000001101010010001
+1100000111010101111101111000111
+11110001 1110101 101111010001
+11111111 1111111 111111111111
+
+``` 
+
+To a rendering like this using *mlx* : 
+
+PUT IMAGE HERE
 
 ## **Raycasting logic**
 
 Raycasting is a rendering technique that is used to reproduce 3D environment, even though it is not actual 3D.
 Raycasting is a technique that (based on a grid that is used as the map) consists of casting rays for each column of the screen until it reaches a wall or a blocking structure (such as closed doors) and renders right associated pixels in this column only.
 
-![Raycasting illustration](https://www.google.com/url?sa=i&url=https://lodev.org/cgtutor/raycasting.html&psig=AOvVaw2DVhSrt9C6pouh66Jmpk8A&ust=1761086158004000&source=images&cd=vfe&opi=89978449&ved=0CBUQjRxqFwoTCNimu6nrs5ADFQAAAAAdAAAAABAE)
+PUT IMAGE HERE
 
 ### **Algorithm used : DDA (Digital differential analyzer)**
 
@@ -192,8 +243,24 @@ void  render_walls(t_data  *data)
 	}
 }
 ```
-You may now understood that it is not **actual** 3D, it is only creating an illusion of 3D by rendering an effect of depth. Nowhere in the code we use 3D coordinates, only 2D. And this **raycasting** system being very useful at the time it was created, is still limited. For example, the fact that we don't have 3D coordinates makes it impossible for the player to jump, or create different "floors". 
+You may now understand that this is not **actual** 3D, it is only creating an illusion of 3D by rendering an effect of depth. Nowhere in the code we use 3D coordinates, only 2D. And this **raycasting** system being very useful at the time it was created, is still limited. For example, the fact that we don't have 3D coordinates makes it impossible for the player to jump, or go to different "floors". 
 
-#### Sprite rendering :
+#### Sprite rendering (bonus part) :
 Sprites (which are not mandatory in this project) can be hard to render properly. I would separate this part in two, first the static sprites that never move (for example: flowers, grass...) :
-1. First, the static sprites. An easy way to do this is by adding them to the map with a special letter/character. For example, in our game, we included heal pads that never moves. We choose to store all their positions in a big array at the initialization of the program. Then, if we have that, we can calculate distance
+1. First, the static sprites. An easy way to do this is by adding them to the map with a special letter/character. For example, in our game, we included heal pads that never moves, and added them to the map with the letter "H". We choose to store all their positions in a big array at the initialization of the program. Then, if we have that, we can calculate distance between the player and the pad easily and render it accordingly. Of course, we also need to know for each column of the sprite if it is hidden by a wall or a door by calculating if the distance between the first wall/door we cross is higher than the distance between the sprite and the player. If it is, we can draw the column, because for most part of the rendering, we render column by column.
+2. Then, for moving sprites such as enemies, knowing that we update the position ourselves, we can easily calculate distance between the player and the moving sprite. As we do with static sprites, we calculate if the sprite is hidden by a wall but there is still one thing left to do, which is that we need to layer it with other sprites accordingly. For example, if the enemy is behind a pad of heal, we must render it **also** behind the pad of heal.
+
+### Conclusion :
+Here is all the basics you will need to implement your own **raycaster** engine ! Even though this is not a method used nowadays, it is still fun to practice and it definitely makes you familiar with building a game and rendering pixels on a window at a low level.
+
+## Fun things we have learned
+
+- ### Build a Raycaster
+- ### Math library usage
+- ### Window handling
+- ### Optimization with ```valgrind --tool=callgrind ./program``` that permits to easily see where you can optimize your code by passing the .out file in  *Kcachegrind*
+- ### Basic game rendering logic (drawing loop, delta time...)
+- ### Color management (RGBA or hexadecimal)
+- ### Animation logic
+- ### Github projects usage to create drafts of features to implement or reporting issues
+- ### A* algorithm to find the shortest path between player and enemy so that the enemy always move towards the player
