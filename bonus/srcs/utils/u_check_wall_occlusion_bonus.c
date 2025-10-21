@@ -6,7 +6,7 @@
 /*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/20 18:06:00 by ekeisler          #+#    #+#             */
-/*   Updated: 2025/10/20 20:13:51 by ekeisler         ###   ########.fr       */
+/*   Updated: 2025/10/21 02:26:40 by ekeisler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,32 +34,20 @@ void	calculate_sprite_bounds_from_calc(t_sprite_calc *calc,
 }
 
 int	check_door_occlusion_at_ray(t_data *data, int x,
-	int i, int sprite_bounds[2])
+		int i, int sprite_bounds[2])
 {
-	int	sample_count;
-	int	opaque_count;
-	int	step_y;
-	int	y;
-	int	pixel;
+	t_pos	door_pos;
+	t_door	*door;
 
-	sample_count = 0;
-	opaque_count = 0;
-	step_y = (sprite_bounds[1] - sprite_bounds[0]) / 5;
-	if (step_y < 1)
-		step_y = 1;
-	y = sprite_bounds[0];
-	while (y < sprite_bounds[1])
-	{
-		pixel = get_door_pixel_at_position(data, x, y, i);
-		if (pixel != -1)
-		{
-			sample_count++;
-			if (!is_transparent_color(pixel))
-				opaque_count++;
-		}
-		y += step_y;
-	}
-	return (sample_count > 0 && opaque_count * 2 > sample_count);
+	door_pos = data->rays[x].hit_map_pos[i];
+	if (!is_door_pos_valid(data, door_pos))
+		return (0);
+	door = &data->door_grid[door_pos.y][door_pos.x];
+	if (!door)
+		return (0);
+	if (door->state == DOOR_CLOSED || door->state == DOOR_CLOSING)
+		return (1);
+	return (sample_door_pixels(data, x, i, sprite_bounds));
 }
 
 int	check_hit_occlusion(t_data *data, int x,

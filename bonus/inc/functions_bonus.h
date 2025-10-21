@@ -6,7 +6,7 @@
 /*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 13:18:22 by lcalero           #+#    #+#             */
-/*   Updated: 2025/10/21 00:01:12 by ekeisler         ###   ########.fr       */
+/*   Updated: 2025/10/21 02:28:02 by ekeisler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -210,6 +210,9 @@ t_wall_side		get_wall_side_from_stored(int stored_side,
 void			calc_delta_time_ms(t_data *data);
 int				check_sprite_occlusion(t_data *data, int x, t_vector sprite_pos,
 					t_sprite_calc *calc);
+int				is_door_pos_valid(t_data *data, t_pos door_pos);
+int				sample_door_pixels(t_data *data, int x, int i,
+					int sprite_bounds[2]);
 
 /* COLOR & FOG */
 void			extract_base_colors(int base_color, int *r, int *g, int *b);

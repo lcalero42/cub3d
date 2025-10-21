@@ -148,6 +148,7 @@ SRCS_BONUS = main_bonus.c							\
 		u_get_door_pixel_bonus.c					\
 		u_check_wall_occlusion_bonus.c				\
 		u_get_wall_texture_pixel_bonus.c			\
+		u_door_utils_bonus.c						\
 		m_init_mouse_move_bonus.c					\
 		m_mouse_move_bonus.c						\
 		m_mouse_rotation_bonus.c					\
