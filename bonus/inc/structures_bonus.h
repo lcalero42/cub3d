@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structures_bonus.h                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 13:18:32 by lcalero           #+#    #+#             */
-/*   Updated: 2025/10/21 04:02:57 by ekeisler         ###   ########.fr       */
+/*   Updated: 2025/10/21 18:07:40 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,10 @@
 
 # include "../minilibx-linux/mlx.h"
 # include "libft.h"
-# include <X11/X.h>
 # include <X11/keysym.h>
 # include <fcntl.h>
 # include <math.h>
 # include <stdio.h>
-# include <stdlib.h>
-# include <unistd.h>
 # include "constants_bonus.h"
 
 typedef enum e_wall_side
@@ -92,13 +89,6 @@ typedef struct s_pos
 	int	y;
 }	t_pos;
 
-typedef struct s_dda_vars
-{
-	int	map_x;
-	int	map_y;
-	int	steps;
-}	t_dda_vars;
-
 typedef struct s_color
 {
 	int	base_r;
@@ -108,21 +98,6 @@ typedef struct s_color
 	int	fog_g;
 	int	fog_b;
 }	t_color;
-
-typedef struct s_fog_params
-{
-	int	x;
-	int	wall_start;
-	int	wall_end;
-	int	fog_alpha;
-	int	fog_color;
-}	t_fog_params;
-
-typedef struct s_wall_bounds
-{
-	int	wall_start;
-	int	wall_end;
-}	t_wall_bounds;
 
 typedef struct s_vector
 {

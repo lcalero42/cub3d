@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   constants_bonus.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 13:17:32 by lcalero           #+#    #+#             */
-/*   Updated: 2025/10/21 00:15:51 by ekeisler         ###   ########.fr       */
+/*   Updated: 2025/10/21 18:04:28 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # endif
 
 # ifndef MIN_HEIGHT
-#  define MIN_HEIGHT	360
+#  define MIN_HEIGHT 360
 # endif
 
 # ifndef MAX_WIDTH
@@ -26,11 +26,11 @@
 # endif
 
 # ifndef MAX_HEIGHT
-#  define MAX_HEIGHT	1080
+#  define MAX_HEIGHT 1080
 # endif
 
 # ifndef WINDOW_WIDTH
-#  define WINDOW_WIDTH	1280
+#  define WINDOW_WIDTH 1280
 # endif
 
 # ifndef WINDOW_HEIGHT
@@ -112,7 +112,6 @@
 #  define LIFE_DRAIN_RATE 20.0f
 # endif
 
-# define ANIMATION_INTERVAL 2
 # define MAX_ANIM_LENGTH 4
 # define ENEMY_RADIUS 0.380f
 # define HEALTH_BAR_WIDTH 200
@@ -123,8 +122,6 @@
 
 # define MAX_DOORS 64
 # define MAX_HEALTH_PAD 64
-# define DOOR_INTERACTION_COOLDOWN 300
-# define DOOR_ANIMATION_SPEED 2.0
 
 # define MAX_RAY_HIT 20
 
