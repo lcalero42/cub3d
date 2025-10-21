@@ -6,11 +6,10 @@
 /*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 19:04:42 by lcalero           #+#    #+#             */
-/*   Updated: 2025/10/20 20:09:35 by ekeisler         ###   ########.fr       */
+/*   Updated: 2025/10/21 02:37:11 by ekeisler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <math.h>
 #include "cub3d_bonus.h"
 
 static void	draw_enemy_health_background(t_data *data,

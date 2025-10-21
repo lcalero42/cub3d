@@ -6,7 +6,7 @@
 /*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/20 20:01:00 by ekeisler          #+#    #+#             */
-/*   Updated: 2025/10/20 20:02:37 by ekeisler         ###   ########.fr       */
+/*   Updated: 2025/10/21 02:42:23 by ekeisler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,6 @@ void	calculate_sprite_bounds_x(t_sprite_calc *calc)
 
 void	render_sprite(t_data *data, t_generic_sprite *sprite)
 {
-	if (sprite->calc.transform_y <= 0)
-		return ;
 	if (sprite->type == SPRITE_ENEMY)
 		render_enemy_with_health(data, &data->enemy);
 	else if (sprite->type == SPRITE_HEALTH_PAD)
