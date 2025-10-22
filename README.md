@@ -185,7 +185,7 @@ int  render_loop(t_data  *data)
 }
 ```
 
-> Info :
+> [!NOTE]
 > For the game to be **frame rate independent**, we calculate a **delta time**, which is the elapsed time since the program last updated and we will make scale all the movement/speed calculations with this delta time so that for example, the player goes the same speed when we have good or bad CPU
 
  #### Floor/sky rendering :
@@ -255,12 +255,12 @@ Here is all the basics you will need to implement your own **raycaster** engine 
 
 ## Fun things we have learned
 
-- ### Build a Raycaster
-- ### Math library usage
-- ### Window handling
-- ### Optimization with ```valgrind --tool=callgrind ./program``` that permits to easily see where you can optimize your code by passing the .out file in  *Kcachegrind*
-- ### Basic game rendering logic (drawing loop, delta time...)
-- ### Color management (RGBA or hexadecimal)
-- ### Animation logic
-- ### Github projects usage to create drafts of features to implement or reporting issues
-- ### A* algorithm to find the shortest path between player and enemy so that the enemy always move towards the player
+- Build a **Raycaster**
+- **`Math library`** usage
+- Window handling
+- Optimization with ```valgrind --tool=callgrind ./program``` that permits to easily see where you can **optimize** your code by passing the .out file in  *`Kcachegrind`*
+- Basic **game rendering logic** (drawing loop, delta time...)
+- Color management (RGBA or hexadecimal)
+- **Animation logic**
+- **Github projects** usage to create drafts of features to implement or reporting *issues*
+- `A* algorithm` to find the shortest path between *player* and *enemy* so that the *enemy* always move towards the *player*
