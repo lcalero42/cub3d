@@ -1,4 +1,7 @@
 *
+!assets
+!*.gif
+!*.png
 !sprites
 !minilibx-linux
 !Makefile

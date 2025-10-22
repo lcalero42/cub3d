@@ -16,26 +16,27 @@
     make
     ./cub3d mandatory/maps/deathcave.cub
 
->Note :
+>[!IMPORTANT]
 >`make bonus` if you want to build the bonus and launch the game with maps in `bonus/maps` 
 
 ## Showcase
 
-PUT IMAGES HERE
+![](assets/screen-1.png)
+![](assets/screen-2.png)
 
 ## Features implemented
-- ### Walls
-- ### Doors
-- ### Fog
-- ### Shooting
-- ### Pitch
-- ### Player movement (with running)
-- ### Collisions
-- ### Enemy (With pathfinding)
-- ### Health pads
-- ### Menu
-- ### Health/Stamina bar
-- ### Minimap
+- *Walls*
+- *Doors*
+- *Fog*
+- *Shooting*
+- *Pitch*
+- *Player movement (with running)*
+- *Collisions*
+- *Enemy (With pathfinding)*
+- *Health pads*
+- *Menu*
+- *Health/Stamina bar*
+- *Minimap*
 
 ## What is cub3d ?
 Cu3d is a project in which you need to build a Raycaster engine, coming from a map looking like this : 
@@ -75,7 +76,7 @@ PUT IMAGE HERE
 Raycasting is a rendering technique that is used to reproduce 3D environment, even though it is not actual 3D.
 Raycasting is a technique that (based on a grid that is used as the map) consists of casting rays for each column of the screen until it reaches a wall or a blocking structure (such as closed doors) and renders right associated pixels in this column only.
 
-PUT IMAGE HERE
+![Raycasting illustration](assets/raycasthit.gif)
 
 ### **Algorithm used : DDA (Digital differential analyzer)**
 
@@ -83,19 +84,20 @@ PUT IMAGE HERE
 
 #### The steps involved in DDA line generation algorithm are :
 
-  1. Input the two endpoints of the line segment, (x1,y1) and (x2,y2).
-  2. Calculate the difference between the x-coordinates and y-coordinates of the endpoints as dx and dy respectively.
-  3. Calculate the slope of the line as m = dy/dx.
-  4. Set the initial point of the line as (x1,y1).
-  5. Loop through the x-coordinates of the line, incrementing by one each time, and calculate the corresponding y-coordinate using the equation y = y1 + m(x - x1).
-  6. Plot the pixel at the calculated (x,y) coordinate.
-  7. Repeat steps 5 and 6 until the endpoint (x2,y2) is reached.
+  1. Input the **two endpoints** of the line segment, *(x1,y1)* and *(x2,y2)*.
+  2. Calculate the difference between the *x-coordinates* and *y-coordinates* of the endpoints as dx and dy respectively.
+  3. Calculate the **slope** of the line as m = dy/dx.
+  4. Set the **initial point** of the line as *(x1,y1)*.
+  5. Loop through the *x-coordinates* of the line, incrementing by one each time, and calculate the corresponding *y-coordinate* using the equation ***y = y1 + m(x - x1)***.
+  6. Plot the pixel at the calculated *(x,y)* coordinate.
+  7. **Repeat steps 5 and 6 until the endpoint *(x2,y2)* is reached.**
 
-Here, we have a subtle difference it term of use of the algorithm, which is that we don't know the coordinates of the point we want to go to, so we want to loop indefinitely until we reach a blocking structure.
-I would sum up the use of the algorithm here to be : 
+Here, we have a *subtle difference* it term of use of **the algorithm**, which is that we don't know the coordinates of the point we want to go to, so we want to loop indefinitely until we reach a blocking structure.
 
-  1. initiate the starting coordinates (player coordinates).
-  2. increment from the starting coordinates by adding the step accordingly 
+**I would sum up the use of the algorithm here to be :** 
+
+  1. initiate the **starting coordinates** (player coordinates).
+  2. increment from the starting coordinates by **adding the *step* accordingly**
   ```
   void	perform_dda_step(t_data *data, int i)
 {
@@ -114,7 +116,7 @@ I would sum up the use of the algorithm here to be :
 }
 ```
 
-3. Once we know we've reached a wall, we store the current coordinates of the ray and we calculate the distance between the player and the point reached
+3. Once we know we've **reached a wall**, we **store the current *coordinates*** of the ray and we calculate the **distance between the player and the point reached**
 ```
 static int	handle_hit(t_data *data, int i, t_pos map_pos)
 {
@@ -143,21 +145,21 @@ static int	handle_hit(t_data *data, int i, t_pos map_pos)
 	return (0);
 }
 ```
-4. repeat these 3 first steps for each column of the screen/window width
+4. **repeat these 3 first steps for each column of the screen/window width**
 
 ### **Rendering (using mlx) :**
 
 
-> info
+> [!NOTE]
 > Note that the logic of rendering should be the same even if you are not using  mlx but the code provided will be adapted to mlx and it can differ if you use an other library
 
-When building video games, one of the basics to know is a drawing loop. Here basically we want that loop to look be like this : 
-1. Clear the screen (needed because we want to completely clear whatever we have drawn in the previous frame)
-2. Update all the data we need (player position, cast rays, calculate delta time)
-3. Draw the walls and doors
-4. Draw the sprites
+When building video games, one of the basics to know is a ***drawing loop***. Here basically we want that loop to look be like this :
+1. **Clear the screen** (needed because we want to completely clear whatever we have drawn in the previous frame)
+2. **Update** all the data we need (player position, cast rays, calculate delta time)
+3. **Draw the walls and doors**
+4. **Draw the sprites**
 
-And we want to iterate indefinitely in that loop until the user wants to leave. The order of rendering is very important if we want it to be a little realistic.
+And we want to **iterate indefinitely** in that loop until the user wants to leave. The **order of rendering** is very important if we want it to be a little bit realistic. This is **layered rendering**.
 > Example : 
 > In a FPS (First Person Shooter), we want to render the gun the player is holding in the lasts sprites that you render, otherwise you would see the textures of the game above the gun which would look pretty weird
 
@@ -216,14 +218,14 @@ void	clear_screen(t_data *data)
 	}
 }
 ```
->Note :
+>[!NOTE]
 >knowing that in the bonus part we implemented a feature that permits to the player to look up and down, we should adapt rendering knowing this by adding *pitch offset* every time we want to render : walls, ground/sky, sprites...
 
 #### Wall rendering :
 
-Each vertical slice of the screen represents a **ray cast** into the game world to detect the distance to the nearest wall. That distance is used to calculate how tall the wall should appear on screen and where to start and stop drawing it, creating a sense of depth. Texture coordinates are then mapped proportionally to that wall segment, giving the **illusion of a 3D environment** from a 2D grid
+Each ***vertical slice*** of the screen represents a **ray cast** into the game world to detect the **distance to the nearest wall**. That distance is used to calculate ***how tall the wall should appear on screen*** and where to start and stop drawing it, creating a sense of **depth**. Texture coordinates are then mapped proportionally to that wall segment, giving the **illusion of a 3D environment** from a *2D grid*
 
->Main wall rendering function :
+> Main wall rendering function :
 ```
 void  render_walls(t_data  *data)
 {
