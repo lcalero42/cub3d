@@ -42,7 +42,7 @@
 - *Health/Stamina bar*
 - *Minimap*
 
-## What is cub3d ? :pensive:
+## What is cub3d ? :black_medium_small_square:
 **Cu3d** is a project in which you need to build a ***Raycaster engine***, coming from a *map* looking like this : 
 
 ```
@@ -95,7 +95,7 @@ Colons can be used to align columns.
 | `M`				| *Toggle mouse*     		|
 | `Esc`				| *Leave game*     		|
 
-## **Raycasting logic** :notebook:
+## **Raycasting logic** :green_book:
 
 ***Raycasting*** is a **rendering technique** that is used to **reproduce `3D environment`**, even though it is not actual 3D.
 Raycasting is a technique that (based on a grid that is used as the map) consists of **casting rays** for each column of the screen until it reaches a wall or a blocking structure (such as closed doors) ***and renders associated pixels*** in this column only.
@@ -279,7 +279,7 @@ void  render_walls(t_data  *data)
 ### Conclusion :
 Here is all the basics you will need to implement your own **raycaster** engine ! Even though this is not a method used nowadays, it is still fun to practice and it definitely makes you familiar with building a game and rendering pixels on a window at a low level.
 
-## Fun things we have learned :joy:
+## Fun things we have learned :smile:
 
 - Build a **Raycaster**
 - **`Math library`** usage
