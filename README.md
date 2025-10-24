@@ -10,17 +10,21 @@
 
 *A 3D maze exploration game built from scratch using raycasting techniques*
 
-## Summary :paperclip:
+## Table of contents :paperclip:
 
 - [Build project](#build-project-hammer)
+	- [Commands](#commands-to-build-the-project) 
 - [Showcase](#showcase-star)
 - [Features](#features-implemented-rocket)
-- [What is cub3d ?](#what-is-cub3d--black_medium_small_square)
+- [What is cub3d ?](#what-is-cub3d--question)
 - [Controls](#controls-computer)
 - [Settings](#settings-wrench)
 - [Parsing](#parsing-fax)
 - [Initialization](#initialization-unlock)
 - [Raycasting](#raycasting-logic-green_book)
+	- [Algortithm used : DDA](#algorithm-used--dda-digital-differential-analyzer)
+	- [Rendering](#rendering-using-mlx)
+	- [Conclusion](#conclusion)
 - [Fun things we learned](#fun-things-we-have-learned-smile)
 - [Contributors](#contributors-wave)
 - [Useful ressources](#useful-ressources-paperclip)
@@ -88,11 +92,9 @@ C 139,0,0
 
 To a **rendering** like this using **mlx** : 
 
-PUT IMAGE HERE
+![](assets/screen-3.png)
 
 ## Controls :computer:
-
-Colons can be used to align columns.
 
 | KEY        	|Action          
 | ------------- |:-------------:|
@@ -464,3 +466,8 @@ Here is all the basics you will need to implement your own **raycaster** engine 
 - https://www.geeksforgeeks.org/computer-graphics/dda-line-generation-algorithm-computer-graphics/
 - https://harm-smits.github.io/42docs/libs/minilibx/getting_started.html
 - https://www.geeksforgeeks.org/dsa/a-search-algorithm/
+
+## Bonus feature details
+
+**TO FILL**
+
