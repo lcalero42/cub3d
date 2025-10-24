@@ -51,7 +51,8 @@ Then, you will be able to launch the game
 
 This project is clearly letting space **creativity** in the bonuses. So, we wanted to push the project **as much as possible**, implementing **everything** that crossed our mind using ONLY ***fake 2D raycasting*** like in *Woflenstein*.
 
-> [!NOTE] We could've created 3D engine and use raycsating in this engine casting rays in all directions. But we chose to stick to the original concept of Raycasting, when computers did not have the performances to run a 3D engine.
+>[!NOTE]
+We could've created 3D engine and use raycsating in this engine casting rays in all directions. But we chose to stick to the original concept of Raycasting, when computersdid not have the performances to run a 3D engine.
 
 ![](assets/screen-1.png)
 ![](assets/screen-2.png)
