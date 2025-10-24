@@ -95,6 +95,8 @@ Colons can be used to align columns.
 | `M`				| *Toggle mouse*     		|
 | `Esc`				| *Leave game*     		|
 
+## Parsing :fax:
+
 ## **Raycasting logic** :green_book:
 
 ***Raycasting*** is a **rendering technique** that is used to **reproduce `3D environment`**, even though it is not actual 3D.
@@ -295,3 +297,11 @@ Here is all the basics you will need to implement your own **raycaster** engine 
 
 - [**lcalero**](https://github.com/lcalero42)
 - [**ekeisler**](https://github.com/eterrale)
+
+## Useful ressources :paperclip:
+
+- https://lodev.org/cgtutor/raycasting.html
+- https://xitog.github.io/dgx/passetemps/tech_raycasting_fr.html
+- https://perso.esiee.fr/~buzerl/sphinx_IMA/80%20raycast/raycast.html
+- https://www.geeksforgeeks.org/computer-graphics/dda-line-generation-algorithm-computer-graphics/
+- https://harm-smits.github.io/42docs/libs/minilibx/getting_started.html
