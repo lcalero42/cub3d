@@ -10,6 +10,21 @@
 
 *A 3D maze exploration game built from scratch using raycasting techniques*
 
+## Summary :paperclip:
+
+- [Build project](#build-project-hammer)
+- [Showcase](#showcase-star)
+- [Features](#features-implemented-rocket)
+- [What is cub3d ?](#what-is-cub3d--black_medium_small_square)
+- [Controls](#controls-computer)
+- [Settings](#settings-wrench)
+- [Parsing](#parsing-fax)
+- [Initialization](#initialization-unlock)
+- [Raycasting](#raycasting-logic-green_book)
+- [Fun things we learned](#fun-things-we-have-learned-smile)
+- [Contributors](#contributors-wave)
+- [Useful ressources](#useful-ressources-paperclip)
+
 ## Build project :hammer:
 
 ### Commands to build the project
@@ -42,7 +57,7 @@
 - *Health/Stamina bar*
 - *Minimap*
 
-## What is cub3d ? :black_medium_small_square:
+## What is cub3d ? :question:
 **Cu3d** is a project in which you need to build a ***Raycaster engine***, coming from a *map* looking like this : 
 
 ```
@@ -95,7 +110,150 @@ Colons can be used to align columns.
 | `M`				| *Toggle mouse*     		|
 | `Esc`				| *Leave game*     		|
 
+## Settings :wrench:
+
+There is a couple `settings` you can edit to have a better experience playing the game !
+All the `settings` are at the top of the **`Makefile`** : 
+
+```Makefile
+# ---------------------------------- window ---------------------------------- #
+WINDOW_WIDTH = 1280   # width of window
+WINDOW_HEIGHT = 720			# height of window
+
+# --------------------------------- gameplay --------------------------------- #
+MOVE_SPEED = 5.0f		   # player movement speed
+CROSSHAIR_SIZE = 4		   # size of the crosshair
+CROSSHAIR_THICKNESS = 2    # thickness of the crosshair
+CROSSHAIR_COLOR = 0x00FF00 # color of the crosshair in hexa format
+SENSITIVITY = 0.25f		   # player mouse sensitivity
+RELOAD_TIME_MS = 1000	   # reload time of the weapon
+
+# -------------------------------- performance ------------------------------- #
+RENDER_DISTANCE = 1000	   # the maximum distance where the walls will be rendered
+
+```
+> [!NOTE] For better rendering, *resolution* **must** be in *9:16 format* (1920\*1080, 1280\*720)
+
+
 ## Parsing :fax:
+
+***To fill***
+
+## Initialization :unlock:
+
+The ***main init function*** is pretty simple and looks like this :
+
+```C
+void	init(t_data *data, char **argv)
+{
+	srand(time(NULL));
+	if (parse_file(argv[1], data))
+		close_window(data);
+	data->render_fog = 1;
+	data->mlx = mlx_init();
+	data->window = mlx_new_window(data->mlx, WINDOW_WIDTH, WINDOW_HEIGHT,
+			"cub3d");
+	init_walls(data);
+	data->door_count = 0;
+	data->health_count = 0;
+	load_sprites(data);
+	data->gun.is_playing = 1;
+	init_mouse_control(data);
+	data->player.stamina = MAX_STAMINA;
+	init_health_bar(&data->health_bar, data);
+}
+```
+
+We have 2 main parts in this initialization : mlx init and texture loading
+
+First we initialize all the mlx data that we will need to open and handle a window (mlx pointer, window pointer...)
+
+```C
+data->mlx = mlx_init();
+	data->window = mlx_new_window(data->mlx, WINDOW_WIDTH, WINDOW_HEIGHT,
+			"cub3d");
+```
+
+When the window opens, we start loading all the xpm textures that we will need along the runtime directly. By sotring a pointer in our main data structure
+
+```C
+static void	load_sprites(t_data *data)
+{
+	load_texture(data, data->enemy_render.texture_path, &data->enemy.render);
+	load_texture(data, "bonus/textures/gun-hand-0.xpm",
+		&data->gun.render_arr[0]);
+	load_texture(data, "bonus/textures/gun-hand-1.xpm",
+		&data->gun.render_arr[1]);
+	load_texture(data, "bonus/textures/gun-hand-2.xpm",
+		&data->gun.render_arr[2]);
+	load_texture(data, "bonus/textures/heal_1.xpm",
+		&data->health_pad_anim.render_arr[0]);
+	load_texture(data, "bonus/textures/heal_2.xpm",
+		&data->health_pad_anim.render_arr[1]);
+	load_texture(data, "bonus/textures/heal_3.xpm",
+		&data->health_pad_anim.render_arr[2]);
+	load_texture(data, "bonus/textures/shot-0.xpm", &data->shot.render_arr[0]);
+	load_texture(data, "bonus/textures/shot-1.xpm", &data->shot.render_arr[1]);
+	load_texture(data, "bonus/textures/shot-2.xpm", &data->shot.render_arr[2]);
+	load_texture(data, "bonus/textures/play_button.xpm", &data->play_button);
+	load_texture(data, "bonus/textures/leave_button.xpm", &data->leave_button);
+	load_texture(data, "bonus/textures/menu_background.xpm",
+		&data->menu_background);
+	load_texture(data, "bonus/textures/game_over_print.xpm",
+		&data->game_over_print);
+	load_texture(data, "bonus/textures/you_won_print.xpm",
+		&data->you_won_print);
+}
+```
+
+But, this is not the only setup we need for this to work, we also have top setup *hooks* which are a big part of mlx library that are used to trigger functions depending on the event processed (mouse moved, key pressed, key released...)
+
+```C
+int	main(int argc, char **argv)
+{
+	t_data	data;
+
+	if (argc != 2)
+	{
+		u_print_error("missing map path");
+		return (1);
+	}
+	validate_window_size();
+	ft_bzero(&data, sizeof(t_data));
+	init(&data, argv);
+	mlx_hook(data.window, 2, 1L << 0, key_press_hook, &data);
+	mlx_hook(data.window, 3, 1L << 1, key_release_hook, &data);
+	mlx_hook(data.window, 6, (1L << 6), mouse_move, &data);
+	mlx_hook(data.window, 17, 1L << 17, close_window, &data);
+	mlx_mouse_hook(data.window, mouse_hook, &data);
+	mlx_loop_hook(data.mlx, render_loop, &data);
+	mlx_loop(data.mlx);
+	mlx_destroy_display(data.mlx);
+	return (0);
+}
+```
+
+Then, we can **launch our loop** ! <br/>
+> [!IMPORTANT] Well, for our case, we implemented a *menu*, meaning that we need to reset the **game state** each time the player press the *play* button (recalculate *enemy position*, close open doors, reset *player position/health*...)
+
+```C
+void	reset_game(t_data *data)
+{
+	if (data->grid.grid)
+		u_ft_free(data->grid.grid);
+	parse_map(data->all_lines, data);
+	data->player.pitch = 0;
+	init_health_pad_system(data);
+	spawn_enemy(data);
+	if (data->door_grid)
+		u_ft_free_doors(data);
+	init_door_system(data);
+	data->game_started = 1;
+	data->player_won = 0;
+	toggle_mouse_control(data);
+	find_player_pos(data);
+}
+```
 
 ## **Raycasting logic** :green_book:
 
@@ -124,8 +282,8 @@ Here, we have a *subtle difference* it term of use of **the algorithm**, which i
 
   1. initiate the **starting coordinates** (player coordinates).
   2. increment from the starting coordinates by **adding the *step* accordingly**
-  ```C
-  void	perform_dda_step(t_data *data, int i)
+```C
+void	perform_dda_step(t_data *data, int i)
 {
 	if (data->rays[i].side_dist.x < data->rays[i].side_dist.y)
 	{
@@ -305,3 +463,4 @@ Here is all the basics you will need to implement your own **raycaster** engine 
 - https://perso.esiee.fr/~buzerl/sphinx_IMA/80%20raycast/raycast.html
 - https://www.geeksforgeeks.org/computer-graphics/dda-line-generation-algorithm-computer-graphics/
 - https://harm-smits.github.io/42docs/libs/minilibx/getting_started.html
+- https://www.geeksforgeeks.org/dsa/a-search-algorithm/
