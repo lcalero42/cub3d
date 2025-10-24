@@ -4,9 +4,13 @@
 [![42 School](https://img.shields.io/badge/42-School-000000?style=for-the-badge&logo=42&logoColor=white)](https://42.fr)
 [![Norminette](https://img.shields.io/badge/Norminette-passing-success?style=for-the-badge)](https://github.com/42School/norminette)
 
+<div align="center">
+  <img src="https://github.com/ayogun/42-project-badges/blob/main/badges/cub3dm.png?raw=true" alt="cub3d badge">
+</div>
+
 *A 3D maze exploration game built from scratch using raycasting techniques*
 
-## Build project
+## Build project :hammer:
 
 ### Commands to build the project
 
@@ -19,12 +23,12 @@
 >[!IMPORTANT]
 >`make bonus` if you want to build the bonus and launch the game with maps in `bonus/maps` 
 
-## Showcase
+## Showcase :star:
 
 ![](assets/screen-1.png)
 ![](assets/screen-2.png)
 
-## Features implemented
+## Features implemented :rocket:
 - *Walls*
 - *Doors*
 - *Fog*
@@ -38,8 +42,8 @@
 - *Health/Stamina bar*
 - *Minimap*
 
-## What is cub3d ?
-Cu3d is a project in which you need to build a Raycaster engine, coming from a map looking like this : 
+## What is cub3d ? :pensive:
+**Cu3d** is a project in which you need to build a ***Raycaster engine***, coming from a *map* looking like this : 
 
 ```
 NO mandatory/textures/376.xpm
@@ -67,20 +71,40 @@ C 139,0,0
 
 ``` 
 
-To a rendering like this using *mlx* : 
+To a **rendering** like this using **mlx** : 
 
 PUT IMAGE HERE
 
-## **Raycasting logic**
+## Controls :computer:
 
-Raycasting is a rendering technique that is used to reproduce 3D environment, even though it is not actual 3D.
-Raycasting is a technique that (based on a grid that is used as the map) consists of casting rays for each column of the screen until it reaches a wall or a blocking structure (such as closed doors) and renders right associated pixels in this column only.
+Colons can be used to align columns.
+
+| KEY        	|Action          
+| ------------- |:-------------:|
+| `W`     		| *Move forward*  |
+| `A`      		| *Move to the left*		|
+| `S`				| *Move backward*      	|
+| `D`				| *Move to the right*     |
+| `Shift + moving key`| *Sprint*    |
+| `Left Arrow`		| *Rotate left*     		|
+| `Right Arrow`		| *Rotate right*     		|
+| `Mouse`		| *Rotate up and down*     		|
+| `Left click`| *shoot*     		|
+| `Space`			| *Open door*     		|
+| `F`				| *Toggle fog*     		|
+| `M`				| *Toggle mouse*     		|
+| `Esc`				| *Leave game*     		|
+
+## **Raycasting logic** :notebook:
+
+***Raycasting*** is a **rendering technique** that is used to **reproduce `3D environment`**, even though it is not actual 3D.
+Raycasting is a technique that (based on a grid that is used as the map) consists of **casting rays** for each column of the screen until it reaches a wall or a blocking structure (such as closed doors) ***and renders associated pixels*** in this column only.
 
 ![Raycasting illustration](assets/raycasthit.gif)
 
 ### **Algorithm used : DDA (Digital differential analyzer)**
 
-**DDA (Digital Differential Analyzer)** is a line drawing algorithm used in computer graphics to generate a line segment between two specified endpoints. Here, the two endpoints are the player (his position will be where the ray starts) and the wall or blocking structure.
+**DDA (Digital Differential Analyzer)** is a line drawing algorithm used in computer graphics to ***generate a line segment*** between two specified endpoints. Here, the two endpoints are *the player* (his position will be where the ray starts) and *the wall* or blocking structure.
 
 #### The steps involved in DDA line generation algorithm are :
 
@@ -92,13 +116,13 @@ Raycasting is a technique that (based on a grid that is used as the map) consist
   6. Plot the pixel at the calculated *(x,y)* coordinate.
   7. **Repeat steps 5 and 6 until the endpoint *(x2,y2)* is reached.**
 
-Here, we have a *subtle difference* it term of use of **the algorithm**, which is that we don't know the coordinates of the point we want to go to, so we want to loop indefinitely until we reach a blocking structure.
+Here, we have a *subtle difference* it term of use of **the algorithm**, which is that we don't know the coordinates of the point we want to go to, so we want to **loop indefinitely** until we reach a blocking structure.
 
 **I would sum up the use of the algorithm here to be :** 
 
   1. initiate the **starting coordinates** (player coordinates).
   2. increment from the starting coordinates by **adding the *step* accordingly**
-  ```
+  ```C
   void	perform_dda_step(t_data *data, int i)
 {
 	if (data->rays[i].side_dist.x < data->rays[i].side_dist.y)
@@ -117,7 +141,7 @@ Here, we have a *subtle difference* it term of use of **the algorithm**, which i
 ```
 
 3. Once we know we've **reached a wall**, we **store the current *coordinates*** of the ray and we calculate the **distance between the player and the point reached**
-```
+```C
 static int	handle_hit(t_data *data, int i, t_pos map_pos)
 {
 	t_door	*door;
@@ -161,9 +185,9 @@ When building video games, one of the basics to know is a ***drawing loop***. He
 
 And we want to **iterate indefinitely** in that loop until the user wants to leave. The **order of rendering** is very important if we want it to be a little bit realistic. This is **layered rendering**.
 > Example : 
-> In a FPS (First Person Shooter), we want to render the gun the player is holding in the lasts sprites that you render, otherwise you would see the textures of the game above the gun which would look pretty weird
+> In a **FPS** (First Person Shooter), we want to render the gun that the player is holding in the **lasts sprites** that you render on the screen, otherwise you would see the textures of the game above the gun which would look pretty weird
 
-```
+```C
 int  render_loop(t_data  *data)
 {
 	if (!handle_scene(data))
@@ -191,9 +215,9 @@ int  render_loop(t_data  *data)
 > For the game to be **frame rate independent**, we calculate a **delta time**, which is the elapsed time since the program last updated and we will make scale all the movement/speed calculations with this delta time so that for example, the player goes the same speed when we have good or bad CPU
 
  #### Floor/sky rendering :
- The floor or Ceiling rendering here is very simple, we just need to draw for each row from top of the screen the color of the sky until we reach half the height of the screen and then, draw the other half with the floor color.
+ The **`floor`** or **`Ceiling` rendering** here is very simple, we just need to draw for each row from top of the screen the color of the sky until we reach h**alf the height of the screen** and then, draw the other half with the floor color.
  
-```
+```C
 void	clear_screen(t_data *data)
 {
 	int	x;
@@ -226,7 +250,7 @@ void	clear_screen(t_data *data)
 Each ***vertical slice*** of the screen represents a **ray cast** into the game world to detect the **distance to the nearest wall**. That distance is used to calculate ***how tall the wall should appear on screen*** and where to start and stop drawing it, creating a sense of **depth**. Texture coordinates are then mapped proportionally to that wall segment, giving the **illusion of a 3D environment** from a *2D grid*
 
 > Main wall rendering function :
-```
+```C
 void  render_walls(t_data  *data)
 {
 	int  x;
@@ -245,17 +269,17 @@ void  render_walls(t_data  *data)
 	}
 }
 ```
-You may now understand that this is not **actual** 3D, it is only creating an illusion of 3D by rendering an effect of depth. Nowhere in the code we use 3D coordinates, only 2D. And this **raycasting** system being very useful at the time it was created, is still limited. For example, the fact that we don't have 3D coordinates makes it impossible for the player to jump, or go to different "floors". 
+> You may now understand that this is not **actual** 3D, it is only creating an illusion of 3D by rendering an effect of depth. Nowhere in the code we use 3D coordinates, only 2D. And this **raycasting** system being very useful at the time it was created, is still limited. For example, the fact that we don't have 3D coordinates makes it impossible for the player to jump, or go to different "floors". 
 
 #### Sprite rendering (bonus part) :
-Sprites (which are not mandatory in this project) can be hard to render properly. I would separate this part in two, first the static sprites that never move (for example: flowers, grass...) :
-1. First, the static sprites. An easy way to do this is by adding them to the map with a special letter/character. For example, in our game, we included heal pads that never moves, and added them to the map with the letter "H". We choose to store all their positions in a big array at the initialization of the program. Then, if we have that, we can calculate distance between the player and the pad easily and render it accordingly. Of course, we also need to know for each column of the sprite if it is hidden by a wall or a door by calculating if the distance between the first wall/door we cross is higher than the distance between the sprite and the player. If it is, we can draw the column, because for most part of the rendering, we render column by column.
-2. Then, for moving sprites such as enemies, knowing that we update the position ourselves, we can easily calculate distance between the player and the moving sprite. As we do with static sprites, we calculate if the sprite is hidden by a wall but there is still one thing left to do, which is that we need to layer it with other sprites accordingly. For example, if the enemy is behind a pad of heal, we must render it **also** behind the pad of heal.
+**Sprites** (which are not mandatory in this project) can be hard to **render properly**. I would separate this part in two, first the `static sprites` that never move (flowers, grass...) and `moving sprites` :
+1. First, the `static sprites`. An easy way to do this is by ***adding them to the map with a special letter/character***. For example, in our game, we included heal pads that never moves, and added them to the map with the letter "H". We choose to store all their ***positions*** in a ***big array*** at the initialization of the program. Then, if we have that, we can calculate distance between the *player* and *the pad* easily and render it accordingly. Of course, we also need to know for each column of the sprite if it is hidden by a wall or a door by calculating if the **distance between the first wall/door we cross** is ***higher*** than the **distance between the sprite and the player**. If it is, we can draw the column.
+2. Then, for `moving sprites` such as *enemies*, knowing that we update the position ourselves, we can easily calculate **distance between the player and the moving sprite**. As we do with `static sprites`, we calculate if the sprite is hidden by a wall but there is still one thing left to do, which is that we need to **layer** it with other sprites accordingly. For example, if the enemy is behind a pad of heal, we must render it **also** behind the pad of heal.
 
 ### Conclusion :
 Here is all the basics you will need to implement your own **raycaster** engine ! Even though this is not a method used nowadays, it is still fun to practice and it definitely makes you familiar with building a game and rendering pixels on a window at a low level.
 
-## Fun things we have learned
+## Fun things we have learned :joy:
 
 - Build a **Raycaster**
 - **`Math library`** usage
@@ -264,5 +288,10 @@ Here is all the basics you will need to implement your own **raycaster** engine 
 - Basic **game rendering logic** (drawing loop, delta time...)
 - Color management (RGBA or hexadecimal)
 - **Animation logic**
-- **Github projects** usage to create drafts of features to implement or reporting *issues*
-- `A* algorithm` to find the shortest path between *player* and *enemy* so that the *enemy* always move towards the *player*
+- ***`Github projects`*** usage to create drafts of features to implement or reporting *issues*
+- `A* algorithm` to find the ***shortest path*** between *player* and *enemy* so that the *enemy* always move towards the *player*
+
+## Contributors :wave:
+
+- [**lcalero**](https://github.com/lcalero42)
+- [**ekeisler**](https://github.com/eterrale)
