@@ -186,7 +186,7 @@ data->mlx = mlx_init();
 			"cub3d");
 ```
 
-When the window opens, we start loading all the xpm textures that we will need along the runtime directly. By sotring a pointer in our main data structure
+When the window opens, we start loading all the xpm textures that we will need along the runtime directly. By storing a pointer in our main data structure
 
 ```C
 static void	load_sprites(t_data *data)
