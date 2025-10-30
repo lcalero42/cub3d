@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   u_print_error.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/23 14:59:38 by ekeisler          #+#    #+#             */
-/*   Updated: 2025/07/29 14:41:49 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/10/30 16:45:13 by ekeisler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	u_print_error(char *msg)
 {
-	ft_putstr_fd("Error\n", 2);
+	ft_putstr_fd("\033[1;31mError\n", 2);
 	ft_putstr_fd(msg, 2);
-	ft_putstr_fd("\n", 2);
+	ft_putstr_fd("\n\033[0m", 2);
 }

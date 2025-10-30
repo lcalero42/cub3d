@@ -91,6 +91,8 @@ SRCS_MANDATORY = main.c				\
 		u_rendering.c				\
 		u_map_checking.c			\
 		u_init.c					\
+		u_ft_atoi_n_check.c			\
+		c_validate_resolution.c		\
 
 # Bonus source files (with _bonus suffix)
 SRCS_BONUS = main_bonus.c							\
@@ -145,7 +147,7 @@ SRCS_BONUS = main_bonus.c							\
 		u_get_current_speed_bonus.c 				\
 		u_trace_shot_bonus.c						\
 		u_calc_hitbox_bonus.c						\
-		ft_atoi_n_check_bonus.c						\
+		u_ft_atoi_n_check_bonus.c					\
 		u_get_door_pixel_bonus.c					\
 		u_check_wall_occlusion_bonus.c				\
 		u_get_wall_texture_pixel_bonus.c			\

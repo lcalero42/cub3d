@@ -6,7 +6,7 @@
 /*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 14:01:03 by lcalero           #+#    #+#             */
-/*   Updated: 2025/08/26 16:50:09 by ekeisler         ###   ########.fr       */
+/*   Updated: 2025/10/30 16:53:02 by ekeisler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,28 @@
 # include <stdlib.h>
 # include <unistd.h>
 
+# ifndef MIN_WIDTH
+#  define MIN_WIDTH	640
+# endif
+
+# ifndef MIN_HEIGHT
+#  define MIN_HEIGHT 360
+# endif
+
+# ifndef MAX_WIDTH
+#  define MAX_WIDTH	1920
+# endif
+
+# ifndef MAX_HEIGHT
+#  define MAX_HEIGHT 1080
+# endif
+
 # ifndef WINDOW_WIDTH
-#  define WINDOW_WIDTH 640
+#  define WINDOW_WIDTH 1280
 # endif
 
 # ifndef WINDOW_HEIGHT
-#  define WINDOW_HEIGHT 480
+#  define WINDOW_HEIGHT	720
 # endif
 
 # ifndef MOVE_SPEED
@@ -54,21 +70,7 @@
 # define FOG_COLOR_G 0
 # define FOG_COLOR_B 0
 
-# define FOV 60.0f
 # define CAMERA_PLANE_LENGTH 0.57735f
-
-# define RAY_HIT 1
-# define RAY_CONTINUE 0
-
-# ifndef CROSSHAIR_SIZE
-#  define CROSSHAIR_SIZE 10
-# endif
-# ifndef CROSSHAIR_THICKNESS
-#  define CROSSHAIR_THICKNESS 2
-# endif
-# ifndef CROSSHAIR_COLOR
-#  define CROSSHAIR_COLOR 0x00FF00
-# endif
 
 typedef struct s_pos
 {
@@ -251,6 +253,7 @@ int					find_player_pos(t_data *data);
 // CHECKER
 int					check_map(t_data *data);
 int					is_map_surrounded(t_data *data);
+void				validate_window_size(void);
 
 // FUNCTIONS
 // RAYCASTING/RENDERING FUNCTIONS
@@ -299,5 +302,6 @@ int					is_out_of_bounds(int x, int y, int height, int width);
 int					is_valid_map_char(char c);
 void				load_texture(t_data *data, char *path, t_render *texture);
 void				init(t_data *data, char **argv);
+int					ft_atoi_n_check(const char *nptr);
 
 #endif
