@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   functions_bonus.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 13:18:22 by lcalero           #+#    #+#             */
-/*   Updated: 2025/10/21 17:45:48 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/10/30 16:42:05 by ekeisler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -212,6 +212,8 @@ int				add_enemy_sprite(t_data *data, t_generic_sprite *sprites);
 void			add_health_pad_sprite(t_data *data, t_generic_sprite *sprites,
 					int *count, int i);
 int				is_valid_spawn(t_data *data, int x, int y);
+int				ft_atoi_n_check(const char *nptr);
+void			free_paths(t_data *data);
 
 /* COLOR & FOG */
 void			extract_base_colors(int base_color, int *r, int *g, int *b);

@@ -43,7 +43,7 @@ endif
 INCLUDES = -I$(INC_DIR) -Ilib/libft -Ilib/minilibx-linux
 LIBS = lib/libft/libft.a lib/minilibx-linux/libmlx_Linux.a
 CC = cc
-CFLAGS = -Wall -Werror -Wextra -MD -MP $(INCLUDES) $(CONFIG) $(OPTI)
+CFLAGS = -g3 -Wall -Werror -Wextra -MD -MP $(INCLUDES) $(CONFIG) $(OPTI)
 MLXFLAGS = -lX11 -lXext -lm
 
 ifeq ($(MODE), debug)
@@ -145,6 +145,7 @@ SRCS_BONUS = main_bonus.c							\
 		u_get_current_speed_bonus.c 				\
 		u_trace_shot_bonus.c						\
 		u_calc_hitbox_bonus.c						\
+		ft_atoi_n_check_bonus.c						\
 		u_get_door_pixel_bonus.c					\
 		u_check_wall_occlusion_bonus.c				\
 		u_get_wall_texture_pixel_bonus.c			\

@@ -3,17 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   u_close_window_bonus.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 18:20:34 by lcalero           #+#    #+#             */
-/*   Updated: 2025/10/21 18:16:43 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/10/22 17:23:36 by ekeisler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d_bonus.h"
 
 static void	destroy_images(t_data *data);
-static void	free_paths(t_data *data);
 
 int	close_window(t_data *data)
 {
@@ -39,7 +38,7 @@ int	close_window(t_data *data)
 	return (1);
 }
 
-static void	free_paths(t_data *data)
+void	free_paths(t_data *data)
 {
 	if (data->north_wall.texture_path)
 		free(data->north_wall.texture_path);
@@ -49,6 +48,8 @@ static void	free_paths(t_data *data)
 		free(data->east_wall.texture_path);
 	if (data->west_wall.texture_path)
 		free(data->west_wall.texture_path);
+	if (data->enemy_render.texture_path)
+		free(data->enemy_render.texture_path);
 }
 
 static void	destroy_images(t_data *data)
