@@ -19,7 +19,7 @@ RENDER_DISTANCE = 1000	   # the maximum distance where the walls will be rendere
 
 # ------------------------------------- - ------------------------------------ #
 
-NAME = cub3d
+NAME = cub3D
 MODE ?= release
 CONFIG = -D WINDOW_WIDTH=$(WINDOW_WIDTH) -D WINDOW_HEIGHT=$(WINDOW_HEIGHT) -D MOVE_SPEED=$(MOVE_SPEED) -D ROT_SPEED=$(ROT_SPEED) -D RENDER_DISTANCE=$(RENDER_DISTANCE) \
 		 -D CROSSHAIR_SIZE=$(CROSSHAIR_SIZE) -D CROSSHAIR_THICKNESS=$(CROSSHAIR_THICKNESS) -D CROSSHAIR_COLOR=$(CROSSHAIR_COLOR) -D SENSITIVITY=$(SENSITIVITY) \
