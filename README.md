@@ -54,7 +54,7 @@ Then, you will be able to launch the game
 This project is clearly letting space **creativity** in the bonuses. So, we wanted to push the project **as much as possible**, implementing **everything** that crossed our mind using ONLY ***fake 2D raycasting*** like in *Woflenstein*.
 
 >[!NOTE]
-We could've created 3D engine and use raycsating in this engine casting rays in all directions. But we chose to stick to the original concept of Raycasting, when computersdid not have the performances to run a 3D engine.
+We could've created 3D engine and use raycsating in this engine casting rays in all directions. But we chose to stick to the original concept of Raycasting, when computers did not have the performances to run on a pure 3D engine.
 
 ![](assets/screen-1.png)
 ![](assets/screen-2.png)
@@ -146,7 +146,8 @@ RELOAD_TIME_MS = 1000	   # reload time of the weapon
 RENDER_DISTANCE = 1000	   # the maximum distance where the walls will be rendered
 
 ```
->[!NOTE] For better rendering, *resolution* **must** be in *9:16 format* (1920\*1080, 1280\*720)
+>[!NOTE]
+For better rendering, *resolution* **must** be in *9:16 format* (1920\*1080, 1280\*720)
 
 
 ## Parsing :fax:
@@ -176,7 +177,8 @@ static int	open_and_validate_file(char *filename)
 	return (fd);
 }
 ```
->[!WARNING] Of course, we must verify that the data is written as we want, for example if you expect an input to be an integer but the user inserts a character, we must return an error
+>[!WARNING]
+Of course, we must verify that the data is written as we want, for example if you expect an input to be an integer but the user inserts a character, we must return an error
 
 ### Data storage :1234:
 
@@ -210,7 +212,8 @@ int	parse_file(char *filename, t_data *data)
 	return (0);
 }
 ```
->[!NOTE] The config elements will change with the bonus part for our project with doors, enemy and heal pads
+>[!NOTE]
+The config elements will change with the bonus part for our project with doors, enemy and heal pads
 
 **Parsing** is not an *algorithm* to follow, this is a **logic** and a **vision** of how to **exploit data**, there is an ***infinite number of ways to parse something***, the key is to **predict** how you will use the *inputs* in the future for your project.
 
