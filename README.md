@@ -20,6 +20,8 @@
 - [Controls](#controls-computer)
 - [Settings](#settings-wrench)
 - [Parsing](#parsing-fax)
+	- [File exploration](#file-exploration-scroll)
+	- [Data storage](#data-storage-1234)
 - [Initialization](#initialization-unlock)
 - [Raycasting](#raycasting-logic-green_book)
 	- [Algortithm used : DDA](#algorithm-used--dda-digital-differential-analyzer)
@@ -106,25 +108,25 @@ To a **rendering** like this using **mlx** :
 
 ## Controls :computer:
 
-| KEY        	|Action          
+| **KEY**        	|**Action**         
 | ------------- |:-------------:|
-| `W`     		| *Move forward*  |
-| `A`      		| *Move to the left*		|
-| `S`				| *Move backward*      	|
-| `D`				| *Move to the right*     |
-| `Shift + moving key`| *Sprint*    |
-| `Left Arrow`		| *Rotate left*     		|
-| `Right Arrow`		| *Rotate right*     		|
-| `Mouse`		| *Rotate up and down*     		|
-| `Left click`| *shoot*     		|
-| `Space`			| *Open door*     		|
-| `F`				| *Toggle fog*     		|
-| `M`				| *Toggle mouse*     		|
-| `Esc`				| *Leave game*     		|
+| **`W`**     		| ***Move forward***  |
+| **`A`**      		| ***Move to the left***		|
+| **`S`**				| ***Move backward***      	|
+| **`D`**				| ***Move to the right***     |
+| **`Shift + moving key`**| ***Sprint***    |
+| **`Left Arrow`**		| ***Rotate left***     		|
+| **`Right Arrow`**		| ***Rotate right***    		|
+| **`Mouse`**		| ***Rotate up and down***     		|
+| **`Left click`**| ***shoot***     		|
+| **`Space`**			| ***Open door***     		|
+| **`F`**				| ***Toggle fog***     		|
+| **`M`**				| ***Toggle mouse***     		|
+| **`Esc`**				| ***Leave game***    		|
 
 ## Settings :wrench:
 
-There is a couple `settings` you can edit to have a better experience playing the game !
+There is a couple of `settings` that you can edit to have a **better experience** playing the game !
 All the `settings` are at the top of the **`Makefile`** : 
 
 ```Makefile
@@ -149,7 +151,68 @@ RENDER_DISTANCE = 1000	   # the maximum distance where the walls will be rendere
 
 ## Parsing :fax:
 
-***To fill***
+### File exploration :scroll:
+
+First *step of the process* of **parsing** ***(analyse a string or text into logical syntactic components)*** is to read the file(s) we will use in our project to use them in the game main logic. For that we will use the function **```open```** to be able to **read the data** written in the file. This function will return a **```fd (file descriptor)```** that will permit us to use the **```read```** function and store the data we want in our structs : 
+
+> See .cub file example at : [**map example**](#what-is-cub3d--question)
+
+```C
+static int	open_and_validate_file(char *filename)
+{
+	int	fd;
+
+	if (check_file_extension(filename))
+	{
+		u_print_error("File extension (.cub needed)");
+		return (-1);
+	}
+	fd = open(filename, O_RDONLY);
+	if (fd < 0)
+	{
+		u_print_error("fd error");
+		return (-1);
+	}
+	return (fd);
+}
+```
+> [!WARNING] Of course, we must verify that the data is written as we want, for example if you expect an input to be an integer but the user inserts a character we must return an error
+
+### Data storage :1234:
+
+To **store our data**, we prepare structures that will be able to store everything the best way (this is why you have to make ***scalable*** structs that are appropriate to a lot of case and ***well organized*** for your code workflow).
+
+Here, we can divide the file *.cub* that we will **parse** in multiple **```config elements```** that will be : 
+1. The **textures** we will be using for walls in *.xpm*
+2. The colors in **```RGB```** used for *ceiling* and *floor* separatly
+3. **The map** which is composed by 0's and 1's, the **player spawn position** with the direction he is looking at when he spawns (east as E, west as W, north as N, south as S)
+
+```C
+int	parse_file(char *filename, t_data *data)
+{
+	int		fd;
+	char	*buf;
+
+	fd = open_and_validate_file(filename);
+	if (fd < 0)
+		return (1);
+	buf = read_entire_file(fd);
+	close(fd);
+	if (!buf)
+		return (1);
+	if (process_file_content(buf, data))
+		return (1);
+	free(buf);
+	if (check_map(data))
+		return (1);
+	if (find_player_pos(data))
+		return (1);
+	return (0);
+}
+```
+> [!NOTE] The config elements will change with the bonus part for our project with doors, enemy and heal pads
+
+**Parsing** is not an *algorithm* to follow, this is a **logic** and a **vision** of how to **exploit data**, there is an ***infinite number of ways to parse something***, the key is to **predict** how you will use the *inputs* in the future for your project.
 
 ## Initialization :unlock:
 
