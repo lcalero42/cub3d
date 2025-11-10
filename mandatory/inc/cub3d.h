@@ -6,7 +6,7 @@
 /*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 14:01:03 by lcalero           #+#    #+#             */
-/*   Updated: 2025/10/30 16:53:02 by ekeisler         ###   ########.fr       */
+/*   Updated: 2025/11/10 15:21:28 by ekeisler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,14 @@
 
 # ifndef WINDOW_HEIGHT
 #  define WINDOW_HEIGHT	720
+# endif
+
+# ifndef MAX_MAP_LINES
+#  define MAX_MAP_LINES 100
+# endif
+
+# ifndef MAX_LINE_LEN
+#  define MAX_LINE_LEN 100
 # endif
 
 # ifndef MOVE_SPEED

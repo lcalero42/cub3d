@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   constants_bonus.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 13:17:32 by lcalero           #+#    #+#             */
-/*   Updated: 2025/10/21 18:04:28 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/11/10 15:10:06 by ekeisler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,14 @@
 
 # ifndef WINDOW_HEIGHT
 #  define WINDOW_HEIGHT	720
+# endif
+
+# ifndef MAX_MAP_LINES
+#  define MAX_MAP_LINES 100
+# endif
+
+# ifndef MAX_LINE_LEN
+#  define MAX_LINE_LEN 100
 # endif
 
 # ifndef MOVE_SPEED

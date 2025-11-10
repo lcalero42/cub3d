@@ -6,7 +6,7 @@
 /*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 18:18:28 by lcalero           #+#    #+#             */
-/*   Updated: 2025/09/03 11:51:26 by ekeisler         ###   ########.fr       */
+/*   Updated: 2025/11/10 15:14:23 by ekeisler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,11 @@ int	parse_map(char **all_lines, t_data *data)
 		return (0);
 	}
 	map_line_count = count_map_lines(all_lines, map_start);
+	if (map_line_count == -1)
+	{
+		u_print_error("Map too big");
+		return (0);
+	}
 	if (!allocate_grid(data, map_line_count))
 		return (0);
 	if (!fill_grid(all_lines, data, map_start, map_line_count))
@@ -56,15 +61,22 @@ static int	count_map_lines(char **all_lines, int map_start)
 {
 	int	i;
 	int	count;
+	int	len;
 
 	i = map_start;
 	count = 0;
+	len = 0;
 	while (all_lines[i])
 	{
 		if (!u_is_config_line(all_lines[i]) && !u_is_empty_line(all_lines[i]))
 			count++;
+		len = ft_strlen(all_lines[i]);
+		if (len > MAX_LINE_LEN)
+			return (-1);
 		i++;
 	}
+	if (count > MAX_MAP_LINES)
+		return (-1);
 	return (count);
 }
 
