@@ -146,7 +146,7 @@ RELOAD_TIME_MS = 1000	   # reload time of the weapon
 RENDER_DISTANCE = 1000	   # the maximum distance where the walls will be rendered
 
 ```
-> [!NOTE] For better rendering, *resolution* **must** be in *9:16 format* (1920\*1080, 1280\*720)
+>[!NOTE] For better rendering, *resolution* **must** be in *9:16 format* (1920\*1080, 1280\*720)
 
 
 ## Parsing :fax:
@@ -176,7 +176,7 @@ static int	open_and_validate_file(char *filename)
 	return (fd);
 }
 ```
-> [!WARNING] Of course, we must verify that the data is written as we want, for example if you expect an input to be an integer but the user inserts a character we must return an error
+>[!WARNING] Of course, we must verify that the data is written as we want, for example if you expect an input to be an integer but the user inserts a character, we must return an error
 
 ### Data storage :1234:
 
@@ -210,7 +210,7 @@ int	parse_file(char *filename, t_data *data)
 	return (0);
 }
 ```
-> [!NOTE] The config elements will change with the bonus part for our project with doors, enemy and heal pads
+>[!NOTE] The config elements will change with the bonus part for our project with doors, enemy and heal pads
 
 **Parsing** is not an *algorithm* to follow, this is a **logic** and a **vision** of how to **exploit data**, there is an ***infinite number of ways to parse something***, the key is to **predict** how you will use the *inputs* in the future for your project.
 
