@@ -93,6 +93,7 @@ SRCS_MANDATORY = main.c				\
 		u_init.c					\
 		u_ft_atoi_n_check.c			\
 		c_validate_resolution.c		\
+		c_check_map_content.c		\
 
 # Bonus source files (with _bonus suffix)
 SRCS_BONUS = main_bonus.c							\

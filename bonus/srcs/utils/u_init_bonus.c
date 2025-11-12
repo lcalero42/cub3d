@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   u_init_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 18:20:59 by lcalero           #+#    #+#             */
-/*   Updated: 2025/10/21 17:44:24 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/11/10 17:20:52 by ekeisler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	load_texture(t_data *data, char *path, t_render *texture)
 	if (!texture->texture_img)
 	{
 		u_print_error("Cannot load wall texture");
-		exit(1);
+		close_window(data);
 	}
 	texture->info.addr = mlx_get_data_addr(texture->texture_img,
 			&texture->info.bpp, &texture->info.line_len,

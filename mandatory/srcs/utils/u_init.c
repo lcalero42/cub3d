@@ -6,7 +6,7 @@
 /*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/30 14:21:07 by lcalero           #+#    #+#             */
-/*   Updated: 2025/10/16 15:50:21 by ekeisler         ###   ########.fr       */
+/*   Updated: 2025/11/12 17:55:55 by ekeisler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ void	load_texture(t_data *data, char *path, t_render *texture)
 			&width, &height);
 	if (!texture->texture_img)
 	{
-		printf("Error: Cannot load wall texture\n");
-		exit(1);
+		u_print_error("Cannot load wall texture");
+		close_window(data);
 	}
 	texture->info.addr = mlx_get_data_addr(texture->texture_img,
 			&texture->info.bpp,

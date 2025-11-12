@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   u_ft_free.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/19 10:54:06 by ekeisler          #+#    #+#             */
-/*   Updated: 2025/07/29 14:11:35 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/11/10 15:34:58 by ekeisler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	u_ft_free(char **res)
 {
 	int	i;
-
+	
 	i = 0;
 	while (res[i])
 	{

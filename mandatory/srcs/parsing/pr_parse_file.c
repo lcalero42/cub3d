@@ -6,7 +6,7 @@
 /*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 23:32:10 by ekeisler          #+#    #+#             */
-/*   Updated: 2025/11/10 15:22:39 by ekeisler         ###   ########.fr       */
+/*   Updated: 2025/11/12 18:45:34 by ekeisler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,10 +83,17 @@ static int	process_file_content(char *buf, t_data *data)
 {
 	char	**all_lines;
 
+	if (!check_map_content(buf))
+		return (1);
 	all_lines = ft_split(buf, '\n');
 	if (!all_lines)
 		return (1);
-	parse_config_section(all_lines, data);
+	if (!parse_config_section(all_lines, data))
+	{
+		u_ft_free(all_lines);
+		free(buf);
+		return (1);
+	}
 	if (0 == parse_map(all_lines, data))
 	{
 		u_ft_free(all_lines);
@@ -96,7 +103,6 @@ static int	process_file_content(char *buf, t_data *data)
 	u_ft_free(all_lines);
 	if (0 == validate_config(data))
 	{
-		u_ft_free(all_lines);
 		free(buf);
 		return (1);
 	}
