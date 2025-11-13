@@ -6,7 +6,7 @@
 /*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 23:32:10 by ekeisler          #+#    #+#             */
-/*   Updated: 2025/11/12 18:45:34 by ekeisler         ###   ########.fr       */
+/*   Updated: 2025/11/13 17:58:12 by ekeisler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,11 @@ int	parse_file(char *filename, t_data *data)
 	close(fd);
 	if (!buf)
 		return (1);
+	if (!check_map_content(buf))
+	{
+		u_print_error("Hole in map");
+		return (1);
+	}
 	if (process_file_content(buf, data))
 		return (1);
 	free(buf);
@@ -83,8 +88,6 @@ static int	process_file_content(char *buf, t_data *data)
 {
 	char	**all_lines;
 
-	if (!check_map_content(buf))
-		return (1);
 	all_lines = ft_split(buf, '\n');
 	if (!all_lines)
 		return (1);

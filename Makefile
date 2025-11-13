@@ -108,6 +108,7 @@ SRCS_BONUS = main_bonus.c							\
 		c_check_map_bonus.c							\
 		c_check_sourrounded_bw_bonus.c				\
 		c_validate_resolution_bonus.c				\
+		c_check_map_content_bonus.c					\
 		re_wall_render_bonus.c						\
 		re_wall_texture_bonus.c						\
 		re_render_fog_bonus.c						\
