@@ -6,7 +6,7 @@
 /*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 13:17:32 by lcalero           #+#    #+#             */
-/*   Updated: 2025/11/10 15:10:06 by ekeisler         ###   ########.fr       */
+/*   Updated: 2025/11/17 15:04:36 by ekeisler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,7 @@
 # endif
 
 # ifndef LIFE_DRAIN_RATE
-#  define LIFE_DRAIN_RATE 20.0f
+#  define LIFE_DRAIN_RATE 0 //20.0f
 # endif
 
 # define MAX_ANIM_LENGTH 4

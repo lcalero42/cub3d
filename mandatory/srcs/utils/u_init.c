@@ -6,7 +6,7 @@
 /*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/30 14:21:07 by lcalero           #+#    #+#             */
-/*   Updated: 2025/11/12 17:55:55 by ekeisler         ###   ########.fr       */
+/*   Updated: 2025/11/17 14:59:39 by ekeisler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ void	init(t_data *data, char **argv)
 		close_window(data);
 	data->render_fog = 1;
 	data->mlx = mlx_init();
+	init_walls(data);
 	data->window = mlx_new_window(data->mlx, WINDOW_WIDTH,
 			WINDOW_HEIGHT, "cub3d");
-	init_walls(data);
 }
 
 void	load_texture(t_data *data, char *path, t_render *texture)

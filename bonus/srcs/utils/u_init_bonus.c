@@ -6,7 +6,7 @@
 /*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 18:20:59 by lcalero           #+#    #+#             */
-/*   Updated: 2025/11/10 17:20:52 by ekeisler         ###   ########.fr       */
+/*   Updated: 2025/11/17 16:15:00 by ekeisler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,15 @@ void	init(t_data *data, char **argv)
 	srand(time(NULL));
 	if (parse_file(argv[1], data))
 		close_window(data);
+	check_enemy_can_spawn(data);
 	data->render_fog = 1;
 	data->mlx = mlx_init();
+	load_sprites(data);
 	data->window = mlx_new_window(data->mlx, WINDOW_WIDTH, WINDOW_HEIGHT,
 			"cub3d");
 	init_walls(data);
 	data->door_count = 0;
 	data->health_count = 0;
-	load_sprites(data);
 	data->gun.is_playing = 1;
 	init_mouse_control(data);
 	data->player.stamina = MAX_STAMINA;
@@ -75,15 +76,15 @@ void	spawn_enemy(t_data *data)
 		x = rand() % data->grid.width;
 		if (is_valid_spawn(data, x, y))
 		{
-			data->enemy.position.x = (double)x;
-			data->enemy.position.y = (double)y;
+			data->enemy.position.x = (double)x + 0.5;
+			data->enemy.position.y = (double)y + 0.5;
 			data->enemy.current_health = 100;
 			data->enemy.max_health = 100;
 			return ;
 		}
 		attempts++;
 	}
-	printf("Error: Could not find valid spawn position\n");
+	u_print_error("Cannot find a place to spawn enemy");
 }
 
 static void	load_sprites(t_data *data)

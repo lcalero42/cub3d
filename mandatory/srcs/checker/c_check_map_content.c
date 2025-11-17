@@ -6,7 +6,7 @@
 /*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/13 17:48:20 by ekeisler          #+#    #+#             */
-/*   Updated: 2025/11/13 19:11:19 by ekeisler         ###   ########.fr       */
+/*   Updated: 2025/11/17 15:00:33 by ekeisler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ static int	skip_whitespace(char *all_lines, int i)
 			|| (all_lines[i] >= 7 && all_lines[i] <= 13)))
 		i++;
 	return (i);
-} 
+}
 
 static int	map_start_buff(char *all_lines)
 {
@@ -88,7 +88,7 @@ static int	map_start_buff(char *all_lines)
 	int		line_start;
 	int		result;
 	char	*all_lines_cpy;
-	
+
 	i = 0;
 	conf_element = 0;
 	line_start = 0;

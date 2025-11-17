@@ -6,7 +6,7 @@
 /*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 11:53:44 by lcalero           #+#    #+#             */
-/*   Updated: 2025/10/21 00:02:35 by ekeisler         ###   ########.fr       */
+/*   Updated: 2025/11/17 15:26:22 by ekeisler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,9 @@ int	render_loop(t_data *data)
 		return (0);
 	calc_delta_time_ms(data);
 	update_player_movement(data);
+	if (!data->keys.d && !data->keys.a && !data->keys.w
+		&& !data->keys.s)
+		data->player.is_moving = 0;
 	update_enemy_movement(data);
 	check_health_pickup_collision(data);
 	trace_ray(data, data->player.angle);

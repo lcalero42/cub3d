@@ -6,7 +6,7 @@
 /*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/10 17:18:30 by lcalero           #+#    #+#             */
-/*   Updated: 2025/10/20 20:25:47 by ekeisler         ###   ########.fr       */
+/*   Updated: 2025/11/17 15:38:25 by ekeisler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static void	update_gun_indexes(t_data *data, double *acc_time,
 	if (!data->gun.render_arr[data->gun.index + 1].info.addr
 		&& data->gun.is_playing)
 		data->gun.index = 0;
-	else if (data->gun.is_playing)
+	else if (data->gun.is_playing && data->player.is_moving)
 		data->gun.index++;
 	if (!data->shot.render_arr[data->shot.index + 1].info.addr
 		&& data->shot.is_playing)

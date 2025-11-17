@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   p_hooks_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 14:02:02 by lcalero           #+#    #+#             */
-/*   Updated: 2025/10/14 12:16:51 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/11/17 15:24:53 by ekeisler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,6 @@
 
 int	key_release_hook(int keycode, t_data *data)
 {
-	if (keycode == XK_d || keycode == XK_a || keycode == XK_w
-		|| keycode == XK_s)
-		data->player.is_moving = 0;
 	if (keycode == XK_d)
 		data->keys.d = 0;
 	if (keycode == XK_a)
