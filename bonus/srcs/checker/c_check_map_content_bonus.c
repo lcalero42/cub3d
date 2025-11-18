@@ -6,23 +6,49 @@
 /*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/13 17:48:20 by ekeisler          #+#    #+#             */
-/*   Updated: 2025/11/13 18:30:26 by ekeisler         ###   ########.fr       */
+/*   Updated: 2025/11/18 18:49:58 by ekeisler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d_bonus.h"
 
-static int	find_line_end(char *s, int start);
-static int	process_config_line(char *all_lines, int *i, int *line_start);
-static int	skip_whitespace(char *all_lines, int i);
-static int	map_start_buff(char *all_lines);
+static int	check_double_newline(char *all_lines, int j,
+		int i, int last_newline)
+{
+	int	only_whitespace;
+	int	temp;
+
+	if (last_newline == -1 || all_lines[j] != '\n')
+		return (-1);
+	only_whitespace = 1;
+	while (i < j)
+	{
+		if (!(((all_lines[i] >= 7 && all_lines[i] <= 13)
+					&& all_lines[i] != '\n') || all_lines[i] == ' '))
+		{
+			only_whitespace = 0;
+			break ;
+		}
+		i++;
+	}
+	if (only_whitespace)
+	{
+		temp = j;
+		while (all_lines[temp] && !ft_isalnum(all_lines[temp]))
+			temp++;
+		if (ft_isalnum(all_lines[temp]))
+			return (0);
+	}
+	return (-1);
+}
 
 int	check_map_content(char *all_lines)
 {
 	int	j;
-	int	found_endl;
+	int	last_newline;
+	int	result;
 
-	found_endl = -1;
+	last_newline = -1;
 	j = map_start_buff(all_lines);
 	while (all_lines[j])
 	{
@@ -32,12 +58,12 @@ int	check_map_content(char *all_lines)
 			j++;
 			continue ;
 		}
-		if (j != 0)
-			if (all_lines[j] == '\n' && all_lines[j - 1]
-				&& found_endl == j - 1)
-				return (0);
+		result = check_double_newline(all_lines, j,
+				last_newline + 1, last_newline);
+		if (result == 0)
+			return (0);
 		if (all_lines[j] == '\n')
-			found_endl = j;
+			last_newline = j;
 		j++;
 	}
 	return (1);
@@ -73,15 +99,7 @@ static int	process_config_line(char *all_lines, int *i, int *line_start)
 	return (is_config);
 }
 
-static int	skip_whitespace(char *all_lines, int i)
-{
-	while (all_lines[i] && (all_lines[i] == ' '
-			|| (all_lines[i] >= 7 && all_lines[i] <= 13)))
-		i++;
-	return (i);
-}
-
-static int	map_start_buff(char *all_lines)
+int	map_start_buff(char *all_lines)
 {
 	int		i;
 	int		conf_element;

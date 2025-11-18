@@ -6,7 +6,7 @@
 /*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 14:01:03 by lcalero           #+#    #+#             */
-/*   Updated: 2025/11/12 18:44:58 by ekeisler         ###   ########.fr       */
+/*   Updated: 2025/11/18 18:00:00 by ekeisler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -263,7 +263,7 @@ int					check_map(t_data *data);
 int					is_map_surrounded(t_data *data);
 void				validate_window_size(void);
 int					check_map_content(char *all_lines);
-
+int					map_start_buff(char *all_lines);
 // FUNCTIONS
 // RAYCASTING/RENDERING FUNCTIONS
 void				trace_ray(t_data *data, double angle);
@@ -297,6 +297,7 @@ void				u_ft_free(char **res);
 int					close_window(t_data *data);
 void				u_print_error(char *msg);
 int					u_is_empty_line(char *line);
+int					skip_whitespace(char *all_lines, int i);
 int					u_is_config_line(char *line);
 void				u_calculate_map_width(t_data *data);
 void				u_ft_free(char **res);

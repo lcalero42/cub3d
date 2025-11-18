@@ -6,7 +6,7 @@
 /*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 13:18:22 by lcalero           #+#    #+#             */
-/*   Updated: 2025/11/17 16:14:37 by ekeisler         ###   ########.fr       */
+/*   Updated: 2025/11/18 18:05:26 by ekeisler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ int				check_map_content(char *all_lines);
 int				is_map_surrounded(t_data *data);
 void			validate_window_size(void);
 void			check_enemy_can_spawn(t_data *data);
+int				map_start_buff(char *all_lines);
 
 /* RAYCASTING/RENDERING */
 void			trace_ray(t_data *data, double angle);
@@ -187,6 +188,7 @@ int				u_is_empty_line(char *line);
 int				u_is_config_line(char *line);
 void			u_calculate_map_width(t_data *data);
 void			u_ft_free(char **res);
+int				skip_whitespace(char *all_lines, int i);
 void			u_ft_free_doors(t_data *data);
 int				close_window(t_data *data);
 void			u_print_error(char *msg);

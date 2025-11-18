@@ -83,6 +83,7 @@ SRCS_MANDATORY = main.c				\
 		u_calculate_map_width.c		\
 		u_is_config_line.c			\
 		u_is_empty_line.c			\
+		u_skip_whitespace.c			\
 		u_ft_free.c					\
 		u_close_window.c			\
 		u_rgb_to_hex.c				\
@@ -141,6 +142,7 @@ SRCS_BONUS = main_bonus.c							\
 		u_rgb_to_hex_bonus.c						\
 		u_print_error_bonus.c						\
 		u_fog_rendering_bonus.c						\
+		u_skip_whitespace_bonus.c							\
 		u_rendering_bonus.c							\
 		u_map_checking_bonus.c						\
 		u_init_bonus.c								\
