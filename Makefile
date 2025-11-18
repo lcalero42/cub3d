@@ -43,11 +43,11 @@ endif
 INCLUDES = -I$(INC_DIR) -Ilib/libft -Ilib/minilibx-linux
 LIBS = lib/libft/libft.a lib/minilibx-linux/libmlx_Linux.a
 CC = cc
-CFLAGS = -g3 -Wall -Werror -Wextra -MD -MP $(INCLUDES) $(CONFIG) $(OPTI)
+CFLAGS = -Wall -Werror -Wextra -W -Wunused -MD -MP $(INCLUDES) $(CONFIG) $(OPTI)
 MLXFLAGS = -lX11 -lXext -lm
 
 ifeq ($(MODE), debug)
-	CFLAGS = -Wall -Wextra -MD -MP $(INCLUDES) -g3 $(DEBUG_CONFIG) $(OPTI)
+	CFLAGS = -Wall -Wextra -MD -MP $(INCLUDES) $(DEBUG_CONFIG) $(OPTI)
 endif
 
 VPATH = $(SRC_DIR)/srcs:$(SRC_DIR)/srcs/raycasting \
