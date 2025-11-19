@@ -1,23 +1,54 @@
-*
-!Makefile
-!inc
-!libft
-!srcs
-!raycasting
-!player
-!checker
-!UI
-!parsing
-!rendering
-!utils
-!mouse_move
-!sprite
-!mandatory
-!bonus
-!lib
-!map
-!textures
-!*.c
-!*.h
-!*.xpm
-!*.cub
+# Prerequisites
+*.d
+
+# Compiled Object files
+*.slo
+*.lo
+*.o
+*.obj
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Linker files
+*.ilk
+
+# Debugger Files
+*.pdb
+
+# Compiled Dynamic libraries
+*.so
+*.dylib
+*.dll
+
+# Fortran module files
+*.mod
+*.smod
+
+# Compiled Static libraries
+*.lai
+*.la
+*.a
+*.lib
+
+# Executables
+*.exe
+*.out
+*.app
+
+# debug information files
+*.dwo
+
+# objects folder
+objects
+
+# binary
+cub3D
+
+# vscode
+.vscode
+
+#obj folders
+obj-release
+obj-debug
