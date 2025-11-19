@@ -1,0 +1,48 @@
+name: Cub3D CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  build_and_norm:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Get the repository + submodules
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      # Install dependencies needed for MLX (Linux environment)
+      - name: Install Linux dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            xorg \
+            libxext-dev \
+            libx11-dev \
+            libbsd-dev \
+            libxrender-dev \
+            libxrandr-dev \
+            libxfixes-dev \
+            libxcb1-dev \
+            libxkbcommon-dev \
+            libx11-xcb-dev
+
+      # Install norminette
+      - name: Install Norminette
+        run: |
+          python3 -m pip install --upgrade pip
+          pip install norminette
+
+      # Run Norminette
+      - name: Run Norminette
+        run: |
+          norminette
+
+      # Build Cub3D
+      - name: Build cub3D
+        run: |
+          make
