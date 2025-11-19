@@ -40,7 +40,7 @@ jobs:
       # Run Norminette
       - name: Run Norminette
         run: |
-          norminette
+          norminette bonus mandatory
 
       # Build Cub3D
       - name: Build cub3D
