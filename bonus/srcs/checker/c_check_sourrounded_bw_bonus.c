@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   c_check_sourrounded_bw_bonus.c                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 18:16:02 by lcalero           #+#    #+#             */
-/*   Updated: 2025/10/20 19:59:05 by ekeisler         ###   ########.fr       */
+/*   Updated: 2025/11/19 13:09:52 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,8 @@ int	is_map_surrounded(t_data *data)
 static int	is_walkable_space(char c)
 {
 	return (c == '0' || c == 'N' || c == 'S'
-		|| c == 'E' || c == 'W' || c == 'H');
+		|| c == 'E' || c == 'W' || c == 'H'
+		|| c == '2');
 }
 
 static int	has_open_neighbor(t_data *data, int x, int y)

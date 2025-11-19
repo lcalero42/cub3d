@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   u_close_window_bonus.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 18:20:34 by lcalero           #+#    #+#             */
-/*   Updated: 2025/10/22 17:23:36 by ekeisler         ###   ########.fr       */
+/*   Updated: 2025/11/19 14:09:51 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,4 +66,6 @@ static void	destroy_images(t_data *data)
 		mlx_destroy_image(data->mlx, data->west_wall.texture_img);
 	if (data->crosshair.texture_img)
 		mlx_destroy_image(data->mlx, data->crosshair.texture_img);
+	if (data->enemy_render.texture_img)
+		mlx_destroy_image(data->mlx, data->enemy_render.texture_img);
 }

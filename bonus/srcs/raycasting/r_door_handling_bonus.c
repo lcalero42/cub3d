@@ -6,7 +6,7 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/03 13:59:19 by lcalero           #+#    #+#             */
-/*   Updated: 2025/10/16 15:04:25 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/11/19 14:07:07 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ static void	init_door_grid(t_data *data)
 	y = 0;
 	while (y < data->grid.height)
 	{
-		data->door_grid[y] = malloc(sizeof(t_door *) * data->grid.width);
+		data->door_grid[y] = malloc(sizeof(t_door) * data->grid.width);
 		ft_memset(data->door_grid[y], 0, sizeof(t_door *) * data->grid.width);
 		y++;
 	}

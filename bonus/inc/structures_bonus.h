@@ -6,14 +6,14 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 13:18:32 by lcalero           #+#    #+#             */
-/*   Updated: 2025/10/21 18:07:40 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/11/19 14:58:03 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCTURES_BONUS_H
 # define STRUCTURES_BONUS_H
 
-# include "../minilibx-linux/mlx.h"
+# include "../mlx/mlx.h"
 # include "libft.h"
 # include <X11/keysym.h>
 # include <fcntl.h>

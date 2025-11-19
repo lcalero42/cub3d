@@ -40,10 +40,10 @@ else
 	INC_DIR = mandatory/inc
 endif
 
-INCLUDES = -I$(INC_DIR) -Ilib/libft -Ilib/minilibx-linux
-LIBS = lib/libft/libft.a lib/minilibx-linux/libmlx_Linux.a
+INCLUDES = -I$(INC_DIR) -Ilib/libft -Ilib/mlx
+LIBS = lib/libft/libft.a lib/mlx/libmlx_Linux.a
 CC = cc
-CFLAGS = -Wall -Werror -Wextra -W -Wunused -MD -MP $(INCLUDES) $(CONFIG) $(OPTI)
+CFLAGS = -g3 -Wall -Werror -Wextra -W -Wunused -MD -MP $(INCLUDES) $(CONFIG) $(OPTI)
 MLXFLAGS = -lX11 -lXext -lm
 
 ifeq ($(MODE), debug)
@@ -142,7 +142,7 @@ SRCS_BONUS = main_bonus.c							\
 		u_rgb_to_hex_bonus.c						\
 		u_print_error_bonus.c						\
 		u_fog_rendering_bonus.c						\
-		u_skip_whitespace_bonus.c							\
+		u_skip_whitespace_bonus.c					\
 		u_rendering_bonus.c							\
 		u_map_checking_bonus.c						\
 		u_init_bonus.c								\
@@ -216,10 +216,10 @@ libft:
 	$(MAKE) -C lib/libft > /dev/null 2>&1
 
 mlx:
-	$(MAKE) -C lib/minilibx-linux > /dev/null 2>&1
+	$(MAKE) -C lib/mlx > /dev/null 2>&1
 
 mlx-verbose:
-	$(MAKE) -C lib/minilibx-linux
+	$(MAKE) -C lib/mlx
 
 $(BIN): $(OBJS)
 	$(CC) $(CFLAGS) $(OBJS) $(LIBS) -o $@ $(MLXFLAGS)
@@ -231,13 +231,13 @@ $(OBJ_DIR)/%.o: %.c Makefile $(LIBS) | $(OBJ_DIR)
 clean:
 	rm -rf obj-*
 	$(MAKE) -C lib/libft clean
-	$(MAKE) -C lib/minilibx-linux clean > /dev/null 2>&1
+	$(MAKE) -C lib/mlx clean > /dev/null 2>&1
 
 fclean: clean
 	rm -f $(NAME)
 	$(MAKE) -C lib/libft fclean
-	$(MAKE) -C lib/minilibx-linux clean > /dev/null 2>&1
-	rm -f lib/minilibx-linux/libmlx.a
+	$(MAKE) -C lib/mlx clean > /dev/null 2>&1
+	rm -f lib/mlx/libmlx.a
 
 re: fclean all
 
