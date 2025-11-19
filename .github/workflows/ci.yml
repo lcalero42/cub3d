@@ -46,3 +46,4 @@ jobs:
       - name: Build cub3D
         run: |
           make
+          make bonus
