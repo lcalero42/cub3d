@@ -52,3 +52,6 @@ cub3D
 #obj folders
 obj-release
 obj-debug
+
+#supression file
+*.supp

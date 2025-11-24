@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   constants_bonus.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 13:17:32 by lcalero           #+#    #+#             */
-/*   Updated: 2025/11/17 15:04:36 by ekeisler         ###   ########.fr       */
+/*   Updated: 2025/11/24 15:14:19 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,6 @@
 # define FOG_COLOR_G 0
 # define FOG_COLOR_B 0
 
-# define FOV 60.0f
 # define CAMERA_PLANE_LENGTH 0.57735f
 
 # define RAY_HIT 1
@@ -117,7 +116,7 @@
 # endif
 
 # ifndef LIFE_DRAIN_RATE
-#  define LIFE_DRAIN_RATE 0 //20.0f
+#  define LIFE_DRAIN_RATE 20.0f
 # endif
 
 # define MAX_ANIM_LENGTH 4

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   u_init_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 18:20:59 by lcalero           #+#    #+#             */
-/*   Updated: 2025/11/19 17:26:51 by ekeisler         ###   ########.fr       */
+/*   Updated: 2025/11/24 15:02:27 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@ void	init(t_data *data, char **argv)
 	data->render_fog = 1;
 	data->mlx = mlx_init();
 	load_sprites(data);
+	init_walls(data);
 	data->window = mlx_new_window(data->mlx, WINDOW_WIDTH, WINDOW_HEIGHT,
 			"cub3d");
-	init_walls(data);
 	data->door_count = 0;
 	data->health_count = 0;
 	data->gun.is_playing = 1;

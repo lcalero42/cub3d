@@ -10,7 +10,7 @@ WINDOW_HEIGHT = 720			# height of window
 MOVE_SPEED = 5.0f		   # player movement speed
 CROSSHAIR_SIZE = 4		   # size of the crosshair
 CROSSHAIR_THICKNESS = 2    # thickness of the crosshair
-CROSSHAIR_COLOR = 0x00FF00 # color of the crosshair in hexa format
+CROSSHAIR_COLOR = 0x00FF00 # color of the crosshair in hexa zrmat
 SENSITIVITY = 0.25f		   # player mouse sensitivity
 RELOAD_TIME_MS = 1000	   # reload time of the weapon
 
