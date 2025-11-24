@@ -6,7 +6,7 @@
 /*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 18:20:59 by lcalero           #+#    #+#             */
-/*   Updated: 2025/11/17 16:15:00 by ekeisler         ###   ########.fr       */
+/*   Updated: 2025/11/19 17:26:51 by ekeisler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	load_texture(t_data *data, char *path, t_render *texture)
 			&height);
 	if (!texture->texture_img)
 	{
-		u_print_error("Cannot load wall texture");
+		u_print_error("Cannot load texture");
 		close_window(data);
 	}
 	texture->info.addr = mlx_get_data_addr(texture->texture_img,
@@ -89,7 +89,7 @@ void	spawn_enemy(t_data *data)
 
 static void	load_sprites(t_data *data)
 {
-	load_texture(data, data->enemy_render.texture_path, &data->enemy.render);
+	load_texture(data, data->enemy_render.texture_path, &data->enemy_render);
 	load_texture(data, "bonus/textures/gun-hand-0.xpm",
 		&data->gun.render_arr[0]);
 	load_texture(data, "bonus/textures/gun-hand-1.xpm",

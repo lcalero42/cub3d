@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   c_check_sourrounded_bw_bonus.c                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 18:16:02 by lcalero           #+#    #+#             */
-/*   Updated: 2025/11/19 13:09:52 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/11/24 14:56:08 by ekeisler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ int	is_map_surrounded(t_data *data)
 				if (has_open_neighbor(data, i, j))
 				{
 					u_print_error("Map not surrounded by walls");
+					printf("x : %d, y : %d\n'%c'\n",
+						i, j, data->grid.grid[i][j]);
 					return (0);
 				}
 			}

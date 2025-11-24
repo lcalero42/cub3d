@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structures_bonus.h                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 13:18:32 by lcalero           #+#    #+#             */
-/*   Updated: 2025/11/19 14:58:03 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/11/19 17:26:08 by ekeisler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -322,7 +322,6 @@ typedef struct s_mouse
 typedef struct s_enemy
 {
 	t_vector			position;
-	t_render			render;
 	t_enemy_render_data	enemy_data;
 	int					current_health;
 	int					max_health;

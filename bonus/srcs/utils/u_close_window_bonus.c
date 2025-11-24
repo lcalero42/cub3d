@@ -3,16 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   u_close_window_bonus.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 18:20:34 by lcalero           #+#    #+#             */
-/*   Updated: 2025/11/19 14:09:51 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/11/24 14:55:07 by ekeisler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d_bonus.h"
 
 static void	destroy_images(t_data *data);
+static void	destroy_anim_images(t_data *data);
+static void	destroy_hud_and_anim(t_data *data);
 
 int	close_window(t_data *data)
 {
@@ -54,6 +56,8 @@ void	free_paths(t_data *data)
 
 static void	destroy_images(t_data *data)
 {
+	destroy_anim_images(data);
+	destroy_hud_and_anim(data);
 	if (data->render_img)
 		mlx_destroy_image(data->mlx, data->render_img);
 	if (data->north_wall.texture_img)
@@ -68,4 +72,56 @@ static void	destroy_images(t_data *data)
 		mlx_destroy_image(data->mlx, data->crosshair.texture_img);
 	if (data->enemy_render.texture_img)
 		mlx_destroy_image(data->mlx, data->enemy_render.texture_img);
+	if (data->door_opened.texture_img)
+		mlx_destroy_image(data->mlx, data->door_opened.texture_img);
+	if (data->door_closed.texture_img)
+		mlx_destroy_image(data->mlx, data->door_closed.texture_img);
+}
+
+static void	destroy_anim_images(t_data *data)
+{
+	if (data->health_pad_anim.render_arr[0].texture_img)
+	{
+		if (data->health_pad_anim.render_arr[0].texture_img)
+			mlx_destroy_image(data->mlx,
+				data->health_pad_anim.render_arr[0].texture_img);
+		if (data->health_pad_anim.render_arr[1].texture_img)
+			mlx_destroy_image(data->mlx,
+				data->health_pad_anim.render_arr[1].texture_img);
+		if (data->health_pad_anim.render_arr[2].texture_img)
+			mlx_destroy_image(data->mlx,
+				data->health_pad_anim.render_arr[2].texture_img);
+	}
+	if (data->shot.render_arr[0].texture_img)
+	{
+		if (data->shot.render_arr[0].texture_img)
+			mlx_destroy_image(data->mlx, data->shot.render_arr[0].texture_img);
+		if (data->shot.render_arr[1].texture_img)
+			mlx_destroy_image(data->mlx, data->shot.render_arr[1].texture_img);
+		if (data->shot.render_arr[2].texture_img)
+			mlx_destroy_image(data->mlx, data->shot.render_arr[2].texture_img);
+	}
+}
+
+static void	destroy_hud_and_anim(t_data *data)
+{
+	if (data->play_button.texture_img)
+		mlx_destroy_image(data->mlx, data->play_button.texture_img);
+	if (data->leave_button.texture_img)
+		mlx_destroy_image(data->mlx, data->leave_button.texture_img);
+	if (data->menu_background.texture_img)
+		mlx_destroy_image(data->mlx, data->menu_background.texture_img);
+	if (data->game_over_print.texture_img)
+		mlx_destroy_image(data->mlx, data->game_over_print.texture_img);
+	if (data->you_won_print.texture_img)
+		mlx_destroy_image(data->mlx, data->you_won_print.texture_img);
+	if (data->gun.render_arr[0].texture_img)
+	{
+		if (data->gun.render_arr[0].texture_img)
+			mlx_destroy_image(data->mlx, data->gun.render_arr[0].texture_img);
+		if (data->gun.render_arr[1].texture_img)
+			mlx_destroy_image(data->mlx, data->gun.render_arr[1].texture_img);
+		if (data->gun.render_arr[2].texture_img)
+			mlx_destroy_image(data->mlx, data->gun.render_arr[2].texture_img);
+	}
 }
