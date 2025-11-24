@@ -6,7 +6,7 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 18:20:59 by lcalero           #+#    #+#             */
-/*   Updated: 2025/11/24 15:02:27 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/11/24 17:22:06 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ static void		load_sprites(t_data *data);
 
 void	init(t_data *data, char **argv)
 {
+	if (!check_settings())
+		close_window(data);
 	srand(time(NULL));
 	if (parse_file(argv[1], data))
 		close_window(data);

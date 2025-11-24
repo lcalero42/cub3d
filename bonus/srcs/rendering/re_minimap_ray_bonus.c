@@ -3,25 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   re_minimap_ray_bonus.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/09 15:32:00 by ekeisler          #+#    #+#             */
-/*   Updated: 2025/10/09 15:33:15 by ekeisler         ###   ########.fr       */
+/*   Updated: 2025/11/24 16:57:22 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d_bonus.h"
 
-static int	check_ray_bounds(t_data *data, int grid_x, int grid_y)
-{
-	if (grid_y < 0 || grid_y >= data->grid.height
-		|| grid_x < 0 || grid_x >= data->grid.width)
-		return (1);
-	if (data->grid.grid[grid_y][grid_x] == '1'
-		|| data->grid.grid[grid_y][grid_x] == '2')
-		return (1);
-	return (0);
-}
+static int	check_ray_bounds(t_data *data, int grid_x, int grid_y);
 
 void	draw_ray_on_minimap(t_data *data, t_ray_draw_params *params)
 {
@@ -45,4 +36,16 @@ void	draw_ray_on_minimap(t_data *data, t_ray_draw_params *params)
 		ray.x += cos(params->angle) * ray.step;
 		ray.y += sin(params->angle) * ray.step;
 	}
+}
+
+static int	check_ray_bounds(t_data *data, int grid_x, int grid_y)
+{
+	if (grid_y < 0 || grid_y >= data->grid.height)
+		return (1);
+	if (grid_x < 0 || grid_x >= (int)ft_strlen(data->grid.grid[grid_y]))
+		return (1);
+	if (data->grid.grid[grid_y][grid_x] == '1'
+		|| data->grid.grid[grid_y][grid_x] == '2')
+		return (1);
+	return (0);
 }

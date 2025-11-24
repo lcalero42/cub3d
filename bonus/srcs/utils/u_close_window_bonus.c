@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   u_close_window_bonus.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 18:20:34 by lcalero           #+#    #+#             */
-/*   Updated: 2025/11/24 14:55:07 by ekeisler         ###   ########.fr       */
+/*   Updated: 2025/11/24 16:56:47 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void	destroy_images(t_data *data);
 static void	destroy_anim_images(t_data *data);
-static void	destroy_hud_and_anim(t_data *data);
+static void	destroy_ui_anim(t_data *data);
 
 int	close_window(t_data *data)
 {
@@ -57,7 +57,7 @@ void	free_paths(t_data *data)
 static void	destroy_images(t_data *data)
 {
 	destroy_anim_images(data);
-	destroy_hud_and_anim(data);
+	destroy_ui_anim(data);
 	if (data->render_img)
 		mlx_destroy_image(data->mlx, data->render_img);
 	if (data->north_wall.texture_img)
@@ -103,7 +103,7 @@ static void	destroy_anim_images(t_data *data)
 	}
 }
 
-static void	destroy_hud_and_anim(t_data *data)
+static void	destroy_ui_anim(t_data *data)
 {
 	if (data->play_button.texture_img)
 		mlx_destroy_image(data->mlx, data->play_button.texture_img);

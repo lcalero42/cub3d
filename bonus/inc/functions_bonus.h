@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   functions_bonus.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 13:18:22 by lcalero           #+#    #+#             */
-/*   Updated: 2025/11/18 18:05:26 by ekeisler         ###   ########.fr       */
+/*   Updated: 2025/11/24 17:18:14 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ int				parse_color(char *color_str, t_color *color);
 int				check_file_extension(char *filename);
 int				validate_config(t_data *data);
 int				find_player_pos(t_data *data);
+int				map_start_buff(char *all_lines);
 
 /* CHECKER */
 int				check_map(t_data *data);
@@ -31,7 +32,7 @@ int				check_map_content(char *all_lines);
 int				is_map_surrounded(t_data *data);
 void			validate_window_size(void);
 void			check_enemy_can_spawn(t_data *data);
-int				map_start_buff(char *all_lines);
+int				check_settings(void);
 
 /* RAYCASTING/RENDERING */
 void			trace_ray(t_data *data, double angle);
