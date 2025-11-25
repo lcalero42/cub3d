@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   c_check_settings.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/24 17:42:55 by lcalero           #+#    #+#             */
-/*   Updated: 2025/11/24 17:43:21 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/11/25 15:11:40 by ekeisler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,24 @@ int	check_settings(void)
 	if ((MOVE_SPEED < 0.1f || MOVE_SPEED > 100.0f)
 		|| (SENSITIVITY < 0.1f || SENSITIVITY > 100.0f)
 		|| (RENDER_DISTANCE < 1 || RENDER_DISTANCE > 5000))
+		return (0);
+	return (1);
+}
+
+int	check_comas(char *trimmed)
+{
+	int	i;
+	int	count;
+
+	i = 0;
+	count = 0;
+	while (trimmed[i])
+	{
+		if (trimmed[i] == ',')
+			count++;
+		i++;
+	}
+	if (count != 2)
 		return (0);
 	return (1);
 }

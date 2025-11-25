@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   functions.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 14:01:03 by lcalero           #+#    #+#             */
-/*   Updated: 2025/11/24 17:57:01 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/11/25 15:11:56 by ekeisler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void				validate_window_size(void);
 int					check_map_content(char *all_lines);
 int					map_start_buff(char *all_lines);
 int					check_settings(void);
+int					check_comas(char *trimmed);
 
 // RAYCASTING/RENDERING FUNCTIONS
 void				trace_ray(t_data *data, double angle);

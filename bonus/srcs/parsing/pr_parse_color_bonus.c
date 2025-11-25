@@ -6,7 +6,7 @@
 /*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/18 04:59:55 by ekeisler          #+#    #+#             */
-/*   Updated: 2025/11/13 18:12:04 by ekeisler         ###   ########.fr       */
+/*   Updated: 2025/11/25 15:36:08 by ekeisler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,25 +49,24 @@ int	parse_color(char *color_str, t_color *color)
 	char	*trimmed;
 
 	if (color->base_r || color->base_g || color->base_b)
-	{
-		u_print_error("Duplicate color settings in map");
 		return (0);
-	}
 	trimmed = ft_strtrim(color_str, "FC");
+	if (!trimmed)
+		return (0);
 	rgb_parts = ft_split(trimmed, ',');
-	if (!validate_and_extract(rgb_parts, color))
+	if (!rgb_parts)
 	{
-		u_ft_free(rgb_parts);
 		free(trimmed);
 		return (0);
 	}
-	if (!validate_color_range(color))
+	if (!validate_and_extract(rgb_parts, color)
+		|| !validate_color_range(color) || !check_comas(trimmed))
 	{
-		u_ft_free(rgb_parts);
 		free(trimmed);
+		u_ft_free(rgb_parts);
 		return (0);
 	}
-	u_ft_free(rgb_parts);
 	free(trimmed);
+	u_ft_free(rgb_parts);
 	return (1);
 }

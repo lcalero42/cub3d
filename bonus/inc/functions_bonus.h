@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   functions_bonus.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 13:18:22 by lcalero           #+#    #+#             */
-/*   Updated: 2025/11/24 17:18:14 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/11/25 15:06:52 by ekeisler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ int				is_map_surrounded(t_data *data);
 void			validate_window_size(void);
 void			check_enemy_can_spawn(t_data *data);
 int				check_settings(void);
+int				check_comas(char *trimmed);
 
 /* RAYCASTING/RENDERING */
 void			trace_ray(t_data *data, double angle);
