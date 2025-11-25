@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   u_init.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/30 14:21:07 by lcalero           #+#    #+#             */
-/*   Updated: 2025/11/17 14:59:39 by ekeisler         ###   ########.fr       */
+/*   Updated: 2025/11/24 17:44:12 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 void	init(t_data *data, char **argv)
 {
+	if (!check_settings())
+		close_window(data);
 	if (parse_file(argv[1], data))
 		close_window(data);
 	data->render_fog = 1;

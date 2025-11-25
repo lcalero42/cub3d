@@ -10,7 +10,7 @@ WINDOW_HEIGHT = 1080			# height of window
 MOVE_SPEED = 5.0f		   # player movement speed
 CROSSHAIR_SIZE = 4		   # size of the crosshair
 CROSSHAIR_THICKNESS = 2    # thickness of the crosshair
-CROSSHAIR_COLOR = 0x00FF00 # color of the crosshair in hexa zrmat
+CROSSHAIR_COLOR = 0x00FF00 # color of the crosshair in hexa format
 SENSITIVITY = 0.25f		   # player mouse sensitivity
 RELOAD_TIME_MS = 1000	   # reload time of the weapon
 
@@ -72,6 +72,7 @@ SRCS_MANDATORY = main.c				\
 		pr_find_player_pos.c		\
 		c_check_map.c				\
 		c_check_sourrounded_bw.c	\
+		c_check_settings.c			\
 		re_wall_render.c			\
 		re_wall_texture.c			\
 		re_render_fog.c				\
