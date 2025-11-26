@@ -6,11 +6,11 @@
 /*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/26 16:52:44 by ekeisler          #+#    #+#             */
-/*   Updated: 2025/11/26 16:56:59 by ekeisler         ###   ########.fr       */
+/*   Updated: 2025/11/26 17:32:49 by ekeisler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d_bonus.h"
+#include "cub3d.h"
 
 void	free_grid_partial(t_data *data, int count)
 {

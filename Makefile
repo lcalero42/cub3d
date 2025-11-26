@@ -91,7 +91,7 @@ SRCS_MANDATORY = main.c						\
 		u_rgb_to_hex.c						\
 		u_print_error.c						\
 		u_fog_rendering.c					\
-		u_free_partial_grid_bonus.c			\
+		u_free_partial_grid.c			\
 		u_rendering.c						\
 		u_map_checking.c					\
 		u_init.c							\
