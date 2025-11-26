@@ -235,7 +235,7 @@ mlx-verbose:
 COMPILED_FLAG := 0
 
 $(OBJ_DIR)/%.o: %.c Makefile $(LIBS) | $(OBJ_DIR)
-	@printf "$(GRAY)compiling: $(BLUE)$<$(RESET)\n"
+	@printf "$(GRAY)↻ Compiling: $(BLUE)$<$(RESET)\n"
 	@$(CC) $(CFLAGS) -c $< -o $@
 	@$(eval COMPILED_FLAG := 1)
 
@@ -243,8 +243,6 @@ $(BIN): $(OBJS)
 	@$(CC) $(CFLAGS) $(OBJS) $(LIBS) -o $@ $(MLXFLAGS)
 	@if [ "$(COMPILED_FLAG)" = "1" ]; then \
 		printf "$(GREEN)✓ Compilation has been done: $(BIN)$(RESET)\n"; \
-	else \
-		printf "$(YELLOW)✓ Nothing to compile, $(BIN) is up to date$(RESET)\n"; \
 	fi
 	@$(eval COMPILED_FLAG := 0)
 
