@@ -232,17 +232,25 @@ mlx:
 mlx-verbose:
 	$(MAKE) -C lib/mlx
 
+COMPILED_FLAG := 0
+
 $(OBJ_DIR)/%.o: %.c Makefile $(LIBS) | $(OBJ_DIR)
-	printf "$(GRAY)compiling: $(BLUE)$<$(RESET)\n"
-	$(CC) $(CFLAGS) -c $< -o $@
+	@printf "$(GRAY)↻ Compiling: $(BLUE)$<$(RESET)\n"
+	@$(CC) $(CFLAGS) -c $< -o $@
+	@$(eval COMPILED_FLAG := 1)
 
 $(BIN): $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) $(LIBS) -o $@ $(MLXFLAGS)
+	@$(CC) $(CFLAGS) $(OBJS) $(LIBS) -o $@ $(MLXFLAGS)
+	@if [ "$(COMPILED_FLAG)" = "1" ]; then \
+		printf "$(GREEN)✓ Compilation has been done: $(BIN)$(RESET)\n"; \
+	fi
+	@$(eval COMPILED_FLAG := 0)
 
 clean:
 	rm -rf obj-*
 	$(MAKE) -C lib/libft clean
 	$(MAKE) -C lib/mlx clean > /dev/null 2>&1
+	printf "$(GREEN)✓ Objects cleaning done$(RESET)\n"
 
 fclean: clean
 	rm -f $(NAME_BONUS)
@@ -250,6 +258,7 @@ fclean: clean
 	$(MAKE) -C lib/libft fclean
 	$(MAKE) -C lib/mlx clean > /dev/null 2>&1
 	rm -f lib/mlx/libmlx.a
+	printf "$(GREEN)✓ Binaries cleaning done$(RESET)\n"
 
 re: fclean all
 
