@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pr_parse_map.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 23:59:55 by ekeisler          #+#    #+#             */
-/*   Updated: 2025/11/19 13:24:40 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/11/26 17:50:43 by ekeisler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,10 @@ static int	fill_grid(char **all_lines, t_data *data, int map_start, int count)
 		{
 			data->grid.grid[map_idx] = ft_strdup(all_lines[i]);
 			if (!data->grid.grid[map_idx])
+			{
+				free_grid_partial(data, map_idx);
 				return (0);
+			}
 			map_idx++;
 		}
 		i++;
