@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 11:53:44 by lcalero           #+#    #+#             */
-/*   Updated: 2025/11/17 15:26:22 by ekeisler         ###   ########.fr       */
+/*   Updated: 2025/11/26 18:14:40 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,10 @@ int	main(int argc, char **argv)
 
 	if (argc != 2)
 	{
-		u_print_error("missing map path");
+		if (argc == 1)
+			u_print_error("Missing map path");
+		if (argc > 2)
+			u_print_error("Too much parameters");
 		return (1);
 	}
 	validate_window_size();

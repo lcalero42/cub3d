@@ -6,7 +6,7 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 18:18:20 by lcalero           #+#    #+#             */
-/*   Updated: 2025/11/19 13:44:11 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/11/26 17:15:44 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,12 +81,6 @@ static char	*read_entire_file(int fd)
 
 static int	process_file_content(char *buf, t_data *data)
 {
-	if (!check_map_content(buf))
-	{
-		u_print_error("Hole in map");
-		free(buf);
-		return (1);
-	}
 	data->all_lines = ft_split(buf, '\n');
 	if (!data->all_lines)
 	{
@@ -101,6 +95,12 @@ static int	process_file_content(char *buf, t_data *data)
 	}
 	if (0 == validate_config(data))
 	{
+		free(buf);
+		return (1);
+	}
+	if (!check_map_content(buf))
+	{
+		u_print_error("Hole in map");
 		free(buf);
 		return (1);
 	}

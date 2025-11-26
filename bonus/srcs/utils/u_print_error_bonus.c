@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   u_print_error_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 18:21:19 by lcalero           #+#    #+#             */
-/*   Updated: 2025/10/30 16:35:06 by ekeisler         ###   ########.fr       */
+/*   Updated: 2025/11/26 18:18:53 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,11 @@
 
 void	u_print_error(char *msg)
 {
+	static int	called = 0;
+
+	if (called)
+		return ;
+	called = 1;
 	ft_putstr_fd("\033[1;31mError\n", 2);
 	ft_putstr_fd(msg, 2);
 	ft_putstr_fd("\n\033[0m", 2);
