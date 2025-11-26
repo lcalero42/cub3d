@@ -1,14 +1,11 @@
-NO bonus/textures/cavewall.xpm
-SO bonus/textures/376.xpm
-WE bonus/textures/enemy.xpm
-EA bonus/textures/gun-hand-2.xpm
+NO bonus/textures/LIGHT_1B.xpm
+SO bonus/textures/LIGHT_1B.xpm
+WE bonus/textures/LIGHT_1B.xpm
+EA bonus/textures/LIGHT_1B.xpm
 EN bonus/textures/enemy_jaurel.xpm
 
 F 138,138,138
 C 0,0,0
-
-
-
 
 
 
