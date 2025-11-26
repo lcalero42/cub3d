@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pr_parse_file.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 23:32:10 by ekeisler          #+#    #+#             */
-/*   Updated: 2025/11/18 18:02:04 by ekeisler         ###   ########.fr       */
+/*   Updated: 2025/11/26 18:04:19 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,14 @@ int	parse_file(char *filename, t_data *data)
 	close(fd);
 	if (!buf)
 		return (1);
+	if (process_file_content(buf, data))
+		return (1);
 	if (!check_map_content(buf))
 	{
 		u_print_error("Hole in map");
 		free(buf);
 		return (1);
 	}
-	if (process_file_content(buf, data))
-		return (1);
 	free(buf);
 	if (check_map(data))
 		return (1);

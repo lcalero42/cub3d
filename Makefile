@@ -20,6 +20,7 @@ RENDER_DISTANCE = 1000	   # the maximum distance where the walls will be rendere
 # ------------------------------------- - ------------------------------------ #
 
 NAME = cub3D
+NAME_BONUS = cub3D_bonus
 MODE ?= release
 CONFIG = -D WINDOW_WIDTH=$(WINDOW_WIDTH) -D WINDOW_HEIGHT=$(WINDOW_HEIGHT) -D MOVE_SPEED=$(MOVE_SPEED) -D ROT_SPEED=$(ROT_SPEED) -D RENDER_DISTANCE=$(RENDER_DISTANCE) \
 		 -D CROSSHAIR_SIZE=$(CROSSHAIR_SIZE) -D CROSSHAIR_THICKNESS=$(CROSSHAIR_THICKNESS) -D CROSSHAIR_COLOR=$(CROSSHAIR_COLOR) -D SENSITIVITY=$(SENSITIVITY) \
@@ -50,52 +51,53 @@ ifeq ($(MODE), debug)
 	CFLAGS = -Wall -Wextra -MD -MP $(INCLUDES) $(DEBUG_CONFIG) $(OPTI)
 endif
 
-VPATH = $(SRC_DIR)/srcs:$(SRC_DIR)/srcs/raycasting \
-        $(SRC_DIR)/srcs:$(SRC_DIR)/srcs/player     \
-        $(SRC_DIR)/srcs:$(SRC_DIR)/srcs/parsing    \
-        $(SRC_DIR)/srcs:$(SRC_DIR)/srcs/checker    \
-        $(SRC_DIR)/srcs:$(SRC_DIR)/srcs/utils      \
-        $(SRC_DIR)/srcs:$(SRC_DIR)/srcs/rendering  \
-        $(SRC_DIR)/srcs:$(SRC_DIR)/srcs/mouse_move \
-		$(SRC_DIR)/srcs:$(SRC_DIR)/srcs/sprite	   \
-		$(SRC_DIR)/srcs:$(SRC_DIR)/srcs/UI		   \
+VPATH = $(SRC_DIR)/srcs:$(SRC_DIR)/srcs/raycasting 	\
+		$(SRC_DIR)/srcs:$(SRC_DIR)/srcs/player     	\
+		$(SRC_DIR)/srcs:$(SRC_DIR)/srcs/parsing    	\
+		$(SRC_DIR)/srcs:$(SRC_DIR)/srcs/checker    	\
+		$(SRC_DIR)/srcs:$(SRC_DIR)/srcs/utils      	\
+		$(SRC_DIR)/srcs:$(SRC_DIR)/srcs/rendering  	\
+		$(SRC_DIR)/srcs:$(SRC_DIR)/srcs/mouse_move 	\
+		$(SRC_DIR)/srcs:$(SRC_DIR)/srcs/sprite	   	\
+		$(SRC_DIR)/srcs:$(SRC_DIR)/srcs/UI		   	\
 
 # Mandatory source files
-SRCS_MANDATORY = main.c				\
-		pr_parse_config_lines.c		\
-		pr_parse_file.c				\
-		pr_parse_map.c				\
-		pr_parse_texture.c			\
-		pr_parse_color.c			\
-		pr_check_file_extension.c	\
-		pr_validate_config.c		\
-		pr_find_player_pos.c		\
-		c_check_map.c				\
-		c_check_sourrounded_bw.c	\
-		c_check_settings.c			\
-		re_wall_render.c			\
-		re_wall_texture.c			\
-		re_render_fog.c				\
-		r_wall_side.c				\
-		r_raycast_dda.c				\
-		r_raycast_init.c			\
-		p_determine_movement.c		\
-		p_delta_time.c				\
-		u_calculate_map_width.c		\
-		u_is_config_line.c			\
-		u_is_empty_line.c			\
-		u_skip_whitespace.c			\
-		u_ft_free.c					\
-		u_close_window.c			\
-		u_rgb_to_hex.c				\
-		u_print_error.c				\
-		u_fog_rendering.c			\
-		u_rendering.c				\
-		u_map_checking.c			\
-		u_init.c					\
-		u_ft_atoi_n_check.c			\
-		c_validate_resolution.c		\
-		c_check_map_content.c		\
+SRCS_MANDATORY = main.c						\
+		pr_parse_config_lines.c				\
+		pr_parse_file.c						\
+		pr_parse_map.c						\
+		pr_parse_texture.c					\
+		pr_parse_color.c					\
+		pr_check_file_extension.c			\
+		pr_validate_config.c				\
+		pr_find_player_pos.c				\
+		c_check_map.c						\
+		c_check_sourrounded_bw.c			\
+		c_check_settings.c					\
+		re_wall_render.c					\
+		re_wall_texture.c					\
+		re_render_fog.c						\
+		r_wall_side.c						\
+		r_raycast_dda.c						\
+		r_raycast_init.c					\
+		p_determine_movement.c				\
+		p_delta_time.c						\
+		u_calculate_map_width.c				\
+		u_is_config_line.c					\
+		u_is_empty_line.c					\
+		u_skip_whitespace.c					\
+		u_ft_free.c							\
+		u_close_window.c					\
+		u_rgb_to_hex.c						\
+		u_print_error.c						\
+		u_fog_rendering.c					\
+		u_free_partial_grid.c			\
+		u_rendering.c						\
+		u_map_checking.c					\
+		u_init.c							\
+		u_ft_atoi_n_check.c					\
+		c_validate_resolution.c				\
+		c_check_map_content.c				\
 
 # Bonus source files (with _bonus suffix)
 SRCS_BONUS = main_bonus.c							\
@@ -159,6 +161,7 @@ SRCS_BONUS = main_bonus.c							\
 		u_check_wall_occlusion_bonus.c				\
 		u_get_wall_texture_pixel_bonus.c			\
 		u_door_utils_bonus.c						\
+		u_free_partial_grid_bonus.c					\
 		m_init_mouse_move_bonus.c					\
 		m_mouse_move_bonus.c						\
 		m_mouse_rotation_bonus.c					\
@@ -166,13 +169,13 @@ SRCS_BONUS = main_bonus.c							\
 		s_sprite_render_bonus.c		    			\
 		s_init_hpad_bonus.c							\
 		s_hpad_sprite_calc_bonus.c					\
-		s_hpad_bonus.c              				\
-		s_hpad_system_bonus.c       				\
-		s_hpad_collect_bonus.c      				\
-		s_hpad_transform_bonus.c    				\
-		s_hpad_bounds_bonus.c       				\
-		s_hpad_render_bonus.c       				\
-		s_enemy_movement_bonus.c	    			\
+		s_hpad_bonus.c								\
+		s_hpad_system_bonus.c						\
+		s_hpad_collect_bonus.c						\
+		s_hpad_transform_bonus.c					\
+		s_hpad_bounds_bonus.c						\
+		s_hpad_render_bonus.c						\
+		s_enemy_movement_bonus.c					\
 		s_render_gun_bonus.c						\
 		s_enemy_find_path_bonus.c					\
 		s_render_enemy_health_bonus.c				\
@@ -189,7 +192,12 @@ endif
 
 OBJS = $(addprefix $(OBJ_DIR)/, $(SRCS:.c=.o))
 DEPS = $(OBJS:.o=.d)
-BIN = $(NAME)
+
+ifeq ($(MODE), bonus)
+	BIN = $(NAME_BONUS)
+else
+	BIN = $(NAME)
+endif
 
 RESET			= \033[0m
 GRAY			= \033[90m
@@ -202,6 +210,9 @@ all:
 	$(MAKE) libft
 	$(MAKE) mlx
 	$(MAKE) $(BIN)
+	@if [ -f $(BIN) ]; then \
+		printf "$(GREEN)✓ Build complete: $(BIN)$(RESET)\n"; \
+	fi
 	printf "$(RESET)"
 
 $(OBJ_DIR):
@@ -223,23 +234,33 @@ mlx:
 mlx-verbose:
 	$(MAKE) -C lib/mlx
 
-$(BIN): $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) $(LIBS) -o $@ $(MLXFLAGS)
+COMPILED_FLAG := 0
 
 $(OBJ_DIR)/%.o: %.c Makefile $(LIBS) | $(OBJ_DIR)
-	$(CC) $(CFLAGS) -c $< -o $@
-	printf "$(GRAY)compiling: $(BLUE)%-40s $(GRAY)[%d/%d]\n" "$<" "$$(find $(OBJ_DIR) -name '*.o' | wc -l)" "$(words $(SRCS))"
+	@printf "$(GRAY)↻ Compiling: $(BLUE)$<$(RESET)\n"
+	@$(CC) $(CFLAGS) -c $< -o $@
+	@$(eval COMPILED_FLAG := 1)
+
+$(BIN): $(OBJS)
+	@$(CC) $(CFLAGS) $(OBJS) $(LIBS) -o $@ $(MLXFLAGS)
+	@if [ "$(COMPILED_FLAG)" = "1" ]; then \
+		printf "$(GREEN)✓ Compilation has been done: $(BIN)$(RESET)\n"; \
+	fi
+	@$(eval COMPILED_FLAG := 0)
 
 clean:
 	rm -rf obj-*
 	$(MAKE) -C lib/libft clean
 	$(MAKE) -C lib/mlx clean > /dev/null 2>&1
+	printf "$(GREEN)✓ Objects cleaning done$(RESET)\n"
 
 fclean: clean
+	rm -f $(NAME_BONUS)
 	rm -f $(NAME)
 	$(MAKE) -C lib/libft fclean
 	$(MAKE) -C lib/mlx clean > /dev/null 2>&1
 	rm -f lib/mlx/libmlx.a
+	printf "$(GREEN)✓ Binaries cleaning done$(RESET)\n"
 
 re: fclean all
 

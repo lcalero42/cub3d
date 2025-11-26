@@ -6,7 +6,7 @@
 /*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 14:01:03 by lcalero           #+#    #+#             */
-/*   Updated: 2025/11/25 15:11:56 by ekeisler         ###   ########.fr       */
+/*   Updated: 2025/11/26 16:56:07 by ekeisler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,5 +83,6 @@ int					is_valid_map_char(char c);
 void				load_texture(t_data *data, char *path, t_render *texture);
 void				init(t_data *data, char **argv);
 int					ft_atoi_n_check(const char *nptr);
+void				free_grid_partial(t_data *data, int count);
 
 #endif

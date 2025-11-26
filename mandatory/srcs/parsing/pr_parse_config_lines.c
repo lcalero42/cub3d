@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pr_parse_config_lines.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 23:58:38 by ekeisler          #+#    #+#             */
-/*   Updated: 2025/11/12 17:57:17 by ekeisler         ###   ########.fr       */
+/*   Updated: 2025/11/26 17:57:33 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,10 @@ int	parse_config_section(char **all_lines, t_data *data)
 		if (u_is_config_line(all_lines[i]))
 		{
 			if (!parse_config_line(all_lines[i], data))
+			{
+				u_print_error("Wrong config line");
 				return (0);
+			}
 			data->config_lines++;
 		}
 		else

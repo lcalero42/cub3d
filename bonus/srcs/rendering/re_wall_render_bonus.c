@@ -6,7 +6,7 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 18:19:52 by lcalero           #+#    #+#             */
-/*   Updated: 2025/10/16 14:58:04 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/11/26 16:54:56 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,8 @@ int	calculate_texture_x_for_hit(t_data *data, int ray_index, int hit_index)
 			+ perp_dist * data->rays[ray_index].ray_dir.x;
 	wall_x -= (int)wall_x;
 	tex_x = (int)(wall_x * 64);
-	if ((side == 0 && data->rays[ray_index].ray_dir.x > 0)
-		|| (side == 1 && data->rays[ray_index].ray_dir.y < 0))
+	if ((side == 0 && data->rays[ray_index].ray_dir.x < 0)
+		|| (side == 1 && data->rays[ray_index].ray_dir.y > 0))
 		tex_x = 64 - tex_x - 1;
 	return (tex_x);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pr_validate_config.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/19 10:58:01 by ekeisler          #+#    #+#             */
-/*   Updated: 2025/10/30 16:32:46 by ekeisler         ###   ########.fr       */
+/*   Updated: 2025/11/26 18:05:08 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,7 @@ int	validate_config(t_data *data)
 	required_elements = 6;
 	if (data->config_lines < required_elements)
 	{
-		printf("\033[1;31mError\nExpected %d config elements, got %d\n\033[0m",
-			required_elements, data->config_lines);
+		u_print_error("Expected 6 config elements");
 		return (0);
 	}
 	if (!data->north_wall.texture_path || !data->south_wall.texture_path

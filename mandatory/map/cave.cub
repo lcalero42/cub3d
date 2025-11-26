@@ -1,7 +1,7 @@
-NO mandatory/textures/cavewall.xpm
-SO mandatory/textures/cavewall.xpm
-WE mandatory/textures/cavewall.xpm
-EA mandatory/textures/cavewall.xpm
+NO mandatory/textures/BRICK_1A.xpm
+SO mandatory/textures/BRICK_2B.xpm
+WE mandatory/textures/BRICK_3B.xpm
+EA mandatory/textures/BRICK_3D.xpm
 
 F 138,138,138
 C 0,0,0
