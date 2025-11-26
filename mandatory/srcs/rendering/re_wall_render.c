@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   r_wall_render.c                                    :+:      :+:    :+:   */
+/*   re_wall_render.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 17:13:46 by lcalero           #+#    #+#             */
-/*   Updated: 2025/07/29 15:18:44 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/11/26 16:54:48 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static double	calculate_perp_wall_dist(t_data *data, int x);
 static void		calculate_wall_bounds(double perp_wall_dist, int *draw_start,
 					int *draw_end);
-static int		calculate_texture_x(t_data *data, int x, double perp_wall_dist);
+static int		calculate_texture_x(t_data *data, int ray_index);
 static void		draw_wall_column(t_data *data, int x,
 					int draw_start, int draw_end);
 
@@ -62,22 +62,25 @@ static void	calculate_wall_bounds(double perp_wall_dist, int *draw_start,
 		*draw_end = WINDOW_HEIGHT - 1;
 }
 
-static int	calculate_texture_x(t_data *data, int x, double perp_wall_dist)
+static int	calculate_texture_x(t_data *data, int ray_index)
 {
 	double	wall_x;
 	int		tex_x;
+	double	perp_dist;
+	int		side;
 
-	if (data->rays[x].side == 0)
-		wall_x = data->player.position.y + perp_wall_dist
-			* data->rays[x].ray_dir.y;
+	perp_dist = data->rays[ray_index].perp_wall_dist;
+	side = data->rays[ray_index].side;
+	if (side == 0)
+		wall_x = data->player.position.y
+			+ perp_dist * data->rays[ray_index].ray_dir.y;
 	else
-		wall_x = data->player.position.x + perp_wall_dist
-			* data->rays[x].ray_dir.x;
-	wall_x -= floor(wall_x);
+		wall_x = data->player.position.x
+			+ perp_dist * data->rays[ray_index].ray_dir.x;
+	wall_x -= (int)wall_x;
 	tex_x = (int)(wall_x * 64);
-	if (data->rays[x].side == 0 && data->rays[x].ray_dir.x > 0)
-		tex_x = 64 - tex_x - 1;
-	if (data->rays[x].side == 1 && data->rays[x].ray_dir.y < 0)
+	if ((side == 0 && data->rays[ray_index].ray_dir.x < 0)
+		|| (side == 1 && data->rays[ray_index].ray_dir.y > 0))
 		tex_x = 64 - tex_x - 1;
 	return (tex_x);
 }
@@ -91,7 +94,7 @@ static void	draw_wall_column(t_data *data, int x, int draw_start, int draw_end)
 	int		y;
 
 	perp_wall_dist = calculate_perp_wall_dist(data, x);
-	tex_x = calculate_texture_x(data, x, perp_wall_dist);
+	tex_x = calculate_texture_x(data, x);
 	step = 1.0 * 64 / (WINDOW_HEIGHT / perp_wall_dist);
 	tex_pos = (draw_start - WINDOW_HEIGHT / 2
 			+ (WINDOW_HEIGHT / perp_wall_dist) / 2) * step;
