@@ -20,6 +20,7 @@ RENDER_DISTANCE = 1000	   # the maximum distance where the walls will be rendere
 # ------------------------------------- - ------------------------------------ #
 
 NAME = cub3D
+NAME_BONUS = cub3D_bonus
 MODE ?= release
 CONFIG = -D WINDOW_WIDTH=$(WINDOW_WIDTH) -D WINDOW_HEIGHT=$(WINDOW_HEIGHT) -D MOVE_SPEED=$(MOVE_SPEED) -D ROT_SPEED=$(ROT_SPEED) -D RENDER_DISTANCE=$(RENDER_DISTANCE) \
 		 -D CROSSHAIR_SIZE=$(CROSSHAIR_SIZE) -D CROSSHAIR_THICKNESS=$(CROSSHAIR_THICKNESS) -D CROSSHAIR_COLOR=$(CROSSHAIR_COLOR) -D SENSITIVITY=$(SENSITIVITY) \
@@ -51,12 +52,12 @@ ifeq ($(MODE), debug)
 endif
 
 VPATH = $(SRC_DIR)/srcs:$(SRC_DIR)/srcs/raycasting \
-        $(SRC_DIR)/srcs:$(SRC_DIR)/srcs/player     \
-        $(SRC_DIR)/srcs:$(SRC_DIR)/srcs/parsing    \
-        $(SRC_DIR)/srcs:$(SRC_DIR)/srcs/checker    \
-        $(SRC_DIR)/srcs:$(SRC_DIR)/srcs/utils      \
-        $(SRC_DIR)/srcs:$(SRC_DIR)/srcs/rendering  \
-        $(SRC_DIR)/srcs:$(SRC_DIR)/srcs/mouse_move \
+		$(SRC_DIR)/srcs:$(SRC_DIR)/srcs/player     \
+		$(SRC_DIR)/srcs:$(SRC_DIR)/srcs/parsing    \
+		$(SRC_DIR)/srcs:$(SRC_DIR)/srcs/checker    \
+		$(SRC_DIR)/srcs:$(SRC_DIR)/srcs/utils      \
+		$(SRC_DIR)/srcs:$(SRC_DIR)/srcs/rendering  \
+		$(SRC_DIR)/srcs:$(SRC_DIR)/srcs/mouse_move \
 		$(SRC_DIR)/srcs:$(SRC_DIR)/srcs/sprite	   \
 		$(SRC_DIR)/srcs:$(SRC_DIR)/srcs/UI		   \
 
@@ -166,13 +167,13 @@ SRCS_BONUS = main_bonus.c							\
 		s_sprite_render_bonus.c		    			\
 		s_init_hpad_bonus.c							\
 		s_hpad_sprite_calc_bonus.c					\
-		s_hpad_bonus.c              				\
-		s_hpad_system_bonus.c       				\
-		s_hpad_collect_bonus.c      				\
-		s_hpad_transform_bonus.c    				\
-		s_hpad_bounds_bonus.c       				\
-		s_hpad_render_bonus.c       				\
-		s_enemy_movement_bonus.c	    			\
+		s_hpad_bonus.c								\
+		s_hpad_system_bonus.c						\
+		s_hpad_collect_bonus.c						\
+		s_hpad_transform_bonus.c					\
+		s_hpad_bounds_bonus.c						\
+		s_hpad_render_bonus.c						\
+		s_enemy_movement_bonus.c					\
 		s_render_gun_bonus.c						\
 		s_enemy_find_path_bonus.c					\
 		s_render_enemy_health_bonus.c				\
@@ -189,7 +190,12 @@ endif
 
 OBJS = $(addprefix $(OBJ_DIR)/, $(SRCS:.c=.o))
 DEPS = $(OBJS:.o=.d)
-BIN = $(NAME)
+
+ifeq ($(MODE), bonus)
+	BIN = $(NAME_BONUS)
+else
+	BIN = $(NAME)
+endif
 
 RESET			= \033[0m
 GRAY			= \033[90m
@@ -202,6 +208,9 @@ all:
 	$(MAKE) libft
 	$(MAKE) mlx
 	$(MAKE) $(BIN)
+	@if [ -f $(BIN) ]; then \
+		printf "$(GREEN)✓ Build complete: $(BIN)$(RESET)\n"; \
+	fi
 	printf "$(RESET)"
 
 $(OBJ_DIR):
@@ -223,12 +232,12 @@ mlx:
 mlx-verbose:
 	$(MAKE) -C lib/mlx
 
+$(OBJ_DIR)/%.o: %.c Makefile $(LIBS) | $(OBJ_DIR)
+	printf "$(GRAY)compiling: $(BLUE)$<$(RESET)\n"
+	$(CC) $(CFLAGS) -c $< -o $@
+
 $(BIN): $(OBJS)
 	$(CC) $(CFLAGS) $(OBJS) $(LIBS) -o $@ $(MLXFLAGS)
-
-$(OBJ_DIR)/%.o: %.c Makefile $(LIBS) | $(OBJ_DIR)
-	$(CC) $(CFLAGS) -c $< -o $@
-	printf "$(GRAY)compiling: $(BLUE)%-40s $(GRAY)[%d/%d]\n" "$<" "$$(find $(OBJ_DIR) -name '*.o' | wc -l)" "$(words $(SRCS))"
 
 clean:
 	rm -rf obj-*
@@ -236,6 +245,7 @@ clean:
 	$(MAKE) -C lib/mlx clean > /dev/null 2>&1
 
 fclean: clean
+	rm -f $(NAME_BONUS)
 	rm -f $(NAME)
 	$(MAKE) -C lib/libft fclean
 	$(MAKE) -C lib/mlx clean > /dev/null 2>&1
