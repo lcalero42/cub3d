@@ -51,52 +51,53 @@ ifeq ($(MODE), debug)
 	CFLAGS = -Wall -Wextra -MD -MP $(INCLUDES) $(DEBUG_CONFIG) $(OPTI)
 endif
 
-VPATH = $(SRC_DIR)/srcs:$(SRC_DIR)/srcs/raycasting \
-		$(SRC_DIR)/srcs:$(SRC_DIR)/srcs/player     \
-		$(SRC_DIR)/srcs:$(SRC_DIR)/srcs/parsing    \
-		$(SRC_DIR)/srcs:$(SRC_DIR)/srcs/checker    \
-		$(SRC_DIR)/srcs:$(SRC_DIR)/srcs/utils      \
-		$(SRC_DIR)/srcs:$(SRC_DIR)/srcs/rendering  \
-		$(SRC_DIR)/srcs:$(SRC_DIR)/srcs/mouse_move \
-		$(SRC_DIR)/srcs:$(SRC_DIR)/srcs/sprite	   \
-		$(SRC_DIR)/srcs:$(SRC_DIR)/srcs/UI		   \
+VPATH = $(SRC_DIR)/srcs:$(SRC_DIR)/srcs/raycasting 	\
+		$(SRC_DIR)/srcs:$(SRC_DIR)/srcs/player     	\
+		$(SRC_DIR)/srcs:$(SRC_DIR)/srcs/parsing    	\
+		$(SRC_DIR)/srcs:$(SRC_DIR)/srcs/checker    	\
+		$(SRC_DIR)/srcs:$(SRC_DIR)/srcs/utils      	\
+		$(SRC_DIR)/srcs:$(SRC_DIR)/srcs/rendering  	\
+		$(SRC_DIR)/srcs:$(SRC_DIR)/srcs/mouse_move 	\
+		$(SRC_DIR)/srcs:$(SRC_DIR)/srcs/sprite	   	\
+		$(SRC_DIR)/srcs:$(SRC_DIR)/srcs/UI		   	\
 
 # Mandatory source files
-SRCS_MANDATORY = main.c				\
-		pr_parse_config_lines.c		\
-		pr_parse_file.c				\
-		pr_parse_map.c				\
-		pr_parse_texture.c			\
-		pr_parse_color.c			\
-		pr_check_file_extension.c	\
-		pr_validate_config.c		\
-		pr_find_player_pos.c		\
-		c_check_map.c				\
-		c_check_sourrounded_bw.c	\
-		c_check_settings.c			\
-		re_wall_render.c			\
-		re_wall_texture.c			\
-		re_render_fog.c				\
-		r_wall_side.c				\
-		r_raycast_dda.c				\
-		r_raycast_init.c			\
-		p_determine_movement.c		\
-		p_delta_time.c				\
-		u_calculate_map_width.c		\
-		u_is_config_line.c			\
-		u_is_empty_line.c			\
-		u_skip_whitespace.c			\
-		u_ft_free.c					\
-		u_close_window.c			\
-		u_rgb_to_hex.c				\
-		u_print_error.c				\
-		u_fog_rendering.c			\
-		u_rendering.c				\
-		u_map_checking.c			\
-		u_init.c					\
-		u_ft_atoi_n_check.c			\
-		c_validate_resolution.c		\
-		c_check_map_content.c		\
+SRCS_MANDATORY = main.c						\
+		pr_parse_config_lines.c				\
+		pr_parse_file.c						\
+		pr_parse_map.c						\
+		pr_parse_texture.c					\
+		pr_parse_color.c					\
+		pr_check_file_extension.c			\
+		pr_validate_config.c				\
+		pr_find_player_pos.c				\
+		c_check_map.c						\
+		c_check_sourrounded_bw.c			\
+		c_check_settings.c					\
+		re_wall_render.c					\
+		re_wall_texture.c					\
+		re_render_fog.c						\
+		r_wall_side.c						\
+		r_raycast_dda.c						\
+		r_raycast_init.c					\
+		p_determine_movement.c				\
+		p_delta_time.c						\
+		u_calculate_map_width.c				\
+		u_is_config_line.c					\
+		u_is_empty_line.c					\
+		u_skip_whitespace.c					\
+		u_ft_free.c							\
+		u_close_window.c					\
+		u_rgb_to_hex.c						\
+		u_print_error.c						\
+		u_fog_rendering.c					\
+		u_free_partial_grid_bonus.c			\
+		u_rendering.c						\
+		u_map_checking.c					\
+		u_init.c							\
+		u_ft_atoi_n_check.c					\
+		c_validate_resolution.c				\
+		c_check_map_content.c				\
 
 # Bonus source files (with _bonus suffix)
 SRCS_BONUS = main_bonus.c							\
@@ -160,6 +161,7 @@ SRCS_BONUS = main_bonus.c							\
 		u_check_wall_occlusion_bonus.c				\
 		u_get_wall_texture_pixel_bonus.c			\
 		u_door_utils_bonus.c						\
+		u_free_partial_grid_bonus.c					\
 		m_init_mouse_move_bonus.c					\
 		m_mouse_move_bonus.c						\
 		m_mouse_rotation_bonus.c					\

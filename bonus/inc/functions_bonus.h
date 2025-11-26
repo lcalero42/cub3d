@@ -6,7 +6,7 @@
 /*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 13:18:22 by lcalero           #+#    #+#             */
-/*   Updated: 2025/11/25 15:06:52 by ekeisler         ###   ########.fr       */
+/*   Updated: 2025/11/26 16:53:38 by ekeisler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -220,6 +220,7 @@ void			add_health_pad_sprite(t_data *data, t_generic_sprite *sprites,
 int				is_valid_spawn(t_data *data, int x, int y);
 int				ft_atoi_n_check(const char *nptr);
 void			free_paths(t_data *data);
+void			free_grid_partial(t_data *data, int count);
 
 /* COLOR & FOG */
 void			extract_base_colors(int base_color, int *r, int *g, int *b);
