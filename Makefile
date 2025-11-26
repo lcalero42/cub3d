@@ -243,6 +243,7 @@ clean:
 	rm -rf obj-*
 	$(MAKE) -C lib/libft clean
 	$(MAKE) -C lib/mlx clean > /dev/null 2>&1
+	printf "$(GREEN)✓ Objects cleaning done$(RESET)\n"
 
 fclean: clean
 	rm -f $(NAME_BONUS)
@@ -250,6 +251,7 @@ fclean: clean
 	$(MAKE) -C lib/libft fclean
 	$(MAKE) -C lib/mlx clean > /dev/null 2>&1
 	rm -f lib/mlx/libmlx.a
+	printf "$(GREEN)✓ Binaries cleaning done$(RESET)\n"
 
 re: fclean all
 
