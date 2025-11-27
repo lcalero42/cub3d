@@ -28,6 +28,10 @@
 	- [Rendering](#rendering-using-mlx-)
 	- [Conclusion](#conclusion-)
 - [Fun things we learned](#fun-things-we-have-learned-smile)
+- [Bonus features](#bonus-feature-details)
+	- [A* pathfinding algorithm](#a-pathfinding-algorithm)
+	- [Rotating up and down](#rotating-up-and-down)
+	- [Health pads](#health-pads)
 - [Contributors](#contributors-wave)
 - [Useful ressources](#useful-ressources-paperclip)
 
@@ -312,7 +316,8 @@ int	main(int argc, char **argv)
 ```
 
 Then, we can **launch our loop** ! <br/>
-> [!IMPORTANT] Well, for our case, we implemented a *menu*, meaning that we need to reset the **game state** each time the player press the *play* button (recalculate *enemy position*, close open doors, reset *player position/health*...)
+> [!IMPORTANT]
+Well, for our case, we implemented a *menu*, meaning that we need to reset the **game state** each time the player press the *play* button (recalculate *enemy position*, close open doors, reset *player position/health*...)
 
 ```C
 void	reset_game(t_data *data)
@@ -529,6 +534,76 @@ Here is all the basics you will need to implement your own **raycaster** engine 
 - ***`Github projects`*** usage to create drafts of features to implement or reporting *issues*
 - `A* algorithm` to find the ***shortest path*** between *player* and *enemy* so that the *enemy* always move towards the *player*
 
+## Bonus feature details
+
+### A* pathfinding algorithm
+
+When we implemented the **enemy**, we wanted of course that the enemy follow the *player all along the game* which was not so easy to do. <br/>In order to **accomplish** that, we implemented an algorithm called the ***A\* algorithm***. The goal of this algorithm is to find the ***shortest path*** to go to a certain place (which here is the ***player position***) the most *optimal way*.<br/>
+At each iteration of its main loop, A* needs to determine which of its paths to extend. It does so based on the cost of the path and an estimate of the cost required to extend the path all the way to the goal. Specifically, A* selects the path that minimizes :
+
+    f(n)=g(n)+h(n)
+
+> main pathfinding function :
+```C
+int	find_astar_path(t_data *data, t_pos start, t_pos goal, t_pos *out_path)
+{
+	t_astar_data		astar;
+	t_neighbor_context	ctx;
+	int					lowest;
+	t_astar_node		*curr;
+	int					visited[MAX_GRID_HEIGHT][MAX_GRID_WIDTH];
+
+	ft_memset(astar.nodes, 0, sizeof(astar.nodes));
+	ft_memset(visited, 0, sizeof(visited));
+	init_astar_data(data, &astar, start, goal);
+	ctx = (t_neighbor_context){data, &astar, goal, visited};
+	while (1)
+	{
+		lowest = find_lowest_f_cost(&astar);
+		if (lowest == -1)
+			break ;
+		curr = &astar.nodes[lowest];
+		curr->open = 0;
+		curr->closed = 1;
+		if (curr->pos.x == goal.x && curr->pos.y == goal.y)
+			return (reconstruct_path(curr, out_path, MAX_NODES));
+		process_neighbors_with_visited(&ctx, curr);
+	}
+	return (0);
+}
+```
+As you can see above, the only moment the enemy won't move is when he doesnt find a possible path to go to the enemy.
+
+### Rotating up and down
+
+In the project of cub3d, the subject requires only to **rotate** the camera on the x axis. Meaning we can only **rotate** *right* or *left*.
+<br/>We wanted to implement a *pitch* that would enable us to also look *up and down*. It may seem complicated, but it is way easier than we think. The trick is to implement a *pitch* variable that will **increment** or **decrement** whether the player is moving the camera up or down. <br/>
+But for now, we dont have anything that would change our ***rendering***. To change that, we calculate the *pitch offset* which is a value that is calculated like this **`pitch *(WINDOW_HEIGHT / 2)`** <br/>
+Now, it is very easy, we just need to add the ***pitch offset*** to the ***y coordinates*** where we want to draw a *pixel*.
+
+```C
+horizon_line = WINDOW_HEIGHT / 2 + (int)data->player.pitch_offset;
+```
+
+### Health pads
+
+In order to be able to resist to the enemy, the bonus maps can contain **health pads** that will **heal** the player whenever he steps above one. <br/>
+For the ***rendering*** of these pads, this is pretty much the same behaviour as an usual sprite. We render it at a certain position and we layer it with the other elements (walls, enemy, doors...).<br/>
+We ***animate*** it using an **animation loop**, which will just switch the *texture* using an *index* that increment through all the textures available using an array of texture.
+
+```C
+static void	update_hpad_indexes(t_data *data, double *acc_hpad_time,
+	double hpad_speed)
+{
+	if (!data->health_pad_anim.render_arr[data->health_pad_anim.index
+			+ 1].info.addr)
+		data->health_pad_anim.index = 0;
+	else
+		data->health_pad_anim.index++;
+	*acc_hpad_time -= 1.0 / hpad_speed;
+}
+```
+
 ## Contributors :wave:
 
 - [**lcalero**](https://github.com/lcalero42)
@@ -542,8 +617,3 @@ Here is all the basics you will need to implement your own **raycaster** engine 
 - https://www.geeksforgeeks.org/computer-graphics/dda-line-generation-algorithm-computer-graphics/
 - https://harm-smits.github.io/42docs/libs/minilibx/getting_started.html
 - https://www.geeksforgeeks.org/dsa/a-search-algorithm/
-
-## Bonus feature details
-
-**TO FILL**
-
