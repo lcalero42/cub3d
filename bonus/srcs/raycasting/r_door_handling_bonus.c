@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   r_door_handling_bonus.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/03 13:59:19 by lcalero           #+#    #+#             */
-/*   Updated: 2025/11/19 14:07:07 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/12/02 20:20:10 by ekeisler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ static void	init_door_grid(t_data *data)
 	while (y < data->grid.height)
 	{
 		data->door_grid[y] = malloc(sizeof(t_door) * data->grid.width);
-		ft_memset(data->door_grid[y], 0, sizeof(t_door *) * data->grid.width);
+		ft_memset(data->door_grid[y], 0, sizeof(t_door) * data->grid.width);
 		y++;
 	}
 	i = 0;
