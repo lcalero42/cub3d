@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   functions_bonus.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 13:18:22 by lcalero           #+#    #+#             */
-/*   Updated: 2025/11/26 16:53:38 by ekeisler         ###   ########.fr       */
+/*   Updated: 2025/12/02 21:34:55 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -192,7 +192,9 @@ void			u_calculate_map_width(t_data *data);
 void			u_ft_free(char **res);
 int				skip_whitespace(char *all_lines, int i);
 void			u_ft_free_doors(t_data *data);
-int				close_window(t_data *data);
+int				close_window(t_data *data, int exit_code);
+int				close_window_cross(t_data *data);
+void			destroy_images(t_data *data);
 void			u_print_error(char *msg);
 long long		get_current_time(void);
 void			calculate_fps(t_data *data);

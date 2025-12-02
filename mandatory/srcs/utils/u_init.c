@@ -6,7 +6,7 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/30 14:21:07 by lcalero           #+#    #+#             */
-/*   Updated: 2025/11/24 17:44:12 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/12/02 21:23:34 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 void	init(t_data *data, char **argv)
 {
 	if (!check_settings())
-		close_window(data);
+		close_window(data, 1);
 	if (parse_file(argv[1], data))
-		close_window(data);
+		close_window(data, 1);
 	data->render_fog = 1;
 	data->mlx = mlx_init();
 	init_walls(data);
@@ -35,7 +35,7 @@ void	load_texture(t_data *data, char *path, t_render *texture)
 	if (!texture->texture_img)
 	{
 		u_print_error("Cannot load wall texture");
-		close_window(data);
+		close_window(data, 1);
 	}
 	texture->info.addr = mlx_get_data_addr(texture->texture_img,
 			&texture->info.bpp,

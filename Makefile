@@ -91,11 +91,12 @@ SRCS_MANDATORY = main.c						\
 		u_rgb_to_hex.c						\
 		u_print_error.c						\
 		u_fog_rendering.c					\
-		u_free_partial_grid.c			\
+		u_free_partial_grid.c				\
 		u_rendering.c						\
 		u_map_checking.c					\
 		u_init.c							\
 		u_ft_atoi_n_check.c					\
+		u_close_window_cross.c				\
 		c_validate_resolution.c				\
 		c_check_map_content.c				\
 
@@ -143,6 +144,7 @@ SRCS_BONUS = main_bonus.c							\
 		u_is_empty_line_bonus.c						\
 		u_ft_free_bonus.c							\
 		u_close_window_bonus.c						\
+		u_close_window_cross_bonus.c				\
 		u_rgb_to_hex_bonus.c						\
 		u_print_error_bonus.c						\
 		u_fog_rendering_bonus.c						\

@@ -6,7 +6,7 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 11:53:44 by lcalero           #+#    #+#             */
-/*   Updated: 2025/11/26 18:14:40 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/12/02 21:32:33 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int	main(int argc, char **argv)
 	mlx_hook(data.window, 2, 1L << 0, key_press_hook, &data);
 	mlx_hook(data.window, 3, 1L << 1, key_release_hook, &data);
 	mlx_hook(data.window, 6, (1L << 6), mouse_move, &data);
-	mlx_hook(data.window, 17, 1L << 17, close_window, &data);
+	mlx_hook(data.window, 17, 1L << 17, close_window_cross, &data);
 	mlx_mouse_hook(data.window, mouse_hook, &data);
 	mlx_loop_hook(data.mlx, render_loop, &data);
 	mlx_loop(data.mlx);

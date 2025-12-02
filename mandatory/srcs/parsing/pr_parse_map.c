@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pr_parse_map.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 23:59:55 by ekeisler          #+#    #+#             */
-/*   Updated: 2025/11/26 17:50:43 by ekeisler         ###   ########.fr       */
+/*   Updated: 2025/12/02 21:22:23 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ static int	allocate_grid(t_data *data, int map_line_count)
 	}
 	data->grid.grid = malloc(sizeof(char *) * (map_line_count + 1));
 	if (!data->grid.grid)
-		close_window(data);
+		close_window(data, 1);
 	return (1);
 }
 

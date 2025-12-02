@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   p_hooks_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 14:02:02 by lcalero           #+#    #+#             */
-/*   Updated: 2025/11/17 15:24:53 by ekeisler         ###   ########.fr       */
+/*   Updated: 2025/12/02 21:12:43 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	key_release_hook(int keycode, t_data *data)
 int	key_press_hook(int keycode, t_data *data)
 {
 	if (keycode == XK_Escape)
-		close_window(data);
+		close_window(data, 0);
 	handle_move_keys(data, keycode);
 	if (keycode == XK_f && data->render_fog)
 		data->render_fog = 0;
@@ -55,7 +55,7 @@ int	mouse_hook(int keycode, int x, int y, t_data *data)
 			if (handle_menu_button_clicks(data, x, y) == 1)
 				reset_game(data);
 			else if (handle_menu_button_clicks(data, x, y) == 2)
-				close_window(data);
+				close_window(data, 0);
 		}
 		else
 		{

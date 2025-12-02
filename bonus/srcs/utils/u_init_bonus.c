@@ -6,7 +6,7 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 18:20:59 by lcalero           #+#    #+#             */
-/*   Updated: 2025/11/24 17:22:06 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/12/02 21:14:51 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@ static void		load_sprites(t_data *data);
 void	init(t_data *data, char **argv)
 {
 	if (!check_settings())
-		close_window(data);
+		close_window(data, 1);
 	srand(time(NULL));
 	if (parse_file(argv[1], data))
-		close_window(data);
+		close_window(data, 1);
 	check_enemy_can_spawn(data);
 	data->render_fog = 1;
 	data->mlx = mlx_init();
@@ -47,7 +47,7 @@ void	load_texture(t_data *data, char *path, t_render *texture)
 	if (!texture->texture_img)
 	{
 		u_print_error("Cannot load texture");
-		close_window(data);
+		close_window(data, 1);
 	}
 	texture->info.addr = mlx_get_data_addr(texture->texture_img,
 			&texture->info.bpp, &texture->info.line_len,

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   functions.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 14:01:03 by lcalero           #+#    #+#             */
-/*   Updated: 2025/11/26 16:56:07 by ekeisler         ###   ########.fr       */
+/*   Updated: 2025/12/02 21:38:55 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,10 @@ int					u_is_empty_line(char *line);
 int					u_is_config_line(char *line);
 void				u_calculate_map_width(t_data *data);
 void				u_ft_free(char **res);
-int					close_window(t_data *data);
+int					close_window(t_data *data, int exit_code);
+int					close_window_cross(t_data *data);
+void				destroy_images(t_data *data);
+void				free_paths(t_data *data);
 void				u_print_error(char *msg);
 int					u_is_empty_line(char *line);
 int					skip_whitespace(char *all_lines, int i);

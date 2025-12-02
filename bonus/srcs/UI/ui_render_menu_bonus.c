@@ -6,7 +6,7 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/23 12:40:43 by lcalero           #+#    #+#             */
-/*   Updated: 2025/10/18 14:06:52 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/12/02 21:17:27 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ int	handle_menu_button_clicks(t_data *data, int mouse_x, int mouse_y)
 		&& mouse_y >= leave_bounds.sprite_top
 		&& mouse_y <= leave_bounds.sprite_top + leave_bounds.sprite_height)
 	{
-		close_window(data);
+		close_window(data, 0);
 		return (2);
 	}
 	return (0);

@@ -6,17 +6,16 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 18:20:34 by lcalero           #+#    #+#             */
-/*   Updated: 2025/11/24 16:56:47 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/12/02 21:35:16 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d_bonus.h"
 
-static void	destroy_images(t_data *data);
 static void	destroy_anim_images(t_data *data);
 static void	destroy_ui_anim(t_data *data);
 
-int	close_window(t_data *data)
+int	close_window(t_data *data, int exit_code)
 {
 	if (data->mouse.enabled)
 		toggle_mouse_control(data);
@@ -36,7 +35,7 @@ int	close_window(t_data *data)
 	if (data->all_lines)
 		u_ft_free(data->all_lines);
 	free_paths(data);
-	exit(0);
+	exit(exit_code);
 	return (1);
 }
 
@@ -54,7 +53,7 @@ void	free_paths(t_data *data)
 		free(data->enemy_render.texture_path);
 }
 
-static void	destroy_images(t_data *data)
+void	destroy_images(t_data *data)
 {
 	destroy_anim_images(data);
 	destroy_ui_anim(data);

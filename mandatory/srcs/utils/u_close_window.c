@@ -3,19 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   u_close_window.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/22 15:12:24 by lcalero           #+#    #+#             */
-/*   Updated: 2025/07/30 19:06:42 by ekeisler         ###   ########.fr       */
+/*   Updated: 2025/12/02 21:43:56 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static void	destroy_images(t_data *data);
-static void	free_paths(t_data *data);
-
-int	close_window(t_data *data)
+int	close_window(t_data *data, int exit_code)
 {
 	destroy_images(data);
 	if (data->window)
@@ -29,23 +26,11 @@ int	close_window(t_data *data)
 	if (data->grid.grid)
 		u_ft_free(data->grid.grid);
 	free_paths(data);
-	exit(0);
+	exit(exit_code);
 	return (1);
 }
 
-static void	free_paths(t_data *data)
-{
-	if (data->north_wall.texture_path)
-		free(data->north_wall.texture_path);
-	if (data->south_wall.texture_path)
-		free(data->south_wall.texture_path);
-	if (data->east_wall.texture_path)
-		free(data->east_wall.texture_path);
-	if (data->west_wall.texture_path)
-		free(data->west_wall.texture_path);
-}
-
-static void	destroy_images(t_data *data)
+void	destroy_images(t_data *data)
 {
 	if (data->render_img)
 		mlx_destroy_image(data->mlx, data->render_img);
@@ -59,4 +44,16 @@ static void	destroy_images(t_data *data)
 		mlx_destroy_image(data->mlx, data->west_wall.texture_img);
 	if (data->crosshair.texture_img)
 		mlx_destroy_image(data->mlx, data->crosshair.texture_img);
+}
+
+void	free_paths(t_data *data)
+{
+	if (data->north_wall.texture_path)
+		free(data->north_wall.texture_path);
+	if (data->south_wall.texture_path)
+		free(data->south_wall.texture_path);
+	if (data->east_wall.texture_path)
+		free(data->east_wall.texture_path);
+	if (data->west_wall.texture_path)
+		free(data->west_wall.texture_path);
 }

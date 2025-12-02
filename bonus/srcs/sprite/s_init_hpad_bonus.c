@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   s_init_hpad_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/21 04:55:45 by ekeisler          #+#    #+#             */
-/*   Updated: 2025/10/21 04:58:02 by ekeisler         ###   ########.fr       */
+/*   Updated: 2025/12/02 21:15:20 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	init_health_pad_system(t_data *data)
 	while (y < data->grid.height)
 	{
 		if (!process_row(data, y))
-			close_window(data);
+			close_window(data, 1);
 		y++;
 	}
 }

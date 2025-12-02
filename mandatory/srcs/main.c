@@ -6,7 +6,7 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 11:53:44 by lcalero           #+#    #+#             */
-/*   Updated: 2025/11/26 18:15:16 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/12/02 21:39:09 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	key_press_hook(int keycode, t_data *data)
 		|| keycode == XK_w || keycode == XK_s)
 		data->player.is_moving = 1;
 	if (keycode == XK_Escape)
-		close_window(data);
+		close_window(data, 0);
 	if (keycode == XK_f && data->render_fog)
 		data->render_fog = 0;
 	else if (keycode == XK_f && !data->render_fog)
@@ -89,7 +89,7 @@ int	main(int argc, char **argv)
 	init(&data, argv);
 	mlx_hook(data.window, 2, 1L << 0, key_press_hook, &data);
 	mlx_hook(data.window, 3, 1L << 1, key_release_hook, &data);
-	mlx_hook(data.window, 17, 1L << 17, close_window, &data);
+	mlx_hook(data.window, 17, 1L << 17, close_window_cross, &data);
 	mlx_loop_hook(data.mlx, render_loop, &data);
 	mlx_loop(data.mlx);
 	mlx_destroy_display(data.mlx);

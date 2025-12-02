@@ -1,33 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   c_check_enemy_spawn_bonus.c                        :+:      :+:    :+:   */
+/*   u_close_window_cross.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/17 16:11:30 by ekeisler          #+#    #+#             */
-/*   Updated: 2025/12/02 21:11:16 by lcalero          ###   ########.fr       */
+/*   Created: 2025/12/02 21:31:20 by lcalero           #+#    #+#             */
+/*   Updated: 2025/12/02 21:40:48 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d_bonus.h"
+#include "cub3d.h"
 
-void	check_enemy_can_spawn(t_data *data)
+int	close_window_cross(t_data *data)
 {
-	int	i;
-	int	can_spawn_enemy;
-
-	i = 0;
-	can_spawn_enemy = 0;
-	while (data->grid.grid[i])
-	{
-		if (ft_strchr(data->grid.grid[i], '0'))
-			can_spawn_enemy = 1;
-		i++;
-	}
-	if (!can_spawn_enemy)
-	{
-		u_print_error("Cannot find a place to spawn enemy");
-		close_window(data, 1);
-	}
+	destroy_images(data);
+	if (data->window)
+		mlx_destroy_window(data->mlx, data->window);
+	if (data->game_started)
+		mlx_loop_end(data->mlx);
+	if (data->mlx)
+		mlx_destroy_display(data->mlx);
+	if (data->mlx)
+		free(data->mlx);
+	if (data->grid.grid)
+		u_ft_free(data->grid.grid);
+	free_paths(data);
+	exit(0);
+	return (1);
 }
