@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   r_render_fog.c                                     :+:      :+:    :+:   */
+/*   re_render_fog.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/28 14:09:27 by lcalero           #+#    #+#             */
-/*   Updated: 2025/07/28 19:54:10 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/12/04 18:27:01 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static void	calculate_wall_bounds(double distance, t_wall_bounds *bounds)
 	int	wall_height;
 
 	wall_height = (int)(WINDOW_HEIGHT / distance);
-	bounds->wall_start = (WINDOW_HEIGHT - wall_height) / 2;
+	bounds->wall_start = (WINDOW_HEIGHT - wall_height) >> 1;
 	bounds->wall_end = bounds->wall_start + wall_height;
 }
 

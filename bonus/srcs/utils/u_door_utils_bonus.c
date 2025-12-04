@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   u_door_utils_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/21 02:26:59 by ekeisler          #+#    #+#             */
-/*   Updated: 2025/10/21 02:29:11 by ekeisler         ###   ########.fr       */
+/*   Updated: 2025/12/04 18:10:52 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,5 +46,5 @@ int	sample_door_pixels(t_data *data, int x, int i, int sprite_bounds[2])
 		}
 		y += step_y;
 	}
-	return (sample_count > 0 && opaque_count * 2 > sample_count);
+	return (sample_count > 0 && opaque_count << 1 > sample_count);
 }

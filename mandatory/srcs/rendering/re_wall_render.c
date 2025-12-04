@@ -6,7 +6,7 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 17:13:46 by lcalero           #+#    #+#             */
-/*   Updated: 2025/11/26 16:54:48 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/12/04 18:27:57 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,10 +54,10 @@ static void	calculate_wall_bounds(double perp_wall_dist, int *draw_start,
 	int	line_height;
 
 	line_height = (int)(WINDOW_HEIGHT / perp_wall_dist);
-	*draw_start = -line_height / 2 + WINDOW_HEIGHT / 2;
+	*draw_start = (-line_height >> 1) + (WINDOW_HEIGHT >> 1);
 	if (*draw_start < 0)
 		*draw_start = 0;
-	*draw_end = line_height / 2 + WINDOW_HEIGHT / 2;
+	*draw_end = (line_height >> 1) + (WINDOW_HEIGHT >> 1);
 	if (*draw_end >= WINDOW_HEIGHT)
 		*draw_end = WINDOW_HEIGHT - 1;
 }
@@ -96,7 +96,7 @@ static void	draw_wall_column(t_data *data, int x, int draw_start, int draw_end)
 	perp_wall_dist = calculate_perp_wall_dist(data, x);
 	tex_x = calculate_texture_x(data, x);
 	step = 1.0 * 64 / (WINDOW_HEIGHT / perp_wall_dist);
-	tex_pos = (draw_start - WINDOW_HEIGHT / 2
+	tex_pos = (draw_start - (WINDOW_HEIGHT >> 1)
 			+ (WINDOW_HEIGHT / perp_wall_dist) / 2) * step;
 	y = draw_start;
 	while (y < draw_end)

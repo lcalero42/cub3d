@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   u_trace_shot.c                                     :+:      :+:    :+:   */
+/*   u_trace_shot_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/09 20:28:17 by lcalero           #+#    #+#             */
-/*   Updated: 2025/09/10 17:31:27 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/12/04 18:04:55 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	init_ray_direction_shot(t_data *data)
 
 	ft_bzero(&data->shot_ray, sizeof(t_ray));
 	data->shot_ray.must_render = 1;
-	camera_x = 2.0 * (WINDOW_WIDTH / 2) / (double)WINDOW_WIDTH - 1.0;
+	camera_x = 2.0 * (WINDOW_WIDTH >> 1) / (double)WINDOW_WIDTH - 1.0;
 	data->shot_ray.ray_dir.x = data->player.dir.x
 		+ data->player.camera_segment.x * camera_x;
 	data->shot_ray.ray_dir.y = data->player.dir.y

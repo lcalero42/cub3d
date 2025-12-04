@@ -6,7 +6,7 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/12 16:42:45 by lcalero           #+#    #+#             */
-/*   Updated: 2025/09/22 14:40:39 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/12/04 18:25:57 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,9 @@ void	calculate_enemy_screen_pos(t_enemy *enemy, t_player *player,
 	render_data->sprite_height = (int)(WINDOW_HEIGHT / dist);
 	if (render_data->sprite_height > WINDOW_HEIGHT)
 		render_data->sprite_height = WINDOW_HEIGHT;
-	render_data->sprite_top = (WINDOW_HEIGHT / 2) - (render_data->sprite_height
-			/ 2) + player->pitch_offset;
+	render_data->sprite_top = (WINDOW_HEIGHT >> 1)
+		- ((render_data->sprite_height
+				>> 1)) + player->pitch_offset;
 }
 
 void	calculate_health_bar_position(t_enemy_render_data *r_dt,
@@ -53,7 +54,7 @@ void	calculate_health_bar_position(t_enemy_render_data *r_dt,
 	bar_height = 8;
 	if (bar_width < 20)
 		bar_width = 20;
-	health_bar->x = r_dt->screen_x - bar_width / 2;
+	health_bar->x = r_dt->screen_x - (bar_width >> 1);
 	health_bar->y = r_dt->sprite_top - bar_height - 10;
 	health_bar->width = bar_width;
 	health_bar->height = bar_height;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   u_sprite_utils_bonus.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 19:04:02 by lcalero           #+#    #+#             */
-/*   Updated: 2025/10/14 19:27:07 by ekeisler         ###   ########.fr       */
+/*   Updated: 2025/12/04 18:25:32 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	calculate_sprite_bounds(int screen_x, int sprite_height,
 {
 	int	half_width;
 
-	half_width = sprite_height / 2;
+	half_width = sprite_height >> 1;
 	bounds->start_x = screen_x - half_width;
 	bounds->end_x = screen_x + half_width;
 	bounds->half_width = half_width;
@@ -68,7 +68,7 @@ static unsigned int	get_texture_pixel(t_texture_info *texture_info,
 	unsigned char	rgba[4];
 	unsigned int	color;
 
-	bytes_per_pixel = texture_info->bpp / 8;
+	bytes_per_pixel = texture_info->bpp >> 3;
 	pixel_addr = texture_info->addr + y * texture_info->line_len
 		+ x * bytes_per_pixel;
 	rgba[2] = (unsigned char)pixel_addr[0];

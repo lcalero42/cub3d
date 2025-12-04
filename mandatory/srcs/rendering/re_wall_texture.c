@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   r_wall_texture.c                                   :+:      :+:    :+:   */
+/*   re_wall_texture.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 17:10:47 by lcalero           #+#    #+#             */
-/*   Updated: 2025/07/30 14:33:13 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/12/04 18:28:17 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	get_wall_texture_pixel(t_data *data, int x, int y, int ray_index)
 	texture = get_texture_info_by_side(data, side);
 	if (!texture.addr)
 		return (0x808080);
-	dst = texture.addr + (y * texture.line_len + x * (texture.bpp / 8));
+	dst = texture.addr + (y * texture.line_len + x * (texture.bpp >> 3));
 	return (*(unsigned int *)dst);
 }
 
@@ -56,7 +56,7 @@ void	put_pixel_to_image(t_data *data, int x, int y, int color)
 	if (x < 0 || x >= WINDOW_WIDTH || y < 0 || y >= WINDOW_HEIGHT)
 		return ;
 	dst = data->render_info.addr + (y * data->render_info.line_len
-			+ x * (data->render_info.bpp / 8));
+			+ x * (data->render_info.bpp >> 3));
 	*(unsigned int *)dst = color;
 }
 
@@ -66,7 +66,7 @@ void	clear_screen(t_data *data)
 	int	y;
 
 	y = -1;
-	while (y++ < WINDOW_HEIGHT / 2)
+	while (y++ < WINDOW_HEIGHT >> 1)
 	{
 		x = -1;
 		while (x++ < WINDOW_WIDTH)

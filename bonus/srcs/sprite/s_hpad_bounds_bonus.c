@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   s_hpad_bounds_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/20 20:01:00 by ekeisler          #+#    #+#             */
-/*   Updated: 2025/10/21 04:48:00 by ekeisler         ###   ########.fr       */
+/*   Updated: 2025/12/04 18:19:38 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 void	calculate_sprite_bounds_y(t_data *data, t_sprite_calc *calc)
 {
-	calc->draw_start_y = -calc->sprite_height / 2 + WINDOW_HEIGHT / 2
+	calc->draw_start_y = (-calc->sprite_height >> 1) + (WINDOW_HEIGHT >> 1)
 		+ (int)data->player.pitch_offset;
 	if (calc->draw_start_y < 0)
 		calc->draw_start_y = 0;
-	calc->draw_end_y = calc->sprite_height / 2 + WINDOW_HEIGHT / 2
+	calc->draw_end_y = (calc->sprite_height >> 1) + (WINDOW_HEIGHT >> 1)
 		+ (int)data->player.pitch_offset;
 	if (calc->draw_end_y >= WINDOW_HEIGHT)
 		calc->draw_end_y = WINDOW_HEIGHT - 1;
@@ -26,10 +26,10 @@ void	calculate_sprite_bounds_y(t_data *data, t_sprite_calc *calc)
 
 void	calculate_sprite_bounds_x(t_sprite_calc *calc)
 {
-	calc->draw_start_x = -calc->sprite_width / 2 + calc->screen_x;
+	calc->draw_start_x = (-calc->sprite_width >> 1) + calc->screen_x;
 	if (calc->draw_start_x < 0)
 		calc->draw_start_x = 0;
-	calc->draw_end_x = calc->sprite_width / 2 + calc->screen_x;
+	calc->draw_end_x = (calc->sprite_width >> 1) + calc->screen_x;
 	if (calc->draw_end_x >= WINDOW_WIDTH)
 		calc->draw_end_x = WINDOW_WIDTH - 1;
 }

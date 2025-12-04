@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   m_init_mouse_move_bonus.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 18:17:24 by lcalero           #+#    #+#             */
-/*   Updated: 2025/11/10 17:18:01 by ekeisler         ###   ########.fr       */
+/*   Updated: 2025/12/04 18:11:32 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,8 @@ void	init_mouse_control(t_data *data)
 	data->player.pitch = 0.0;
 	data->mouse.first_move = 1;
 	data->mouse.sensitivity = SENSITIVITY;
-	center_x = WINDOW_WIDTH / 2;
-	center_y = WINDOW_HEIGHT / 2;
+	center_x = WINDOW_WIDTH >> 1;
+	center_y = WINDOW_HEIGHT >> 1;
 	init_smooth_buffer(data);
 	mlx_mouse_hide(data->mlx, data->window);
 	mlx_mouse_move(data->mlx, data->window, center_x, center_y);
@@ -63,8 +63,8 @@ void	toggle_mouse_control(t_data *data)
 	int	center_x;
 	int	center_y;
 
-	center_x = WINDOW_WIDTH / 2;
-	center_y = WINDOW_HEIGHT / 2;
+	center_x = WINDOW_WIDTH >> 1;
+	center_y = WINDOW_HEIGHT >> 1;
 	if (data->mouse.enabled)
 	{
 		data->mouse.enabled = 0;

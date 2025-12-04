@@ -6,7 +6,7 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/12 17:41:57 by lcalero           #+#    #+#             */
-/*   Updated: 2025/09/16 16:29:06 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/12/04 18:16:55 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	render_stamina(t_data *data, t_health_bar *bar)
 	bar->x = HEALTH_BAR_X;
 	bar->y = HEALTH_BAR_Y * 1.6;
 	bar->width = HEALTH_BAR_WIDTH;
-	bar->height = HEALTH_BAR_HEIGHT / 2;
+	bar->height = HEALTH_BAR_HEIGHT >> 1;
 	draw_health_bar_background(data, bar);
 	draw_stamina_bar_fill(data, bar);
 }

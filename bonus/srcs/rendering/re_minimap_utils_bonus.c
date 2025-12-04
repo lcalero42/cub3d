@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   re_minimap_utils_bonus.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/09 15:18:00 by ekeisler          #+#    #+#             */
-/*   Updated: 2025/10/09 15:32:48 by ekeisler         ###   ########.fr       */
+/*   Updated: 2025/12/04 18:29:26 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,11 @@ void	draw_minimap_player_with_direction(t_data *data,
 		+ (int)(data->player.position.x * params->cell_size);
 	player_pixel_y = params->start_y
 		+ (int)(data->player.position.y * params->cell_size);
-	offset = params->cell_size / 4;
+	offset = params->cell_size >> 2;
 	square.x = player_pixel_x - offset;
 	square.y = player_pixel_y - offset;
 	square.color = 0xFF0000;
-	square.scale = params->cell_size / 2;
+	square.scale = params->cell_size >> 1;
 	draw_square(data, square);
 	draw_minimap_fov_cone(data, params);
 }

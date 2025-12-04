@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   m_mouse_move_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/30 14:14:46 by ekeisler          #+#    #+#             */
-/*   Updated: 2025/10/08 17:22:10 by ekeisler         ###   ########.fr       */
+/*   Updated: 2025/12/04 18:12:45 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ int	mouse_move(int x, int y, void *param)
 	data = (t_data *)param;
 	if (!data || !data->mouse.enabled)
 		return (0);
-	data->mouse.center_x = WINDOW_WIDTH / 2;
-	data->mouse.center_y = WINDOW_HEIGHT / 2;
+	data->mouse.center_x = WINDOW_WIDTH >> 1;
+	data->mouse.center_y = WINDOW_HEIGHT >> 1;
 	if (data->mouse.first_move)
 		return (handle_first_move(data));
 	if (check_out_of_bounds(x, y, data))

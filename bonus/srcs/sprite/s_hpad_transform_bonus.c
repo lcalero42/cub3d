@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   s_hpad_transform_bonus.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/20 19:11:00 by ekeisler          #+#    #+#             */
-/*   Updated: 2025/10/21 01:03:17 by ekeisler         ###   ########.fr       */
+/*   Updated: 2025/12/04 18:21:08 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	calculate_sprite_size(t_generic_sprite *sprite)
 {
 	double	scale;
 
-	sprite->calc.screen_x = (int)((WINDOW_WIDTH / 2)
+	sprite->calc.screen_x = (int)((WINDOW_WIDTH >> 1)
 			* (1 + sprite->calc.transform_x / sprite->calc.transform_y));
 	scale = 1.0;
 	if (sprite->type == SPRITE_HEALTH_PAD)

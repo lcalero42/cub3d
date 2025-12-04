@@ -6,7 +6,7 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 18:19:52 by lcalero           #+#    #+#             */
-/*   Updated: 2025/11/26 16:54:56 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/12/04 18:17:26 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,9 +91,9 @@ static void	find_visible_pixel(t_data *data, int x, int y,
 	{
 		line_height = (int)(WINDOW_HEIGHT
 				/ data->rays[x].perp_wall_dist_per_hit[i]);
-		wall_top = -line_height / 2 + WINDOW_HEIGHT / 2
+		wall_top = (-line_height >> 1) + (WINDOW_HEIGHT >> 1)
 			+ (int)data->player.pitch_offset;
-		wall_bottom = line_height / 2 + WINDOW_HEIGHT / 2
+		wall_bottom = (line_height >> 1) + (WINDOW_HEIGHT >> 1)
 			+ (int)data->player.pitch_offset - 1;
 		if (y < wall_top || y > wall_bottom)
 			continue ;

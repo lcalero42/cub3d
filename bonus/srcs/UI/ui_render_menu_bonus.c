@@ -6,7 +6,7 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/23 12:40:43 by lcalero           #+#    #+#             */
-/*   Updated: 2025/12/02 21:17:27 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/12/04 18:24:40 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	render_background(t_data *data)
 	bg_bounds.end_x = WINDOW_WIDTH;
 	bg_bounds.sprite_top = 0;
 	bg_bounds.sprite_height = WINDOW_HEIGHT;
-	bg_bounds.half_width = WINDOW_WIDTH / 2;
+	bg_bounds.half_width = WINDOW_WIDTH >> 1;
 	bg_bounds.sprite_size = 128;
 	draw_button_at(data, &data->menu_background, &bg_bounds);
 }
@@ -94,19 +94,19 @@ void	render_menu(t_data *data)
 	button_width = WINDOW_WIDTH * 0.5;
 	button_height = WINDOW_HEIGHT * 0.5;
 	button_spacing = button_height * 0.1;
-	start_y = (WINDOW_HEIGHT - (button_height * 2) + button_spacing) / 2;
-	data->play_bounds.start_x = (WINDOW_WIDTH - button_width) / 2;
+	start_y = (WINDOW_HEIGHT - (button_height << 1) + button_spacing) >> 1;
+	data->play_bounds.start_x = (WINDOW_WIDTH - button_width) >> 1;
 	data->play_bounds.end_x = data->play_bounds.start_x + button_width;
 	data->play_bounds.sprite_top = start_y + button_spacing;
 	data->play_bounds.sprite_height = button_height;
-	data->play_bounds.half_width = button_width / 2;
+	data->play_bounds.half_width = button_width >> 1;
 	data->play_bounds.sprite_size = 128;
 	draw_button_at(data, &data->play_button, &data->play_bounds);
-	data->leave_bounds.start_x = (WINDOW_WIDTH - button_width) / 2;
+	data->leave_bounds.start_x = (WINDOW_WIDTH - button_width) >> 1;
 	data->leave_bounds.end_x = data->leave_bounds.start_x + button_width;
 	data->leave_bounds.sprite_top = start_y + button_height - button_spacing;
 	data->leave_bounds.sprite_height = button_height;
-	data->leave_bounds.half_width = button_width / 2;
+	data->leave_bounds.half_width = button_width >> 1;
 	data->leave_bounds.sprite_size = 128;
 	draw_button_at(data, &data->leave_button, &data->leave_bounds);
 }

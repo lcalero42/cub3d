@@ -6,7 +6,7 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 17:10:47 by lcalero           #+#    #+#             */
-/*   Updated: 2025/10/14 12:40:13 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/12/04 18:18:55 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ static int	calc_horizon_line(t_data *data)
 	int		horizon_line;
 
 	data->player.pitch_offset = data->player.pitch * (WINDOW_HEIGHT * 0.5);
-	horizon_line = WINDOW_HEIGHT / 2 + (int)data->player.pitch_offset;
+	horizon_line = (WINDOW_HEIGHT >> 1) + (int)data->player.pitch_offset;
 	if (horizon_line < 0)
 		horizon_line = 0;
 	if (horizon_line >= WINDOW_HEIGHT)

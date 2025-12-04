@@ -6,7 +6,7 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/28 14:25:57 by lcalero           #+#    #+#             */
-/*   Updated: 2025/10/12 21:12:49 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/12/04 17:59:42 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	put_pixel_to_image(t_data *data, int x, int y, int color)
 	if (x < 0 || x >= WINDOW_WIDTH || y < 0 || y >= WINDOW_HEIGHT)
 		return ;
 	dst = data->render_info.addr + (y * data->render_info.line_len
-			+ x * (data->render_info.bpp / 8));
+			+ x * (data->render_info.bpp >> 3));
 	*(unsigned int *)dst = color;
 }
 
@@ -50,7 +50,7 @@ int	get_pixel_from_image(t_data *data, int x, int y)
 	if (x < 0 || x >= WINDOW_WIDTH || y < 0 || y >= WINDOW_HEIGHT)
 		return (0);
 	pixel_addr = data->render_info.addr + y * data->render_info.line_len + x
-		* (data->render_info.bpp / 8);
+		* (data->render_info.bpp >> 3);
 	color = *(unsigned int *)pixel_addr;
 	return (color);
 }

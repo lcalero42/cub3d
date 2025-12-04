@@ -6,7 +6,7 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/09 15:26:18 by lcalero           #+#    #+#             */
-/*   Updated: 2025/10/16 15:04:02 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/12/04 18:25:09 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,9 @@ static void	calculate_wall_bounds(t_data *data,
 	x = data->current_ray_index;
 	perp_dist = data->rays[x].perp_wall_dist_per_hit[hit_index];
 	calc->line_height = (int)(WINDOW_HEIGHT / perp_dist);
-	calc->wall_top = (-calc->line_height / 2 + WINDOW_HEIGHT / 2);
+	calc->wall_top = ((-calc->line_height >> 1) + (WINDOW_HEIGHT >> 1));
 	calc->wall_top += (int)data->player.pitch_offset;
-	calc->wall_bottom = (calc->line_height / 2 + WINDOW_HEIGHT / 2);
+	calc->wall_bottom = ((calc->line_height >> 1) + (WINDOW_HEIGHT >> 1));
 	calc->wall_bottom += (int)data->player.pitch_offset - 1;
 	step = 1.0 * 64 / calc->line_height;
 	tex_pos = (y - calc->wall_top) * step;
@@ -63,6 +63,6 @@ static int	get_texture_pixel(t_texture_info *tex_info, int tex_x, int tex_y)
 	if (tex_x < 0 || tex_x >= 64 || tex_y < 0 || tex_y >= 64)
 		return (-1);
 	pixel_addr = tex_info->addr + (tex_y * tex_info->line_len
-			+ tex_x * (tex_info->bpp / 8));
+			+ tex_x * (tex_info->bpp >> 3));
 	return (*(int *)pixel_addr);
 }

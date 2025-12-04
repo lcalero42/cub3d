@@ -6,7 +6,7 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/12 21:07:25 by lcalero           #+#    #+#             */
-/*   Updated: 2025/10/14 13:13:49 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/12/04 17:57:08 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static int	get_pixel_from_texture(t_texture_info texture, int x, int y)
 
 	if (!texture.addr)
 		return (0x808080);
-	dst = texture.addr + (y * texture.line_len + x * (texture.bpp / 8));
+	dst = texture.addr + (y * texture.line_len + x * (texture.bpp >> 3));
 	return (*(unsigned int *)dst);
 }
 

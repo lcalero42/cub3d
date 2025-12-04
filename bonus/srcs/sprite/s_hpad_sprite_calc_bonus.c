@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   s_hpad_sprite_calc_bonus.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ekeisler <ekeisler@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/21 04:59:00 by ekeisler          #+#    #+#             */
-/*   Updated: 2025/10/21 05:00:06 by ekeisler         ###   ########.fr       */
+/*   Updated: 2025/12/04 18:20:58 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static void	calc_sprite_transform(t_sprite_calc *calc, t_player *player,
 
 static void	calc_sprite_screen_props(t_sprite_calc *calc)
 {
-	calc->screen_x = (int)((WINDOW_WIDTH / 2)
+	calc->screen_x = (int)((WINDOW_WIDTH >> 1)
 			* (1 + calc->transform_x / calc->transform_y));
 	calc->sprite_height = abs((int)(WINDOW_HEIGHT / calc->transform_y));
 	calc->sprite_width = abs((int)(WINDOW_HEIGHT / calc->transform_y));

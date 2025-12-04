@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   u_pathfinding.c                                    :+:      :+:    :+:   */
+/*   u_pathfinding_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 19:34:56 by lcalero           #+#    #+#             */
-/*   Updated: 2025/09/02 16:19:56 by lcalero          ###   ########.fr       */
+/*   Updated: 2025/12/04 18:25:39 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int	reconstruct_path(t_astar_node *goal_node, t_pos *out_path,
 		trace = trace->parent;
 	}
 	i = 0;
-	while (i < path_len / 2)
+	while (i < path_len >> 1)
 	{
 		tmp = out_path[i];
 		out_path[i] = out_path[path_len - i - 1];
